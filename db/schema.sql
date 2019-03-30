@@ -6,8 +6,7 @@ CREATE TABLE IF NOT EXISTS main_data (
     user_id INT(50) NOT NULL,
     picture_id TEXT NOT NULL, /* let's see how cloudinary works */
     time_stamp TIMESTAMP NOT NULL,
-    time_obs TIME NOT NULL,
-    date_obs DATE NOT NULL,
+    date_time_obs DATETIME NOT NULL,
     lat_lon POINT NOT NULL, /* would be cool to use google maps for this */
     category ENUM("animal", "plant", "fungus", "weather", "land & water") NOT NULL,
     species TEXT,
