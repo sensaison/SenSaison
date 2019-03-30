@@ -66,5 +66,5 @@ module.exports = function(sequelize, DataTypes) {
         });
     };
 
-    return newRecord;
+    return Observation;
 };
