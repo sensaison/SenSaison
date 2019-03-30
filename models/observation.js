@@ -1,10 +1,11 @@
 module.exports = function(sequelize, DataTypes) {
     var Observation = sequelize.define("Observation", {
         id: {
+            primaryKey: true,
             type: DataTypes.INTEGER,
             allowNull: false
         },
-        user_id: {
+        user: {
             type: DataTypes.INTEGER,
             allowNull: false
         },
@@ -37,7 +38,7 @@ module.exports = function(sequelize, DataTypes) {
             allowNull: true
         },
         species_confidence: {
-            type: DataTypes.INTEGER
+            type: DataTypes.INTEGER,
             allowNull: true
         },
         weather: {
