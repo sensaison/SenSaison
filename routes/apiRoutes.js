@@ -44,8 +44,8 @@ module.exports = function(app) {
                 res.json(updobs);
             }
         );
-    });
-
+    })
+  
     app.set("/api/users/:id", function(req, res) {
         db.User.update({
             where: {
@@ -57,5 +57,4 @@ module.exports = function(app) {
             }
         );
     });
-
 };
