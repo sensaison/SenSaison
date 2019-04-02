@@ -13,11 +13,11 @@ console.log("googleMaps.js has executed.");
 var map;
 
 function initMap() {
-  var california = { lat: 37.4419, lng: -122.1419 };
-  map = new google.maps.Map(document.getElementById("map"), {
-    center: california,
-    zoom: 13
-  });
+    var california = { lat: 37.4419, lng: -122.1419 };
+    map = new google.maps.Map(document.getElementById("map"), {
+        center: california,
+        zoom: 13
+    });
 }
 
 /*
