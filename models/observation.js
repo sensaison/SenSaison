@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 module.exports = function(sequelize, DataTypes) {
     var Observation = sequelize.define("Observation", {
         id: {
