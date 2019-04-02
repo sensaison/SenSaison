@@ -3,9 +3,13 @@ module.exports = function(sequelize, DataTypes) {
         id: {
             primaryKey: true,
             type: DataTypes.INTEGER,
-            allowNull: false
+            allowNull: false,
+            unique: {
+                args: true,
+                msg: "CATHERINE THERE'S A PROBLEM WITH PRIMARY KEY!!"
+            }
         },
-        user: {
+        user_id: {
             type: DataTypes.INTEGER,
             allowNull: false
         },
@@ -19,7 +23,10 @@ module.exports = function(sequelize, DataTypes) {
         },
         date_time_obs: {
             type: DataTypes.DATE,
-            allowNull: false
+            allowNull: false,
+            validate: {
+
+            }
         },
         lat_lon: {
             type: DataTypes.GEOMETRY,
@@ -31,11 +38,17 @@ module.exports = function(sequelize, DataTypes) {
         },
         species: {
             type: DataTypes.STRING,
-            allowNull: true
+            allowNull: true,
+            validate: {
+                isAlpha: true
+            }
         },
         species_sci_name: {
             type: DataTypes.STRING,
-            allowNull: true
+            allowNull: true,
+            validate: {
+                isAlpha: true
+            }
         },
         species_confidence: {
             type: DataTypes.INTEGER,
@@ -43,11 +56,17 @@ module.exports = function(sequelize, DataTypes) {
         },
         weather: {
             type: DataTypes.STRING,
-            allowNull: true
+            allowNull: true,
+            validate: {
+                isAlpha: true
+            }
         },
         land_water: {
             type: DataTypes.STRING,
-            allowNull: true
+            allowNull: true,
+            validate: {
+                isAlpha: true
+            }
         },
         first_confidence: {
             type: DataTypes.INTEGER,
@@ -55,7 +74,10 @@ module.exports = function(sequelize, DataTypes) {
         },
         notes: {
             type: DataTypes.TEXT,
-            allowNull: false
+            allowNull: false,
+            validate: {
+                notEmpty: true
+            }
         }
     });
 

@@ -41,7 +41,10 @@ module.exports = function(app) {
             }
         }).then(
             function(updobs) {
-                res.json(updobs);
+                if (updobs.changedRows === 0) {
+                    return res.status(404).end();
+                }
+                res.status(200).end();
             }
         );
     });
@@ -53,7 +56,10 @@ module.exports = function(app) {
             }
         }).then(
             function(updusr) {
-                res.json(updusr);
+                if (updusr.changedRows === 0) {
+                    return res.status(404).end();
+                }
+                res.status(200).end();
             }
         );
     });

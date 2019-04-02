@@ -5,29 +5,59 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.INTEGER,
             allowNull: false
         },
-        user: {
+        user_id: {
             type: DataTypes.INTEGER,
-            allowNull: false
+            allowNull: false,
+            unique: {
+                args: true,
+                msg: "CATHERINE THERE'S A PROBLEM WITH USER ID!!"
+            }
         },
         firstname: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: false,
+            validate: {
+                isAlpha: true
+            }
         },
         lastname: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: false,
+            validate: {
+                isAlpha: true
+            }
         },
         email: {
             type: DataTypes.TEXT,
-            allowNull: false
+            allowNull: false,
+            validate: {
+                isEmail: true
+            },
+            unique: {
+                args: true,
+                msg: "Email address already in use!"
+            }
         },
         username: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: false,
+            validate: {
+                isAlphanumeric: true
+            },
+            unique: {
+                args: true,
+                msg: "Username already taken!"
+            }
         },
         password: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: false,
+            validate: {
+                notEmpty: true,
+                notContains: User.username,
+                notContains: User.firstname,
+                notContains: User.lastname
+            }
         }
     });
 
