@@ -23,10 +23,7 @@ module.exports = function(sequelize, DataTypes) {
         },
         date_time_obs: {
             type: DataTypes.DATE,
-            allowNull: false,
-            validate: {
-
-            }
+            allowNull: false
         },
         lat_lon: {
             type: DataTypes.GEOMETRY,
@@ -40,14 +37,16 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.STRING,
             allowNull: true,
             validate: {
-                isAlpha: true
+                isAlpha: true,
+                msg: "Are you sure you spelled that right?"
             }
         },
         species_sci_name: {
             type: DataTypes.STRING,
             allowNull: true,
             validate: {
-                isAlpha: true
+                isAlpha: true,
+                msg: "Are you sure you spelled that right?"
             }
         },
         species_confidence: {
@@ -58,14 +57,16 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.STRING,
             allowNull: true,
             validate: {
-                isAlpha: true
+                isAlpha: true,
+                msg: "Are you sure you spelled that right?"
             }
         },
         land_water: {
             type: DataTypes.STRING,
             allowNull: true,
             validate: {
-                isAlpha: true
+                isAlpha: true,
+                msg: "Are you sure you spelled that right?"
             }
         },
         first_confidence: {
@@ -88,6 +89,5 @@ module.exports = function(sequelize, DataTypes) {
             }
         });
     };
-
     return Observation;
 };

@@ -17,21 +17,24 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
-                isAlpha: true
+                isAlpha: true,
+                msg: "Are you sure you spelled that right?"
             }
         },
         lastname: {
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
-                isAlpha: true
+                isAlpha: true,
+                msg: "Are you sure you spelled that right?"
             }
         },
         email: {
             type: DataTypes.TEXT,
             allowNull: false,
             validate: {
-                isEmail: true
+                isEmail: true,
+                msg: "Are you sure you spelled that right?"
             },
             unique: {
                 args: true,
@@ -42,7 +45,8 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
-                isAlphanumeric: true
+                isAlphanumeric: true,
+                msg: "Only letters and numbers allowed!"
             },
             unique: {
                 args: true,
@@ -53,10 +57,12 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
+                len: [10, 20],
                 notEmpty: true,
                 notContains: User.username,
                 notContains: User.firstname,
-                notContains: User.lastname
+                notContains: User.lastname,
+                msg: "Your password cannot contain your name or username, and must be between 10 and 20 characters in length"
             }
         }
     });
