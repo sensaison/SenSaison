@@ -30,7 +30,7 @@ module.exports = function(sequelize, DataTypes) {
             }
         },
         email: {
-            type: DataTypes.TEXT,
+            type: DataTypes.STRING,
             allowNull: false,
             validate: {
                 isEmail: true,
@@ -59,9 +59,9 @@ module.exports = function(sequelize, DataTypes) {
             validate: {
                 len: [10, 20],
                 notEmpty: true,
-                notContains: User.username,
-                notContains: User.firstname,
-                notContains: User.lastname,
+                notContains: this.username,
+                notContains: this.firstname,
+                notContains: this.lastname,
                 msg: "Your password cannot contain your name or username, and must be between 10 and 20 characters in length"
             }
         }
@@ -70,6 +70,5 @@ module.exports = function(sequelize, DataTypes) {
     User.associate = function(models) {
         User.hasMany(models.Observation);
     };
-    
     return User;
 };

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+
+<html lang="en-us">
+
+    <head>
+        <title> </title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" type="text/css" href="Assets/css/reset.css">
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="Assets/css/style.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+
+    <body>
+
+        <form>
+            <div class="row">
+                <div class="twelve columns">
+                    <label for="dateandtime">Date and time of observation</label>
+                    <input type="datetime-local" id="dateandtime">
+                </div>
+            </div>
+            <div class="row">
+                <div class="twelve columns">
+                    <label for="geolocation">Location</label>
+                    <!-- GOOGLE MAPS HERE -->
+                </div>
+            </div>
+            <div class="row">
+                <div class="four columns">
+                    <label for="species">Species name</label>
+                    <input type="text" placeholder="" id="species">
+                </div>
+                <div class="four columns">
+                    <label for="species-sci-name">Scientific name (if known)</label>
+                    <input type="text" placeholder="" id="species-sci-name">
+                </div>
+                <div class="four columns">
+                    <label for="species-confidence">Species ID confidence</label>
+                    <select name="Confidence" id="species-confidence">
+                        <option value="1" selected>1 - low confidence</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5 - high confidence</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="twelve columns">
+                    <label for="weather">Weather event</label>
+                    <input type="text" placeholder="" id="weather">
+                </div>
+            </div>
+            <div class="row">
+                <div class="twelve columns">
+                    <label for="landwater">Land or water event</label>
+                    <input type="text" placeholder="" id="landwater">
+                </div>
+            </div>
+            <div class="row">
+                <div class="twelve columns">
+                    <label for="first-confidence">Confidence that your observation is representative of such a first event for your general location</label>
+                    <select id="first-confidence" name="Confidence">
+                        <option value="1" selected>1 - low confidence</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5 - high confidence</option>
+                    </select>
+                </div>
+            </div>
+            
+
+        </form>
+
+
+        <!-- DateTime*
+        Location (google maps Stefan)*
+        Category (dropdown)*
+        Species (required if animal plant or fungus is selected)
+        Scientific name (if known)
+        Confidence in species identification (required if animal fungus or plant is selected)
+        Weather
+        Land&Water
+        Confidence that this observation is representative of the first of its kind in the area*
+        Notes* (extended description of observation)
+
+        Other fields are auto generated in the backend -->
+
+
+
+    
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="Assets/javascript/script.js"></script>
+
+    </body>
+
+</html>
