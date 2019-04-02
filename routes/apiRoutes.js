@@ -47,8 +47,8 @@ module.exports = function(app) {
                 res.status(200).end();
             }
         );
-    });
-
+    })
+  
     app.set("/api/users/:id", function(req, res) {
         db.User.update({
             where: {
@@ -63,5 +63,4 @@ module.exports = function(app) {
             }
         );
     });
-
 };
