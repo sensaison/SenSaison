@@ -2,6 +2,11 @@ require("dotenv").config();
 var express = require("express");
 var exphbs = require("express-handlebars");
 
+// reqs for google OAuth
+const authRoutes = require('./routes/auth-routes')
+const passportSetup = require('./config/passport');
+//
+
 var db = require("./models");
 
 var app = express();
@@ -11,6 +16,7 @@ var PORT = process.env.PORT || 3000;
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(express.static("public"));
+app.use('/auth', authRoutes);
 
 // Handlebars
 app.engine(
