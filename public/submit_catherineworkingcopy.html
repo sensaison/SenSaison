@@ -205,7 +205,7 @@
 
             <br>
             <div class="row">
-              <button class="btn waves-effect waves-light btn-large" type="submit">Submit
+              <button class="btn waves-effect waves-light btn-large" type="submit" id="submit">Submit
               </button>     
             </div>
 
@@ -217,7 +217,33 @@
       <div class="row hidden" id="view-your-observations-div">
         <div class="col s12 center">
           <h5>All your observations</h5>
+          <br>
+          <table>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Category</th>
+                <th>Brief description</th>
+                <th>Delete</th>
+              </tr>
+            </thead>
+    
+            <tbody>
+              <tr>
+                <td>01/01/1990</td>
+                <td>Animal</td>
+                <td>First Canada geese this spring</td>
+                <td><button class="btn waves-effect waves-light btn-small" id="delete">X</button></td>
+              </tr>
+            </tbody>
+          </table>
+
+
         </div>
+      </div>
+      <br><br>
+      <div class="row">
+        <button class="waves-effect waves-teal btn-flat" id="backtotop" href="#">Back to top</button>
       </div>
 
     </div>
