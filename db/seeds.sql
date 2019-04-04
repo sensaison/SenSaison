@@ -1,4 +1,4 @@
-USE SenSeason_db;
+USE SenSaison_db;
 
 INSERT INTO main_data
     (user_id, picture_id, date_time_obs, lat_lon, category, species, species_confidence, first_confidence, notes)
