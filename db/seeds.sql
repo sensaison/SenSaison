@@ -1,6 +1,6 @@
-USE SenSeason_db;
+USE SenSaison_db;
 
-INSERT INTO main_data
+INSERT INTO observation_data
     (user_id, picture_id, date_time_obs, lat_lon, category, species, species_confidence, first_confidence, notes)
     VALUES (12345, "5", "1989-12-31 23:59:59", ST_GeomFromText("POINT(1 2)"), "animal", "red-footed booby", 4, 3, "lalalalalalalalalalala"),
     (678910, "4", "1990-12-31 23:59:59", ST_GeomFromText("POINT(3 4)"), "animal", "blue-footed booby", 3, 5, "rurururururururuur"),
