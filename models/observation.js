@@ -4,9 +4,13 @@ module.exports = function(sequelize, DataTypes) {
         id: {
             primaryKey: true,
             type: DataTypes.INTEGER,
-            allowNull: false
+            allowNull: false,
+            unique: {
+                args: true,
+                msg: "CATHERINE THERE'S A PROBLEM WITH PRIMARY KEY!!"
+            }
         },
-        user: {
+        user_id: {
             type: DataTypes.INTEGER,
             allowNull: false
         },
@@ -32,11 +36,19 @@ module.exports = function(sequelize, DataTypes) {
         },
         species: {
             type: DataTypes.STRING,
-            allowNull: true
+            allowNull: true,
+            validate: {
+                isAlpha: true,
+                msg: "Are you sure you spelled that right?"
+            }
         },
         species_sci_name: {
             type: DataTypes.STRING,
-            allowNull: true
+            allowNull: true,
+            validate: {
+                isAlpha: true,
+                msg: "Are you sure you spelled that right?"
+            }
         },
         species_confidence: {
             type: DataTypes.INTEGER,
@@ -44,11 +56,19 @@ module.exports = function(sequelize, DataTypes) {
         },
         weather: {
             type: DataTypes.STRING,
-            allowNull: true
+            allowNull: true,
+            validate: {
+                isAlpha: true,
+                msg: "Are you sure you spelled that right?"
+            }
         },
         land_water: {
             type: DataTypes.STRING,
-            allowNull: true
+            allowNull: true,
+            validate: {
+                isAlpha: true,
+                msg: "Are you sure you spelled that right?"
+            }
         },
         first_confidence: {
             type: DataTypes.INTEGER,
@@ -56,7 +76,10 @@ module.exports = function(sequelize, DataTypes) {
         },
         notes: {
             type: DataTypes.TEXT,
-            allowNull: false
+            allowNull: false,
+            validate: {
+                notEmpty: true
+            }
         }
     });
 
@@ -67,6 +90,5 @@ module.exports = function(sequelize, DataTypes) {
             }
         });
     };
-
     return Observation;
 };
