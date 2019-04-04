@@ -1,15 +1,27 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener("DOMContentLoaded", function() {
+    M.AutoInit();
+
     M.updateTextFields();
 
-    var elemsDate = document.querySelectorAll('.datepicker');
-    var instancesDate = M.Datepicker.init(elemsDate, options);
+    let dateOptions = {
+        maxDate: new Date(),
+        autoClose: true
+    }
+    let elemsDate = document.querySelectorAll(".datepicker");
+    let instancesDate = M.Datepicker.init(elemsDate, dateOptions);
 
-    var elemsTime = document.querySelectorAll('.timepicker');
-    var instancesTime = M.Timepicker.init(elemsTime, options);
+    let timeOptions = {
+        autoClose: true
+    }
+    let elemsTime = document.querySelectorAll(".timepicker");
+    let instancesTime = M.Timepicker.init(elemsTime, timeOptions);
 
-    var elemsSelect = document.querySelectorAll('select');
-    var instancesSelect = M.FormSelect.init(elemsSelect, options);
+    let elemsSelect = document.querySelectorAll("select");
+    let instancesSelect = M.FormSelect.init(elemsSelect);
 
-    document.querySelectorAll('textarea').characterCounter();
-    document.querySelectorAll('#species, #speciessciname').characterCounter();
+    let elemsOpts = document.querySelectorAll("select");
+    let instancesOpts = M.FormSelect.init(elemsOpts);
+
+    // document.querySelectorAll("textarea").characterCounter();
+    // document.querySelectorAll("#species, #speciessciname").characterCounter();
 });

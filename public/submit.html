@@ -12,6 +12,7 @@
   <!-- CSS  -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="css/navbar.css" media="screen" rel="stylesheet" type="text/css" />
   <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 
   <!-- Swatchbook -->
@@ -24,10 +25,6 @@
   <link rel="stylesheet" type="text/css" href="Swatchbook/css/style.css" />
   <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:700,300,300italic' rel='stylesheet' type='text/css'>
   <script type="text/javascript" src="Swatchbook/js/modernizr.custom.79639.js"></script> 
-    
-  <!-- Navbar css -->
-  <link href="css/navbar.css" media="screen" rel="stylesheet" type="text/css" />
-
 
 </head>
 
@@ -51,7 +48,7 @@
 
 <div class="wrap">
   <nav>
-		<ul class="menu">
+		<ul class="menu" id="top">
             <!-- Home -->
 			<li><a href="home.html"><span class=""></span> Home</a></li>
             <!-- View individual updates -->
@@ -64,12 +61,6 @@
 					<li><a href="#">Water</a></li>
 					<li><a href="#">Weather</a></li>
 				</ul>
-            </li>
-            <!-- Map -->
-			<li><a href="map.html"><span class=""></span> View nearby observations</a>
-      </li>
-      <li><a href="download.html"><span class=""></span> Download data</a>
-			</li>
             <!-- US -->
 			<li><a href="contact.html"><span class=""></span> Contact</a>
 				<ul>
@@ -99,11 +90,13 @@
       <h3>Your account</h3>
       <br>
       <div class="row">
-        <button class="btn waves-effect waves-light">Add new observation</button>
-        <button class="btn waves-effect waves-light">View all your observations</button>
+        <button class="btn waves-effect waves-light btn-flat">Add new observation</button><br>
+        <button class="btn waves-effect waves-light btn-flat">View all your observations</button><br>
+        <button class="btn waves-effect waves-light btn-flat">View nearby observations</button><br>
+        <button class="btn waves-effect waves-light btn-flat">Download data</button>
       </div>
       <br>
-      <div class="row hidden" id="add-observation-div">
+      <div class="row" id="add-obs">
 
         <div class="col s12 center">
         <h5>Add new observation</h5>
@@ -112,18 +105,17 @@
           <form action="#">
             <div class="row">
               <div class="input-field col s4">
-                <label for="date">Date of observation*</label>
-                <input type="text" class="datepicker" id="date">
+                <input type="text" class="datepicker" id="dateobs">
+                <label for="dateobs">Date of observation*</label>
               </div>
 
               <div class="input-field col s4">
+                <input type="text" class="timepicker time">
                 <label for="time">Time of observation*</label>
-                <input type="text" class="timepicker" id="time">
               </div>
 
               <div class="input-field col s4">
-                <label for="obstype">Type of observation*</label>
-                <select id="obstype">
+                <select class="obstype">
                   <option value="" disabled selected>Choose an option</option>
                   <option value="animal">Animal</option>
                   <option value="plant">Plant</option>
@@ -131,81 +123,89 @@
                   <option value="weather">Weather</option>
                   <option value="land_water">Land or water</option>
                 </select>
+                <label for="obstype">Type of observation*</label>
               </div>
             </div>
 
+
+
+
             <div class="row">
-              <div class="input-field col s6">
-                <label for="shortdesc">Brief description of observation*</label>
-                <textarea id="shortdesc" class="materialize-textarea" data-length="50"></textarea>
-              </div>
 
               <div class="col s6">
-                <label for="googlemap">Location of observation*</label>
-                <!-- GOOGLE MAP HERE -->
-              </div>
-            </div>
 
-            <div class="row">
-              <div class="input-field col s6">
-                <label for="longdesc">Extended description of observation</label>
-                <textarea id="longdesc" class="materialize-textarea" data-length="500"></textarea>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="input-field col s6">
-                <label for="first-confidence">Confidence that your observation is the first of its type in your area*</label>
-                <select id="first-confidence">
-                  <option value="1" selected>1 - low confidence</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5 - high confidence</option>
-                </select>
-              </div>
-            </div>
-
-            <br><br>
-            <div class="row">
-              <div class="file-field input-field col s6">
-                <div class="btn btn-small">
-                  <span>Upload</span>
-                  <input type="file" multiple>
+                <div class="row">
+                  <div class="input-field col s12">
+                    <textarea id="shortdesc" class="materialize-textarea" data-length="50" placeholder="Ex. First Canada geese to return from winter"></textarea>
+                    <label for="shortdesc">Brief description of observation*</label>
+                  </div>
                 </div>
-                <div class="file-path-wrapper">
-                  <input class="file-path validate" type="text" placeholder="Upload one or more pictures*">
+
+                <div class="row">
+                  <div class="input-field col s12">
+                    <textarea id="longdesc" class="materialize-textarea" data-length="500" placeholder="Ex. Cold day, some patches of ice on Mirror Lake. Four Canada geese showed up early this morning."></textarea>
+                    <label for="longdesc">Extended description of observation</label>
+                  </div>
                 </div>
+
+                <div class="row">
+                  <div class="input-field col s12">
+                    <select class="first-confidence">
+                      <option value="1" selected>1 - low confidence</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5 - high confidence</option>
+                    </select>
+                    <label for="first-confidence">Confidence that your observation is the first of its type in your area*</label>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="file-field input-field col s12">
+                    <button class="btn waves-effect waves-teal btn-flat btn-small">
+                      Upload
+                      <input type="file" multiple>
+                    </button>
+                    <div class="file-path-wrapper">
+                      <input class="file-path validate" type="text" placeholder="Upload one or more pictures*">
+                    </div>
+                  </div>
+                </div>
+
               </div>
+                <div class="col s6">
+                  <label for="googlemap">Location of observation*</label>
+                  <!-- STEFAN PUT GOOGLE MAP HERE -->
+                </div>
             </div>
 
             <div class="row">
               <p><i>This section is required if you selected animal, plant, or fungus.</i></p>
               <div class="input-field col s4">
                 <label for="species">Species common name*</label>
-                <input type="text" id="species" data-length="50">
+                <input type="text" class="species" data-length="50">
               </div>
 
               <div class="input-field col s4">
                 <label for="speciessciname">Species scientific name (if known)</label>
-                <input type="text" id="speciessciname" data-length="50">
+                <input type="text" class="speciessciname" data-length="50">
               </div>
 
               <div class="input-field col s4">
-                <label for="species-confidence">Species ID confidence*</label>
-                <select id="species-confidence">
+                <select class="species-confidence">
                   <option value="1" selected>1 - low confidence</option>
                   <option value="2">2</option>
                   <option value="3">3</option>
                   <option value="4">4</option>
                   <option value="5">5 - high confidence</option>
                 </select>
+                <label for="species-confidence">Species ID confidence*</label>
               </div>
             </div>
-
             <br>
             <div class="row">
-              <button class="btn waves-effect waves-light btn-large" type="submit" id="submit">Submit
+              <button class="btn waves-effect waves-light" type="submit" id="submitobs">Submit
               </button>     
             </div>
 
@@ -214,11 +214,12 @@
         </div>
       </div>
 
-      <div class="row hidden" id="view-your-observations-div">
+      <div class="row" id="view-your-obs">
         <div class="col s12 center">
           <h5>All your observations</h5>
+
           <br>
-          <table>
+          <table class="highlight responsive-table allyourobs">
             <thead>
               <tr>
                 <th>Date</th>
@@ -227,7 +228,6 @@
                 <th>Delete</th>
               </tr>
             </thead>
-    
             <tbody>
               <tr>
                 <td>01/01/1990</td>
@@ -235,15 +235,65 @@
                 <td>First Canada geese this spring</td>
                 <td><button class="btn waves-effect waves-light btn-small" id="delete">X</button></td>
               </tr>
+              <tr>
+                <td>01/02/1990</td>
+                <td>Plant</td>
+                <td>First crocus flowers this spring</td>
+                <td><button class="btn waves-effect waves-light btn-small" id="delete">X</button></td>
+              </tr>
             </tbody>
           </table>
 
-
         </div>
       </div>
+
+      <div class="row" id="view-nearby-obs">
+        <h5>Nearby observations</h5>
+        <!-- STEFAN PUT MAP WITH NEARBY OBSERVATIONS HERE -->
+      </div>
+
+      <div class="row" id="download-data">
+        <h5>Download data</h5>
+
+        <form action="#">
+          <div class="row">
+
+            <div class="input-field col s4">
+              <select class="categorydownload">
+                <option value="all" selected>All</option>
+                <option value="animal">Animal</option>
+                <option value="plants">Plant</option>
+                <option value="fungus">Fungus</option>
+                <option value="weather">Weather</option>
+                <option value="land_water">Land or water</option>
+              </select>
+              <label for="categorydownload">Choose a category of observations*</label>
+            </div>
+
+            <div class="input-field col s4">
+              <input type="text" class="datepicker" id="startdatedownload">
+              <label for="startdatedownload">Start date*</label>
+            </div>
+
+            <div class="input-field col s4">
+              <input type="text" class="datepicker">
+              <label for="enddatedownload" id="enddatedownload">End date*</label>
+            </div>
+          </div>
+
+          <div class="row">
+            <button class="btn waves-effect waves-light" type="submit" id="requestdata">Request
+            </button>     
+          </div>
+
+        </form>
+
+      </div>
+
+
       <br><br>
       <div class="row">
-        <button class="waves-effect waves-teal btn-flat" id="backtotop" href="#">Back to top</button>
+        <a class="btn waves-effect waves-teal btn-flat" id="backtotop" href="#top">Back to top</a>
       </div>
 
     </div>
@@ -289,11 +339,10 @@
 
 
   <!--  Scripts-->
-  <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-  <script type="text/javascript" src="js/materialize.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
   <script type="text/javascript" src="js/init.js"></script>
-  <script type="text/javascript" src="js/forminitialization.js"></script>
-  
+  <script type="text/javascript" src="js/forminitialization.js"></script>  
 
 
   </body>
