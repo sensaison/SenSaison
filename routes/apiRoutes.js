@@ -30,16 +30,30 @@ module.exports = function(app) {
             where: {
                 id: req.params.id
             }
-        }).then(function(updobs) {
+        }).then(
+            function(updobs) {
+                if (updobs.changedRows === 0) {
+                    return res.status(404).end();
+                }
+                res.status(200).end();
+            }
+        ).then(function(updobs) {
             res.json(updobs);
         });
-    });
 
     app.set("/api/users/:id", function(req, res) {
         db.User.update({
             where: {
                 id: req.params.id
             }
+        }).then(
+            function(updusr) {
+                if (updusr.changedRows === 0) {
+                    return res.status(404).end();
+                }
+                res.status(200).end();
+            }
+        );
         }).then(function(updusr) {
             res.json(updusr);
         });
