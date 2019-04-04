@@ -30,7 +30,6 @@ module.exports = function(app) {
             where: {
                 id: req.params.id
             }
-<<<<<<< HEAD
         }).then(
             function(updobs) {
                 if (updobs.changedRows === 0) {
@@ -38,22 +37,15 @@ module.exports = function(app) {
                 }
                 res.status(200).end();
             }
-        );
-    })
-  
-=======
-        }).then(function(updobs) {
+        ).then(function(updobs) {
             res.json(updobs);
         });
-    });
 
->>>>>>> 213cd5eba2a5c881d21827951dbcf62b6b1a8e44
     app.set("/api/users/:id", function(req, res) {
         db.User.update({
             where: {
                 id: req.params.id
             }
-<<<<<<< HEAD
         }).then(
             function(updusr) {
                 if (updusr.changedRows === 0) {
@@ -62,10 +54,8 @@ module.exports = function(app) {
                 res.status(200).end();
             }
         );
-=======
         }).then(function(updusr) {
             res.json(updusr);
         });
->>>>>>> 213cd5eba2a5c881d21827951dbcf62b6b1a8e44
     });
 };

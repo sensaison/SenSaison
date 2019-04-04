@@ -70,9 +70,5 @@ module.exports = function(sequelize, DataTypes) {
     User.associate = function(models) {
         User.hasMany(models.Observation);
     };
-<<<<<<< HEAD
-=======
-
->>>>>>> 213cd5eba2a5c881d21827951dbcf62b6b1a8e44
     return User;
 };
