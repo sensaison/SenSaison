@@ -1,3 +1,4 @@
+// selector form initialized
 (function($){
     $(function(){
 

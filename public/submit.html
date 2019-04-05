@@ -26,7 +26,7 @@
   <script type="text/javascript" src="Swatchbook/js/modernizr.custom.79639.js"></script> 
     
   <!-- Navbar css -->
-    <link href="css/navbar.css" media="screen" rel="stylesheet" type="text/css" />
+  <link href="css/navbar.css" media="screen" rel="stylesheet" type="text/css" />
 
 
 </head>
@@ -64,10 +64,10 @@
 					<li><a href="#">Weather</a></li>
 				</ul>
             </li>
-            <!-- SUBMIT -->
-            <li><a href="submit.html"><span class=""></span> Submit Observation</a></li>
             <!-- Map -->
-			<li><a href="map.html"><span class=""></span> Map</a>
+			<li><a href="map.html"><span class=""></span> View nearby observations</a>
+      </li>
+      <li><a href="download.html"><span class=""></span> Download data</a>
 			</li>
             <!-- US -->
 			<li><a href="contact.html"><span class=""></span> Contact</a>
@@ -93,21 +93,156 @@
   </div>
 
 
-  <div class="container">
+  <div class="container center-align">
     <div class="section">
-
+      <h3>Your account</h3>
+      <br>
       <div class="row">
+        <button class="btn waves-effect waves-light">Add new observation</button>
+        <button class="btn waves-effect waves-light">View all your observations</button>
+      </div>
+      <br>
+      <div class="row hidden" id="add-observation-div">
+
         <div class="col s12 center">
-          <h3><i class="mdi-content-send brown-text"></i></h3>
-          <h4>Submit Form</h4>
-          <p class="left-align light">
+        <h5>Add new observation</h5>
+        <br>
 
-            <!-- CATHERINE!!! FORM INFO HERE -->
+          <form action="#">
+            <div class="row">
+              <div class="input-field col s4">
+                <label for="date">Date of observation*</label>
+                <input type="text" class="datepicker" id="date">
+              </div>
 
-            FORM CODE HERE
+              <div class="input-field col s4">
+                <label for="time">Time of observation*</label>
+                <input type="text" class="timepicker" id="time">
+              </div>
 
-          </p>
+              <div class="input-field col s4">
+                <label for="obstype">Type of observation*</label>
+                <select id="obstype">
+                  <option value="" disabled selected>Choose an option</option>
+                  <option value="animal">Animal</option>
+                  <option value="plant">Plant</option>
+                  <option value="fungus">Fungus</option>
+                  <option value="weather">Weather</option>
+                  <option value="land_water">Land or water</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="input-field col s6">
+                <label for="shortdesc">Brief description of observation*</label>
+                <textarea id="shortdesc" class="materialize-textarea" data-length="50"></textarea>
+              </div>
+
+              <div class="col s6">
+                <label for="googlemap">Location of observation*</label>
+                <!-- GOOGLE MAP HERE -->
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="input-field col s6">
+                <label for="longdesc">Extended description of observation</label>
+                <textarea id="longdesc" class="materialize-textarea" data-length="500"></textarea>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="input-field col s6">
+                <label for="first-confidence">Confidence that your observation is the first of its type in your area*</label>
+                <select id="first-confidence">
+                  <option value="1" selected>1 - low confidence</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5 - high confidence</option>
+                </select>
+              </div>
+            </div>
+
+            <br><br>
+            <div class="row">
+              <div class="file-field input-field col s6">
+                <div class="btn btn-small">
+                  <span>Upload</span>
+                  <input type="file" multiple>
+                </div>
+                <div class="file-path-wrapper">
+                  <input class="file-path validate" type="text" placeholder="Upload one or more pictures*">
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <p><i>This section is required if you selected animal, plant, or fungus.</i></p>
+              <div class="input-field col s4">
+                <label for="species">Species common name*</label>
+                <input type="text" id="species" data-length="50">
+              </div>
+
+              <div class="input-field col s4">
+                <label for="speciessciname">Species scientific name (if known)</label>
+                <input type="text" id="speciessciname" data-length="50">
+              </div>
+
+              <div class="input-field col s4">
+                <label for="species-confidence">Species ID confidence*</label>
+                <select id="species-confidence">
+                  <option value="1" selected>1 - low confidence</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5 - high confidence</option>
+                </select>
+              </div>
+            </div>
+
+            <br>
+            <div class="row">
+              <button class="btn waves-effect waves-light btn-large" type="submit" id="submit">Submit
+              </button>     
+            </div>
+
+          </form>
+
         </div>
+      </div>
+
+      <div class="row hidden" id="view-your-observations-div">
+        <div class="col s12 center">
+          <h5>All your observations</h5>
+          <br>
+          <table>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Category</th>
+                <th>Brief description</th>
+                <th>Delete</th>
+              </tr>
+            </thead>
+    
+            <tbody>
+              <tr>
+                <td>01/01/1990</td>
+                <td>Animal</td>
+                <td>First Canada geese this spring</td>
+                <td><button class="btn waves-effect waves-light btn-small" id="delete">X</button></td>
+              </tr>
+            </tbody>
+          </table>
+
+
+        </div>
+      </div>
+      <br><br>
+      <div class="row">
+        <button class="waves-effect waves-teal btn-flat" id="backtotop" href="#">Back to top</button>
       </div>
 
     </div>
@@ -153,10 +288,18 @@
 
 
   <!--  Scripts-->
+<<<<<<< HEAD
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
   <script src="js/materialize.js"></script>
   <script src="js/init.js"></script>
 
+=======
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script type="text/javascript" src="js/materialize.js"></script>
+  <script type="text/javascript" src="js/init.js"></script>
+  <script type="text/javascript" src="js/forminitialization.js"></script>
+  
+>>>>>>> f990b5a8fc5286c17d18d2c6494c58dea45b09e6
 
 
   </body>
