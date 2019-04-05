@@ -8,8 +8,8 @@ CREATE TABLE IF NOT EXISTS observation_data (
     time_stamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
     date_obs DATE NOT NULL,
     time_obs TIME NOT NULL,
-    latitude FLOAT(20, 18) NOT NULL, /* would be cool to use google maps for this */
-    longitude FLOAT(20, 18) NOT NULL,
+    latitude FLOAT NOT NULL, /* would be cool to use google maps for this */
+    longitude FLOAT NOT NULL,
     category ENUM("animal", "plant", "fungus", "weather", "land_water", "other") NOT NULL,
     first_confidence ENUM("1", "2", "3", "4", "5") DEFAULT("1") NOT NULL,
     species VARCHAR(50),

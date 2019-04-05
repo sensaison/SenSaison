@@ -10,10 +10,6 @@ $("#add-obs-btn").on("click", function() {
         $("#view-near-obs").removeClass("show");
         $("#download-data").addClass("hidden");
         $("#download-data").removeClass("show");
-
-        console.log("show add observations");
-    } else {
-        console.log("already showing");
     }
     // NO ELSE because if it's already showing do nothing
 });
@@ -30,12 +26,7 @@ $("#view-usr-obs-btn").on("click", function() {
         $("#view-near-obs").removeClass("show");
         $("#download-data").addClass("hidden");
         $("#download-data").removeClass("show");
-
-        console.log("show view user observations")
-    } else {
-        console.log("already showing");
     }
-    // NO ELSE because if it's already showing do nothing
 });
 
 $("#view-near-obs-btn").on("click", function() {
@@ -50,10 +41,6 @@ $("#view-near-obs-btn").on("click", function() {
         $("#add-obs").removeClass("show");
         $("#download-data").addClass("hidden");
         $("#download-data").removeClass("show");
-
-        console.log("show view nearby observations");
-    } else {
-        console.log("already showing");
     }
     // NO ELSE because if it's already showing do nothing
 });
@@ -70,10 +57,6 @@ $("#download-data-btn").on("click", function() {
         $("#view-near-obs").removeClass("show");
         $("#add-obs").addClass("hidden");
         $("#add-obs").removeClass("show");
-
-        console.log("show download data");
-    } else {
-        console.log("already showing");
     }
     // NO ELSE because if it's already showing do nothing
 });
