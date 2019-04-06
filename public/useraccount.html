@@ -1,0 +1,353 @@
+<!-- After signing in -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+
+  <title>SenSaison</title>
+
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="css/navbar.css" media="screen" rel="stylesheet" type="text/css" />
+  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+
+  <!-- Swatchbook -->
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <meta name="description" content="Animated Swatch Book with CSS3 and jQuery" />
+  <meta name="keywords" content="swatch book, css3, jquery, animated, rotation, transition, folding fan" />
+  <meta name="author" content="Codrops" />
+  <link rel="stylesheet" type="text/css" href="Swatchbook/css/style.css" />
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:700,300,300italic' rel='stylesheet' type='text/css'>
+  <script type="text/javascript" src="Swatchbook/js/modernizr.custom.79639.js"></script> 
+
+</head>
+
+<body>
+
+    <!-- NAV BAR -->
+ <!-- <nav class="white" role="navigation">
+    <div class="nav-wrapper container">
+      <a id="logo-container" href="#" class="brand-logo">Logo</a>
+      <ul class="right hide-on-med-and-down">
+        <li><a href="#">Navbar Link</a></li>
+      </ul>
+
+      <ul id="nav-mobile" class="sidenav">
+        <li><a href="#">About Us</a></li>
+      </ul>
+      <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+    </div>
+  </nav>
+-->
+
+<div class="wrap">
+  <nav>
+		<ul class="menu" id="top">
+            <!-- Home -->
+			<li><a href="home.html"><span class=""></span> Home</a></li>
+            <!-- View individual updates -->
+			<li><a href="#"><span class=""></span> Updates</a>
+				<ul>
+					<li><a href="#">Animals</a></li>
+          <li><a href="#">Fungus</a></li>
+          <li><a href="#">Land</a></li>
+					<li><a href="#">Plants</a></li>
+					<li><a href="#">Water</a></li>
+					<li><a href="#">Weather</a></li>
+				</ul>
+            <!-- US -->
+			<li><a href="contact.html"><span class=""></span> Contact</a>
+				<ul>
+					<li><a href="#">Stefan</a></li>
+					<li><a href="#">Auri</a></li>
+					<li><a href="#">Catherine</a></li>
+					<li><a href="#">Julie</a></li>
+				</ul>
+			</li>
+		</ul>
+        <div class="clearfix"></div>
+	</nav>
+</div>
+
+    <!-- MAIN -->
+  <div id="index-banner" class="success">
+    <div class="section no-pad-bot">
+      <div class="container">
+
+      </div>
+    </div>
+  </div>
+
+
+  <div class="container center-align">
+    <div class="section">
+      <h3>Your account</h3>
+      <br>
+      <div class="row">
+        <button class="btn waves-effect waves-light btn-flat" id="add-obs-btn">Add new observation</button><br>
+        <button class="btn waves-effect waves-light btn-flat" id="view-usr-obs-btn">View all your observations</button><br>
+        <button class="btn waves-effect waves-light btn-flat" id="view-near-obs-btn">View nearby observations</button><br>
+        <button class="btn waves-effect waves-light btn-flat" id="download-data-btn">Download data</button>
+      </div>
+      <br>
+
+      <div class="row hidden" id="add-obs">
+        <div class="col s12 center">
+        <h5>Add new observation</h5>
+        <br>
+
+          <form action="#">
+            <div class="row">
+              <div class="input-field col s4">
+                <input type="text" class="datepicker" id="date-obs" required="" aria-required="true">
+                <label for="date-obs">Date of observation*</label>
+              </div>
+
+              <div class="input-field col s4">
+                <input type="text" class="timepicker" id="time-obs" required="" aria-required="true">
+                <label for="time-obs">Time of observation*</label>
+              </div>
+
+              <div class="input-field col s4">
+                <select id="obs-category" required="" aria-required="true">
+                  <option value="" disabled selected>Choose an option</option>
+                  <option value="animal">Animal</option>
+                  <option value="plant">Plant</option>
+                  <option value="fungus">Fungus</option>
+                  <option value="weather">Weather</option>
+                  <option value="land_water">Land or water</option>
+                  <option value="other">Other (please explain in Description fields)</option>
+                </select>
+                <label for="obs-category">Category of observation*</label>
+              </div>
+            </div>
+
+            <div class="row">
+
+              <div class="col s6">
+
+                <div class="row">
+                  <div class="input-field col s12">
+                    <textarea id="brief-desc" class="materialize-textarea validate" data-length="50" required=""  aria-required="true" placeholder="Ex. First Canada geese to return from winter"></textarea>
+                    <label for="brief-desc">Brief description of observation*</label>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="input-field col s12">
+                    <textarea id="extended-desc" class="materialize-textarea validate" data-length="500" required=""  aria-required="true" placeholder="Ex. Cold day, some patches of ice on Mirror Lake. Four Canada geese showed up early this morning."></textarea>
+                    <label for="extended-desc">Extended description of observation</label>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="input-field col s12">
+                    <select class="first-confidence" required="" aria-required="true">
+                      <option value="1" selected>1 - low confidence (default)</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5 - high confidence</option>
+                    </select>
+                    <label for="first-confidence">Confidence that your observation is the first of its type in your area*</label>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="file-field input-field col s12">
+                    <button class="btn waves-effect waves-teal btn-flat btn-small">
+                      Upload
+                      <input type="file" id="pic-file" multiple required="" aria-required="true">
+                    </button>
+                    <div class="file-path-wrapper">
+                      <input class="file-path validate" id="pic-path" type="text" placeholder="Upload one or more pictures*">
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+                <div class="col s6">
+                  <label for="googlemap">Location of observation*</label>
+                  <!-- STEFAN PUT GOOGLE MAP HERE -->
+                </div>
+            </div>
+
+            <div class="row">
+              <p><i>This section is required if you selected animal, plant, or fungus.</i></p>
+              <div class="input-field col s4">
+                <label for="species">Species common name*</label>
+                <input type="text" class="validate" id="species" data-length="50">
+              </div>
+
+              <div class="input-field col s4">
+                <label for="species-sci-name">Species scientific name (if known)</label>
+                <input type="text" class="validate" id="species-sci-name" data-length="50">
+              </div>
+
+              <div class="input-field col s4">
+                <select id="species-confidence">
+                  <option value="1" selected>1 - low confidence (default)</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5 - high confidence</option>
+                </select>
+                <label for="species-confidence">Species ID confidence*</label>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <button class="btn waves-effect waves-light" type="submit" id="submit-obs">Submit
+              </button>     
+            </div>
+
+          </form>
+
+        </div>
+      </div>
+
+      <div class="row hidden" id="view-usr-obs">
+        <div class="col s12 center">
+          <h5>All your observations</h5>
+
+          <br>
+          <table class="highlight responsive-table all-your-obs">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Category</th>
+                <th>Brief description</th>
+                <th>Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>01/01/1990</td>
+                <td>Animal</td>
+                <td>First Canada geese this spring</td>
+                <td><button class="btn waves-effect waves-light btn-small" id="delete">X</button></td>
+              </tr>
+              <tr>
+                <td>01/02/1990</td>
+                <td>Plant</td>
+                <td>First crocus flowers this spring</td>
+                <td><button class="btn waves-effect waves-light btn-small" id="delete">X</button></td>
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+
+      <div class="row hidden" id="view-near-obs">
+        <h5>Nearby observations</h5>
+        <!-- STEFAN PUT MAP WITH NEARBY OBSERVATIONS HERE -->
+      </div>
+
+      <div class="row hidden" id="download-data">
+        <h5>Download data</h5>
+
+        <form action="#">
+          <div class="row">
+
+            <div class="input-field col s4">
+              <select id="category-download">
+                <option value="all" selected>All (default)</option>
+                <option value="animal">Animal</option>
+                <option value="plants">Plant</option>
+                <option value="fungus">Fungus</option>
+                <option value="weather">Weather</option>
+                <option value="land_water">Land or water</option>
+                <option value="other">Other</option>
+              </select>
+              <label for="category-download">Choose a category of observations*</label>
+            </div>
+
+            <div class="input-field col s4">
+              <input type="text" class="datepicker" id="start-date-download" required="" aria-required="true">
+              <label for="start-date-download">Start date*</label>
+            </div>
+
+            <div class="input-field col s4">
+              <input type="text" class="datepicker" id="end-date-download" required="" aria-required="true">
+              <label for="end-date-download">End date*</label>
+            </div>
+          </div>
+
+          <div class="row">
+            <button class="btn waves-effect waves-light" type="submit" id="request-data">Request
+            </button>     
+          </div>
+
+        </form>
+
+      </div>
+
+
+      <br><br>
+      <div class="row">
+        <a class="btn waves-effect waves-teal btn-flat" id="backtotop" href="#top">Back to top</a>
+      </div>
+
+    </div>
+  </div>
+
+
+
+  <footer class="page-footer teal">
+    <div class="container">
+      <div class="row">
+        <div class="col l6 s12">
+          <h5 class="white-text">Group Bio</h5>
+          <p class="grey-text text-lighten-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Cursus vitae congue mauris rhoncus aenean vel elit scelerisque. Montes nascetur ridiculus mus mauris vitae. Tincidunt ornare massa eget egestas purus viverra accumsan in.</p>
+
+
+        </div>
+        <div class="col l3 s12">
+          <h5 class="white-text">Settings</h5>
+          <ul>
+            <li><a class="white-text" href="#!">Link 1</a></li>
+            <li><a class="white-text" href="#!">Link 2</a></li>
+            <li><a class="white-text" href="#!">Link 3</a></li>
+            <li><a class="white-text" href="#!">Link 4</a></li>
+          </ul>
+        </div>
+        <div class="col l3 s12">
+          <h5 class="white-text">Connect</h5>
+          <ul>
+            <li><a class="white-text" href="#!">Link 1</a></li>
+            <li><a class="white-text" href="#!">Link 2</a></li>
+            <li><a class="white-text" href="#!">Link 3</a></li>
+            <li><a class="white-text" href="#!">Link 4</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <div class="container">
+      Made by <a class="brown-text text-lighten-3" href="http://materializecss.com">Materialize</a>
+      </div>
+    </div>
+  </footer>
+
+
+  <!--  Scripts -->
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script type="text/javascript" src="js/init.js"></script>
+
+  <!-- Scripts specific to user account page -->
+  <script type="text/javascript" src="js/forminitialization.js"></script>
+  <script type="text/javascript" src="js/useraccount.js"></script>
+  <script type="text/javascript" src="js/datasubmission.js"></script>
+  <script type="text/javascript" src="js/datarequest.js"></script>
+
+
+  </body>
+</html>
