@@ -12,18 +12,19 @@ console.log("googleMaps.js has executed.");
 var map;
 var startingPos;
 var userPin;
+var mapType;
 getLocation();
 
 function getLocation() {
     if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition, showError);
+        navigator.geolocation.getCurrentPosition(usePosition, showError);
     } else {
         console.log("Geolocation is not supported by this browser.");
         generateMap();
     }
 }
 
-function showPosition(position) {
+function usePosition(position) {
     console.log("Latitude: " + position.coords.latitude);
     console.log("Longitude: " + position.coords.longitude);
     startingPos = position;
@@ -49,6 +50,11 @@ function showError(error) {
 }
 
 function generateMap() {
+    var pageName = document.location.href.match(/[^\/]+$/)[0];
+    console.log(pageName);
+    if(pageName === "map.html" || pageName === "useraccount.html") {
+        mapType = 0;
+    }
     var latitude = 47.1585;
     var longitude = 27.6014;
     if(startingPos !== undefined) {
@@ -63,15 +69,16 @@ function generateMap() {
         clickableIcons: false,
         mapTypeControl: false
     });
-
-    map.addListener("click", function(event) {
-        console.log(userPin);
-        if(userPin === undefined) {
-            placeMarkerAndPanTo(event.latLng, map);
-        } else {
-            console.log("A pin has already been placed. Add a way to delete the pin and pick another later.");
-        }
-    });
+    if(mapType === 0) {
+        map.addListener("click", function(event) {
+            console.log(userPin);
+            if(userPin === undefined) {
+                placeMarkerAndPanTo(event.latLng, map);
+            } else {
+                console.log("A pin has already been placed. Click 'clear pins' to clear them first.");
+            }
+        });
+    }
 }
 
 function placeMarkerAndPanTo(latLng, map) {
@@ -80,10 +87,15 @@ function placeMarkerAndPanTo(latLng, map) {
         map: map
     });
     map.panTo(latLng);
-    userPin = latLng;
-    console.log(userPin.lat());
-    console.log(userPin.lng());
+    userPin = marker;
+    console.log(userPin.position.lat());
+    console.log(userPin.position.lng());
 }
+
+$("#clear-pins").click(function deletePin() {
+    userPin.setMap(null);
+    userPin = undefined;
+});
 
 /*
 function initAutocomplete() {
