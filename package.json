@@ -16,10 +16,10 @@
     "express-handlebars": "^3.0.0",
     "git": "^0.1.5",
     "mime": "^2.4.0",
-    "mysql2": "^1.6.4",
+    "mysql2": "^1.6.5",
     "passport": "^0.4.0",
     "passport-google-oauth20": "^2.0.0",
-    "sequelize": "^4.41.2"
+    "sequelize": "^4.43.1"
   },
   "devDependencies": {
     "chai": "^4.1.2",

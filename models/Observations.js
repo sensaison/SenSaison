@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
 module.exports = function(sequelize, DataTypes) {
-    var Observation = sequelize.define("Observation", {
+    var Observations = sequelize.define("Observations", {
         id: {
             primaryKey: true,
             type: DataTypes.INTEGER,
@@ -83,12 +83,12 @@ module.exports = function(sequelize, DataTypes) {
         }
     });
 
-    Observation.associate = function(models) {
-        Observation.belongsTo(models.User, {
+    Observations.associate = function(models) {
+        Observations.belongsTo(models.Users, {
             foreignkey: {
                 allowNull: false
             }
         });
     };
-    return Observation;
+    return Observations;
 };

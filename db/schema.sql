@@ -1,7 +1,7 @@
 CREATE DATABASE IF NOT EXISTS SenSaison_db;
 USE SenSaison_db;
 
-CREATE TABLE IF NOT EXISTS observation_data (
+CREATE TABLE IF NOT EXISTS Observations (
     id INT NOT NULL UNIQUE AUTO_INCREMENT,
     user_id binary(16) NOT NULL, /* tied to the id in next table */
     picture_id VARCHAR(50) NOT NULL, /* let's see how cloudinary works */
@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS observation_data (
 
 
 /* ??? will need to figure out this one with Auri */
-CREATE TABLE IF NOT EXISTS user_data (
+CREATE TABLE IF NOT EXISTS Users (
     id INT NOT NULL UNIQUE AUTO_INCREMENT,
     user_id BINARY(16) UNIQUE NOT NULL, /* needs to be auto generated - based on UUID */
     firstname VARCHAR(20) NOT NULL,

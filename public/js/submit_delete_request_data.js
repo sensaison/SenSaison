@@ -1,10 +1,18 @@
 $(document).ready(function() {
 
+    // show user's observations on document ready
+    $.ajax("/api/users", function() {
+        type: "GET",
+        data: 
+    })
+
     // POST request when submitting new observation
     $("#submit-obs").on("click", function(e) {
         e.preventDefault();
 
         let observation = {
+            // user_id: ,AURI
+            // picture_id: AURI,
             date_obs: $("#date-obs").val(),
             time_obs: $("#time-obs").val(),
             // latitude: ,STEFAN
@@ -16,7 +24,6 @@ $(document).ready(function() {
             species: $("#species").val(),
             species_sci_name: $("#species-sci-name").val(),
             species_confidence: $("#species-confidence").val(),
-            // picture_id: AURI
         }
 
         $.ajax("/api/observations", {
@@ -62,7 +69,8 @@ $(document).ready(function() {
             // date_obs: new Date(dateRangeRequest); // ???
         }
 
-        // let queryURL = "https://www.rebasedata.com/api/v1/convert" + ; // ???
+        // let queryURL = "https://www.rebasedata.com/api/v1/convert?outputFormat=csv&errorResponse=json";
+        // output to csv, if error then error response format is json
 
 
         $.ajax("api/observations", {
