@@ -10,6 +10,28 @@ module.exports = function(app) {
             });
     });
 
+
+
+
+
+    // FIND ALL observations grouped by category
+    // CHECK THIS
+    app.get("/api/observations", function(req, res) {
+        db.Observations.findAll({
+            group: ["category"]
+        })
+            .then(function(dbObs) {
+                res.json(dbObs);
+            });
+    });
+
+
+
+
+
+
+
+
     // FIND ALL observations by category
     app.get("/api/categories/animal", function(req, res) {
         db.Observations.findAll({
@@ -74,7 +96,7 @@ module.exports = function(app) {
                 category: "animal",
 
             },
-            order: [["time_stamp", "DESC"]]
+            order: [["id", "DESC"]]
         }).then(function(recentAnimal) {
             res.json(recentAnimal);
         });
@@ -86,7 +108,7 @@ module.exports = function(app) {
                 category: "plant",
 
             },
-            order: [["time_stamp", "DESC"]]
+            order: [["id", "DESC"]]
         }).then(function(recentPlant) {
             res.json(recentPlant);
         });
@@ -98,7 +120,7 @@ module.exports = function(app) {
                 category: "fungus",
 
             },
-            order: [["time_stamp", "DESC"]]
+            order: [["id", "DESC"]]
         }).then(function(recentFungus) {
             res.json(recentFungus);
         });
@@ -110,7 +132,7 @@ module.exports = function(app) {
                 category: "weather",
 
             },
-            order: [["time_stamp", "DESC"]]
+            order: [["id", "DESC"]]
         }).then(function(recentWeather) {
             res.json(recentWeather);
         });
@@ -122,7 +144,7 @@ module.exports = function(app) {
                 category: "land_water",
 
             },
-            order: [["time_stamp", "DESC"]]
+            order: [["id", "DESC"]]
         }).then(function(recentLandWater) {
             res.json(recentLandWater);
         });
@@ -134,7 +156,7 @@ module.exports = function(app) {
                 category: "other",
 
             },
-            order: [["time_stamp", "DESC"]]
+            order: [["id", "DESC"]]
         }).then(function(recentOther) {
             res.json(recentOther);
         });
