@@ -1,6 +1,6 @@
 USE SenSaison_db;
 
-INSERT INTO observation_data
+INSERT INTO Observations
     (user_id, picture_id, date_obs, time_obs, latitude, longitude, category, species, species_confidence, first_confidence, brief_description)
     VALUES (12345, "5", "1989-12-31", "23:59:59", 68.50, -162.50, "animal", "red-footed booby", 4, 3, "lalalallalalalala"),
     (678910, "4", "1990-12-31", "23:59:59", 69.50, -161.50, "animal", "blue-footed booby", 3, 5, "rurururururururuur"),
@@ -14,7 +14,7 @@ INSERT INTO observation_data
     (13579, "esr", "1995-12-31", "23:59:59", 68.20, -161.90, "land_water", "freeze", null, 3, "hahahahahahahahahaha"),
     (13579, "456", "1995-12-01", "23:59:59", 68.10, -161.90, "other", "something", null, 2, "hahahahahahahahahaha");
 
-INSERT IGNORE INTO user_data
+INSERT IGNORE INTO Users
     (user_id, firstname, lastname, email, username)
     VALUES (12345, "Catherine", "Pham", "acpham028@gmail.com", "catherine"),
     (678910, "Stefan", "Apreutesei", "stefan@apreutesei.com", "stefan"),
