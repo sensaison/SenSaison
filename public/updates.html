@@ -1,12 +1,16 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="en">
   <head>
-
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+              
+    <title>SenSaison</title>
+              
     <!-- CSS  -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
     <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-
+              
     <!-- Swatchbook -->
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
@@ -14,20 +18,13 @@
     <meta name="description" content="Animated Swatch Book with CSS3 and jQuery" />
     <meta name="keywords" content="swatch book, css3, jquery, animated, rotation, transition, folding fan" />
     <meta name="author" content="Codrops" />
-    <link rel="stylesheet" type="text/css" href="Swatchbook/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="Swatchbook/css/style3.css" />
     <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:700,300,300italic' rel='stylesheet' type='text/css'>
-    <script type="text/javascript" src="Swatchbook/js/modernizr.custom.79639.js"></script> 
-    
+    <script type="text/javascript" src="Swatchbook/js/modernizr.custom.79639.js"></script>
+    <script type="text/javascript" src="Swatchbook/js/jquery.swatchbookjs"></script>
+                  
     <!-- Navbar css -->
     <link href="css/navbar.css" media="screen" rel="stylesheet" type="text/css" />
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-
-    <title>Map Testing Ground</title>
-
-    <meta charset="utf-8">
-    <link rel="stylesheet" type="text/css" href="styles/googleMaps.css">
-
   </head>
 
   <body>
@@ -37,7 +34,7 @@
           <!-- Home -->
           <li><a href="home.html"><span class=""></span> Home</a></li>
           <!-- View individual updates -->
-          <li><a href="update.html"><span class=""></span> Updates</a>
+          <li><a href="updates.html"><span class=""></span> Updates</a>
             <ul>
               <li><a href="#">Animals</a></li>
               <li><a href="#">Fungus</a></li>
@@ -50,7 +47,7 @@
           <li><a href="useraccount.html"><span class=""></span> Download Data</a></li>
           <!-- Map -->
           <li><a href="map.html"><span class=""></span> Map</a></li>
-          <!-- CONTACT US -->
+          <!-- US -->
           <li><a href="contact.html"><span class=""></span> Contact</a>
             <ul>
               <li><a href="#">Stefan</a></li>
@@ -63,10 +60,26 @@
         <div class="clearfix"></div>
       </nav>
     </div>
-          
-    <h1>I'm testing maps.</h1>
-    <div class="mapDisplayed" id="map"></div>
-
+    <!-- MAIN -->
+    <div id="index-banner" class="success">
+      <div class="section no-pad-bot">
+        <div class="container">
+              
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="section">
+        <div class="row">
+          <div class="col s12 center">
+            <h3><i class="mdi-content-send brown-text"></i></h3>
+            <h4>Updates</h4>
+            <p class="left-align light">blah blah blah blah Updates</p>
+          </div>
+        </div>
+      </div>
+    </div>
+              
     <footer class="page-footer teal">
       <div class="container">
         <div class="row">
@@ -96,19 +109,18 @@
           </div>
         </div>
       </div>
-          
+            
       <div class="footer-copyright">
         <div class="container">
           Made by <a class="brown-text text-lighten-3" href="http://materializecss.com">Materialize</a>
         </div>
       </div>
-    </footer>    
+    </footer> 
 
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-    <script src="js/googleMaps.js"></script>
-
-    <!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDexLO6StKoAhSrxypz3E6neGfT9PpJSlM&libraries=places&callback=initAutocomplete"async defer></script>-->
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDexLO6StKoAhSrxypz3E6neGfT9PpJSlM&callback=initMap"></script>
+    <!--  Scripts-->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="js/materialize.js"></script>
+    <script src="js/init.js"></script>
 
   </body>
 </html>

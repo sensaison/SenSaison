@@ -8,14 +8,6 @@
  * Copyright 2012, Codrops
  * http://www.codrops.com
  */
-
-function randomImg(){
-	var randomNumber = Math.floor(Math.random() * 11) + 1;
-	var imgName = "img" + randomNumber + ".jpg";
-	document.getElementById("imageid").src= "../images" + "/" + imgName ;
-	}
-
-;( function( $, window, undefined ) {
 	
 	'use strict';
 

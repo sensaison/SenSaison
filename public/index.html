@@ -1,253 +1,226 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
+    <title>SenSaison</title>
 
-  <title>SenSaison</title>
+    <!-- CSS  -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 
-  <!-- CSS  -->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-
-  <!-- Google sign in -->
-  		<meta name="google-signin-scope" content="profile email">
-		<meta name="google-signin-client_id" content="helpful-binder-236118.apps.googleusercontent.com">
+    <!-- Google sign in -->
+    <meta name="google-signin-scope" content="profile email">
+	  <meta name="google-signin-client_id" content="helpful-binder-236118.apps.googleusercontent.com">
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     
     <link href="css/navbar.css" media="screen" rel="stylesheet" type="text/css" />
+  </head>
 
+  <body>
+    <div class="wrap">
+      <nav>
+		    <ul class="menu">
+      
+          <!-- Home outside of signin-->
+          <li><a href="index.html"><span class=""></span> Home</a></li>
 
-</head>
-
-<body>
-
-    <!-- NAV BAR -->
- <!-- <nav class="white" role="navigation">
-    <div class="nav-wrapper container">
-      <a id="logo-container" href="#" class="brand-logo">Logo</a>
-      <ul class="right hide-on-med-and-down">
-        <li><a href="#">Navbar Link</a></li>
-      </ul>
-
-      <ul id="nav-mobile" class="sidenav">
-        <li><a href="#">About Us</a></li>
-      </ul>
-      <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-    </div>
-  </nav>
--->
-
-<div class="wrap">
-  <nav>
-		<ul class="menu">
-            <!-- Home -->
-			<li><a href="index.html"><span class=""></span> Home</a></li>
-            <!-- Scroll to info below -->
-			<li><a href="#"><span class=""></span> About</a>
-				<ul>
-					<li><a href="#">Animals</a></li>
-          <li><a href="#">Fungus</a></li>
-          <li><a href="#">Land & Water</a></li>
-					<li><a href="#">Plants</a></li>
-					<li><a href="#">Weather</a></li>
-				</ul>
-			</li>
-            <!-- Map -->
-			<li><a href="map.html"><span class=""></span> Map</a>
-			</li>
-            <!-- US -->
-			<li><a href="contact.html"><span class=""></span> Contact</a>
-				<ul>
-					<li><a href="#">Stefan</a></li>
-					<li><a href="#">Auri</a></li>
-					<li><a href="#">Catherine</a></li>
-					<li><a href="#">Julie</a></li>
-				</ul>
-			</li>
-		</ul>
+          <!-- Scroll to info below -->
+			    <li><a href="#"><span class=""></span> About</a>
+				    <ul>
+					    <li><a href="#">Animals</a></li>
+              <li><a href="#">Fungus</a></li>
+              <li><a href="#">Land & Water</a></li>
+		  			  <li><a href="#">Plants</a></li>
+			  		  <li><a href="#">Weather</a></li>
+				    </ul>
+			    </li>
+            
+          <!-- Map -->
+	  		  <li><a href="map.html"><span class=""></span> Map</a></li>
+            
+          <!-- US -->
+			    <li><a href="contact.html"><span class=""></span> Contact</a>
+  				  <ul>
+	  				  <li><a href="#">Stefan</a></li>
+		  			  <li><a href="#">Auri</a></li>
+			  		  <li><a href="#">Catherine</a></li>
+				  	  <li><a href="#">Julie</a></li>
+  				  </ul>
+	  		  </li>
+		    </ul>
         <div class="clearfix"></div>
-	</nav>
-</div>
+	    </nav>
+     </div>
 
-    <!-- MAIN -->
-  <div id="index-banner" class="parallax-container">
-    <div class="section no-pad-bot">
+      <!-- MAIN -->
+      <div id="index-banner" class="parallax-container">
+        <div class="section no-pad-bot">
+          <div class="container">
+            <h1 class="header center teal-text text-lighten-2" >SenSaison</h1>
+            <div class="row center">
+              <h5 class="header col s12 light" style="text-shadow: 0 0 7px white;">
+                For citizen scientists to record natural history observations
+              </h5>
+            </div>
+            <div class="row center">
+              <!-- Sign in with google-->
+              <!--  <a href="#" id="download-button" class="btn-large waves-effect waves-light teal lighten-1">Sign In</a> -->
+              <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark">Sign In with Google</div>
+            </div>
+          </div>
+        </div>
+        <div class="parallax"><img src="images/image1.jpg" alt="img 1"></div>
+      </div>
+
       <div class="container">
-        <br><br>
-        <h1 class="header center teal-text text-lighten-2" >SenSaison</h1>
-        <div class="row center">
-          <h5 class="header col s12 light" style="text-shadow: 0 0 7px white;">For citizen scientists to record natural history observations</h5>
-        </div>
-        <div class="row center">
+        <div class="section">
+          <!--   Icon Section   -->
+          <div class="row">
+            <div class="col s12 m4">
+              <div class="icon-block">
+                <h2 class="center brown-text"><i class="material-icons">bug_report</i></h2>
+                <h5 class="center">Animal</h5>
+                <p class="light">Animal migrations, breeding biology. Like when monarch butterflies first show up, when geese start migrating south, when frogs start laying eggs, when cicadas come out of the ground. life history events basically. Life history events being important "biological events" in an individual's life</p>
+              </div>
+            </div>
 
-            <!-- Sign in with google-->
-        <!--  <a href="#" id="download-button" class="btn-large waves-effect waves-light teal lighten-1">Sign In</a> -->
-        	<div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark">Sign In with Google</div>
+            <div class="col s12 m4">
+              <div class="icon-block">
+                <h2 class="center brown-text"><i class="material-icons">nature</i></h2>
+                <h5 class="center">Fungus</h5>
+                <p class="light">Mushrooms.</p>
+              </div>
+            </div>
 
-        </div>
-        <br><br>
-
-      </div>
-    </div>
-    <div class="parallax"><img src="images/image1.jpg" alt="img 1"></div>
-  </div>
-
-
-  <div class="container">
-    <div class="section">
-
-      <!--   Icon Section   -->
-      <div class="row">
-        <div class="col s12 m4">
-          <div class="icon-block">
-            <h2 class="center brown-text"><i class="material-icons">bug_report</i></h2>
-            <h5 class="center">Animal</h5>
-
-            <p class="light">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Cursus vitae congue mauris rhoncus aenean vel elit scelerisque. Montes nascetur ridiculus mus mauris vitae. Tincidunt ornare massa eget egestas purus viverra accumsan in.</p>
+            <div class="col s12 m4">
+              <div class="icon-block">
+                <h2 class="center brown-text"><i class="material-icons">landscape</i></h2>
+                <h5 class="center">Land & Water</h5>
+                <p class="light">Permafrost hits the surface, local creek goes dry, lake freezes over</p>
+              </div>
+            </div>
           </div>
-        </div>
 
-        <div class="col s12 m4">
-          <div class="icon-block">
-            <h2 class="center brown-text"><i class="material-icons">nature</i></h2>
-            <h5 class="center">Fungus</h5>
+          <div class="row">
+            <div class="col s12 m6">
+              <div class="icon-block">
+                <h2 class="center brown-text"><i class="material-icons">filter_vintage</i></h2>
+                <h5 class="center">Plants</h5>
+                  <p class="light">weather would be first frost, first snowstorm, first thunderstorm, first hurricane of the season.</p>
+              </div>
+            </div>
 
-            <p class="light">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Cursus vitae congue mauris rhoncus aenean vel elit scelerisque. Montes nascetur ridiculus mus mauris vitae. Tincidunt ornare massa eget egestas purus viverra accumsan in.</p>
-          </div>
-        </div>
-
-        <div class="col s12 m4">
-          <div class="icon-block">
-            <h2 class="center brown-text"><i class="material-icons">landscape</i></h2>
-            <h5 class="center">Land & Water</h5>
-
-            <p class="light">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Cursus vitae congue mauris rhoncus aenean vel elit scelerisque. Montes nascetur ridiculus mus mauris vitae. Tincidunt ornare massa eget egestas purus viverra accumsan in.</p>
-          </div>
-        </div>
-      </div>
-            <div class="row">
-        <div class="col s12 m6">
-          <div class="icon-block">
-            <h2 class="center brown-text"><i class="material-icons">filter_vintage</i></h2>
-            <h5 class="center">Plants</h5>
-
-            <p class="light">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Cursus vitae congue mauris rhoncus aenean vel elit scelerisque. Montes nascetur ridiculus mus mauris vitae. Tincidunt ornare massa eget egestas purus viverra accumsan in.</p>
-          </div>
-        </div>
-
-        <div class="col s12 m6">
-          <div class="icon-block">
-            <h2 class="center brown-text"><i class="material-icons">wb_sunny</i></h2>
-            <h5 class="center">Weather</h5>
-
-            <p class="light">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Cursus vitae congue mauris rhoncus aenean vel elit scelerisque. Montes nascetur ridiculus mus mauris vitae. Tincidunt ornare massa eget egestas purus viverra accumsan in.</p>
+            <div class="col s12 m6">
+              <div class="icon-block">
+                <h2 class="center brown-text"><i class="material-icons">wb_sunny</i></h2>
+                <h5 class="center">Weather</h5>
+                <p class="light">Seasons</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-    </div>
-  </div>
-
-
-  <div class="parallax-container valign-wrapper">
-    <div class="section no-pad-bot">
-      <div class="container">
-        <div class="row center">
-          <h5 class="header col s12 light" style="text-shadow: 0 0 7px white;">A modern responsive front-end framework based on Material Design</h5>
+      <div class="parallax-container valign-wrapper">
+        <div class="section no-pad-bot">
+          <div class="container">
+            <div class="row center">
+              <h5 class="header col s12 light" style="text-shadow: 0 0 7px white;">
+                A modern responsive front-end framework based on Material Design
+              </h5>
+            </div>
+          </div>
         </div>
-      </div>
+      <div class="parallax"><img src="images/image2.jpg" alt="img 2"></div>
     </div>
-    <div class="parallax"><img src="images/image2.jpg" alt="img 2"></div>
-  </div>
 
-  <div class="container">
-    <div class="section">
-
-      <div class="row">
-        <div class="col s12 center">
-          <h3><i class="mdi-content-send brown-text"></i></h3>
-          <h4>Contact Us</h4>
-          <p class="left-align light">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque id nunc nec volutpat. Etiam pellentesque tristique arcu, non consequat magna fermentum ac. Cras ut ultricies eros. Maecenas eros justo, ullamcorper a sapien id, viverra ultrices eros. Morbi sem neque, posuere et pretium eget, bibendum sollicitudin lacus. Aliquam eleifend sollicitudin diam, eu mattis nisl maximus sed. Nulla imperdiet semper molestie. Morbi massa odio, condimentum sed ipsum ac, gravida ultrices erat. Nullam eget dignissim mauris, non tristique erat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;</p>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-
-  <div class="parallax-container valign-wrapper">
-    <div class="section no-pad-bot">
-      <div class="container">
-        <div class="row center">
-          <h5 class="header col s12 light" style="text-shadow: 0 0 7px white;">A modern responsive front-end framework based on Material Design</h5>
-        </div>
-      </div>
-    </div>
-    <div class="parallax"><img src="images/image1a.jpg" alt="img 3"></div>
-  </div>
-
-  <footer class="page-footer teal">
     <div class="container">
-      <div class="row">
-        <div class="col l6 s12">
-          <h5 class="white-text">Group Bio</h5>
-          <p class="grey-text text-lighten-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Cursus vitae congue mauris rhoncus aenean vel elit scelerisque. Montes nascetur ridiculus mus mauris vitae. Tincidunt ornare massa eget egestas purus viverra accumsan in.</p>
-
-
-        </div>
-        <div class="col l3 s12">
-          <h5 class="white-text">Settings</h5>
-          <ul>
-            <li><a class="white-text" href="#!">Link 1</a></li>
-            <li><a class="white-text" href="#!">Link 2</a></li>
-            <li><a class="white-text" href="#!">Link 3</a></li>
-            <li><a class="white-text" href="#!">Link 4</a></li>
-          </ul>
-        </div>
-        <div class="col l3 s12">
-          <h5 class="white-text">Connect</h5>
-          <ul>
-            <li><a class="white-text" href="#!">Link 1</a></li>
-            <li><a class="white-text" href="#!">Link 2</a></li>
-            <li><a class="white-text" href="#!">Link 3</a></li>
-            <li><a class="white-text" href="#!">Link 4</a></li>
-          </ul>
+      <div class="section">
+        <div class="row">
+          <div class="col s12 center">
+            <h3><i class="mdi-content-send brown-text"></i></h3>
+            <h4>Contact Us</h4>
+            <p class="left-align light">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque id nunc nec volutpat. Etiam pellentesque tristique arcu, non consequat magna fermentum ac. Cras ut ultricies eros. Maecenas eros justo, ullamcorper a sapien id, viverra ultrices eros. Morbi sem neque, posuere et pretium eget, bibendum sollicitudin lacus. Aliquam eleifend sollicitudin diam, eu mattis nisl maximus sed. Nulla imperdiet semper molestie. Morbi massa odio, condimentum sed ipsum ac, gravida ultrices erat. Nullam eget dignissim mauris, non tristique erat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;</p>
+          </div>
         </div>
       </div>
     </div>
-    <div class="footer-copyright">
+
+    <div class="parallax-container valign-wrapper">
+      <div class="section no-pad-bot">
+        <div class="container">
+          <div class="row center">
+            <h5 class="header col s12 light" style="text-shadow: 0 0 7px white;">
+              A modern responsive front-end framework based on Material Design
+            </h5>
+          </div>
+        </div>
+      </div>
+      <div class="parallax"><img src="images/image1a.jpg" alt="img 3"></div>
+    </div>
+
+    <footer class="page-footer teal">
       <div class="container">
-      Made by <a class="brown-text text-lighten-3" href="http://materializecss.com">Materialize</a>
+        <div class="row">
+          <div class="col l6 s12">
+            <h5 class="white-text">Group Bio</h5>
+            <p class="grey-text text-lighten-4">Check out our githubs and portfolios </p>
+          </div>
+      
+          <div class="col l3 s12">
+            <h5 class="white-text">Github</h5>
+            <ul>
+              <li><a class="white-text" href="#!">Link 1</a></li>
+              <li><a class="white-text" href="#!">Link 2</a></li>
+              <li><a class="white-text" href="#!">Link 3</a></li>
+              <li><a class="white-text" href="#!">Link 4</a></li>
+            </ul>
+          </div>
+              
+          <div class="col l3 s12">
+            <h5 class="white-text">Portfolio</h5>
+            <ul>
+              <li><a class="white-text" href="#!">Link 1</a></li>
+              <li><a class="white-text" href="#!">Link 2</a></li>
+              <li><a class="white-text" href="#!">Link 3</a></li>
+              <li><a class="white-text" href="#!">Link 4</a></li>            
+            </ul>
+          </div>
+        </div>
       </div>
-    </div>
-  </footer>
+          
+      <div class="footer-copyright">
+        <div class="container">
+          Made by <a class="brown-text text-lighten-3" href="http://materializecss.com">Materialize</a>
+        </div>
+      </div>
+   </footer>
 
-
-  <!--  Scripts-->
-  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-  <script src="js/materialize.js"></script>
-  <script src="js/init.js"></script>
+    <!--  Scripts-->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="js/materialize.js"></script>
+    <script src="js/init.js"></script>
 
     <!-- Google sign in -->
-  <script>
-  function onSignIn(googleUser) {
-	// Useful data for your client-side scripts:
-	var profile = googleUser.getBasicProfile();
-	console.log("ID: " + profile.getId()); // Don't send this directly to your server!
-	console.log('Full Name: ' + profile.getName());
-	console.log('Given Name: ' + profile.getGivenName());
-	console.log('Family Name: ' + profile.getFamilyName());
-	console.log("Image URL: " + profile.getImageUrl());
-	console.log("Email: " + profile.getEmail());
+    <script>
+      function onSignIn(googleUser) {
+	      // Useful data for your client-side scripts:
+	      var profile = googleUser.getBasicProfile();
+	        console.log("ID: " + profile.getId()); // Don't send this directly to your server!
+	        console.log('Full Name: ' + profile.getName());
+	        console.log('Given Name: ' + profile.getGivenName());
+	        console.log('Family Name: ' + profile.getFamilyName());
+	        console.log("Image URL: " + profile.getImageUrl());
+	        console.log("Email: " + profile.getEmail());
 
-	// The ID token you need to pass to your backend:
-	var id_token = googleUser.getAuthResponse().id_token;
-	console.log("ID Token: " + id_token);
-  }
-</script>
+  	    // The ID token you need to pass to your backend:
+  	    var id_token = googleUser.getAuthResponse().id_token;
+  	      console.log("ID Token: " + id_token);
+      }
+    </script>
 
   </body>
 </html>

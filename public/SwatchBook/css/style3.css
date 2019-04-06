@@ -58,11 +58,55 @@
 }
 
 .sb-container div:last-child{
-	background: #111 url(../images/dark_leather.jpg) repeat center center;
 	box-shadow: 
 		-1px -1px 3px rgba(0,0,0,0.2),
 		12px 12px 20px rgba(0,0,0,0.6),
 		inset 2px 2px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* SWATCHBOOK random changing cover photos when load */
+.sb-container div:last-child.img1{
+	background: #111 url(../images/img01.jpg) repeat center center;
+}
+
+.sb-container div:last-child.img2{
+	background: #111 url(../images/img02.jpg) repeat center center;
+}
+
+.sb-container div:last-child.img3{
+	background: #111 url(../images/img03.jpg) repeat center center;
+}
+
+.sb-container div:last-child.img4{
+	background: #111 url(../images/img04.jpg) repeat center center;
+}
+
+.sb-container div:last-child.img5{
+	background: #111 url(../images/img05.jpg) repeat center center;
+}
+
+.sb-container div:last-child.img6{
+	background: #111 url(../images/img06.jpg) repeat center center;
+}
+
+.sb-container div:last-child.img7{
+	background: #111 url(../images/img07.jpg) repeat center center;
+}
+
+.sb-container div:last-child.img8{
+	background: #111 url(../images/img08.jpg) repeat center center;
+}
+
+.sb-container div:last-child.img9{
+	background: #111 url(../images/img09.jpg) repeat center center;
+}
+
+.sb-container div:last-child.img10{
+	background: #111 url(../images/img10.jpg) repeat center center;
+}
+
+.sb-container div:last-child.img11{
+	background: #111 url(../images/img11.jpg) repeat center center;
 }
 
 .sb-container div:last-child:after{
