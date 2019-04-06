@@ -1,14 +1,18 @@
 $(document).ready(function() {
 
-    // show user's observations on document ready
-    $.ajax("/api/users", function() {
-        type: "GET",
-        data: 
-    })
+    // // show user's observations on document ready
+    // $.ajax("/api/users", function(req, res) {
+    //     type: "GET",
+    //     data: kjgh
+    // }).then(function(usrdata){
+    //     // HANDLEBAR HERE
+    //      res.render("something", usrdata)
+    // })
 
     // POST request when submitting new observation
     $("#submit-obs").on("click", function(e) {
         e.preventDefault();
+        console.log("submit");
 
         let observation = {
             // user_id: ,AURI
@@ -39,10 +43,11 @@ $(document).ready(function() {
     // DELETE request when deleting observation
     $(".delete").on("click", function(e) {
         e.preventDefault();
+        console.log("delete");
+
+        $(this).parents("tr").remove();
 
         let id_delete = $(this).attr("id"); // ????
-        $(this).closest("tr").remove();
-
         $.ajax("/api/observations", {
             type: "DELETE",
             id: id_delete
@@ -57,11 +62,11 @@ $(document).ready(function() {
     // GET request when requesting to download data
     $("#request-data").on("click", function(e) {
         e.preventDefault();
+        console.log("request");
 
         let categoryRequest = $("#category-download").val();
-        let dateRangeRequest = {
-            minDate: $("#start-date-download").val(),
-            maxDate: $("#end-data-download").val()
+        let minDate = $("#start-date-download").val();
+        let maxDate: $("#end-data-download").val()
         }
 
         // let queryURL = "https://www.rebasedata.com/api/v1/convert?outputFormat=csv&errorResponse=json";
@@ -80,8 +85,8 @@ $(document).ready(function() {
                 method: "POST",
             }).then(function(err, res) {
                 
-            })
-        })
-    })
+            });
+        });
+    });
 
-}
+})

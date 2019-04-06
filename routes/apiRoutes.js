@@ -13,23 +13,40 @@ module.exports = function(app) {
 
 
 
+    ///////////////////// NEXT TWO NEED TO BE TESTED //////////////////////////
+
+
+    // FIND ALL observations
+    // CHECK THIS IN POSTMAN
+    app.get("/api/observations", function(req, res) {
+        db.Observations.findAll({
+            group: ["category"],
+            order: ["id", "DESC"]
+        }).then(function(dbObs) {
+            res.json(dbObs);
+        });
+    });
+
+
+
 
     // FIND ALL observations grouped by category
     // CHECK THIS IN POSTMAN
+    // COMBINE THIS WITH ABOVE ONCE I KNOW HOW IT WORKS
     app.get("/api/observations/:category", function(req, res) {
         db.Observations.findAll({
             where: {
                 category: ["category"]
             },
             group: ["category"],
-            include: [db.Observations]
+            order: ["id", "DESC"]
         }).then(function(dbObs) {
                 res.json(dbObs);
             });
     });
 
 
-
+/////////////////////////////////////////////////////////////////////
 
 
 
@@ -99,7 +116,7 @@ module.exports = function(app) {
                 category: "animal",
 
             },
-            order: [["id", "DESC"]]
+            order: [["time_stamp", "DESC"]]
         }).then(function(recentAnimal) {
             res.json(recentAnimal);
         });
@@ -111,7 +128,7 @@ module.exports = function(app) {
                 category: "plant",
 
             },
-            order: [["id", "DESC"]]
+            order: [["time_stamp", "DESC"]]
         }).then(function(recentPlant) {
             res.json(recentPlant);
         });
@@ -123,7 +140,7 @@ module.exports = function(app) {
                 category: "fungus",
 
             },
-            order: [["id", "DESC"]]
+            order: [["time_stamp", "DESC"]]
         }).then(function(recentFungus) {
             res.json(recentFungus);
         });
@@ -135,7 +152,7 @@ module.exports = function(app) {
                 category: "weather",
 
             },
-            order: [["id", "DESC"]]
+            order: [["time_stamp", "DESC"]]
         }).then(function(recentWeather) {
             res.json(recentWeather);
         });
@@ -147,7 +164,7 @@ module.exports = function(app) {
                 category: "land_water",
 
             },
-            order: [["id", "DESC"]]
+            order: [["time_stamp", "DESC"]]
         }).then(function(recentLandWater) {
             res.json(recentLandWater);
         });
@@ -159,7 +176,7 @@ module.exports = function(app) {
                 category: "other",
 
             },
-            order: [["id", "DESC"]]
+            order: [["time_stamp", "DESC"]]
         }).then(function(recentOther) {
             res.json(recentOther);
         });
@@ -182,6 +199,22 @@ module.exports = function(app) {
         }).then(function(dbObs) {
             res.json(dbObs);
         });
+    });
+
+    // FIND ALL observations for request data download
+    app.get("/api/pbservations/request", function(req, res) {
+        db.Observations.findAll({
+            where: {
+                category: req.category,
+                date_obs: {
+                    [Op.gte]: req.minDate,
+                    [Op.lte]: req.maxDate
+                }
+            }
+        }).then(function(err, res) {
+            if (err) throw err;
+
+        })
     });
 
     // FIND ALL users
