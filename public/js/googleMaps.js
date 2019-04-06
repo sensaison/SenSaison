@@ -7,17 +7,82 @@
 // parameter when you first load the API. For example:
 // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
 
-var searchBox;
 console.log("googleMaps.js has executed.");
 
 var map;
+var startingPos;
+var userPin;
+getLocation();
 
-function initMap() {
-    var california = { lat: 37.4419, lng: -122.1419 };
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition, showError);
+    } else {
+        console.log("Geolocation is not supported by this browser.");
+        generateMap();
+    }
+}
+
+function showPosition(position) {
+    console.log("Latitude: " + position.coords.latitude);
+    console.log("Longitude: " + position.coords.longitude);
+    startingPos = position;
+    generateMap();
+}
+
+function showError(error) {
+    generateMap();
+    switch(error.code) {
+    case error.PERMISSION_DENIED:
+        console.log("User denied the request for Geolocation.");
+        break;
+    case error.POSITION_UNAVAILABLE:
+        console.log("Location information is unavailable.");
+        break;
+    case error.TIMEOUT:
+        console.log("The request to get user location timed out.");
+        break;
+    case error.UNKNOWN_ERROR:
+        console.log("An unknown error occurred.");
+        break;
+    }
+}
+
+function generateMap() {
+    var latitude = 47.1585;
+    var longitude = 27.6014;
+    if(startingPos !== undefined) {
+        latitude = startingPos.coords.latitude;
+        longitude = startingPos.coords.longitude;
+        console.log("Centering map on user's pos");
+    }
+    var centerPlace = { lat: latitude, lng: longitude};
     map = new google.maps.Map(document.getElementById("map"), {
-        center: california,
-        zoom: 13
+        center: centerPlace,
+        zoom: 13,
+        clickableIcons: false,
+        mapTypeControl: false
     });
+
+    map.addListener("click", function(event) {
+        console.log(userPin);
+        if(userPin === undefined) {
+            placeMarkerAndPanTo(event.latLng, map);
+        } else {
+            console.log("A pin has already been placed. Add a way to delete the pin and pick another later.");
+        }
+    });
+}
+
+function placeMarkerAndPanTo(latLng, map) {
+    var marker = new google.maps.Marker({
+        position: latLng,
+        map: map
+    });
+    map.panTo(latLng);
+    userPin = latLng;
+    console.log(userPin.lat());
+    console.log(userPin.lng());
 }
 
 /*

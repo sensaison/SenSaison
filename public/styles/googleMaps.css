@@ -1,12 +1,9 @@
 /* Always set the map height explicitly to define the size of the div
 * element that contains the map. */
-h1 {
-    color: #4d90fe;
-}
-
 #map {
+    display: inline-block;
     height: 350px;
-    width: 100%;
+    width: 50%;
     position: relative;
     margin: 0 auto;
     align-content: space-around;
@@ -110,4 +107,15 @@ h1 {
 
 #pop-searches {
     padding-left:30px;
+}
+
+#map-wrapper {
+    position: relative;
+}
+
+#clear-pins {
+    position: absolute;
+    z-index: 10;
+    left: 5px;
+    top: 5px;
 }
