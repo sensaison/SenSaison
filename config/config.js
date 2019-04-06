@@ -1,17 +1,18 @@
 require("dotenv").config();
+require("./keys");
 
 module.exports = {
     "development": {
-        "username": process.env.MYSQLUSER,
-        "password": process.env.MYSQLPWD,
-        "database": process.env.MYSQLDB,
-        "host": process.env.MYSQLHOST,
-        "dialect": "mysql"
+        "username": "root" || process.env.MYSQLUSER,
+        "password": keys.password.sql || process.env.MYSQLPWD,
+        "database": "senseason_db" || process.env.MYSQLDB,
+        "host": "127.0.0.1" || process.env.MYSQLHOST,
+        "dialect": "mysql"  
     },
     "test": {
         "username": "root",
-        "password": null,
-        "database": "database_test",
+        "password": keys.password.sql,
+        "database": "senseason_db",
         "host": "127.0.0.1",
         "dialect": "mysql"
     },
