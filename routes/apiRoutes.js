@@ -202,7 +202,7 @@ module.exports = function(app) {
     });
 
     // FIND ALL observations for request data download
-    app.get("/api/pbservations/request", function(req, res) {
+    app.get("/request", function(req, res) {
         db.Observations.findAll({
             where: {
                 category: req.category,
