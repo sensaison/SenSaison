@@ -231,13 +231,13 @@
                 <td>01/01/1990</td>
                 <td>Animal</td>
                 <td>First Canada geese this spring</td>
-                <td><button class="btn waves-effect waves-light btn-small" id="delete">X</button></td>
+                <td><button class="btn waves-effect waves-light btn-small" class="delete">X</button></td>
               </tr>
               <tr>
                 <td>01/02/1990</td>
                 <td>Plant</td>
                 <td>First crocus flowers this spring</td>
-                <td><button class="btn waves-effect waves-light btn-small" id="delete">X</button></td>
+                <td><button class="btn waves-effect waves-light btn-small" class="delete">X</button></td>
               </tr>
             </tbody>
           </table>
@@ -257,7 +257,7 @@
           <div class="row">
 
             <div class="input-field col s4">
-              <select id="category-download">
+              <select id="category-download" name="category-download">
                 <option value="all" selected>All (default)</option>
                 <option value="animal">Animal</option>
                 <option value="plants">Plant</option>
@@ -270,12 +270,12 @@
             </div>
 
             <div class="input-field col s4">
-              <input type="text" class="datepicker" id="start-date-download" required="" aria-required="true">
+              <input type="text" class="datepicker" id="start-date-download" name="start-date-download" required="" aria-required="true">
               <label for="start-date-download">Start date*</label>
             </div>
 
             <div class="input-field col s4">
-              <input type="text" class="datepicker" id="end-date-download" required="" aria-required="true">
+              <input type="text" class="datepicker" id="end-date-download" name="end-date-download" required="" aria-required="true">
               <label for="end-date-download">End date*</label>
             </div>
           </div>
