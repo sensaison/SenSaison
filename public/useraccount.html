@@ -258,7 +258,7 @@
         <form action="#">
           <div class="row">
 
-            <div class="input-field col s4">
+            <div class="input-field col s3">
               <select id="category-download" name="category-download">
                 <option value="all" selected>All (default)</option>
                 <option value="animal">Animal</option>
@@ -271,14 +271,21 @@
               <label for="category-download">Choose a category of observations*</label>
             </div>
 
-            <div class="input-field col s4">
+            <div class="input-field col s3">
               <input type="text" class="datepicker" id="start-date-download" name="start-date-download" required="" aria-required="true">
               <label for="start-date-download">Start date*</label>
             </div>
 
-            <div class="input-field col s4">
+            <div class="input-field col s3">
               <input type="text" class="datepicker" id="end-date-download" name="end-date-download" required="" aria-required="true">
               <label for="end-date-download">End date*</label>
+            </div>
+
+            <div class="input-field col s3">
+              <label for="includepictures">
+                <input id="includepictures" type="checkbox" />
+                <span>Check to include pictures</span>
+              </label>
             </div>
           </div>
 
