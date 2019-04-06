@@ -64,11 +64,6 @@ $(document).ready(function() {
             maxDate: $("#end-data-download").val()
         }
 
-        let searchTerms = {
-            category: categoryRequest,
-            // date_obs: new Date(dateRangeRequest); // ???
-        }
-
         // let queryURL = "https://www.rebasedata.com/api/v1/convert?outputFormat=csv&errorResponse=json";
         // output to csv, if error then error response format is json
 

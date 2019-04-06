@@ -15,12 +15,15 @@ module.exports = function(app) {
 
 
     // FIND ALL observations grouped by category
-    // CHECK THIS
-    app.get("/api/observations", function(req, res) {
+    // CHECK THIS IN POSTMAN
+    app.get("/api/observations/:category", function(req, res) {
         db.Observations.findAll({
-            group: ["category"]
-        })
-            .then(function(dbObs) {
+            where: {
+                category: ["category"]
+            },
+            group: ["category"],
+            include: [db.Observations]
+        }).then(function(dbObs) {
                 res.json(dbObs);
             });
     });
@@ -205,7 +208,7 @@ module.exports = function(app) {
             where: {
                 id: req.params.id
             },
-                include: [db.Observations] 
+            include: [db.Observations] 
         }).then(function(dbUser) {
             res.json(dbUser);
         });
