@@ -104,17 +104,17 @@
 
           <form action="#">
             <div class="row">
-              <div class="input-field col s4">
+              <div class="input-field col s12 m4">
                 <input type="text" class="datepicker" id="date-obs" required="" aria-required="true">
                 <label for="date-obs">Date of observation*</label>
               </div>
 
-              <div class="input-field col s4">
+              <div class="input-field col s12 m4">
                 <input type="text" class="timepicker" id="time-obs" required="" aria-required="true">
                 <label for="time-obs">Time of observation*</label>
               </div>
 
-              <div class="input-field col s4">
+              <div class="input-field col s12 m4">
                 <select id="obs-category" required="" aria-required="true">
                   <option value="" disabled selected class="form-option">Choose an option</option>
                   <option value="animal" class="form-option">Animal</option>
@@ -129,10 +129,14 @@
             </div>
 
             <div class="row">
-              <div class="col s6">
+              <div class="col s12 l6">
+                <label for="googlemap">Location of observation*</label>
+                <!-- STEFAN PUT GOOGLE MAP HERE -->
+              </div>
+              <div class="col s12 l6">
 
                 <div class="row">
-                  <div class="input-field col s12">
+                  <div class="input-field col m6 s12">
                     <textarea id="brief-desc" class="materialize-textarea validate" data-length="50" required=""  aria-required="true" placeholder="Ex. First Canada geese to return from winter"></textarea>
                     <label for="brief-desc">Brief description of observation*</label>
                   </div>
@@ -172,25 +176,22 @@
                 </div>
 
               </div>
-                <div class="col s6">
-                  <label for="googlemap">Location of observation*</label>
-                  <!-- STEFAN PUT GOOGLE MAP HERE -->
-                </div>
+
             </div>
 
             <div class="row">
               <p><i>The following section is required if you selected animal, plant, or fungus.</i></p>
-              <div class="input-field col s4">
+              <div class="input-field col s12 m6 l4">
                 <label for="species">Species common name*</label>
                 <input type="text" class="validate" id="species" data-length="50">
               </div>
 
-              <div class="input-field col s4">
+              <div class="input-field col s12 m6 l4">
                 <label for="species-sci-name">Species scientific name (if known)</label>
                 <input type="text" class="validate" id="species-sci-name" data-length="50">
               </div>
 
-              <div class="input-field col s4">
+              <div class="input-field col s12 m6 l4">
                 <select id="species-confidence">
                   <option value="1" selected class="form-option">1 - low confidence (default)</option>
                   <option value="2" class="form-option">2</option>
@@ -213,12 +214,9 @@
       </div>
 
       <div class="row hidden" id="view-usr-obs">
-        <div class="col s12 center">
-          <h5>All your observations</h5>
-
-          <!-- MIGHT NEED HANDLEBARS HERE -->
-
-          <br>
+        <h5>All your observations</h5>
+        <br>
+        <div class="col s12 m6 l6">
           <table class="highlight responsive-table" id="all-your-obs">
             <thead>
               <tr>
@@ -317,6 +315,11 @@
           </table>
 
         </div>
+        <div class="col s12 m6 l6">
+
+          <!-- STEFAN PUT MAP WITH USER'S OBSERVATIONS HERE -->
+
+        </div>
       </div>
 
       <div class="row hidden" id="view-near-obs">
@@ -331,7 +334,7 @@
         <form action="#">
           <div class="row">
 
-            <div class="input-field col s3">
+            <div class="input-field col s12 m6 l3">
               <select id="category-download" name="category-download">
                 <option value="all" selected class="form-option">All (default)</option>
                 <option value="animal" class="form-option">Animal</option>
@@ -344,24 +347,24 @@
               <label for="category-download">Choose a category of observations*</label>
             </div>
 
-            <div class="input-field col s3">
+            <div class="input-field col s12 m6 l3">
               <input type="text" class="datepicker" id="start-date-download" name="start-date-download" required="" aria-required="true">
               <label for="start-date-download">Start date*</label>
             </div>
 
-            <div class="input-field col s3">
+            <div class="input-field col s12 m6 l3">
               <input type="text" class="datepicker" id="end-date-download" name="end-date-download" required="" aria-required="true">
               <label for="end-date-download">End date*</label>
             </div>
 
-            <div class="input-field col s3">
+            <div class="input-field col s12 m6 l3">
               <label for="includepictures">
                 <input id="includepictures" type="checkbox" />
                 <span>Check to include pictures</span>
               </label>
             </div>
           </div>
-
+          <br>
           <div class="row">
             <button class="btn waves-effect waves-light" type="submit" id="request-data">Request
             </button>     

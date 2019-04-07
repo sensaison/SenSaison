@@ -15,7 +15,6 @@ module.exports = function(app) {
 
     ///////////////////// NEXT TWO NEED TO BE TESTED //////////////////////////
 
-
     // FIND ALL observations
     // CHECK THIS IN POSTMAN
     app.get("/api/observations", function(req, res) {
@@ -26,7 +25,6 @@ module.exports = function(app) {
             res.json(dbObs);
         });
     });
-
 
 
 
@@ -44,7 +42,6 @@ module.exports = function(app) {
                 res.json(dbObs);
             });
     });
-
 
 /////////////////////////////////////////////////////////////////////
 

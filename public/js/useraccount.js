@@ -65,12 +65,12 @@ $(document).ready(function() {
 
     // below code is for pagination of table showing all of the user's observations
     $("#all-your-obs").after("<br><ul class='pagination'><li class='waves-effect' id='start-pagination'><a href='#'><i class='material-icons'>chevron_left</i></a></li><li class='waves-effect' id='end-pagination'><a href='#'><i class='material-icons'>chevron_right</i></a></li></div>");
-    var rowsShown = 5;
+    var rowsShown = 10;
     var rowsTotal = $("#all-your-obs tbody tr").length;
     var numPages = rowsTotal/rowsShown;
     for(i = 0; i < numPages; i++) {
         var pageNum = i + 1;
-        $("#end-pagination").before("<li class='btn waves-effect waves-light btn-flat'><a href='#' rel='" + i + "'>" + pageNum + "</a></li> ");
+        $("#end-pagination").before("<li class='btn waves-effect waves-light btn-flat'><a href='#' rel='" + i + "'>" + pageNum + "</a></li>");
     }
     $("#all-your-obs tbody tr").hide();
     $("#all-your-obs tbody tr").slice(0, rowsShown).show();
@@ -84,4 +84,7 @@ $(document).ready(function() {
         var endItem = startItem + rowsShown;
         $("#all-your-obs tbody tr").css("opacity","0.0").hide().slice(startItem, endItem).css("display","table-row").animate({opacity:1}, 300);
     });
+
+    // below code is for displaying user's observations
+
 });

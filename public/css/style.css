@@ -122,10 +122,18 @@ textarea.materialize-textarea {
   margin-bottom: 15px;
 }
 
+.pagination li {
+  padding: 0 5px;
+}
+
 .pagination li.active a {
   color: #343434;
 }
 
 .pagination li.active {
   background-color: #DFDFDF;
+}
+
+table {
+  font-size: 95%;
 }
