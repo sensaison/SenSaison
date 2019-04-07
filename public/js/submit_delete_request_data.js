@@ -28,7 +28,7 @@ $(document).ready(function() {
             species: $("#species").val(),
             species_sci_name: $("#species-sci-name").val(),
             species_confidence: $("#species-confidence").val(),
-        }
+        };
 
         // $.ajax("/api/observations", {
         //     type: "POST",

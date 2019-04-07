@@ -121,3 +121,11 @@ textarea.materialize-textarea {
 .row {
   margin-bottom: 15px;
 }
+
+.pagination li.active a {
+  color: #343434;
+}
+
+.pagination li.active {
+  background-color: #DFDFDF;
+}
