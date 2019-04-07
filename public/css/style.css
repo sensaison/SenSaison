@@ -65,3 +65,12 @@ overflow: hidden;
 }
 
 /* Home Screen after sign in */
+ /* hide/show effects for personal account page */
+
+ .hidden {
+   display: none;
+ }
+
+ .show {
+   display: block;
+ }
