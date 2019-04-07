@@ -64,7 +64,7 @@ $(document).ready(function() {
     });
 
     // below code is for pagination of table showing all of the user's observations
-    $('#all-your-obs').after("<br><div id='pagination'></div>");
+    $("#all-your-obs").after("<br><div id='pagination'></div>");
     var rowsShown = 10;
     var rowsTotal = $("#all-your-obs tbody tr").length;
     var numPages = rowsTotal/rowsShown;
