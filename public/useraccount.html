@@ -129,7 +129,6 @@
             </div>
 
             <div class="row">
-
               <div class="col s6">
 
                 <div class="row">
@@ -161,13 +160,14 @@
 
                 <div class="row">
                   <div class="file-field input-field col s12">
-                    <button class="btn waves-effect waves-teal btn-flat btn-small">
+                    <button class="btn waves-effect waves-teal btn-flat btn-small" id="pic-button">
                       Upload
                       <input type="file" id="pic-file" multiple required="" aria-required="true">
                     </button>
                     <div class="file-path-wrapper">
                       <input class="file-path validate" id="pic-path" type="text" placeholder="Upload one or more pictures*">
                     </div>
+                    
                   </div>
                 </div>
 
@@ -219,7 +219,7 @@
           <!-- MIGHT NEED HANDLEBARS HERE -->
 
           <br>
-          <table class="highlight responsive-table all-your-obs">
+          <table class="highlight responsive-table" id="all-your-obs">
             <thead>
               <tr>
                 <th>Date</th>
@@ -241,6 +241,78 @@
                 <td>First crocus flowers this spring</td>
                 <td><button class="btn waves-effect waves-light btn-small delete">X</button></td>
               </tr>
+              <tr>
+                <td>01/03/1990</td>
+                <td>Animal</td>
+                <td>First Canada geese this spring</td>
+                <td><button class="btn waves-effect waves-light btn-small delete">X</button></td>
+              </tr>
+              <tr>
+                <td>01/04/1990</td>
+                <td>Fungus</td>
+                <td>First crocus flowers this spring</td>
+                <td><button class="btn waves-effect waves-light btn-small delete">X</button></td>
+              </tr>
+              <tr>
+                <td>01/05/1990</td>
+                <td>Land or Water</td>
+                <td>First Canada geese this spring</td>
+                <td><button class="btn waves-effect waves-light btn-small delete">X</button></td>
+              </tr>
+              <tr>
+                <td>01/06/1990</td>
+                <td>Plant</td>
+                <td>First crocus flowers this spring</td>
+                <td><button class="btn waves-effect waves-light btn-small delete">X</button></td>
+              </tr>
+              <tr>
+                <td>01/07/1990</td>
+                <td>Animal</td>
+                <td>First alien geese this spring</td>
+                <td><button class="btn waves-effect waves-light btn-small delete">X</button></td>
+              </tr>
+              <tr>
+                <td>01/08/1990</td>
+                <td>Plant</td>
+                <td>First bumblebees this spring</td>
+                <td><button class="btn waves-effect waves-light btn-small delete">X</button></td>
+              </tr>
+              <tr>
+                <td>01/09/1990</td>
+                <td>Animal</td>
+                <td>First honkin geese this spring</td>
+                <td><button class="btn waves-effect waves-light btn-small delete">X</button></td>
+              </tr>
+              <tr>
+                <td>01/10/1990</td>
+                <td>Plant</td>
+                <td>First crocus flowers this spring</td>
+                <td><button class="btn waves-effect waves-light btn-small delete">X</button></td>
+              </tr>
+              <tr>
+                <td>01/11/1990</td>
+                <td>Weather</td>
+                <td>First Canada geese this spring</td>
+                <td><button class="btn waves-effect waves-light btn-small delete">X</button></td>
+              </tr>
+              <tr>
+                <td>01/12/1990</td>
+                <td>Fungus</td>
+                <td>First crocus flowers this spring</td>
+                <td><button class="btn waves-effect waves-light btn-small delete">X</button></td>
+              </tr>
+              <tr>
+                <td>01/13/1990</td>
+                <td>Plants</td>
+                <td>First Canada geese this spring</td>
+                <td><button class="btn waves-effect waves-light btn-small delete">X</button></td>
+              </tr>
+              <tr>
+                <td>01/14/1990</td>
+                <td>Plant</td>
+                <td>First daffodil flowers this spring</td>
+                <td><button class="btn waves-effect waves-light btn-small delete">X</button></td>
+              </tr>
             </tbody>
           </table>
 
@@ -249,12 +321,13 @@
 
       <div class="row hidden" id="view-near-obs">
         <h5>Nearby observations</h5>
+        <br>
         <!-- STEFAN PUT MAP WITH NEARBY OBSERVATIONS HERE -->
       </div>
 
       <div class="row hidden" id="download-data">
         <h5>Download data</h5>
-
+        <br>
         <form action="#">
           <div class="row">
 
