@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
  * jquery.swatchbook.js v1.1.0
  * http://www.codrops.com
@@ -10,489 +9,239 @@
  * http://www.codrops.com
  */
 	
-	'use strict';
+'use strict';
 
-	// global
-	var Modernizr = window.Modernizr;
+// global
+var Modernizr = window.Modernizr;
 
-	jQuery.fn.reverse = [].reverse;
+jQuery.fn.reverse = [].reverse;
 	
-	$.SwatchBook = function( options, element ) {
+$.SwatchBook = function( options, element ) {
 		
-		this.$el = $( element );
-		this._init( options );
+    this.$el = $( element );
+    this._init( options );
 		
-	};
+};
 
-	$.SwatchBook.defaults = {
-		// index of initial centered item
-		center : 4,
-		// number of degrees that is between each item
-		angleInc : 8,
-		speed : 700,
-		easing : 'ease',
-		// amount in degrees for the opened item's next sibling
-		proximity : 45,
-		// amount in degrees between the opened item's next siblings
-		neighbor : 4,
-		// animate on load
-		onLoadAnim : true,
-		// if it should be closed by default
-		initclosed : false,
-		// index of the element that when clicked, triggers the open/close function
-		// by default there is no such element
-		closeIdx : -1,
-		// open one specific item initially (overrides initclosed)
-		openAt : -1
-	};
+$.SwatchBook.defaults = {
+    // index of initial centered item
+    center : 4,
+    // number of degrees that is between each item
+    angleInc : 8,
+    speed : 700,
+    easing : 'ease',
+    // amount in degrees for the opened item's next sibling
+    proximity : 45,
+    // amount in degrees between the opened item's next siblings
+    neighbor : 4,
+    // animate on load
+    onLoadAnim : true,
+    // if it should be closed by default
+    initclosed : false,
+    // index of the element that when clicked, triggers the open/close function
+    // by default there is no such element
+    closeIdx : -1,
+    // open one specific item initially (overrides initclosed)
+    openAt : -1
+};
 
-	$.SwatchBook.prototype	= {
+$.SwatchBook.prototype	= {
 
-		_init : function( options ) {
+    _init : function( options ) {
 			
-			this.options = $.extend( true, {}, $.SwatchBook.defaults, options );
+        this.options = $.extend( true, {}, $.SwatchBook.defaults, options );
 
-			this.$items = this.$el.children( 'div' );
-			this.itemsCount = this.$items.length;
-			this.current = -1;
-			this.support = Modernizr.csstransitions;
-			this.cache = [];
+        this.$items = this.$el.children( 'div' );
+        this.itemsCount = this.$items.length;
+        this.current = -1;
+        this.support = Modernizr.csstransitions;
+        this.cache = [];
 			
-			if( this.options.onLoadAnim ) {
-				this._setTransition();
-			}
+        if( this.options.onLoadAnim ) {
+            this._setTransition();
+        }
 
-			if( !this.options.initclosed ) {
-				this._center( this.options.center, this.options.onLoadAnim );
-			}
-			else {
+        if( !this.options.initclosed ) {
+            this._center( this.options.center, this.options.onLoadAnim );
+        }
+        else {
 
-				this.isClosed = true;
-				if( !this.options.onLoadAnim ) {
-					this._setTransition();
-				}
+            this.isClosed = true;
+            if( !this.options.onLoadAnim ) {
+                this._setTransition();
+            }
 
-			}
+        }
 
-			if( this.options.openAt >= 0 && this.options.openAt < this.itemsCount ) {
-				this._openItem( this.$items.eq( this.options.openAt ) );
-			}
+        if( this.options.openAt >= 0 && this.options.openAt < this.itemsCount ) {
+            this._openItem( this.$items.eq( this.options.openAt ) );
+        }
 			
-			this._initEvents();
+        this._initEvents();
 			
-		},
-		_setTransition : function() {
+    },
+    _setTransition : function() {
 
-			if( this.support ) {
-				this.$items.css( { 'transition': 'all ' + this.options.speed + 'ms ' + this.options.easing } );
-			}
+        if( this.support ) {
+            this.$items.css( { 'transition': 'all ' + this.options.speed + 'ms ' + this.options.easing } );
+        }
 
-		},
-		_openclose : function() {
+    },
+    _openclose : function() {
 
-			this.isClosed ? this._center( this.options.center, true ) : this.$items.css( { 'transform' : 'rotate(0deg)' } );
-			this.isClosed = !this.isClosed;
+        this.isClosed ? this._center( this.options.center, true ) : this.$items.css( { 'transform' : 'rotate(0deg)' } );
+        this.isClosed = !this.isClosed;
 
-		},
-		_center : function( idx, anim ) {
+    },
+    _center : function( idx, anim ) {
 
-			var self = this;
+        var self = this;
 
-			this.$items.each( function( i ) {
+        this.$items.each( function( i ) {
 
-				var transformStr = 'rotate(' + ( self.options.angleInc * ( i - idx ) ) + 'deg)';
-				$( this ).css( { 'transform' : transformStr } );
+            var transformStr = 'rotate(' + ( self.options.angleInc * ( i - idx ) ) + 'deg)';
+            $( this ).css( { 'transform' : transformStr } );
 
-			} );
+        } );
 
-		},
-		_openItem : function( $item ) {
+    },
+    _openItem : function( $item ) {
 			
-			var itmIdx = $item.index();
+        var itmIdx = $item.index();
 			
-			if( itmIdx !== this.current ) {
+        if( itmIdx !== this.current ) {
 
-				if( this.options.closeIdx !== -1 && itmIdx === this.options.closeIdx ) {
+            if( this.options.closeIdx !== -1 && itmIdx === this.options.closeIdx ) {
 
-					this._openclose();
-					this._setCurrent();
+                this._openclose();
+                this._setCurrent();
 
-				}
-				else {
+            }
+            else {
 
-					this._setCurrent( $item );
-					$item.css( { 'transform' : 'rotate(0deg)' } );
-					this._rotateSiblings( $item );
+                this._setCurrent( $item );
+                $item.css( { 'transform' : 'rotate(0deg)' } );
+                this._rotateSiblings( $item );
 
-				}
+            }
 
-			}
+        }
 
-		},
-		_initEvents : function() {
+    },
+    _initEvents : function() {
 
-			var self = this;
+        var self = this;
 			
-			this.$items.on( 'click.swatchbook', function( event ) {
-				self._openItem( $( this ) );
-			} );
+        this.$items.on( 'click.swatchbook', function( event ) {
+            self._openItem( $( this ) );
+        } );
 
-		},
-		_rotateSiblings : function( $item ) {
+    },
+    _rotateSiblings : function( $item ) {
 
-			var self = this,
-				idx = $item.index(),
-				$cached = this.cache[ idx ],
-				$siblings;
+        var self = this,
+            idx = $item.index(),
+            $cached = this.cache[ idx ],
+            $siblings;
 
-			if( $cached ) {
-				$siblings = $cached;
-			}
-			else {
+        if( $cached ) {
+            $siblings = $cached;
+        }
+        else {
 
-				$siblings = $item.siblings();
-				this.cache[ idx ] = $siblings;
+            $siblings = $item.siblings();
+            this.cache[ idx ] = $siblings;
 				
-			}
+        }
 
-			$siblings.each( function( i ) {
+        $siblings.each( function( i ) {
 
-				var rotateVal = i < idx ? 
-					self.options.angleInc * ( i - idx ) : 
-					i - idx === 1 ?
-						self.options.proximity : 
-						self.options.proximity + ( i - idx - 1 ) * self.options.neighbor;
+            var rotateVal = i < idx ? 
+                self.options.angleInc * ( i - idx ) : 
+                i - idx === 1 ?
+                    self.options.proximity : 
+                    self.options.proximity + ( i - idx - 1 ) * self.options.neighbor;
 
-				var transformStr = 'rotate(' + rotateVal + 'deg)';
+            var transformStr = 'rotate(' + rotateVal + 'deg)';
 
-				$( this ).css( { 'transform' : transformStr } );
+            $( this ).css( { 'transform' : transformStr } );
 
-			} );
+        } );
 
-		},
-		_setCurrent : function( $el ) {
+    },
+    _setCurrent : function( $el ) {
 
-			this.current = $el ? $el.index() : -1;
-			this.$items.removeClass( 'ff-active' );
-			if( $el ) {
-				$el.addClass( 'ff-active' );
-			}
+        this.current = $el ? $el.index() : -1;
+        this.$items.removeClass( 'ff-active' );
+        if( $el ) {
+            $el.addClass( 'ff-active' );
+        }
 
-		}
+    }
 
-	};
+};
 	
-	var logError			= function( message ) {
+var logError			= function( message ) {
 
-		if ( window.console ) {
+    if ( window.console ) {
 
-			window.console.error( message );
+        window.console.error( message );
 		
-		}
+    }
 
-	};
+};
 	
-	$.fn.swatchbook			= function( options ) {
+$.fn.swatchbook			= function( options ) {
 		
-		var instance = $.data( this, 'swatchbook' );
+    var instance = $.data( this, 'swatchbook' );
 		
-		if ( typeof options === 'string' ) {
+    if ( typeof options === 'string' ) {
 			
-			var args = Array.prototype.slice.call( arguments, 1 );
+        var args = Array.prototype.slice.call( arguments, 1 );
 			
-			this.each(function() {
+        this.each(function() {
 			
-				if ( !instance ) {
+            if ( !instance ) {
 
-					logError( "cannot call methods on swatchbook prior to initialization; " +
+                logError( "cannot call methods on swatchbook prior to initialization; " +
 					"attempted to call method '" + options + "'" );
-					return;
+                return;
 				
-				}
+            }
 				
-				if ( !$.isFunction( instance[options] ) || options.charAt(0) === "_" ) {
+            if ( !$.isFunction( instance[options] ) || options.charAt(0) === "_" ) {
 
-					logError( "no such method '" + options + "' for swatchbook instance" );
-					return;
+                logError( "no such method '" + options + "' for swatchbook instance" );
+                return;
 				
-				}
+            }
 				
-				instance[ options ].apply( instance, args );
+            instance[ options ].apply( instance, args );
 			
-			});
+        });
 		
-		} 
-		else {
+    } 
+    else {
 		
-			this.each(function() {
+        this.each(function() {
 				
-				if ( instance ) {
+            if ( instance ) {
 
-					instance._init();
+                instance._init();
 				
-				}
-				else {
+            }
+            else {
 
-					instance = $.data( this, 'swatchbook', new $.SwatchBook( options, this ) );
+                instance = $.data( this, 'swatchbook', new $.SwatchBook( options, this ) );
 				
-				}
+            }
 
-			});
+        });
 		
-		}
+    }
 		
-		return instance;
+    return instance;
 		
-	};
+};
 	
-=======
-/**
- * jquery.swatchbook.js v1.1.0
- * http://www.codrops.com
- *
- * Licensed under the MIT license.
- * http://www.opensource.org/licenses/mit-license.php
- * 
- * Copyright 2012, Codrops
- * http://www.codrops.com
- */
-
-;( function( $, window, undefined ) {
-	
-	'use strict';
-
-	// global
-	var Modernizr = window.Modernizr;
-
-	jQuery.fn.reverse = [].reverse;
-	
-	$.SwatchBook = function( options, element ) {
-		
-		this.$el = $( element );
-		this._init( options );
-		
-	};
-
-	$.SwatchBook.defaults = {
-		// index of initial centered item
-		center : 6,
-		// number of degrees that is between each item
-		angleInc : 8,
-		speed : 700,
-		easing : 'ease',
-		// amount in degrees for the opened item's next sibling
-		proximity : 45,
-		// amount in degrees between the opened item's next siblings
-		neighbor : 4,
-		// animate on load
-		onLoadAnim : true,
-		// if it should be closed by default
-		initclosed : false,
-		// index of the element that when clicked, triggers the open/close function
-		// by default there is no such element
-		closeIdx : -1,
-		// open one specific item initially (overrides initclosed)
-		openAt : -1
-	};
-
-	$.SwatchBook.prototype	= {
-
-		_init : function( options ) {
-			
-			this.options = $.extend( true, {}, $.SwatchBook.defaults, options );
-
-			this.$items = this.$el.children( 'div' );
-			this.itemsCount = this.$items.length;
-			this.current = -1;
-			this.support = Modernizr.csstransitions;
-			this.cache = [];
-			
-			if( this.options.onLoadAnim ) {
-				this._setTransition();
-			}
-
-			if( !this.options.initclosed ) {
-				this._center( this.options.center, this.options.onLoadAnim );
-			}
-			else {
-
-				this.isClosed = true;
-				if( !this.options.onLoadAnim ) {
-					this._setTransition();
-				}
-
-			}
-
-			if( this.options.openAt >= 0 && this.options.openAt < this.itemsCount ) {
-				this._openItem( this.$items.eq( this.options.openAt ) );
-			}
-			
-			this._initEvents();
-			
-		},
-		_setTransition : function() {
-
-			if( this.support ) {
-				this.$items.css( { 'transition': 'all ' + this.options.speed + 'ms ' + this.options.easing } );
-			}
-
-		},
-		_openclose : function() {
-
-			this.isClosed ? this._center( this.options.center, true ) : this.$items.css( { 'transform' : 'rotate(0deg)' } );
-			this.isClosed = !this.isClosed;
-
-		},
-		_center : function( idx, anim ) {
-
-			var self = this;
-
-			this.$items.each( function( i ) {
-
-				var transformStr = 'rotate(' + ( self.options.angleInc * ( i - idx ) ) + 'deg)';
-				$( this ).css( { 'transform' : transformStr } );
-
-			} );
-
-		},
-		_openItem : function( $item ) {
-			
-			var itmIdx = $item.index();
-			
-			if( itmIdx !== this.current ) {
-
-				if( this.options.closeIdx !== -1 && itmIdx === this.options.closeIdx ) {
-
-					this._openclose();
-					this._setCurrent();
-
-				}
-				else {
-
-					this._setCurrent( $item );
-					$item.css( { 'transform' : 'rotate(0deg)' } );
-					this._rotateSiblings( $item );
-
-				}
-
-			}
-
-		},
-		_initEvents : function() {
-
-			var self = this;
-			
-			this.$items.on( 'click.swatchbook', function( event ) {
-				self._openItem( $( this ) );
-			} );
-
-		},
-		_rotateSiblings : function( $item ) {
-
-			var self = this,
-				idx = $item.index(),
-				$cached = this.cache[ idx ],
-				$siblings;
-
-			if( $cached ) {
-				$siblings = $cached;
-			}
-			else {
-
-				$siblings = $item.siblings();
-				this.cache[ idx ] = $siblings;
-				
-			}
-
-			$siblings.each( function( i ) {
-
-				var rotateVal = i < idx ? 
-					self.options.angleInc * ( i - idx ) : 
-					i - idx === 1 ?
-						self.options.proximity : 
-						self.options.proximity + ( i - idx - 1 ) * self.options.neighbor;
-
-				var transformStr = 'rotate(' + rotateVal + 'deg)';
-
-				$( this ).css( { 'transform' : transformStr } );
-
-			} );
-
-		},
-		_setCurrent : function( $el ) {
-
-			this.current = $el ? $el.index() : -1;
-			this.$items.removeClass( 'ff-active' );
-			if( $el ) {
-				$el.addClass( 'ff-active' );
-			}
-
-		}
-
-	};
-	
-	var logError			= function( message ) {
-
-		if ( window.console ) {
-
-			window.console.error( message );
-		
-		}
-
-	};
-	
-	$.fn.swatchbook			= function( options ) {
-		
-		var instance = $.data( this, 'swatchbook' );
-		
-		if ( typeof options === 'string' ) {
-			
-			var args = Array.prototype.slice.call( arguments, 1 );
-			
-			this.each(function() {
-			
-				if ( !instance ) {
-
-					logError( "cannot call methods on swatchbook prior to initialization; " +
-					"attempted to call method '" + options + "'" );
-					return;
-				
-				}
-				
-				if ( !$.isFunction( instance[options] ) || options.charAt(0) === "_" ) {
-
-					logError( "no such method '" + options + "' for swatchbook instance" );
-					return;
-				
-				}
-				
-				instance[ options ].apply( instance, args );
-			
-			});
-		
-		} 
-		else {
-		
-			this.each(function() {
-				
-				if ( instance ) {
-
-					instance._init();
-				
-				}
-				else {
-
-					instance = $.data( this, 'swatchbook', new $.SwatchBook( options, this ) );
-				
-				}
-
-			});
-		
-		}
-		
-		return instance;
-		
-	};
-	
->>>>>>> 4573de9a3f784e2732f10e7b4f757835a477b9f7
-} )( jQuery, window );
+( jQuery, window );
