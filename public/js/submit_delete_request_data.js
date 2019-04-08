@@ -2,7 +2,7 @@ $(document).ready(function() {
 
     // POST request when submitting new observation
     $("#submit-obs").on("click", function(e) {
-        e.preventDefault();
+        // e.preventDefault(); // this line prevents validation from occurring
         console.log("submit");
 
         let newObservation = {
@@ -21,14 +21,15 @@ $(document).ready(function() {
             species_confidence: $("#species-confidence").val(),
         };
 
-        // $.ajax("/api/observations", {
-        //     type: "POST",
-        //     data: newObservation
-        // }).then(function(err, res) {
-        //     if (err) throw err;
-        //     console.log(res);
-        //     location.reload(true);
-        // });
+        $.ajax("/api/observations", {
+            type: "POST",
+            data: newObservation
+        }).then(function(err, res) {
+            if (err) throw err;
+            console.log(res);
+            location.reload(true);
+            // add a modal or something to show success
+        });
     });
 
     // DELETE request when deleting observation
@@ -38,42 +39,35 @@ $(document).ready(function() {
 
         $(this).parents("tr").detach(); // REPLACE WITH REMOVE() WHEN GOING INTO PRODUCTION
 
-        let id_delete = $(this).parents("tr").attr("id"); // ????
+        let id_delete = $(this).parents("tr").attr("id"); // check this once the table is functional
         $.ajax("/api/observations", {
             type: "DELETE",
             url: "/api/users/observations" + id_delete
         }).then(function(err, res) {
             if (err) throw err;
             console.log(res);
-            location.reload(true);
+            // don't need reload because .remove() above
         });
 
     });
 
     // GET request when requesting to download data
-    $("#request-data").on("click", function(e) {
-        e.preventDefault();
-        console.log("request");
+    // $("#request-data").on("click", function(e) {
+    //    // e.preventDefault();
+    //     console.log("request");
 
-        let categoryRequest = $("#category-download").val();
-        let minDate = $("#start-date-download").val();
-        let maxDate = $("#end-data-download").val();
+    //     let categoryRequest = $("#category-download").val();
+    //     let minDate = $("#start-date-download").val();
+    //     let maxDate = $("#end-data-download").val();
 
 
-        $.ajax("api/observations", {
-            type: "GET",
-            data: searchTerms
-        }).then(function(err, res) {
-            if (err) throw err;
-            console.log(res);
-
-            $.ajax({
-                url: queryURL,
-                method: "POST",
-            }).then(function(err, res) {
-                
-            });
-        });
-    });
+    //     $.get("api/observations", {
+    //         data: searchTerms
+    //     }).then(function(err, res) {
+    //         if (err) throw err;
+    //         console.log(res);
+    //         
+    //         more stuff here
+    // });
 
 })
