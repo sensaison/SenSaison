@@ -67,10 +67,73 @@ overflow: hidden;
 /* Home Screen after sign in */
  /* hide/show effects for personal account page */
 
- .hidden {
+.hidden {
    display: none;
- }
+}
 
- .show {
+.show {
    display: block;
- }
+}
+
+ /* make table more compact */
+td, th {
+    padding: 5px;
+}
+
+.btn-small {
+    height: 25px;
+    line-height: 25px;
+    padding: 0 12px;
+}
+
+input:not([type]), input[type=text]:not(.browser-default), input[type=password]:not(.browser-default), input[type=email]:not(.browser-default), input[type=url]:not(.browser-default), input[type=time]:not(.browser-default), input[type=date]:not(.browser-default), input[type=datetime]:not(.browser-default), input[type=datetime-local]:not(.browser-default), input[type=tel]:not(.browser-default), input[type=number]:not(.browser-default), input[type=search]:not(.browser-default), textarea.materialize-textarea, .input-field>label {
+  font-size: 95%;
+}
+
+textarea.materialize-textarea {
+  padding: 0.7rem 0;
+}
+
+.input-field {
+   margin-top: 0.5rem;
+   margin-bottom: 0.5rem;
+}
+
+::placeholder {
+   font-size: 85%;
+}
+
+.dropdown-content li {
+   line-height: 1rem;
+   min-height: auto;
+}
+
+.dropdown-content li>a, .dropdown-content li>span {
+   padding: 7px 10px;
+   font-size: 95%;
+}
+
+.select-wrapper input.select-dropdown {
+  /* padding-top: 1rem; */
+  font-size: 95%;
+}
+
+.row {
+  margin-bottom: 15px;
+}
+
+.pagination li {
+  padding: 0 5px;
+}
+
+.pagination li.active a {
+  color: #343434;
+}
+
+.pagination li.active {
+  background-color: #DFDFDF;
+}
+
+table {
+  font-size: 95%;
+}

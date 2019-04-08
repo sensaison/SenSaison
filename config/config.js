@@ -1,4 +1,5 @@
 require("dotenv").config();
+// require("./keys");
 
 module.exports = {
     "development": {
@@ -6,12 +7,12 @@ module.exports = {
         "password": process.env.MYSQLPWD,
         "database": process.env.MYSQLDB,
         "host": process.env.MYSQLHOST,
-        "dialect": "mysql"
+        "dialect": "mysql"  
     },
     "test": {
         "username": "root",
-        "password": null,
-        "database": "database_test",
+        "password": "catherinemysql",
+        "database": "sensaison_db",
         "host": "127.0.0.1",
         "dialect": "mysql"
     },

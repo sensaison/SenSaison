@@ -11,7 +11,7 @@
 
   <!-- CSS  -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
   <link href="css/navbar.css" media="screen" rel="stylesheet" type="text/css" />
   <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 
@@ -104,33 +104,37 @@
 
           <form action="#">
             <div class="row">
-              <div class="input-field col s4">
+              <div class="input-field col s12 m4">
                 <input type="text" class="datepicker" id="date-obs" required="" aria-required="true">
                 <label for="date-obs">Date of observation*</label>
               </div>
 
-              <div class="input-field col s4">
+              <div class="input-field col s12 m4">
                 <input type="text" class="timepicker" id="time-obs" required="" aria-required="true">
                 <label for="time-obs">Time of observation*</label>
               </div>
 
-              <div class="input-field col s4">
+              <div class="input-field col s12 m4">
                 <select id="obs-category" required="" aria-required="true">
-                  <option value="" disabled selected>Choose an option</option>
-                  <option value="animal">Animal</option>
-                  <option value="plant">Plant</option>
-                  <option value="fungus">Fungus</option>
-                  <option value="weather">Weather</option>
-                  <option value="land_water">Land or water</option>
-                  <option value="other">Other (please explain in Description fields)</option>
+                  <option value="" disabled selected class="form-option">Choose an option</option>
+                  <option value="animal" class="form-option">Animal</option>
+                  <option value="plant" class="form-option">Plant</option>
+                  <option value="fungus" class="form-option">Fungus</option>
+                  <option value="weather" class="form-option">Weather</option>
+                  <option value="land_water" class="form-option">Land or water</option>
+                  <option value="other" class="form-option">Other (please explain in Description fields)</option>
                 </select>
                 <label for="obs-category">Category of observation*</label>
               </div>
             </div>
 
             <div class="row">
+              <div class="col s12 m6">
+                <label for="googlemap">Location of observation*</label>
+                <!-- STEFAN PUT GOOGLE MAP HERE -->
+              </div>
 
-              <div class="col s6">
+              <div class="col s12 m6">
 
                 <div class="row">
                   <div class="input-field col s12">
@@ -149,11 +153,11 @@
                 <div class="row">
                   <div class="input-field col s12">
                     <select class="first-confidence" required="" aria-required="true">
-                      <option value="1" selected>1 - low confidence (default)</option>
-                      <option value="2">2</option>
-                      <option value="3">3</option>
-                      <option value="4">4</option>
-                      <option value="5">5 - high confidence</option>
+                      <option value="1" selected class="form-option">1 - low confidence (default)</option>
+                      <option value="2" class="form-option">2</option>
+                      <option value="3" class="form-option">3</option>
+                      <option value="4" class="form-option">4</option>
+                      <option value="5" class="form-option">5 - high confidence</option>
                     </select>
                     <label for="first-confidence">Confidence that your observation is the first of its type in your area*</label>
                   </div>
@@ -161,42 +165,42 @@
 
                 <div class="row">
                   <div class="file-field input-field col s12">
-                    <button class="btn waves-effect waves-teal btn-flat btn-small">
+                    <button class="btn waves-effect waves-teal btn-flat btn-small" id="pic-button">
                       Upload
                       <input type="file" id="pic-file" multiple required="" aria-required="true">
                     </button>
                     <div class="file-path-wrapper">
                       <input class="file-path validate" id="pic-path" type="text" placeholder="Upload one or more pictures*">
                     </div>
+                    
                   </div>
                 </div>
 
               </div>
-                <div class="col s6">
-                  <label for="googlemap">Location of observation*</label>
-                  <!-- STEFAN PUT GOOGLE MAP HERE -->
-                </div>
+
             </div>
 
+            <br>
             <div class="row">
-              <p><i>This section is required if you selected animal, plant, or fungus.</i></p>
-              <div class="input-field col s4">
+              <p><i>The following section is required if you selected animal, plant, or fungus.</i></p>
+              <br>
+              <div class="input-field col s12 m6 l4">
                 <label for="species">Species common name*</label>
                 <input type="text" class="validate" id="species" data-length="50">
               </div>
 
-              <div class="input-field col s4">
+              <div class="input-field col s12 m6 l4">
                 <label for="species-sci-name">Species scientific name (if known)</label>
                 <input type="text" class="validate" id="species-sci-name" data-length="50">
               </div>
 
-              <div class="input-field col s4">
+              <div class="input-field col s12 m6 l4">
                 <select id="species-confidence">
-                  <option value="1" selected>1 - low confidence (default)</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5 - high confidence</option>
+                  <option value="1" selected class="form-option">1 - low confidence (default)</option>
+                  <option value="2" class="form-option">2</option>
+                  <option value="3" class="form-option">3</option>
+                  <option value="4" class="form-option">4</option>
+                  <option value="5" class="form-option">5 - high confidence</option>
                 </select>
                 <label for="species-confidence">Species ID confidence*</label>
               </div>
@@ -213,11 +217,10 @@
       </div>
 
       <div class="row hidden" id="view-usr-obs">
-        <div class="col s12 center">
-          <h5>All your observations</h5>
-
-          <br>
-          <table class="highlight responsive-table all-your-obs">
+        <h5>All your observations</h5>
+        <br>
+        <div class="col s12 m6 l6">
+          <table class="highlight responsive-table" id="all-your-obs">
             <thead>
               <tr>
                 <th>Date</th>
@@ -231,55 +234,140 @@
                 <td>01/01/1990</td>
                 <td>Animal</td>
                 <td>First Canada geese this spring</td>
-                <td><button class="btn waves-effect waves-light btn-small" id="delete">X</button></td>
+                <td><button class="btn waves-effect waves-light btn-small delete">X</button></td>
               </tr>
               <tr>
                 <td>01/02/1990</td>
                 <td>Plant</td>
                 <td>First crocus flowers this spring</td>
-                <td><button class="btn waves-effect waves-light btn-small" id="delete">X</button></td>
+                <td><button class="btn waves-effect waves-light btn-small delete">X</button></td>
+              </tr>
+              <tr>
+                <td>01/03/1990</td>
+                <td>Animal</td>
+                <td>First Canada geese this spring</td>
+                <td><button class="btn waves-effect waves-light btn-small delete">X</button></td>
+              </tr>
+              <tr>
+                <td>01/04/1990</td>
+                <td>Fungus</td>
+                <td>First crocus flowers this spring</td>
+                <td><button class="btn waves-effect waves-light btn-small delete">X</button></td>
+              </tr>
+              <tr>
+                <td>01/05/1990</td>
+                <td>Land or Water</td>
+                <td>First Canada geese this spring</td>
+                <td><button class="btn waves-effect waves-light btn-small delete">X</button></td>
+              </tr>
+              <tr>
+                <td>01/06/1990</td>
+                <td>Plant</td>
+                <td>First crocus flowers this spring</td>
+                <td><button class="btn waves-effect waves-light btn-small delete">X</button></td>
+              </tr>
+              <tr>
+                <td>01/07/1990</td>
+                <td>Animal</td>
+                <td>First alien geese this spring</td>
+                <td><button class="btn waves-effect waves-light btn-small delete">X</button></td>
+              </tr>
+              <tr>
+                <td>01/08/1990</td>
+                <td>Plant</td>
+                <td>First bumblebees this spring</td>
+                <td><button class="btn waves-effect waves-light btn-small delete">X</button></td>
+              </tr>
+              <tr>
+                <td>01/09/1990</td>
+                <td>Animal</td>
+                <td>First honkin geese this spring</td>
+                <td><button class="btn waves-effect waves-light btn-small delete">X</button></td>
+              </tr>
+              <tr>
+                <td>01/10/1990</td>
+                <td>Plant</td>
+                <td>First crocus flowers this spring</td>
+                <td><button class="btn waves-effect waves-light btn-small delete">X</button></td>
+              </tr>
+              <tr>
+                <td>01/11/1990</td>
+                <td>Weather</td>
+                <td>First Canada geese this spring</td>
+                <td><button class="btn waves-effect waves-light btn-small delete">X</button></td>
+              </tr>
+              <tr>
+                <td>01/12/1990</td>
+                <td>Fungus</td>
+                <td>First crocus flowers this spring</td>
+                <td><button class="btn waves-effect waves-light btn-small delete">X</button></td>
+              </tr>
+              <tr>
+                <td>01/13/1990</td>
+                <td>Plants</td>
+                <td>First Canada geese this spring</td>
+                <td><button class="btn waves-effect waves-light btn-small delete">X</button></td>
+              </tr>
+              <tr>
+                <td>01/14/1990</td>
+                <td>Plant</td>
+                <td>First daffodil flowers this spring</td>
+                <td><button class="btn waves-effect waves-light btn-small delete">X</button></td>
               </tr>
             </tbody>
           </table>
+
+        </div>
+        <div class="col s12 m6 l6">
+
+          <!-- STEFAN PUT MAP WITH USER'S OBSERVATIONS HERE -->
 
         </div>
       </div>
 
       <div class="row hidden" id="view-near-obs">
         <h5>Nearby observations</h5>
+        <br>
         <!-- STEFAN PUT MAP WITH NEARBY OBSERVATIONS HERE -->
       </div>
 
       <div class="row hidden" id="download-data">
         <h5>Download data</h5>
-
+        <br>
         <form action="#">
           <div class="row">
 
-            <div class="input-field col s4">
-              <select id="category-download">
-                <option value="all" selected>All (default)</option>
-                <option value="animal">Animal</option>
-                <option value="plants">Plant</option>
-                <option value="fungus">Fungus</option>
-                <option value="weather">Weather</option>
-                <option value="land_water">Land or water</option>
-                <option value="other">Other</option>
+            <div class="input-field col s12 m6 l3">
+              <select id="category-download" name="category-download">
+                <option value="all" selected class="form-option">All (default)</option>
+                <option value="animal" class="form-option">Animal</option>
+                <option value="plants" class="form-option">Plant</option>
+                <option value="fungus" class="form-option">Fungus</option>
+                <option value="weather" class="form-option">Weather</option>
+                <option value="land_water" class="form-option">Land or water</option>
+                <option value="other" class="form-option">Other</option>
               </select>
               <label for="category-download">Choose a category of observations*</label>
             </div>
 
-            <div class="input-field col s4">
-              <input type="text" class="datepicker" id="start-date-download" required="" aria-required="true">
+            <div class="input-field col s12 m6 l3">
+              <input type="text" class="datepicker" id="start-date-download" name="start-date-download" required="" aria-required="true">
               <label for="start-date-download">Start date*</label>
             </div>
 
-            <div class="input-field col s4">
-              <input type="text" class="datepicker" id="end-date-download" required="" aria-required="true">
+            <div class="input-field col s12 m6 l3">
+              <input type="text" class="datepicker" id="end-date-download" name="end-date-download" required="" aria-required="true">
               <label for="end-date-download">End date*</label>
             </div>
-          </div>
 
+            <div class="input-field col s12 m6 l3">
+              <label for="includepictures">
+                <input id="includepictures" type="checkbox" />
+                <span>Check to include pictures</span>
+              </label>
+            </div>
+          </div>
+          <br>
           <div class="row">
             <button class="btn waves-effect waves-light" type="submit" id="request-data">Request
             </button>     
@@ -345,8 +433,7 @@
   <!-- Scripts specific to user account page -->
   <script type="text/javascript" src="js/forminitialization.js"></script>
   <script type="text/javascript" src="js/useraccount.js"></script>
-  <script type="text/javascript" src="js/datasubmission.js"></script>
-  <script type="text/javascript" src="js/datarequest.js"></script>
+  <script type="text/javascript" src="js/submit_delete_request_data.js"></script>
 
 
   </body>

@@ -1,61 +1,125 @@
 var db = require("../models");
 
 module.exports = function(app) {
+
+    // FIND ALL observations
     app.get("/api/observations", function(req, res) {
-        db.Observation.findAll({}).then(function(allobs) {
-            res.json(allobs);
+        db.Observations.findAll({
+            include: [{
+                all: true,
+                nested: true
+            }] 
+        }).then(function(dbObs) {
+                res.json(dbObs);
+            });
+    });
+
+
+    // FIND ALL observations grouped by category
+    app.get("/api/categories/:category", function(req, res) {
+        db.Observations.findAll({
+            where: {
+                category: req.params.category
+            },
+            include: [{ // should include user data but not working WHY??
+                all: true,
+                nested: true
+            }] 
+        }).then(function(dbObs) {
+                res.json(dbObs);
+            });
+    });
+
+    // GET most recent ONE observation of each category  by TIMESTAMP
+    app.get("/api/:category/mostrecentone", function(req, res) {
+        db.Observations.findAll({
+            limit: 1,
+            where: {
+                category: req.params.category,
+
+            },
+            order: [["createdAt", "DESC"]],
+            include: [{ // should include user data but not working WHY??
+                all: true,
+                nested: true
+            }] 
+        }).then(function(recentObs) {
+            res.json(recentObs);
         });
     });
 
-    app.get("/api/users", function(req, res) {
-        db.User.findAll({}).then(function(allusr) {
-            res.json(allusr);
+    // GET most recent FIVE observations of each category by TIMESTAMP
+    app.get("/api/:category/mostrecentfive", function(req, res) {
+        db.Observations.findAll({
+            limit: 5,
+            where: {
+                category: req.params.category,
+
+            },
+            order: [["createdAt", "DESC"]],
+            include: [{ // should include user data but not working WHY??
+                all: true,
+                nested: true
+            }] 
+        }).then(function(recentObs) {
+            res.json(recentObs);
         });
     });
 
+    // CREATE new observation
     app.post("/api/observations", function(req, res) {
-        db.Observation.create(req.body).then(function(newobs) {
-            res.json(newobs);
-        });
+        db.Observations.create(req.body)
+            .then(function(dbObs) {
+                res.json(dbObs);
+            });
     });
 
-    app.post("/api/users", function(req, res) {
-        db.User.create(req.body).then(function(newusr) {
-            res.json(newusr);
-        });
-    });
-
-    app.set("/api/observations/:id", function(req, res) {
-        db.Observation.update({
+    // DESTROY one observation
+    app.delete("/api/observations/:id", function(req, res) {
+        db.Observations.destroy({
             where: {
                 id: req.params.id
             }
-        }).then(
-            function(updobs) {
-                if (updobs.changedRows === 0) {
-                    return res.status(404).end();
-                }
-                res.status(200).end();
-            }
-        ).then(function(updobs) {
-            res.json(updobs);
-        });
-
-        app.set("/api/users/:id", function(req, res) {
-            db.User.update({
-                where: {
-                    id: req.params.id
-                }
-            }).then(
-                function(updusr) {
-                    if (updusr.changedRows === 0) {
-                        return res.status(404).end();
-                    }
-                    res.status(200).end();
-                }
-            );
-        }).then(function(updusr) {
-            res.json(updusr);
+        }).then(function(dbObs) {
+            res.json(dbObs);
         });
     });
+
+    // FIND ALL observations for request data download
+    // NEED TO TEST THIS ONE!!!
+    app.get("/request", function(req, res) {
+        db.Observations.findAll({
+            where: {
+                category: req.params.category,
+                date_obs: {
+                    [Op.gte]: req.params.minDate,
+                    [Op.lte]: req.params.maxDate
+                }
+            }
+        }).then(function(err, res) {
+            if (err) throw err;
+
+        })
+    });
+
+    // FIND ALL users
+    app.get("/api/users", function(req, res) {
+        db.Users.findAll({
+            include: [{ // should show all their observations but not working WHY??
+                all: true,
+                nested: true
+            }] 
+        }).then(function(allusr) {
+                res.json(allusr);
+            });
+    });
+
+    // CREATE new user
+    app.post("/api/users", function(req, res) {
+        db.Users.create(req.body)
+            .then(function(newusr) {
+                res.json(newusr);
+            });
+    });
+
 };
