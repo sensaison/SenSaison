@@ -64,27 +64,49 @@ $(document).ready(function() {
     });
 
     // below code is for pagination of table showing all of the user's observations
-    $("#all-your-obs").after("<br><ul class='pagination'><li class='waves-effect' id='start-pagination'><a href='#'><i class='material-icons'>chevron_left</i></a></li><li class='waves-effect' id='end-pagination'><a href='#'><i class='material-icons'>chevron_right</i></a></li></div>");
-    var rowsShown = 10;
-    var rowsTotal = $("#all-your-obs tbody tr").length;
-    var numPages = rowsTotal/rowsShown;
-    for(i = 0; i < numPages; i++) {
-        var pageNum = i + 1;
-        $("#end-pagination").before("<li class='btn waves-effect waves-light btn-flat'><a href='#' rel='" + i + "'>" + pageNum + "</a></li>");
+    function paginate() {
+        $("#all-your-obs").after("<br><ul class='pagination'><li class='waves-effect' id='start-pagination'><a href='#'><i class='material-icons'>chevron_left</i></a></li><li class='waves-effect' id='end-pagination'><a href='#'><i class='material-icons'>chevron_right</i></a></li></div>");
+        let rowsShown = 10;
+        let rowsTotal = $("#all-your-obs tbody tr").length;
+        let numPages = rowsTotal/rowsShown;
+        for (i = 0; i < numPages; i++) {
+            let pageNum = i + 1;
+            $("#end-pagination").before("<li class='btn waves-effect waves-light btn-flat'><a href='#' rel='" + i + "'>" + pageNum + "</a></li>");
+        }
+        $("#all-your-obs tbody tr").hide();
+        $("#all-your-obs tbody tr").slice(0, rowsShown).show();
+        $(".pagination a:first").addClass("active");
+        $(".pagination a").bind("click", function(e) {
+            e.preventDefault();
+            $(".pagination a").parent("li").removeClass("active");
+            $(this).parent("li").addClass("active");
+            let currPage = $(this).attr("rel");
+            let startItem = currPage * rowsShown;
+            var endItem = startItem + rowsShown;
+            $("#all-your-obs tbody tr").css("opacity","0.0").hide().slice(startItem, endItem).css("display","table-row").animate({opacity:1}, 300);
+        });
     }
-    $("#all-your-obs tbody tr").hide();
-    $("#all-your-obs tbody tr").slice(0, rowsShown).show();
-    $(".pagination a:first").addClass("active");
-    $(".pagination a").bind("click", function(e) {
-        e.preventDefault();
-        $(".pagination a").parent("li").removeClass("active");
-        $(this).parent("li").addClass("active");
-        var currPage = $(this).attr("rel");
-        var startItem = currPage * rowsShown;
-        var endItem = startItem + rowsShown;
-        $("#all-your-obs tbody tr").css("opacity","0.0").hide().slice(startItem, endItem).css("display","table-row").animate({opacity:1}, 300);
-    });
+    paginate();
 
     // below code is for displaying user's observations
+    function getUserObs(User) {
+        let userID = User || "";
+        // how to get userId from page?
+
+        $.get("/api/users" + userID, function(data) {
+            console.log("Observations: ", data);
+            observations = data;
+            if (!observations || !observations.length) {
+              // DISPLAY EMPTY TABLE
+            }
+            else {
+              populateTable(data);
+            }
+        });
+    } 
+    
+    function populateTable(User) {
+        
+    }
 
 });

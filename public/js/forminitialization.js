@@ -21,7 +21,4 @@ document.addEventListener("DOMContentLoaded", function() {
 
     let elemsOpts = document.querySelectorAll("select");
     let instancesOpts = M.FormSelect.init(elemsOpts);
-
-    // document.querySelectorAll("textarea").characterCounter();
-    // document.querySelectorAll("#species, #speciessciname").characterCounter();
 });

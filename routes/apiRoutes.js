@@ -1,37 +1,34 @@
-var db = require("../models");
+const db = require("../models");
+const Op = Sequelize.Op
 
-module.exports = function(app) {
+module.exports = function (app) {
 
     // FIND ALL observations
-    app.get("/api/observations", function(req, res) {
+    app.get("/api/observations", function (req, res) {
         db.Observations.findAll({
-            include: [{
-                all: true,
-                nested: true
-            }] 
-        }).then(function(dbObs) {
-                res.json(dbObs);
-            });
+            include: [db.Users],
+            logging: console.log
+        }).then(function (dbObs) {
+            res.json(dbObs);
+        });
     });
 
 
     // FIND ALL observations grouped by category
-    app.get("/api/categories/:category", function(req, res) {
+    app.get("/api/categories/:category", function (req, res) {
         db.Observations.findAll({
             where: {
                 category: req.params.category
             },
-            include: [{ // should include user data but not working WHY??
-                all: true,
-                nested: true
-            }] 
-        }).then(function(dbObs) {
-                res.json(dbObs);
-            });
+            include: [db.Users],
+            logging: console.log
+        }).then(function (dbObs) {
+            res.json(dbObs);
+        });
     });
 
     // GET most recent ONE observation of each category  by TIMESTAMP
-    app.get("/api/:category/mostrecentone", function(req, res) {
+    app.get("/api/:category/mostrecentone", function (req, res) {
         db.Observations.findAll({
             limit: 1,
             where: {
@@ -39,17 +36,15 @@ module.exports = function(app) {
 
             },
             order: [["createdAt", "DESC"]],
-            include: [{ // should include user data but not working WHY??
-                all: true,
-                nested: true
-            }] 
-        }).then(function(recentObs) {
+            include: [db.Users],
+            logging: console.log
+        }).then(function (recentObs) {
             res.json(recentObs);
         });
     });
 
     // GET most recent FIVE observations of each category by TIMESTAMP
-    app.get("/api/:category/mostrecentfive", function(req, res) {
+    app.get("/api/:category/mostrecentfive", function (req, res) {
         db.Observations.findAll({
             limit: 5,
             where: {
@@ -57,37 +52,35 @@ module.exports = function(app) {
 
             },
             order: [["createdAt", "DESC"]],
-            include: [{ // should include user data but not working WHY??
-                all: true,
-                nested: true
-            }] 
-        }).then(function(recentObs) {
+            include: [db.Users],
+            logging: console.log
+        }).then(function (recentObs) {
             res.json(recentObs);
         });
     });
 
     // CREATE new observation
-    app.post("/api/observations", function(req, res) {
+    app.post("/api/observations", function (req, res) {
         db.Observations.create(req.body)
-            .then(function(dbObs) {
+            .then(function (dbObs) {
                 res.json(dbObs);
             });
     });
 
     // DESTROY one observation
-    app.delete("/api/observations/:id", function(req, res) {
+    app.delete("/api/observations/:id", function (req, res) {
         db.Observations.destroy({
             where: {
                 id: req.params.id
             }
-        }).then(function(dbObs) {
+        }).then(function (dbObs) {
             res.json(dbObs);
         });
     });
 
     // FIND ALL observations for request data download
     // NEED TO TEST THIS ONE!!!
-    app.get("/request", function(req, res) {
+    app.get("/request", function (req, res) {
         db.Observations.findAll({
             where: {
                 category: req.params.category,
@@ -96,28 +89,26 @@ module.exports = function(app) {
                     [Op.lte]: req.params.maxDate
                 }
             }
-        }).then(function(err, res) {
+        }).then(function (err, res) {
             if (err) throw err;
 
         })
     });
 
     // FIND ALL users
-    app.get("/api/users", function(req, res) {
+    app.get("/api/users", function (req, res) {
         db.Users.findAll({
-            include: [{ // should show all their observations but not working WHY??
-                all: true,
-                nested: true
-            }] 
-        }).then(function(allusr) {
-                res.json(allusr);
-            });
+            include: [db.Observations],
+            logging: console.log
+        }).then(function (allusr) {
+            res.json(allusr);
+        });
     });
 
     // CREATE new user
-    app.post("/api/users", function(req, res) {
+    app.post("/api/users", function (req, res) {
         db.Users.create(req.body)
-            .then(function(newusr) {
+            .then(function (newusr) {
                 res.json(newusr);
             });
     });

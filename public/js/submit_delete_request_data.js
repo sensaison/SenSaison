@@ -1,20 +1,11 @@
 $(document).ready(function() {
 
-    // // show user's observations on document ready
-    // $.ajax("/api/users", function(req, res) {
-    //     type: "GET",
-    //     data: kjgh
-    // }).then(function(usrdata){
-    //     // HANDLEBAR HERE
-    //      res.render("something", usrdata)
-    // })
-
     // POST request when submitting new observation
     $("#submit-obs").on("click", function(e) {
         e.preventDefault();
         console.log("submit");
 
-        let observation = {
+        let newObservation = {
             // user_id: ,AURI
             // picture_id: AURI,
             date_obs: $("#date-obs").val(),
@@ -32,7 +23,7 @@ $(document).ready(function() {
 
         // $.ajax("/api/observations", {
         //     type: "POST",
-        //     data: observation
+        //     data: newObservation
         // }).then(function(err, res) {
         //     if (err) throw err;
         //     console.log(res);
@@ -47,15 +38,15 @@ $(document).ready(function() {
 
         $(this).parents("tr").detach(); // REPLACE WITH REMOVE() WHEN GOING INTO PRODUCTION
 
-        // let id_delete = $(this).attr("id"); // ????
-        // $.ajax("/api/observations", {
-        //     type: "DELETE",
-        //     id: id_delete
-        // }).then(function(err, res) {
-        //     if (err) throw err;
-        //     console.log(res);
-        //     location.reload(true);
-        // });
+        let id_delete = $(this).parents("tr").attr("id"); // ????
+        $.ajax("/api/observations", {
+            type: "DELETE",
+            url: "/api/users/observations" + id_delete
+        }).then(function(err, res) {
+            if (err) throw err;
+            console.log(res);
+            location.reload(true);
+        });
 
     });
 

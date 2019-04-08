@@ -1,6 +1,6 @@
 require("dotenv").config();
-var express = require("express");
-var exphbs = require("express-handlebars");
+const express = require("express");
+const exphbs = require("express-handlebars");
 
 // reqs for google OAuth
 const authRoutes = require('./routes/auth-routes')
