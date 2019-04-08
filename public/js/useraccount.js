@@ -105,8 +105,18 @@ $(document).ready(function() {
         });
     } 
     
-    function populateTable(User) {
-        
+    function populateTable(data) {
+        for (let i=0; i<data.length; i++) {
+            
+            let obsId = data[i].id;
+            let date = data[i].dateObs;
+            let category = data[i].category;
+            let briefDesc = data[i].briefDescription;
+
+            $("#all-your-obs-body").prepend(
+                "<tr id='" + obsId + "'><td>" + date + "</td><td>" + category + "</td><td>" + briefDesc + "</td><td><button class='btn waves-effect waves-light btn-small delete'>X</button></tr>"
+            );
+        }
     }
 
 });
