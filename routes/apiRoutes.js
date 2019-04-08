@@ -1,6 +1,7 @@
 const db = require("../models");
 const Sequelize = require("sequelize");
-const Op = Sequelize.Op
+const Op = Sequelize.Op;
+const csv = require("csv");
 
 module.exports = function (app) {
 
@@ -28,7 +29,7 @@ module.exports = function (app) {
         });
     });
 
-    // GET most recent ONE observation of each category  by TIMESTAMP
+    // GET most recent ONE observation of each category by TIMESTAMP
     app.get("/api/:category/mostrecentone", function (req, res) {
         db.Observations.findAll({
             limit: 1,
@@ -86,13 +87,13 @@ module.exports = function (app) {
             where: {
                 category: req.params.category,
                 date_obs: {
-                    [Op.gte]: req.params.minDate,
+                    [Op.gte]: req.params.minDate, // this needs editing
                     [Op.lte]: req.params.maxDate
                 }
             }
         }).then(function (err, res) {
             if (err) throw err;
-
+            // use csv package here
         })
     });
 

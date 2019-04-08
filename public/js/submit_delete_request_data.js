@@ -58,10 +58,6 @@ $(document).ready(function() {
         let categoryRequest = $("#category-download").val();
         let minDate = $("#start-date-download").val();
         let maxDate = $("#end-data-download").val();
-        
-
-        // let queryURL = "https://www.rebasedata.com/api/v1/convert?outputFormat=csv&errorResponse=json";
-        // output to csv, if error then error response format is json
 
 
         $.ajax("api/observations", {
