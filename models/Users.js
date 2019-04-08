@@ -5,70 +5,67 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.INTEGER,
             allowNull: false
         },
-        user_id: {
+        userId: {
             type: DataTypes.INTEGER,
             allowNull: false,
             unique: {
-                args: true,
-                msg: "CATHERINE THERE'S A PROBLEM WITH USER ID!!"
+                args: true
             }
         },
-        firstname: {
+        firstName: {
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
-                isAlpha: true,
-                msg: "Are you sure you spelled that right?"
+                isAlpha: true
             }
         },
-        lastname: {
+        lastName: {
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
-                isAlpha: true,
-                msg: "Are you sure you spelled that right?"
+                isAlpha: true
             }
         },
         email: {
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
-                isEmail: true,
-                msg: "Are you sure you spelled that right?"
+                isEmail: true
             },
             unique: {
-                args: true,
-                msg: "Email address already in use!"
+                args: true
             }
         },
         username: {
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
-                isAlphanumeric: true,
-                msg: "Only letters and numbers allowed!"
+                isAlphanumeric: true
             },
             unique: {
-                args: true,
-                msg: "Username already taken!"
+                args: true
             }
         },
-        password: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            validate: {
-                len: [10, 20],
-                notEmpty: true,
-                notContains: this.username,
-                notContains: this.firstname,
-                notContains: this.lastname,
-                msg: "Your password cannot contain your name or username, and must be between 10 and 20 characters in length"
-            }
-        }
+        createdAt: {
+            type: DataTypes.DATE,
+            allowNull: false
+        },
+        updatedAt: {
+            type: DataTypes.DATE,
+            allowNull: true
+        },
+    },
+    {
+        freezeTableName: true
     });
 
     Users.associate = function(models) {
-        Users.hasMany(models.Observations);
+        Users.hasMany(models.Observations, {
+            foreignKey: "userId",
+            onDelete: "no action",
+            onUpdate: "cascade"
+        });
     };
+
     return Users;
 };
