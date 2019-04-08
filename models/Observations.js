@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
 module.exports = function(sequelize, DataTypes) {
-    const Observations = sequelize.define("Observations", {
+    let Observations = sequelize.define("Observations", {
         id: {
             primaryKey: true,
             type: DataTypes.INTEGER,
@@ -10,24 +10,28 @@ module.exports = function(sequelize, DataTypes) {
                 msg: "CATHERINE THERE'S A PROBLEM WITH PRIMARY KEY!!"
             }
         },
-        user_id: {
+        userId: {
             type: DataTypes.INTEGER,
             allowNull: false
         },
-        picture_id: {
+        pictureId: {
             type: DataTypes.INTEGER,
             allowNull: false
         },
-        time_stamp: {
-            type: DataTypes.DATE,
+        dateObs: {
+            type: DataTypes.DATEONLY,
             allowNull: false
         },
-        date_time_obs: {
-            type: DataTypes.DATE,
+        timeObs: {
+            type: DataTypes.TIME,
             allowNull: false
         },
-        lat_lon: {
-            type: DataTypes.GEOMETRY,
+        latitude: {
+            type: DataTypes.FLOAT,
+            allowNull: true
+        },
+        longitude: {
+            type: DataTypes.FLOAT,
             allowNull: true
         },
         category: {
@@ -42,7 +46,7 @@ module.exports = function(sequelize, DataTypes) {
                 msg: "Are you sure you spelled that right?"
             }
         },
-        species_sci_name: {
+        speciesSciName: {
             type: DataTypes.STRING,
             allowNull: true,
             validate: {
@@ -50,44 +54,43 @@ module.exports = function(sequelize, DataTypes) {
                 msg: "Are you sure you spelled that right?"
             }
         },
-        species_confidence: {
+        speciesConfidence: {
             type: DataTypes.INTEGER,
             allowNull: true
         },
-        weather: {
-            type: DataTypes.STRING,
-            allowNull: true,
-            validate: {
-                isAlpha: true,
-                msg: "Are you sure you spelled that right?"
-            }
-        },
-        land_water: {
-            type: DataTypes.STRING,
-            allowNull: true,
-            validate: {
-                isAlpha: true,
-                msg: "Are you sure you spelled that right?"
-            }
-        },
-        first_confidence: {
+        firstConfidence: {
             type: DataTypes.INTEGER,
             allowNull: false
         },
-        notes: {
+        briefDescription: {
             type: DataTypes.TEXT,
             allowNull: false,
             validate: {
                 notEmpty: true
             }
-        }
+        },
+        extendedDescription: {
+            type: DataTypes.TEXT,
+            allowNull: true
+        },
+        createdAt: {
+            type: DataTypes.DATE,
+            allowNull: false
+        },
+        updatedAt: {
+            type: DataTypes.DATE,
+            allowNull: true
+        },
+    },
+    {
+        freezeTableName: true
     });
 
     Observations.associate = function(models) {
         Observations.belongsTo(models.Users, {
-            foreignkey: {
-                allowNull: false
-            }
+            foreignKey: "userId",
+            onDelete: "no action",
+            onUpdate: "cascade"
         });
     };
     return Observations;

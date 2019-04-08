@@ -21,23 +21,23 @@ $(document).ready(function() {
             time_obs: $("#time-obs").val(),
             // latitude: ,STEFAN
             // longitude: ,
-            category: $("#obs=category").val(),
+            category: $("#obs-category").val(),
             first_confidence: $("#first-confidence").val(),
             brief_description: $("#brief-desc").val().trim(),
             extended_description: $("#extended-desc").val().trim(),
             species: $("#species").val(),
             species_sci_name: $("#species-sci-name").val(),
             species_confidence: $("#species-confidence").val(),
-        }
+        };
 
-        $.ajax("/api/observations", {
-            type: "POST",
-            data: observation
-        }).then(function(err, res) {
-            if (err) throw err;
-            console.log(res);
-            location.reload(true);
-        });
+        // $.ajax("/api/observations", {
+        //     type: "POST",
+        //     data: observation
+        // }).then(function(err, res) {
+        //     if (err) throw err;
+        //     console.log(res);
+        //     location.reload(true);
+        // });
     });
 
     // DELETE request when deleting observation
@@ -45,17 +45,17 @@ $(document).ready(function() {
         e.preventDefault();
         console.log("delete");
 
-        $(this).parents("tr").remove();
+        $(this).parents("tr").detach(); // REPLACE WITH REMOVE() WHEN GOING INTO PRODUCTION
 
-        let id_delete = $(this).attr("id"); // ????
-        $.ajax("/api/observations", {
-            type: "DELETE",
-            id: id_delete
-        }).then(function(err, res) {
-            if (err) throw err;
-            console.log(res);
-            location.reload(true);
-        });
+        // let id_delete = $(this).attr("id"); // ????
+        // $.ajax("/api/observations", {
+        //     type: "DELETE",
+        //     id: id_delete
+        // }).then(function(err, res) {
+        //     if (err) throw err;
+        //     console.log(res);
+        //     location.reload(true);
+        // });
 
     });
 
@@ -66,8 +66,8 @@ $(document).ready(function() {
 
         let categoryRequest = $("#category-download").val();
         let minDate = $("#start-date-download").val();
-        let maxDate: $("#end-data-download").val()
-        }
+        let maxDate = $("#end-data-download").val();
+        
 
         // let queryURL = "https://www.rebasedata.com/api/v1/convert?outputFormat=csv&errorResponse=json";
         // output to csv, if error then error response format is json
