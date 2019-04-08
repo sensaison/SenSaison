@@ -21,7 +21,7 @@ module.exports = function(app) {
             where: {
                 category: req.params.category
             },
-            include: [{
+            include: [{ // should include user data but not working WHY??
                 all: true,
                 nested: true
             }] 
@@ -38,7 +38,11 @@ module.exports = function(app) {
                 category: req.params.category,
 
             },
-            order: [["createdAt", "DESC"]]
+            order: [["createdAt", "DESC"]],
+            include: [{ // should include user data but not working WHY??
+                all: true,
+                nested: true
+            }] 
         }).then(function(recentObs) {
             res.json(recentObs);
         });
@@ -52,7 +56,11 @@ module.exports = function(app) {
                 category: req.params.category,
 
             },
-            order: [["createdAt", "DESC"]]
+            order: [["createdAt", "DESC"]],
+            include: [{ // should include user data but not working WHY??
+                all: true,
+                nested: true
+            }] 
         }).then(function(recentObs) {
             res.json(recentObs);
         });
@@ -78,6 +86,7 @@ module.exports = function(app) {
     });
 
     // FIND ALL observations for request data download
+    // NEED TO TEST THIS ONE!!!
     app.get("/request", function(req, res) {
         db.Observations.findAll({
             where: {
@@ -96,7 +105,7 @@ module.exports = function(app) {
     // FIND ALL users
     app.get("/api/users", function(req, res) {
         db.Users.findAll({
-            include: [{
+            include: [{ // should show all their observations but not working WHY??
                 all: true,
                 nested: true
             }] 
