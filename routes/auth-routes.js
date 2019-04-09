@@ -14,12 +14,12 @@ router.get('/logout', (req, res) => {
 //OAuth Google 
 
 router.get('/google', passport.authenticate('google', {
-    scope: ['profile']
+    scope: ['profile', 'email', 'openid']
 }));
 
 // google OAuth redirect route
 
-router.get('/google/redirect', (req, res) => {
+router.get('/google/redirect', passport.authenticate('google'), (req, res) => {
     res.send("You've reached the callback URI")
 });
 
