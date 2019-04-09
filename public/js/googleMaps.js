@@ -1,3 +1,5 @@
+const apiKey = "AIzaSyDexLO6StKoAhSrxypz3E6neGfT9PpJSlM";
+
 /* eslint-disable no-unused-vars */
 // This example adds a search box to a map, using the Google Place Autocomplete
 // feature. People can enter geographical searches. The search box will return a
@@ -7,12 +9,13 @@
 // parameter when you first load the API. For example:
 // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
 
-console.log("googleMaps.js has executed.");
-
-var map;
 var startingPos;
 var userPin;
-var mapType;
+var mapType = 0;
+var selectedLocationID;
+var coordinates = {};
+var nearbyMap;
+var userMap;
 getLocation();
 
 function getLocation() {
@@ -20,19 +23,44 @@ function getLocation() {
         navigator.geolocation.getCurrentPosition(usePosition, showError);
     } else {
         console.log("Geolocation is not supported by this browser.");
-        generateMap();
+        generateMaps();
+        setUpForm();
+        enableButtons();
     }
 }
 
+function enableButtons() {
+    $(".g1").each(function() {
+        $(this).removeAttr("disabled");
+        $(this).attr("class", "btn waves-effect waves-light g1");
+    });
+}
+
+function setUpForm() {
+    if(startingPos === undefined) {
+        $("#near-me").css("display", "none");
+    }
+}
+
+$("#me").click(function() {
+    $("#city-select").css("display", "none");
+});
+
+$("#city").click(function() {
+    $("#city-select").css("display", "block");
+});
+
 function usePosition(position) {
-    console.log("Latitude: " + position.coords.latitude);
-    console.log("Longitude: " + position.coords.longitude);
     startingPos = position;
-    generateMap();
+    generateMaps();
+    setUpForm();
+    enableButtons();
 }
 
 function showError(error) {
-    generateMap();
+    generateMaps();
+    setUpForm();
+    enableButtons();
     switch(error.code) {
     case error.PERMISSION_DENIED:
         console.log("User denied the request for Geolocation.");
@@ -49,53 +77,145 @@ function showError(error) {
     }
 }
 
+function generateMaps() {
+    generateMap();
+    generateMap();
+    generateMap();
+}
+
 function generateMap() {
+    // TODO Figure out some kind of handler that distinguishes between map types 0 and 1 on the page.
     var pageName = document.location.href.match(/[^\/]+$/)[0];
     console.log(pageName);
-    if(pageName === "map.html" || pageName === "useraccount.html") {
-        mapType = 0;
-    }
+
     var latitude = 47.1585;
     var longitude = 27.6014;
     if(startingPos !== undefined) {
         latitude = startingPos.coords.latitude;
         longitude = startingPos.coords.longitude;
-        console.log("Centering map on user's pos");
     }
     var centerPlace = { lat: latitude, lng: longitude};
-    map = new google.maps.Map(document.getElementById("map"), {
+    var map = new google.maps.Map(document.getElementById("map-" + mapType), {
         center: centerPlace,
-        zoom: 13,
+        zoom: 12,
         clickableIcons: false,
         mapTypeControl: false
     });
     if(mapType === 0) {
         map.addListener("click", function(event) {
-            console.log(userPin);
             if(userPin === undefined) {
+                $("#pin-reminder").remove();
                 placeMarkerAndPanTo(event.latLng, map);
             } else {
                 console.log("A pin has already been placed. Click 'clear pins' to clear them first.");
             }
         });
+    } else if(mapType === 1) {
+        // Do some stuff to pin all user observations
+        userMap = map;
+    } else if(mapType === 2) {
+        // Do some stuff to pin all nearby observations
+        nearbyMap = map;
     }
+    mapType++;
 }
 
 function placeMarkerAndPanTo(latLng, map) {
+    console.log("placeMarkerAndPanTo Fired");
     var marker = new google.maps.Marker({
         position: latLng,
         map: map
     });
     map.panTo(latLng);
     userPin = marker;
-    console.log(userPin.position.lat());
-    console.log(userPin.position.lng());
 }
 
 $("#clear-pins").click(function deletePin() {
-    userPin.setMap(null);
-    userPin = undefined;
+    event.preventDefault();
+    if(userPin !== undefined) {
+        userPin.setMap(null);
+        userPin = undefined;
+    }
 });
+
+$("#get-nearby").click(function getNearby() {
+    event.preventDefault();
+    var radiusMeters = $("#location-radius").children("option:selected").val() * 1000;
+    console.log(radiusMeters);
+    $.ajax("/api/observations", {
+        type: "GET"
+    }).then(function(err, res) {
+        if(err) {
+            throw err;
+        }
+        console.log(res.json());
+    });
+    if($("#me").is(":checked")) { 
+        console.log(startingPos.coords);
+    } else {
+        if(coordinates.lat !== undefined) {
+            console.log(coordinates);
+        } else {
+            console.log("User needs to pick a city");
+        }
+    }
+});
+
+$("#locationInput").keyup(function(){
+    $(".predictionButtons").remove();
+    var locationInput = $(this).val();    
+    var autoLocationUrl = "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/autocomplete/json?input=" 
+                            + locationInput + "&types=(cities)&key=" + apiKey;
+    $.ajax({
+        url : autoLocationUrl,
+        method : "GET"
+    }).then(function(autoLocationResponse){
+        autoLocationResponse.predictions.forEach(function(locationPrediction){
+            var predictionLink = $("<div>");
+            predictionLink.attr("data-placeId", locationPrediction.place_id);
+            predictionLink.attr("class", "predictionButtons");
+            predictionLink.text(locationPrediction.description);  
+            //console.log(predictionLink);
+            $(".autoComplete").append(predictionLink[0]);
+            //console.log(predictionLink[0]);
+        });
+    });
+});
+
+$(document).on("click", ".predictionButtons", function(event){
+    //console.log($(this).attr('data-placeId'));
+    selectedLocationID = $(this).attr("data-placeId");
+    coordinateUrl = "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/details/json?placeid=" 
+                    + selectedLocationID + "&key=" + apiKey;
+    //console.log(coordinateUrl);
+    $.ajax({
+        url : coordinateUrl,
+        method : "GET"
+    }).then(function(selectedCoordinate){
+        //console.log(selectedCoordinate.result.geometry.location);
+        coordinates = selectedCoordinate.result.geometry.location;
+        console.log(coordinates);
+    });
+    document.getElementById("locationInput").value = $(this).text();
+    $(".predictionButtons").remove();
+    return false;
+});
+
+function getDistance(lat1, lon1, lat2, lon2) {
+    var R = 6371e3; // metres
+    var φ1 = lat1.toRadians();
+    var φ2 = lat2.toRadians();
+    var Δφ = (lat2-lat1).toRadians();
+    var Δλ = (lon2-lon1).toRadians();
+
+    var a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
+        Math.cos(φ1) * Math.cos(φ2) *
+        Math.sin(Δλ/2) * Math.sin(Δλ/2);
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+
+    var d = R * c;
+    return Math.abs(d);
+}
 
 /*
 function initAutocomplete() {
@@ -104,7 +224,6 @@ function initAutocomplete() {
     zoom: 13,
     mapTypeId: "roadmap"
   });
-
   
   // Create the search box and link it to the UI element.
   var input = document.getElementById("event-location");

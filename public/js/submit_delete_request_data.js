@@ -14,21 +14,28 @@ $(document).ready(function() {
         e.preventDefault();
         console.log("submit");
 
-        let observation = {
-            // user_id: ,AURI
-            // picture_id: AURI,
-            date_obs: $("#date-obs").val(),
-            time_obs: $("#time-obs").val(),
-            // latitude: ,STEFAN
-            // longitude: ,
-            category: $("#obs-category").val(),
-            first_confidence: $("#first-confidence").val(),
-            brief_description: $("#brief-desc").val().trim(),
-            extended_description: $("#extended-desc").val().trim(),
-            species: $("#species").val(),
-            species_sci_name: $("#species-sci-name").val(),
-            species_confidence: $("#species-confidence").val(),
-        };
+        if(window.userPin !== undefined) {
+            var observation = {
+                // user_id: AURI,
+                // picture_id: AURI,
+                date_obs: $("#date-obs").val(),
+                time_obs: $("#time-obs").val(),
+                latitude: window.userPin.position.lat(),
+                longitude: window.userPin.position.lng(),
+                category: $("#obs-category").val(),
+                first_confidence: $("#first-confidence").val(),
+                brief_description: $("#brief-desc").val().trim(),
+                extended_description: $("#extended-desc").val().trim(),
+                species: $("#species").val(),
+                species_sci_name: $("#species-sci-name").val(),
+                species_confidence: $("#species-confidence").val(),
+            };
+        } else {
+            $("#pin-reminder").remove();
+            $("#map-wrapper").append($("<label for='map-wrapper' id='pin-reminder'>Please place a pin on the map.</label>"));
+            throw "User didn't place a pin on the map.";
+        }
+
 
         // $.ajax("/api/observations", {
         //     type: "POST",
@@ -89,4 +96,4 @@ $(document).ready(function() {
         });
     });
 
-})
+});
