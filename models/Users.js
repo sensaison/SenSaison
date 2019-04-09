@@ -2,29 +2,21 @@ module.exports = function(sequelize, DataTypes) {
     let Users = sequelize.define("Users", {
         id: {
             primaryKey: true,
-            type: DataTypes.INTEGER,
-            allowNull: false
+            type: DataTypes.INTEGER
         },
         userId: {
             type: DataTypes.INTEGER,
-            allowNull: false,
             unique: {
                 args: true
             }
         },
         firstName: {
             type: DataTypes.STRING,
-            allowNull: false,
-            validate: {
-                isAlpha: true
-            }
+            allowNull: false
         },
         lastName: {
             type: DataTypes.STRING,
-            allowNull: false,
-            validate: {
-                isAlpha: true
-            }
+            allowNull: false
         },
         email: {
             type: DataTypes.STRING,
@@ -53,7 +45,7 @@ module.exports = function(sequelize, DataTypes) {
         updatedAt: {
             type: DataTypes.DATE,
             allowNull: true
-        },
+        }
     },
     {
         freezeTableName: true

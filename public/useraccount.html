@@ -102,7 +102,7 @@
         <h5>Add new observation</h5>
         <br>
 
-          <form action="#">
+          <form id="obs-submission-form">
             <div class="row">
               <div class="input-field col s12 m4">
                 <input type="text" class="datepicker" id="date-obs" required="" aria-required="true">
@@ -110,7 +110,7 @@
               </div>
 
               <div class="input-field col s12 m4">
-                <input type="text" class="timepicker" id="time-obs" required="" aria-required="true">
+                <input type="text" class="timepicker" step="1" id="time-obs" required="" aria-required="true">
                 <label for="time-obs">Time of observation*</label>
               </div>
 
@@ -152,7 +152,7 @@
 
                 <div class="row">
                   <div class="input-field col s12">
-                    <select class="first-confidence" required="" aria-required="true">
+                    <select id="first-confidence" required="" aria-required="true">
                       <option value="1" selected class="form-option">1 - low confidence (default)</option>
                       <option value="2" class="form-option">2</option>
                       <option value="3" class="form-option">3</option>
@@ -334,7 +334,7 @@
       <div class="row hidden" id="download-data">
         <h5>Download data</h5>
         <br>
-        <form action="#">
+        <form id="data-request-form">
           <div class="row">
 
             <div class="input-field col s12 m6 l3">

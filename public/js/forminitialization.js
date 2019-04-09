@@ -11,7 +11,8 @@ document.addEventListener("DOMContentLoaded", function() {
     let instancesDate = M.Datepicker.init(elemsDate, dateOptions);
 
     let timeOptions = {
-        autoClose: true
+        autoClose: true,
+        twelveHour: false
     }
     let elemsTime = document.querySelectorAll(".timepicker");
     let instancesTime = M.Timepicker.init(elemsTime, timeOptions);

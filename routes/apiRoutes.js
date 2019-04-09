@@ -105,7 +105,6 @@ module.exports = function (app) {
             res.setHeader("Content-disposition", "attachment; filename=sensaisondownload.csv");
             res.set("Content-Type", "text/csv");
             res.status(200).send(csv);
-
         })
     });
 

@@ -6,20 +6,22 @@ $(document).ready(function() {
         console.log("clicked on submit new obs");
 
         let newObs = {
-            user_id: 101010101,
-            picture_id: 20202020202,
-            date_obs: $("#date-obs").val(),
-            time_obs: $("#time-obs").val(),
+            // REPLACE DUMMY VALUES
+            userId: 101010101,
+            pictureId: 20202020202,
+            dateObs: $("#date-obs").val(),
+            timeObs: $("#time-obs").val(),
             latitude: 58.2,
             longitude: -121.43,
             category: $("#obs-category").val(),
-            first_confidence: $("#first-confidence").val(),
-            brief_description: $("#brief-desc").val().trim(),
-            extended_description: $("#extended-desc").val().trim(),
-            species: $("#species").val(),
-            species_sci_name: $("#species-sci-name").val(),
-            species_confidence: $("#species-confidence").val(),
+            firstConfidence: $("#first-confidence").val(),
+            briefDescription: $("#brief-desc").val().trim(),
+            extendedDescription: $("#extended-desc").val().trim(),
+            species: $("#species").val().trim(),
+            speciesSciName: $("#species-sci-name").val().trim(),
+            speciesConfidence: $("#species-confidence").val(),
         };
+        console.log(newObs);
 
         $.ajax("/api/observations", {
             type: "POST",
@@ -29,9 +31,9 @@ $(document).ready(function() {
                 console.log(err);
             }
             console.log(res);
-            // location.reload(true);
         }).done(function() {
-            console.log("Observation successfully submitted");
+            alert("Observation successfully submitted");
+            $("#obs-submission-form")[0].reset();
         });
     });
 
@@ -57,17 +59,18 @@ $(document).ready(function() {
     // GET request when requesting to download data
     $("#request-data").on("click", function(e) {
         e.preventDefault();
+        console.log("clicked on request data");
 
-        let category = $("#category-download").val();
         let minDate = $("#start-date-download").val();
         let maxDate = $("#end-date-download").val();
 
-        if (category === "all") {
+        let category;
+        if ($("#category-download").val() === "all") {
             category = {
-                include: [{
-                    all: true
-                }]
+                include: [{all: true}]
             };
+        } else {
+            category = $("#category-download").val();
         }
 
         // let includePics;
@@ -77,11 +80,15 @@ $(document).ready(function() {
         //     includePics = false;
         // }
 
-        $.ajax("api/download", {
+        $.ajax("/download", {
             type: "GET",
             query: {category, minDate, maxDate}
         }).then(function(err, res) {
             if (err) throw err;
+            console.log(res);
+        }).done(function() {
+            console.log("Data request successfully submitted");
+            $("#data-request-form")[0].reset();
         });
 
     });
