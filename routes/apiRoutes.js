@@ -100,9 +100,12 @@ module.exports = function (app) {
                 }
             }
         }).then(function (result) {
+            let csv = JSONToCSV(result, {
+                fields: ["userId", "pictureId", "dateObs", "timeObs", "latitude", "longitude", "category", "species", "speciesSciName", "speciesConfidence", "firstConfidence", "briefDescription", "extendedDescription"]
+            })
             res.setHeader("Content-disposition", "attachment; filename=sensaisondownload.csv");
             res.set("Content-Type", "text/csv");
-            res.status(200).send(result); // send to download?
+            res.status(200).send(csv); // send to download?
 
         })
     });
