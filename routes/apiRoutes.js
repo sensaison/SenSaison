@@ -1,7 +1,7 @@
 const db = require("../models");
 const Sequelize = require("sequelize");
 const Op = Sequelize.Op;
-const JSONToCSV = require("json2csv").parse;
+const json2csv = require("json2csv").parse;
 
 module.exports = function (app) {
 
@@ -89,8 +89,7 @@ module.exports = function (app) {
         });
     });
 
-    // FIND ALL observations for request data download
-    // NEED TO TEST THIS ONE!!!
+    // FIND observations for data request, convert to csv, and download client side
     app.get("/download", function (req, res) {
         db.Observations.findAll({
             where: {
@@ -100,12 +99,12 @@ module.exports = function (app) {
                 }
             }
         }).then(function (result) {
-            let csv = JSONToCSV(result, {
-                fields: ["userId", "pictureId", "dateObs", "timeObs", "latitude", "longitude", "category", "species", "speciesSciName", "speciesConfidence", "firstConfidence", "briefDescription", "extendedDescription"]
+            let csv = json2csv(result, {
+                fields: ["id", "userId", "pictureId", "dateObs", "timeObs", "latitude", "longitude", "category", "species", "speciesSciName", "speciesConfidence", "firstConfidence", "briefDescription", "extendedDescription"]
             })
             res.setHeader("Content-disposition", "attachment; filename=sensaisondownload.csv");
             res.set("Content-Type", "text/csv");
-            res.status(200).send(csv); // send to download?
+            res.status(200).send(csv);
 
         })
     });
