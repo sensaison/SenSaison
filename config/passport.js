@@ -6,10 +6,10 @@ const Users = require('../models/Users')
 passport.use(
     new GoogleStrategy ({
 
-     //clientID: "785370225233-mc4i390arqv9e4pilq7vu4tn7ncstl2n.apps.googleusercontent.com",
+     clientID: "785370225233-mc4i390arqv9e4pilq7vu4tn7ncstl2n.apps.googleusercontent.com",
        //Don't have a good way to hide these keys yet as these specific ones will be needed to allow the app to function
        // uncomment keys to use.
-     //clientSecret: "7LMArbMUbJLOhQ6iUOcOg-a7",
+     clientSecret: "7LMArbMUbJLOhQ6iUOcOg-a7",
      
      callbackURL: "/auth/google/redirect"
     }, (accessToken, refreshToken, email, done) => {

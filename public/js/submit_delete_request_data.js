@@ -59,7 +59,6 @@ $(document).ready(function() {
     // GET request when requesting to download data
     $("#request-data").on("click", function(e) {
         e.preventDefault();
-        console.log("clicked on request data");
 
         let minDate = $("#start-date-download").val();
         let maxDate = $("#end-date-download").val();
@@ -82,7 +81,11 @@ $(document).ready(function() {
 
         $.ajax("/download", {
             type: "GET",
-            query: {category, minDate, maxDate}
+            data: {
+                category: category,
+                minDate: minDate,
+                maxDate: maxDate
+            }
         }).then(function(err, res) {
             if (err) throw err;
             console.log(res);

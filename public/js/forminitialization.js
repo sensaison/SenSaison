@@ -5,7 +5,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
     let dateOptions = {
         maxDate: new Date(),
-        autoClose: true
+        autoClose: true,
+        format: "yyyy-mm-dd"
     }
     let elemsDate = document.querySelectorAll(".datepicker");
     let instancesDate = M.Datepicker.init(elemsDate, dateOptions);
