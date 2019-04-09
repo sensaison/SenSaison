@@ -1,15 +1,18 @@
 const db = require("../models");
 const Sequelize = require("sequelize");
 const Op = Sequelize.Op;
-const csv = require("csv");
+// const path = require("path");
+// const file = require("file");
 
 module.exports = function (app) {
 
     // FIND ALL observations
     app.get("/api/observations", function (req, res) {
         db.Observations.findAll({
-            include: [db.Users],
-            logging: console.log
+            include: [{
+                model: db.Users,
+                attributes: ["userId", "firstName", "lastName", "username"]
+            }]
         }).then(function (dbObs) {
             res.json(dbObs);
         });
@@ -22,8 +25,10 @@ module.exports = function (app) {
             where: {
                 category: req.params.category
             },
-            include: [db.Users],
-            logging: console.log
+            include: [{
+                model: db.Users,
+                attributes: ["userId", "firstName", "lastName", "username"]
+            }]
         }).then(function (dbObs) {
             res.json(dbObs);
         });
@@ -38,8 +43,10 @@ module.exports = function (app) {
 
             },
             order: [["createdAt", "DESC"]],
-            include: [db.Users],
-            logging: console.log
+            include: [{
+                model: db.Users,
+                attributes: ["username"]
+            }]
         }).then(function (recentObs) {
             res.json(recentObs);
         });
@@ -54,14 +61,17 @@ module.exports = function (app) {
 
             },
             order: [["createdAt", "DESC"]],
-            include: [db.Users],
-            logging: console.log
+            include: [{
+                model: db.Users,
+                attributes: ["username"]
+            }]
         }).then(function (recentObs) {
             res.json(recentObs);
         });
     });
 
     // CREATE new observation
+    // need to test this with oauth
     app.post("/api/observations", function (req, res) {
         db.Observations.create(req.body)
             .then(function (dbObs) {
@@ -82,32 +92,34 @@ module.exports = function (app) {
 
     // FIND ALL observations for request data download
     // NEED TO TEST THIS ONE!!!
-    app.get("/request", function (req, res) {
+    app.get("/download", function (req, res) {
         db.Observations.findAll({
             where: {
-                category: req.params.category,
-                date_obs: {
-                    [Op.gte]: req.params.minDate, // this needs editing
-                    [Op.lte]: req.params.maxDate
+                category: req.query.category,
+                dateObs: {
+                    [Op.between]: [req.query.minDate, req.query.maxDate]
                 }
             }
-        }).then(function (err, res) {
-            if (err) throw err;
-            // use csv package here
+        }).then(function (result) {
+            res.setHeader("Content-disposition", "attachment; filename=sensaisondownload.csv");
+            res.set("Content-Type", "text/csv");
+            res.status(200).send(result); // send to download?
+
         })
     });
 
     // FIND ALL users
     app.get("/api/users", function (req, res) {
         db.Users.findAll({
-            include: [db.Observations],
-            logging: console.log
+            attributes: ["userId", "firstName", "lastName", "username"],
+            include: [db.Observations]
         }).then(function (allusr) {
             res.json(allusr);
         });
     });
 
     // CREATE new user
+    // need to test this with oauth
     app.post("/api/users", function (req, res) {
         db.Users.create(req.body)
             .then(function (newusr) {

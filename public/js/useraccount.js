@@ -1,5 +1,6 @@
 $(document).ready(function() {
 
+    // following four event listeners show/hide what the user can do from their account page
     $("#add-obs-btn").on("click", function() {
         if ($("#add-obs").hasClass("hidden")) {
             $("#add-obs").addClass("show");
@@ -63,7 +64,7 @@ $(document).ready(function() {
         // NO ELSE because if it's already showing do nothing
     });
 
-    // below code is for pagination of table showing all of the user's observations
+    // paginate() function is for pagination of table showing all of the user's observations
     function paginate() {
         $("#all-your-obs").after("<br><ul class='pagination'><li class='waves-effect' id='start-pagination'><a href='#'><i class='material-icons'>chevron_left</i></a></li><li class='waves-effect' id='end-pagination'><a href='#'><i class='material-icons'>chevron_right</i></a></li></div>");
 
@@ -92,19 +93,26 @@ $(document).ready(function() {
     }
     paginate();
 
-    // below code is for displaying user's observations
-    function getUserObs(User) {
+    // showUserObs() function is for displaying user's observations in table mentioned above
+    function showUserObs(user) {
         // let userID = User || "";
         // how to get userId from page? AURI!!
 
-        $.get("/api/users" + User, function(data) {
+        $.get("/api/users" + user, function(data) {
             console.log("Observations: ", data);
             let observations = data;
             if (!observations || !observations.length) {
-              // DISPLAY EMPTY TABLE
+                // if no data then add a row saying so
+                $("#all-your-obs-body").prepend("<tr class='no-data'><td>N/A</td><td>N/A</td><td>No observations to display</td><td><button class='btn waves-effect waves-light btn-small delete disabled'>X</button></tr>"
+                );
             } else {
+
+                // remove no data row if there is such a row
+                if $("#all-your-obs-body").child("tr").hasClass("no-data") {
+                    $(this).child("tr").hasClass("no-data").remove();
+                }
+
                 for (let i=0; i<data.length; i++) {
-            
                     let obsId = data[i].id;
                     let date = data[i].dateObs;
                     let category = data[i].category;
@@ -115,6 +123,9 @@ $(document).ready(function() {
                 }
             }
         });
-    }
+    };
+
+    let user = //AURI!!!;
+    showUserObs(user);
 
 });

@@ -52,22 +52,22 @@ $(document).ready(function() {
     });
 
     // GET request when requesting to download data
-    // $("#request-data").on("click", function(e) {
-    //    // e.preventDefault();
-    //     console.log("request");
+    $("#request-data").on("click", function(e) {
+       // e.preventDefault();
+        console.log("request");
 
-    //     let categoryRequest = $("#category-download").val();
-    //     let minDate = $("#start-date-download").val();
-    //     let maxDate = $("#end-data-download").val();
+        let category = $("#category-download").val();
+        let minDate = $("#start-date-download").val();
+        let maxDate = $("#end-data-download").val();
 
-
-    //     $.get("api/observations", {
-    //         data: searchTerms
-    //     }).then(function(err, res) {
-    //         if (err) throw err;
-    //         console.log(res);
-    //         
-    //         more stuff here
-    // });
+        $.ajax("api/download", {
+            type: "GET",
+            query: {category, minDate, maxDate}
+        }).then(function(err, res) {
+            if (err) throw err;
+            // console.log(res);
+            
+            // more stuff here
+    });
 
 })

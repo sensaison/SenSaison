@@ -89,6 +89,7 @@ module.exports = function(sequelize, DataTypes) {
     Observations.associate = function(models) {
         Observations.belongsTo(models.Users, {
             foreignKey: "userId",
+            targetKey: "userId",
             onDelete: "no action",
             onUpdate: "cascade"
         });

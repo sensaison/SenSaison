@@ -62,6 +62,7 @@ module.exports = function(sequelize, DataTypes) {
     Users.associate = function(models) {
         Users.hasMany(models.Observations, {
             foreignKey: "userId",
+            sourceKey: "userId",
             onDelete: "no action",
             onUpdate: "cascade"
         });
