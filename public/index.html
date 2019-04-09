@@ -85,8 +85,8 @@
         <div class="row center">
 
             <!-- Sign in with google-->
-        <!--  <a href="#" id="download-button" class="btn-large waves-effect waves-light teal lighten-1">Sign In</a> -->
-        	<div class="g-signin2" href='/google' data-onsuccess="onSignIn" data-theme="dark">Sign In with Google</div>
+          <a href="/auth/google" id="download-button" class="btn-large waves-effect waves-light teal lighten-1">Sign In</a>
+        	<div class="g-signin2" href='/auth/google' data-onsuccess="onSignIn" data-theme="dark">Sign In with Google</div>
 
         </div>
         <br><br>
@@ -243,6 +243,7 @@
 
     <!-- Google sign in -->
   <script>
+
   function onSignIn(googleUser) {
 	// Useful data for your client-side scripts:
 	var profile = googleUser.getBasicProfile();
@@ -255,8 +256,8 @@
 
 	// The ID token you need to pass to your backend:
 	var id_token = googleUser.getAuthResponse().id_token;
-	console.log("ID Token: " + id_token);
-  }
+//	console.log("ID Token: " + id_token);
+  };
 </script>
 
   </body>
