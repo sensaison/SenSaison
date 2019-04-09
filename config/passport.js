@@ -1,15 +1,14 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20');
-// const keys = require('./keys')
+require("dotenv").config();
 const Users = require('../models/Users')
 
 passport.use(
     new GoogleStrategy ({
 
-     clientID: "785370225233-mc4i390arqv9e4pilq7vu4tn7ncstl2n.apps.googleusercontent.com",
-       //Don't have a good way to hide these keys yet as these specific ones will be needed to allow the app to function
-       // uncomment keys to use.
-     clientSecret: "7LMArbMUbJLOhQ6iUOcOg-a7",
+     clientID: process.env.GOOGLE_CLIENTID,
+
+     clientSecret: process.env.GOOGLE_SECRET,
      
      callbackURL: "/auth/google/redirect"
     }, (accessToken, refreshToken, email, done) => {
@@ -27,6 +26,10 @@ passport.use(
         //need some sequilize magic here to create userData and send it to the server, 
         //Will need an if statement check to see if the user exists in the DB before adding them.
 
+
+        // Catherine comments below:
+        // will have to module.exports email info to another file, since this should just be config stuff
+        // how to connect to Users.js model?
 
     })
 )

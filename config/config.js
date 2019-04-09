@@ -1,5 +1,4 @@
 require("dotenv").config();
-// require("./keys");
 
 module.exports = {
     "development": {

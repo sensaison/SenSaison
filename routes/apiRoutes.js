@@ -91,6 +91,10 @@ module.exports = function (app) {
 
     // FIND observations for data request, convert to csv, and download client side
     app.get("/download", function (req, res) {
+        // moved these two lines up here since setting headers needs to be done as early on as possible in the operation
+        res.setHeader("Content-disposition", "attachment; filename=sensaisondownload.csv");
+        res.setHeader("Content-Type", "text/csv");
+
         db.Observations.findAll({
             where: {
                 category: req.query.category,
@@ -99,13 +103,12 @@ module.exports = function (app) {
                 }
             }
         }).then(function (result) {
-            console.log(result);
             let csv = json2csv(result, {
                 fields: ["id", "userId", "pictureId", "dateObs", "timeObs", "latitude", "longitude", "category", "species", "speciesSciName", "speciesConfidence", "firstConfidence", "briefDescription", "extendedDescription"]
-            })
-            res.setHeader("Content-disposition", "attachment; filename=sensaisondownload.csv");
-            res.set("Content-Type", "text/csv");
-            res.status(200).send(csv);
+            });
+            console.log(csv);
+            // below line does not work
+            res.status(200).send("HELLO THERE");
         }).done(function() {
             console.log("successful download");
         })

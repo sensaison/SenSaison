@@ -65,9 +65,7 @@ $(document).ready(function() {
 
         let category;
         if ($("#category-download").val() === "all") {
-            category = {
-                include: [{all: true}]
-            };
+            category = ["animal", "plant", "fungus", "weather", "land_water"];
         } else {
             category = $("#category-download").val();
         }
