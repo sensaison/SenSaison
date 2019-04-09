@@ -2,7 +2,7 @@ $(document).ready(function() {
 
     // POST request when submitting new observation
     $("#submit-obs").on("click", function(e) {
-        // e.preventDefault(); // this line prevents validation from occurring
+        // e.preventDefault(); // this line prevents front-end required validation from occurring
         console.log("clicked on submit new obs");
 
         let newObs = {
