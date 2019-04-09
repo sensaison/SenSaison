@@ -17,6 +17,17 @@ module.exports = function (app) {
         });
     });
 
+    // FIND ONE user's observations
+    app.get("/api/userobservations", function (req, res) {
+        db.Observations.findAll({
+            where: {
+                userId: req.query.userId
+            }
+        }).then(function (dbObs) {
+            res.json(dbObs);
+        });
+    });
+
 
     // FIND ALL observations grouped by category
     app.get("/api/categories/:category", function (req, res) {
@@ -91,7 +102,7 @@ module.exports = function (app) {
 
     // FIND observations for data request, convert to csv, and download client side
     app.get("/download", function (req, res) {
-        // moved these two lines up here since setting headers needs to be done as early on as possible in the operation
+        // two lines up here since setting headers needs to be done as early on as possible in the operation
         res.setHeader("Content-disposition", "attachment; filename=sensaisondownload.csv");
         res.setHeader("Content-Type", "text/csv");
 
@@ -106,11 +117,11 @@ module.exports = function (app) {
             let csv = json2csv(result, {
                 fields: ["id", "userId", "pictureId", "dateObs", "timeObs", "latitude", "longitude", "category", "species", "speciesSciName", "speciesConfidence", "firstConfidence", "briefDescription", "extendedDescription"]
             });
-            console.log(csv);
-            // below line does not work
-            res.status(200).send("HELLO THERE");
+            // below line does not work locally but does in postman
+            // browser not redirecting or some such
+            res.status(200).send(csv);
         }).done(function() {
-            console.log("successful download");
+            console.log("successful");
         })
     });
 

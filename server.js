@@ -1,6 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const exphbs = require("express-handlebars");
+// const cors = require("cors");
 
 // reqs for google OAuth
 const authRoutes = require('./routes/auth-routes')
@@ -19,7 +20,7 @@ let PORT = process.env.PORT || 3000;
 //     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 //     next();
 // });
-
+// app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(express.static("public"));

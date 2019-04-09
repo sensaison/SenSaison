@@ -3,7 +3,6 @@ $(document).ready(function() {
     // POST request when submitting new observation
     $("#submit-obs").on("click", function(e) {
         // e.preventDefault(); // this line prevents front-end required validation from occurring
-        console.log("clicked on submit new obs");
 
         let newObs = {
             // REPLACE DUMMY VALUES
@@ -21,19 +20,16 @@ $(document).ready(function() {
             speciesSciName: $("#species-sci-name").val().trim(),
             speciesConfidence: $("#species-confidence").val(),
         };
-        console.log(newObs);
 
         $.ajax("/api/observations", {
             type: "POST",
             data: newObs
-        }).then(function(err, res) {
-            if (err) {
-                console.log(err);
-            }
-            console.log(res);
-        }).done(function() {
+        }).then(function() {
             alert("Observation successfully submitted");
             $("#obs-submission-form")[0].reset();
+            // if reload then form is automatically reset and table of user's observations is reloaded too
+            // or do a get request here for the table
+
         });
     });
 
@@ -48,9 +44,8 @@ $(document).ready(function() {
         $.ajax("/api/observations", {
             type: "DELETE",
             url: "/api/users/observations" + id_delete
-        }).then(function(err, res) {
-            if (err) throw err;
-            console.log(res);
+        }).then(function() {
+            console.log("successful delete");
             // don't need reload on delete because .remove() above
         });
 
@@ -58,7 +53,7 @@ $(document).ready(function() {
 
     // GET request when requesting to download data
     $("#request-data").on("click", function(e) {
-        e.preventDefault();
+        // e.preventDefault();
 
         let minDate = $("#start-date-download").val();
         let maxDate = $("#end-date-download").val();
@@ -84,10 +79,7 @@ $(document).ready(function() {
                 minDate: minDate,
                 maxDate: maxDate
             }
-        }).then(function(err, res) {
-            if (err) throw err;
-            console.log(res);
-        }).done(function() {
+        }).then(function() {
             console.log("Data request successfully submitted");
             $("#data-request-form")[0].reset();
         });
