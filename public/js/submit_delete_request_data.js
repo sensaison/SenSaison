@@ -2,10 +2,11 @@ $(document).ready(function() {
 
     // POST request when submitting new observation
     $("#submit-obs").on("click", function(e) { // THIS WORKS NO MORE TOUCHY!!!!
-        // e.preventDefault(); // this line prevents front-end required validation from occurring
+        e.preventDefault(); // this line prevents front-end validation from occurring
+        console.log("submit clicked");
 
-        if(window.userPin !== undefined) {
-            let newObs = {
+        if (window.userPin !== undefined) {
+            var newObs = {
                 userId: 13579,
                 pictureId: 20202020202,
                 dateObs: $("#date-obs").val(),
@@ -25,6 +26,7 @@ $(document).ready(function() {
             $("#map-wrapper").append($("<label for='map-wrapper' id='pin-reminder'>Please place a pin on the map.</label>"));
             throw "User didn't place a pin on the map.";
         }
+        console.log("new obs: " + newObs);
 
         $.ajax("/api/observations", {
             type: "POST",
@@ -42,7 +44,7 @@ $(document).ready(function() {
     $("#all-your-obs-body").on("click", ".delete", function(e) {
         e.preventDefault();
 
-        let id_delete = $(this).parents("tr").attr("id"); // check this once the table is functional
+        let id_delete = $(this).parents("tr").attr("id");
         // FIX THIS AJAX CALL (and api route)
         console.log(id_delete);
         $.ajax({
