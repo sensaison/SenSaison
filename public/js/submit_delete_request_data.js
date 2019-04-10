@@ -58,8 +58,7 @@ $(document).ready(function() {
             url: "/api/observations/" + id_delete, // something wrong with url here
             success: function(response) {
                 console.log("successful delete: "+ response);
-                $(this).parents("tr").detach(); // REPLACE WITH REMOVE() WHEN GOING INTO PRODUCTION
-                // don't need reload on delete because .remove() above
+                $(this).parents("tr").remove(); // REPLACE WITH REMOVE() WHEN GOING INTO PRODUCTION
             }
         });
     })
