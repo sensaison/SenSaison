@@ -84,10 +84,6 @@ function generateMaps() {
 }
 
 function generateMap() {
-    // TODO Figure out some kind of handler that distinguishes between map types 0 and 1 on the page.
-    var pageName = document.location.href.match(/[^\/]+$/)[0];
-    console.log(pageName);
-
     var latitude = 47.1585;
     var longitude = 27.6014;
     if(startingPos !== undefined) {
@@ -121,13 +117,19 @@ function generateMap() {
 }
 
 function placeMarkerAndPanTo(latLng, map) {
-    console.log("placeMarkerAndPanTo Fired");
     var marker = new google.maps.Marker({
         position: latLng,
         map: map
     });
     map.panTo(latLng);
     userPin = marker;
+}
+
+function placeMarker(latLng, map) {
+    var marker = new google.maps.Marker({
+        position: latLng,
+        map: map
+    });
 }
 
 $("#clear-pins").click(function deletePin() {
@@ -141,27 +143,69 @@ $("#clear-pins").click(function deletePin() {
 $("#get-nearby").click(function getNearby() {
     event.preventDefault();
     var radiusMeters = $("#location-radius").children("option:selected").val() * 1000;
-    console.log(radiusMeters);
+    var pointsToMark;
     $.ajax("/api/observations", {
         type: "GET"
-    }).then(function(err, res) {
-        if(err) {
-            throw err;
-        }
-        console.log(res.json());
-    });
-    if($("#me").is(":checked")) { 
-        console.log(startingPos.coords);
-    } else {
-        if(coordinates.lat !== undefined) {
-            console.log(coordinates);
+    }).then(function(res) {
+        if($("#me").is(":checked")) {
+            nearbyMap.panTo(new google.maps.LatLng(startingPos.coords.latitude, startingPos.coords.longitude));
+            pointsToMark = doCalcs(res, startingPos.coords.latitude, startingPos.coords.longitude, radiusMeters);
         } else {
-            console.log("User needs to pick a city");
+            if(coordinates.lat !== undefined) {
+                nearbyMap.panTo(new google.maps.LatLng(coordinates.lat, coordinates.lng));
+                pointsToMark = doCalcs(res, coordinates.lat, coordinates.lng, radiusMeters);
+            } else {
+                console.log("User needs to pick a city");
+            }
         }
-    }
+        if(pointsToMark !== undefined) {
+            for(var i = 0; i < pointsToMark.length; i++) {
+                placeMarker(new google.maps.LatLng(pointsToMark[i].latitude, pointsToMark[i].longitude), nearbyMap);
+            }
+        }
+        switch(radiusMeters) {
+        case 1000: 
+            nearbyMap.setZoom(13);
+            break;
+        case 10000:
+            nearbyMap.setZoom(11);
+            break;
+        case 50000:
+            nearbyMap.setZoom(10);
+            break;
+        case 100000:
+            nearbyMap.setZoom(9);
+            break;
+        case 500000:
+            nearbyMap.setZoom(7);
+            break;
+        case 1000000:
+            nearbyMap.setZoom(5);
+            break;
+        }
+    });
 });
 
-$("#locationInput").keyup(function(){
+function doCalcs(obs, lat, long, radius) {
+    var validSet = [];
+    for(var i = 0; i < obs.length; i++) {
+        var lat2 = obs[i].latitude;
+        var long2 = obs[i].longitude;
+        var distance = getDistance(lat, long, lat2, long2);
+        console.log("Distance: " + distance);
+        if(distance <= radius) {
+            validSet.push(obs[i]);
+        }
+    }
+    return validSet;
+}
+
+function degreesToRadians(degrees) {
+    var pi = Math.PI;
+    return degrees * (pi/180);
+}
+
+$("#locationInput").keyup(function() {
     $(".predictionButtons").remove();
     var locationInput = $(this).val();    
     var autoLocationUrl = "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/autocomplete/json?input=" 
@@ -169,32 +213,26 @@ $("#locationInput").keyup(function(){
     $.ajax({
         url : autoLocationUrl,
         method : "GET"
-    }).then(function(autoLocationResponse){
-        autoLocationResponse.predictions.forEach(function(locationPrediction){
+    }).then(function(autoLocationResponse) {
+        autoLocationResponse.predictions.forEach(function(locationPrediction) {
             var predictionLink = $("<div>");
             predictionLink.attr("data-placeId", locationPrediction.place_id);
             predictionLink.attr("class", "predictionButtons");
             predictionLink.text(locationPrediction.description);  
-            //console.log(predictionLink);
             $(".autoComplete").append(predictionLink[0]);
-            //console.log(predictionLink[0]);
         });
     });
 });
 
 $(document).on("click", ".predictionButtons", function(event){
-    //console.log($(this).attr('data-placeId'));
     selectedLocationID = $(this).attr("data-placeId");
     coordinateUrl = "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/details/json?placeid=" 
                     + selectedLocationID + "&key=" + apiKey;
-    //console.log(coordinateUrl);
     $.ajax({
         url : coordinateUrl,
         method : "GET"
     }).then(function(selectedCoordinate){
-        //console.log(selectedCoordinate.result.geometry.location);
         coordinates = selectedCoordinate.result.geometry.location;
-        console.log(coordinates);
     });
     document.getElementById("locationInput").value = $(this).text();
     $(".predictionButtons").remove();
@@ -203,10 +241,10 @@ $(document).on("click", ".predictionButtons", function(event){
 
 function getDistance(lat1, lon1, lat2, lon2) {
     var R = 6371e3; // metres
-    var φ1 = lat1.toRadians();
-    var φ2 = lat2.toRadians();
-    var Δφ = (lat2-lat1).toRadians();
-    var Δλ = (lon2-lon1).toRadians();
+    var φ1 = degreesToRadians(lat1);
+    var φ2 = degreesToRadians(lat2);
+    var Δφ = degreesToRadians(lat2 - lat1);
+    var Δλ = degreesToRadians(lon2 - lon1);
 
     var a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
         Math.cos(φ1) * Math.cos(φ2) *
