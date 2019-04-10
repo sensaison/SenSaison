@@ -94,38 +94,41 @@ $(document).ready(function() {
     paginate();
 
     // // showUserObs() function is for displaying user's observations in table mentioned above
-    // function showUserObs(user) {
-    //     // let userID = User || "";
-    //     // how to get userId from page? AURI!!
+    function showUserObs(user) {
+        // let userID = User || "";
+        // how to get userId from page? AURI!!
 
-    //     $.get("/api/users" + user, function(data) {
-    //         console.log("Observations: ", data);
-    //         let observations = data;
-    //         if (!observations || !observations.length) {
-    //             // if no data then add a row saying so
-    //             $("#all-your-obs-body").prepend("<tr class='no-data'><td>N/A</td><td>N/A</td><td>No observations to display</td><td><button class='btn waves-effect waves-light btn-small delete disabled'>X</button></tr>"
-    //             );
-    //         } else {
+        $.ajax("/api/userobservations", {
+            type: "GET",
+            data: {
+                userId: user
+            }
+        }).then(function(data) {
 
-    //             // remove no data row if there is such a row
-    //             if $("#all-your-obs-body").child("tr").hasClass("no-data") {
-    //                 $(this).child("tr").hasClass("no-data").remove();
-    //             }
-
-    //             for (let i=0; i<data.length; i++) {
-    //                 let obsId = data[i].id;
-    //                 let date = data[i].dateObs;
-    //                 let category = data[i].category;
-    //                 let briefDesc = data[i].briefDescription;
+            if (!data || !data.length) {
+                // if no data then add a row saying so
+                $("#all-your-obs-body").prepend("<tr class='no-data'><td></td><td></td><td>No observations to display</td><td></td></tr>"
+                );
+            } else {
+                // remove no data row if there is such a row
+                if ($("#all-your-obs-body").children("tr").hasClass("no-data")) {
+                    $(this).children("tr").hasClass("no-data").remove();
+                }
+                //prepend rows of data
+                for (let i=0; i<data.length; i++) {
+                    let obsId = data[i].id;
+                    let date = data[i].dateObs;
+                    let category = data[i].category;
+                    let briefDesc = data[i].briefDescription;
         
-    //                 $("#all-your-obs-body").prepend("<tr id='" + obsId + "'><td>" + date + "</td><td>" + category + "</td><td>" + briefDesc + "</td><td><button class='btn waves-effect waves-light btn-small delete'>X</button></tr>"
-    //                 );
-    //             }
-    //         }
-    //     });
-    // };
+                    $("#all-your-obs-body").prepend("<tr id='" + obsId + "'><td>" + date + "</td><td>" + category + "</td><td>" + briefDesc + "</td><td><button class='btn waves-effect waves-light btn-small delete'>X</button></tr>"
+                    );
+                }
+            }
+        });
+    };
 
     // let user = //AURI!!!;
-    // showUserObs(user);
+    showUserObs(13579);
 
 });

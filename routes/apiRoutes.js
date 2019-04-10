@@ -28,7 +28,6 @@ module.exports = function (app) {
         });
     });
 
-
     // FIND ALL observations grouped by category
     app.get("/api/categories/:category", function (req, res) {
         db.Observations.findAll({
@@ -90,7 +89,7 @@ module.exports = function (app) {
     });
 
     // DESTROY one observation
-    app.delete("/api/observations/:id", function (req, res) {
+    app.delete("/api/observations", function (req, res) {
         db.Observations.destroy({
             where: {
                 id: req.params.id
@@ -102,10 +101,6 @@ module.exports = function (app) {
 
     // FIND observations for data request, convert to csv, and download client side
     app.get("/download", function (req, res) {
-        // two lines up here since setting headers needs to be done as early on as possible in the operation
-        res.setHeader("Content-disposition", "attachment; filename=sensaisondownload.csv");
-        res.setHeader("Content-Type", "text/csv");
-
         db.Observations.findAll({
             where: {
                 category: req.query.category,
@@ -119,6 +114,8 @@ module.exports = function (app) {
             });
             // below line does not work locally but does in postman
             // browser not redirecting or some such
+            res.setHeader("Content-disposition", "attachment; filename=sensaisondownload.csv");
+            res.setHeader("Content-Type", "text/csv");
             res.status(200).send(csv);
         }).done(function() {
             console.log("successful");

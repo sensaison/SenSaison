@@ -1,12 +1,12 @@
 $(document).ready(function() {
 
     // POST request when submitting new observation
-    $("#submit-obs").on("click", function(e) {
+    $("#submit-obs").on("click", function(e) { // THIS WORKS NO MORE TOUCHY!!!!
         // e.preventDefault(); // this line prevents front-end required validation from occurring
 
         let newObs = {
             // REPLACE DUMMY VALUES
-            userId: 101010101,
+            userId: 13579,
             pictureId: 20202020202,
             dateObs: $("#date-obs").val(),
             timeObs: $("#time-obs").val(),
@@ -34,24 +34,25 @@ $(document).ready(function() {
     });
 
     // DELETE request when deleting observation
-    $(".delete").on("click", function(e) {
+    $("#all-your-obs-body").on("click", ".delete", function(e) {
         e.preventDefault();
-        console.log("delete");
-
-        $(this).parents("tr").detach(); // REPLACE WITH REMOVE() WHEN GOING INTO PRODUCTION
 
         let id_delete = $(this).parents("tr").attr("id"); // check this once the table is functional
-        $.ajax("/api/observations", {
+        // FIX THIS AJAX CALL (and api route)
+        console.log(id_delete);
+        $.ajax({
             type: "DELETE",
-            url: "/api/users/observations" + id_delete
-        }).then(function() {
-            console.log("successful delete");
-            // don't need reload on delete because .remove() above
+            url: "/api/observations/" + id_delete, // something wrong with url here
+            success: function(response) {
+                console.log("successful delete: "+ response);
+                $(this).parents("tr").detach(); // REPLACE WITH REMOVE() WHEN GOING INTO PRODUCTION
+                // don't need reload on delete because .remove() above
+            }
         });
-
-    });
+    })
 
     // GET request when requesting to download data
+    // UGH!
     $("#request-data").on("click", function(e) {
         // e.preventDefault();
 
