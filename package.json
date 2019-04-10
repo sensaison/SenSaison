@@ -11,6 +11,7 @@
   },
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.5",
     "dotenv": "^6.0.0",
 <<<<<<< HEAD
     "express": "^4.16.4",
@@ -20,6 +21,7 @@
     "express-handlebars": "^3.0.2",
 >>>>>>> 4573de9a3f784e2732f10e7b4f757835a477b9f7
     "git": "^0.1.5",
+    "json2csv": "^4.4.1",
     "mime": "^2.4.0",
     "mysql2": "^1.6.5",
     "passport": "^0.4.0",
