@@ -103,7 +103,7 @@
         <h5>Add new observation</h5>
         <br>
 
-          <form action="#">
+          <form id="obs-submission-form" onsubmit="return false">
             <div class="row">
               <div class="input-field col s12 m4">
                 <input type="text" class="datepicker" id="date-obs" required="" aria-required="true">
@@ -111,7 +111,8 @@
               </div>
 
               <div class="input-field col s12 m4">
-                <input type="text" class="timepicker" id="time-obs" required="" aria-required="true">
+                <!-- step="1" is to change time format to hh:mm:ss -->
+                <input type="text" class="timepicker" step="1" id="time-obs" required="" aria-required="true">
                 <label for="time-obs">Time of observation*</label>
               </div>
 
@@ -151,14 +152,14 @@
 
                 <div class="row">
                   <div class="input-field col s12">
-                    <textarea id="extended-desc" class="materialize-textarea validate" data-length="500" required=""  aria-required="true" placeholder="Ex. Cold day, some patches of ice on Mirror Lake. Four Canada geese showed up early this morning."></textarea>
+                    <textarea id="extended-desc" class="materialize-textarea validate" data-length="500" placeholder="Ex. Cold day, some patches of ice on Mirror Lake. Four Canada geese showed up early this morning."></textarea>
                     <label for="extended-desc">Extended description of observation</label>
                   </div>
                 </div>
 
                 <div class="row">
                   <div class="input-field col s12">
-                    <select class="first-confidence" required="" aria-required="true">
+                    <select id="first-confidence" required="" aria-required="true">
                       <option value="1" selected class="form-option">1 - low confidence (default)</option>
                       <option value="2" class="form-option">2</option>
                       <option value="3" class="form-option">3</option>
@@ -235,89 +236,35 @@
                 <th>Delete</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
+            <tbody id="all-your-obs-body">
+              <tr id="1">
                 <td>01/01/1990</td>
                 <td>Animal</td>
                 <td>First Canada geese this spring</td>
                 <td><button class="btn waves-effect waves-light btn-small delete">X</button></td>
               </tr>
-              <tr>
+              <tr id="2">
                 <td>01/02/1990</td>
                 <td>Plant</td>
                 <td>First crocus flowers this spring</td>
                 <td><button class="btn waves-effect waves-light btn-small delete">X</button></td>
               </tr>
-              <tr>
+              <tr id="3">
                 <td>01/03/1990</td>
                 <td>Animal</td>
                 <td>First Canada geese this spring</td>
                 <td><button class="btn waves-effect waves-light btn-small delete">X</button></td>
               </tr>
-              <tr>
+              <tr id="4">
                 <td>01/04/1990</td>
                 <td>Fungus</td>
                 <td>First crocus flowers this spring</td>
                 <td><button class="btn waves-effect waves-light btn-small delete">X</button></td>
               </tr>
-              <tr>
+              <tr id="5">
                 <td>01/05/1990</td>
                 <td>Land or Water</td>
                 <td>First Canada geese this spring</td>
-                <td><button class="btn waves-effect waves-light btn-small delete">X</button></td>
-              </tr>
-              <tr>
-                <td>01/06/1990</td>
-                <td>Plant</td>
-                <td>First crocus flowers this spring</td>
-                <td><button class="btn waves-effect waves-light btn-small delete">X</button></td>
-              </tr>
-              <tr>
-                <td>01/07/1990</td>
-                <td>Animal</td>
-                <td>First alien geese this spring</td>
-                <td><button class="btn waves-effect waves-light btn-small delete">X</button></td>
-              </tr>
-              <tr>
-                <td>01/08/1990</td>
-                <td>Plant</td>
-                <td>First bumblebees this spring</td>
-                <td><button class="btn waves-effect waves-light btn-small delete">X</button></td>
-              </tr>
-              <tr>
-                <td>01/09/1990</td>
-                <td>Animal</td>
-                <td>First honkin geese this spring</td>
-                <td><button class="btn waves-effect waves-light btn-small delete">X</button></td>
-              </tr>
-              <tr>
-                <td>01/10/1990</td>
-                <td>Plant</td>
-                <td>First crocus flowers this spring</td>
-                <td><button class="btn waves-effect waves-light btn-small delete">X</button></td>
-              </tr>
-              <tr>
-                <td>01/11/1990</td>
-                <td>Weather</td>
-                <td>First Canada geese this spring</td>
-                <td><button class="btn waves-effect waves-light btn-small delete">X</button></td>
-              </tr>
-              <tr>
-                <td>01/12/1990</td>
-                <td>Fungus</td>
-                <td>First crocus flowers this spring</td>
-                <td><button class="btn waves-effect waves-light btn-small delete">X</button></td>
-              </tr>
-              <tr>
-                <td>01/13/1990</td>
-                <td>Plants</td>
-                <td>First Canada geese this spring</td>
-                <td><button class="btn waves-effect waves-light btn-small delete">X</button></td>
-              </tr>
-              <tr>
-                <td>01/14/1990</td>
-                <td>Plant</td>
-                <td>First daffodil flowers this spring</td>
                 <td><button class="btn waves-effect waves-light btn-small delete">X</button></td>
               </tr>
             </tbody>
@@ -376,7 +323,7 @@
       <div class="row hidden" id="download-data">
         <h5>Download data</h5>
         <br>
-        <form action="#">
+        <form id="data-request-form" onsubmit="return false">
           <div class="row">
 
             <div class="input-field col s12 m6 l3">
@@ -403,8 +350,8 @@
             </div>
 
             <div class="input-field col s12 m6 l3">
-              <label for="includepictures">
-                <input id="includepictures" type="checkbox" />
+              <label for="include-pictures">
+                <input id="include-pictures" type="checkbox" />
                 <span>Check to include pictures</span>
               </label>
             </div>

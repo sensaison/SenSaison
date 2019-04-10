@@ -6,10 +6,10 @@ CREATE TABLE IF NOT EXISTS Observations (
     userId INT NOT NULL REFERENCES Users (userId)
         ON DELETE NO ACTION
         ON UPDATE CASCADE, /* tied to the id in next table */
-    pictureId VARCHAR(50) NOT NULL, /* let's see how cloudinary works */
+    pictureId VARCHAR(50) NOT NULL, /* cloudinary */
     dateObs DATE NOT NULL,
     timeObs TIME NOT NULL,
-    latitude FLOAT NOT NULL, /* would be cool to use google maps for this */
+    latitude FLOAT NOT NULL,
     longitude FLOAT NOT NULL,
     category ENUM("animal", "plant", "fungus", "weather", "land_water", "other") NOT NULL,
     firstConfidence ENUM("1", "2", "3", "4", "5") DEFAULT("1") NOT NULL,
@@ -24,10 +24,9 @@ CREATE TABLE IF NOT EXISTS Observations (
 );
 
 
-/* ??? will need to figure out this one with Auri */
 CREATE TABLE IF NOT EXISTS Users (
     id INT NOT NULL AUTO_INCREMENT,
-    userId INT NOT NULL, /* needs to be auto generated - based on UUID */
+    userId INT NOT NULL, /* needs to be auto generated - based on UUID? */
     firstName VARCHAR(20) NOT NULL,
     lastName VARCHAR(20) NOT NULL,
     email VARCHAR(50) NOT NULL,

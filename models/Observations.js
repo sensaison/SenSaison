@@ -4,10 +4,9 @@ module.exports = function(sequelize, DataTypes) {
         id: {
             primaryKey: true,
             type: DataTypes.INTEGER,
-            allowNull: false,
+            allowNull: true,
             unique: {
-                args: true,
-                msg: "CATHERINE THERE'S A PROBLEM WITH PRIMARY KEY!!"
+                args: true
             }
         },
         userId: {
@@ -40,19 +39,11 @@ module.exports = function(sequelize, DataTypes) {
         },
         species: {
             type: DataTypes.STRING,
-            allowNull: true,
-            validate: {
-                isAlpha: true,
-                msg: "Are you sure you spelled that right?"
-            }
+            allowNull: true
         },
         speciesSciName: {
             type: DataTypes.STRING,
-            allowNull: true,
-            validate: {
-                isAlpha: true,
-                msg: "Are you sure you spelled that right?"
-            }
+            allowNull: true
         },
         speciesConfidence: {
             type: DataTypes.INTEGER,
@@ -64,10 +55,7 @@ module.exports = function(sequelize, DataTypes) {
         },
         briefDescription: {
             type: DataTypes.TEXT,
-            allowNull: false,
-            validate: {
-                notEmpty: true
-            }
+            allowNull: false
         },
         extendedDescription: {
             type: DataTypes.TEXT,
@@ -89,6 +77,7 @@ module.exports = function(sequelize, DataTypes) {
     Observations.associate = function(models) {
         Observations.belongsTo(models.Users, {
             foreignKey: "userId",
+            targetKey: "userId",
             onDelete: "no action",
             onUpdate: "cascade"
         });
