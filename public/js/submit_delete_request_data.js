@@ -2,10 +2,16 @@ $(document).ready(function() {
 
     // POST request when submitting new observation
     $("#submit-obs").on("click", function(e) { // THIS WORKS NO MORE TOUCHY!!!!
+<<<<<<< HEAD
         e.preventDefault(); // this line prevents front-end validation from occurring
         console.log("submit clicked");
 
         if (window.userPin !== undefined) {
+=======
+        e.preventDefault(); // this line prevents front-end required validation from occurring
+
+        if(window.userPin !== undefined) {
+>>>>>>> f7ed68694e7329a3460e9e014f1ba5e67a8a9f8a
             var newObs = {
                 userId: 13579,
                 pictureId: 20202020202,
