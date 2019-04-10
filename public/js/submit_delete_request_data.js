@@ -6,19 +6,19 @@ $(document).ready(function() {
 
         if(window.userPin !== undefined) {
             let newObs = {
-                user_id: 13579,
-                picture_id: 20202020202,
-                date_obs: $("#date-obs").val(),
-                time_obs: $("#time-obs").val(),
+                userId: 13579,
+                pictureId: 20202020202,
+                dateObs: $("#date-obs").val(),
+                timeObs: $("#time-obs").val(),
                 latitude: window.userPin.position.lat(),
                 longitude: window.userPin.position.lng(),
                 category: $("#obs-category").val(),
-                first_confidence: $("#first-confidence").val(),
-                brief_description: $("#brief-desc").val().trim(),
-                extended_description: $("#extended-desc").val().trim(),
-                species: $("#species").val(),
-                species_sci_name: $("#species-sci-name").val(),
-                species_confidence: $("#species-confidence").val(),
+                firstConfidence: $("#first-confidence").val(),
+                briefDescription: $("#brief-desc").val().trim(),
+                extendedDescription: $("#extended-desc").val().trim(),
+                species: $("#species").val().trim(),
+                speciesSciName: $("#species-sci-name").val().trim(),
+                speciesConfidence: $("#species-confidence").val(),
             };
         } else {
             $("#pin-reminder").remove();
