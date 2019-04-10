@@ -5,13 +5,15 @@ document.addEventListener("DOMContentLoaded", function() {
 
     let dateOptions = {
         maxDate: new Date(),
-        autoClose: true
+        autoClose: true,
+        format: "yyyy-mm-dd"
     }
     let elemsDate = document.querySelectorAll(".datepicker");
     let instancesDate = M.Datepicker.init(elemsDate, dateOptions);
 
     let timeOptions = {
-        autoClose: true
+        autoClose: true,
+        twelveHour: false
     }
     let elemsTime = document.querySelectorAll(".timepicker");
     let instancesTime = M.Timepicker.init(elemsTime, timeOptions);
@@ -22,6 +24,6 @@ document.addEventListener("DOMContentLoaded", function() {
     let elemsOpts = document.querySelectorAll("select");
     let instancesOpts = M.FormSelect.init(elemsOpts);
 
-    // document.querySelectorAll("textarea").characterCounter();
-    // document.querySelectorAll("#species, #speciessciname").characterCounter();
+    $("textarea").characterCounter();
+    $("input#species, input#species-sci-name").characterCounter();
 });
