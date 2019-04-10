@@ -11,8 +11,8 @@ module.exports = {
     },
     "test": {
         "username": "root",
-        "password": "catherinemysql",
-        "database": "sensaison_db",
+        "password": null,
+        "database": "database_test",
         "host": "127.0.0.1",
         "dialect": "mysql"
     },
