@@ -5,7 +5,7 @@ $(document).ready(function() {
         // e.preventDefault(); // this line prevents front-end required validation from occurring
 
         if(window.userPin !== undefined) {
-            var observation = {
+            let newObs = {
                 user_id: 13579,
                 picture_id: 20202020202,
                 date_obs: $("#date-obs").val(),
