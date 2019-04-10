@@ -95,8 +95,11 @@ function generateMap() {
         center: centerPlace,
         zoom: 12,
         clickableIcons: false,
-        mapTypeControl: false
+        mapTypeControl: false,
+        streetViewControl: false,
+        fullscreenControl: false
     });
+    // Do some stuff to prepare a map where the user can indicate a choice of location.
     if(mapType === 0) {
         map.addListener("click", function(event) {
             if(userPin === undefined) {
