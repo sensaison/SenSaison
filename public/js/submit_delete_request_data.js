@@ -4,22 +4,27 @@ $(document).ready(function() {
     $("#submit-obs").on("click", function(e) { // THIS WORKS NO MORE TOUCHY!!!!
         // e.preventDefault(); // this line prevents front-end required validation from occurring
 
-        let newObs = {
-            // REPLACE DUMMY VALUES
-            userId: 13579,
-            pictureId: 20202020202,
-            dateObs: $("#date-obs").val(),
-            timeObs: $("#time-obs").val(),
-            latitude: 58.2,
-            longitude: -121.43,
-            category: $("#obs-category").val(),
-            firstConfidence: $("#first-confidence").val(),
-            briefDescription: $("#brief-desc").val().trim(),
-            extendedDescription: $("#extended-desc").val().trim(),
-            species: $("#species").val().trim(),
-            speciesSciName: $("#species-sci-name").val().trim(),
-            speciesConfidence: $("#species-confidence").val(),
-        };
+        if(window.userPin !== undefined) {
+            let newObs = {
+                userId: 13579,
+                pictureId: 20202020202,
+                dateObs: $("#date-obs").val(),
+                timeObs: $("#time-obs").val(),
+                latitude: window.userPin.position.lat(),
+                longitude: window.userPin.position.lng(),
+                category: $("#obs-category").val(),
+                firstConfidence: $("#first-confidence").val(),
+                briefDescription: $("#brief-desc").val().trim(),
+                extendedDescription: $("#extended-desc").val().trim(),
+                species: $("#species").val().trim(),
+                speciesSciName: $("#species-sci-name").val().trim(),
+                speciesConfidence: $("#species-confidence").val(),
+            };
+        } else {
+            $("#pin-reminder").remove();
+            $("#map-wrapper").append($("<label for='map-wrapper' id='pin-reminder'>Please place a pin on the map.</label>"));
+            throw "User didn't place a pin on the map.";
+        }
 
         $.ajax("/api/observations", {
             type: "POST",
@@ -84,6 +89,5 @@ $(document).ready(function() {
             console.log("Data request successfully submitted");
             $("#data-request-form")[0].reset();
         });
-
     });
-})
+});
