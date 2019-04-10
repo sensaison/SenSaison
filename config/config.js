@@ -1,5 +1,4 @@
 require("dotenv").config();
-// require("./keys");
 
 module.exports = {
     "development": {
@@ -16,7 +15,7 @@ module.exports = {
         "host": "127.0.0.1",
         "dialect": "mysql"
     },
-    production: {
+    "production": {
     // eslint-disable-next-line camelcase
         "use_env_variable": process.env.JAWSDB_URL,
         "dialect": "mysql"

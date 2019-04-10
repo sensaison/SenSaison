@@ -1,92 +1,89 @@
 $(document).ready(function() {
 
-    // // show user's observations on document ready
-    // $.ajax("/api/users", function(req, res) {
-    //     type: "GET",
-    //     data: kjgh
-    // }).then(function(usrdata){
-    //     // HANDLEBAR HERE
-    //      res.render("something", usrdata)
-    // })
-
     // POST request when submitting new observation
-    $("#submit-obs").on("click", function(e) {
-        e.preventDefault();
-        console.log("submit");
+    $("#submit-obs").on("click", function(e) { // THIS WORKS NO MORE TOUCHY!!!!
+        // e.preventDefault(); // this line prevents front-end required validation from occurring
 
-        let observation = {
-            // user_id: ,AURI
-            // picture_id: AURI,
-            date_obs: $("#date-obs").val(),
-            time_obs: $("#time-obs").val(),
-            // latitude: ,STEFAN
-            // longitude: ,
+        let newObs = {
+            // REPLACE DUMMY VALUES
+            userId: 13579,
+            pictureId: 20202020202,
+            dateObs: $("#date-obs").val(),
+            timeObs: $("#time-obs").val(),
+            latitude: 58.2,
+            longitude: -121.43,
             category: $("#obs-category").val(),
-            first_confidence: $("#first-confidence").val(),
-            brief_description: $("#brief-desc").val().trim(),
-            extended_description: $("#extended-desc").val().trim(),
-            species: $("#species").val(),
-            species_sci_name: $("#species-sci-name").val(),
-            species_confidence: $("#species-confidence").val(),
+            firstConfidence: $("#first-confidence").val(),
+            briefDescription: $("#brief-desc").val().trim(),
+            extendedDescription: $("#extended-desc").val().trim(),
+            species: $("#species").val().trim(),
+            speciesSciName: $("#species-sci-name").val().trim(),
+            speciesConfidence: $("#species-confidence").val(),
         };
 
-        // $.ajax("/api/observations", {
-        //     type: "POST",
-        //     data: observation
-        // }).then(function(err, res) {
-        //     if (err) throw err;
-        //     console.log(res);
-        //     location.reload(true);
-        // });
-    });
+        $.ajax("/api/observations", {
+            type: "POST",
+            data: newObs
+        }).then(function() {
+            alert("Observation successfully submitted");
+            $("#obs-submission-form")[0].reset();
+            // if reload then form is automatically reset and table of user's observations is reloaded too
+            // or do a get request here for the table
 
-    // DELETE request when deleting observation
-    $(".delete").on("click", function(e) {
-        e.preventDefault();
-        console.log("delete");
-
-        $(this).parents("tr").detach(); // REPLACE WITH REMOVE() WHEN GOING INTO PRODUCTION
-
-        // let id_delete = $(this).attr("id"); // ????
-        // $.ajax("/api/observations", {
-        //     type: "DELETE",
-        //     id: id_delete
-        // }).then(function(err, res) {
-        //     if (err) throw err;
-        //     console.log(res);
-        //     location.reload(true);
-        // });
-
-    });
-
-    // GET request when requesting to download data
-    $("#request-data").on("click", function(e) {
-        e.preventDefault();
-        console.log("request");
-
-        let categoryRequest = $("#category-download").val();
-        let minDate = $("#start-date-download").val();
-        let maxDate = $("#end-data-download").val();
-        
-
-        // let queryURL = "https://www.rebasedata.com/api/v1/convert?outputFormat=csv&errorResponse=json";
-        // output to csv, if error then error response format is json
-
-
-        $.ajax("api/observations", {
-            type: "GET",
-            data: searchTerms
-        }).then(function(err, res) {
-            if (err) throw err;
-            console.log(res);
-
-            $.ajax({
-                url: queryURL,
-                method: "POST",
-            }).then(function(err, res) {
-                
-            });
         });
     });
 
+    // DELETE request when deleting observation
+    $("#all-your-obs-body").on("click", ".delete", function(e) {
+        e.preventDefault();
+
+        let id_delete = $(this).parents("tr").attr("id"); // check this once the table is functional
+        // FIX THIS AJAX CALL (and api route)
+        console.log(id_delete);
+        $.ajax({
+            type: "DELETE",
+            url: "/api/observations/" + id_delete, // something wrong with url here
+            success: function(response) {
+                console.log("successful delete: "+ response);
+                $(this).parents("tr").detach(); // REPLACE WITH REMOVE() WHEN GOING INTO PRODUCTION
+                // don't need reload on delete because .remove() above
+            }
+        });
+    })
+
+    // GET request when requesting to download data
+    // UGH!
+    $("#request-data").on("click", function(e) {
+        // e.preventDefault();
+
+        let minDate = $("#start-date-download").val();
+        let maxDate = $("#end-date-download").val();
+
+        let category;
+        if ($("#category-download").val() === "all") {
+            category = ["animal", "plant", "fungus", "weather", "land_water"];
+        } else {
+            category = $("#category-download").val();
+        }
+
+        // let includePics;
+        // if ($("#include-pictures").is(":checked")) {
+        //     includePics = true;
+        // } else {
+        //     includePics = false;
+        // }
+
+        $.ajax("/download", {
+            type: "GET",
+            data: {
+                category: category,
+                minDate: minDate,
+                maxDate: maxDate
+            }
+        }).then(function() {
+            console.log("Data request successfully submitted");
+            $("#data-request-form")[0].reset();
+        });
+
+    });
 })

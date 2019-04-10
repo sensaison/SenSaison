@@ -1,5 +1,6 @@
 $(document).ready(function() {
 
+    // following four event listeners show/hide what the user can do from their account page
     $("#add-obs-btn").on("click", function() {
         if ($("#add-obs").hasClass("hidden")) {
             $("#add-obs").addClass("show");
@@ -63,28 +64,71 @@ $(document).ready(function() {
         // NO ELSE because if it's already showing do nothing
     });
 
-    // below code is for pagination of table showing all of the user's observations
-    $("#all-your-obs").after("<br><ul class='pagination'><li class='waves-effect' id='start-pagination'><a href='#'><i class='material-icons'>chevron_left</i></a></li><li class='waves-effect' id='end-pagination'><a href='#'><i class='material-icons'>chevron_right</i></a></li></div>");
-    var rowsShown = 10;
-    var rowsTotal = $("#all-your-obs tbody tr").length;
-    var numPages = rowsTotal/rowsShown;
-    for(i = 0; i < numPages; i++) {
-        var pageNum = i + 1;
-        $("#end-pagination").before("<li class='btn waves-effect waves-light btn-flat'><a href='#' rel='" + i + "'>" + pageNum + "</a></li>");
-    }
-    $("#all-your-obs tbody tr").hide();
-    $("#all-your-obs tbody tr").slice(0, rowsShown).show();
-    $(".pagination a:first").addClass("active");
-    $(".pagination a").bind("click", function(e) {
-        e.preventDefault();
-        $(".pagination a").parent("li").removeClass("active");
-        $(this).parent("li").addClass("active");
-        var currPage = $(this).attr("rel");
-        var startItem = currPage * rowsShown;
-        var endItem = startItem + rowsShown;
-        $("#all-your-obs tbody tr").css("opacity","0.0").hide().slice(startItem, endItem).css("display","table-row").animate({opacity:1}, 300);
-    });
+    // paginate() function is for pagination of table showing all of the user's observations
+    function paginate() {
+        $("#all-your-obs").after("<br><ul class='pagination'><li class='waves-effect' id='start-pagination'><a href='#'><i class='material-icons'>chevron_left</i></a></li><li class='waves-effect' id='end-pagination'><a href='#'><i class='material-icons'>chevron_right</i></a></li></div>");
 
-    // below code is for displaying user's observations
+        let rowsShown = 10;
+        let rowsTotal = $("#all-your-obs tbody tr").length;
+        let numPages = rowsTotal/rowsShown;
+
+        for (i = 0; i < numPages; i++) {
+            let pageNum = i + 1;
+            $("#end-pagination").before("<li class='btn waves-effect waves-light btn-flat'><a href='#' rel='" + i + "'>" + pageNum + "</a></li>");
+        }
+
+        $("#all-your-obs tbody tr").hide();
+        $("#all-your-obs tbody tr").slice(0, rowsShown).show();
+        $(".pagination a:first").addClass("active");
+
+        $(".pagination a").bind("click", function(e) {
+            e.preventDefault();
+            $(".pagination a").parent("li").removeClass("active");
+            $(this).parent("li").addClass("active");
+            let currPage = $(this).attr("rel");
+            let startItem = currPage * rowsShown;
+            var endItem = startItem + rowsShown;
+            $("#all-your-obs tbody tr").css("opacity","0.0").hide().slice(startItem, endItem).css("display","table-row").animate({opacity:1}, 300);
+        });   
+    }
+    paginate();
+
+    // // showUserObs() function is for displaying user's observations in table mentioned above
+    function showUserObs(user) {
+        // let userID = User || "";
+        // how to get userId from page? AURI!!
+
+        $.ajax("/api/userobservations", {
+            type: "GET",
+            data: {
+                userId: user
+            }
+        }).then(function(data) {
+
+            if (!data || !data.length) {
+                // if no data then add a row saying so
+                $("#all-your-obs-body").prepend("<tr class='no-data'><td></td><td></td><td>No observations to display</td><td></td></tr>"
+                );
+            } else {
+                // remove no data row if there is such a row
+                if ($("#all-your-obs-body").children("tr").hasClass("no-data")) {
+                    $(this).children("tr").hasClass("no-data").remove();
+                }
+                //prepend rows of data
+                for (let i=0; i<data.length; i++) {
+                    let obsId = data[i].id;
+                    let date = data[i].dateObs;
+                    let category = data[i].category;
+                    let briefDesc = data[i].briefDescription;
+        
+                    $("#all-your-obs-body").prepend("<tr id='" + obsId + "'><td>" + date + "</td><td>" + category + "</td><td>" + briefDesc + "</td><td><button class='btn waves-effect waves-light btn-small delete'>X</button></tr>"
+                    );
+                }
+            }
+        });
+    };
+
+    // let user = //AURI!!!;
+    showUserObs(13579);
 
 });

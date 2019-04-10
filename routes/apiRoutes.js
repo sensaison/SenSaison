@@ -1,37 +1,50 @@
-var db = require("../models");
+const db = require("../models");
+const Sequelize = require("sequelize");
+const Op = Sequelize.Op;
+const json2csv = require("json2csv").parse;
 
-module.exports = function(app) {
+module.exports = function (app) {
 
     // FIND ALL observations
-    app.get("/api/observations", function(req, res) {
+    app.get("/api/observations", function (req, res) {
         db.Observations.findAll({
             include: [{
-                all: true,
-                nested: true
-            }] 
-        }).then(function(dbObs) {
-                res.json(dbObs);
-            });
+                model: db.Users,
+                attributes: ["userId", "firstName", "lastName", "username"]
+            }]
+        }).then(function (dbObs) {
+            res.json(dbObs);
+        });
     });
 
+    // FIND ONE user's observations
+    app.get("/api/userobservations", function (req, res) {
+        db.Observations.findAll({
+            where: {
+                userId: req.query.userId
+            }
+        }).then(function (dbObs) {
+            res.json(dbObs);
+        });
+    });
 
     // FIND ALL observations grouped by category
-    app.get("/api/categories/:category", function(req, res) {
+    app.get("/api/categories/:category", function (req, res) {
         db.Observations.findAll({
             where: {
                 category: req.params.category
             },
-            include: [{ // should include user data but not working WHY??
-                all: true,
-                nested: true
-            }] 
-        }).then(function(dbObs) {
-                res.json(dbObs);
-            });
+            include: [{
+                model: db.Users,
+                attributes: ["userId", "firstName", "lastName", "username"]
+            }]
+        }).then(function (dbObs) {
+            res.json(dbObs);
+        });
     });
 
-    // GET most recent ONE observation of each category  by TIMESTAMP
-    app.get("/api/:category/mostrecentone", function(req, res) {
+    // GET most recent ONE observation of each category by TIMESTAMP
+    app.get("/api/:category/mostrecentone", function (req, res) {
         db.Observations.findAll({
             limit: 1,
             where: {
@@ -39,17 +52,17 @@ module.exports = function(app) {
 
             },
             order: [["createdAt", "DESC"]],
-            include: [{ // should include user data but not working WHY??
-                all: true,
-                nested: true
-            }] 
-        }).then(function(recentObs) {
+            include: [{
+                model: db.Users,
+                attributes: ["username"]
+            }]
+        }).then(function (recentObs) {
             res.json(recentObs);
         });
     });
 
     // GET most recent FIVE observations of each category by TIMESTAMP
-    app.get("/api/:category/mostrecentfive", function(req, res) {
+    app.get("/api/:category/mostrecentfive", function (req, res) {
         db.Observations.findAll({
             limit: 5,
             where: {
@@ -57,67 +70,73 @@ module.exports = function(app) {
 
             },
             order: [["createdAt", "DESC"]],
-            include: [{ // should include user data but not working WHY??
-                all: true,
-                nested: true
-            }] 
-        }).then(function(recentObs) {
+            include: [{
+                model: db.Users,
+                attributes: ["username"]
+            }]
+        }).then(function (recentObs) {
             res.json(recentObs);
         });
     });
 
     // CREATE new observation
-    app.post("/api/observations", function(req, res) {
+    // need to test this with oauth
+    app.post("/api/observations", function (req, res) {
         db.Observations.create(req.body)
-            .then(function(dbObs) {
+            .then(function (dbObs) {
                 res.json(dbObs);
             });
     });
 
     // DESTROY one observation
-    app.delete("/api/observations/:id", function(req, res) {
+    app.delete("/api/observations", function (req, res) {
         db.Observations.destroy({
             where: {
                 id: req.params.id
             }
-        }).then(function(dbObs) {
+        }).then(function (dbObs) {
             res.json(dbObs);
         });
     });
 
-    // FIND ALL observations for request data download
-    // NEED TO TEST THIS ONE!!!
-    app.get("/request", function(req, res) {
+    // FIND observations for data request, convert to csv, and download client side
+    app.get("/download", function (req, res) {
         db.Observations.findAll({
             where: {
-                category: req.params.category,
-                date_obs: {
-                    [Op.gte]: req.params.minDate,
-                    [Op.lte]: req.params.maxDate
+                category: req.query.category,
+                dateObs: {
+                    [Op.between]: [req.query.minDate, req.query.maxDate]
                 }
             }
-        }).then(function(err, res) {
-            if (err) throw err;
-
+        }).then(function (result) {
+            let csv = json2csv(result, {
+                fields: ["id", "userId", "pictureId", "dateObs", "timeObs", "latitude", "longitude", "category", "species", "speciesSciName", "speciesConfidence", "firstConfidence", "briefDescription", "extendedDescription"]
+            });
+            // below line does not work locally but does in postman
+            // browser not redirecting or some such
+            res.setHeader("Content-disposition", "attachment; filename=sensaisondownload.csv");
+            res.setHeader("Content-Type", "text/csv");
+            res.status(200).send(csv);
+        }).done(function() {
+            console.log("successful");
         })
     });
 
     // FIND ALL users
-    app.get("/api/users", function(req, res) {
+    app.get("/api/users", function (req, res) {
         db.Users.findAll({
-            include: [{ // should show all their observations but not working WHY??
-                all: true,
-                nested: true
-            }] 
-        }).then(function(allusr) {
-                res.json(allusr);
-            });
+            attributes: ["userId", "firstName", "lastName", "username"],
+            include: [db.Observations]
+        }).then(function (allusr) {
+            res.json(allusr);
+        });
     });
 
     // CREATE new user
-    app.post("/api/users", function(req, res) {
+    // need to test this with oauth
+    app.post("/api/users", function (req, res) {
         db.Users.create(req.body)
-            .then(function(newusr) {
+            .then(function (newusr) {
                 res.json(newusr);
             });
     });
