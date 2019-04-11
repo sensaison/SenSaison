@@ -121,7 +121,7 @@ $(document).ready(function() {
                     let category = data[i].category;
                     let briefDesc = data[i].briefDescription;
         
-                    $("#all-your-obs-body").prepend("<tr id='" + obsId + "'><td>" + date + "</td><td>" + category + "</td><td>" + briefDesc + "</td><td><button class='btn waves-effect waves-light btn-small delete'>X</button></tr>"
+                    $("#all-your-obs-body").prepend("<tr id='" + obsId + "'><td>" + date + "</td><td>" + category + "</td><td class='desc-cell'>" + briefDesc + "</td><td><button class='btn waves-effect waves-light btn-small delete'>X</button></tr>"
                     );
                 }
             }

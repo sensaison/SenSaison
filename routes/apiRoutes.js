@@ -92,7 +92,7 @@ module.exports = function (app) {
     app.delete("/api/observations", function (req, res) {
         db.Observations.destroy({
             where: {
-                id: req.params.id
+                id: req.query.id
             }
         }).then(function (dbObs) {
             res.json(dbObs);

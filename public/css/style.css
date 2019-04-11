@@ -148,4 +148,12 @@ textarea.materialize-textarea {
 
 table {
   font-size: 95%;
+  width: 100%;
+}
+
+td.desc-cell {
+  max-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: pre-wrap;
 }
