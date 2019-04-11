@@ -10,15 +10,20 @@ $(document).ready(function() {
 
 
         // CLOUDINARY
-        var picturesToUpload = $("input[type=file]").files; // returns a fileList object that contains the files
-        var pictureIds = [];
+        let category = $("#obs-category").val();
+        let dateObs = $("#date-obs").val();
 
+        let picturesToUpload = $("input[type=file]").files; // returns a fileList object that contains the files
+        let pictureIds = [];
+
+        // need code (and cdn) for cloudinary jquery plug in?
         for (let i=0; i<picturesToUpload.length; i++) {
             Cloudinary::Uploader.upload(
                 picturesToUpload.files[i],
                 options = {
                     type: private,
-                    folder: userId    
+                    folder: userId,
+                    tags: [category, dateObs, userId]
                 }
             ).then(function(response) { // response contains the unique public_id of the uploaded file
                 pictureIds.push(response);
@@ -33,11 +38,11 @@ $(document).ready(function() {
             var newObs = {
                 userId: 13579,
                 pictureId: pictureIds, // will this work? if more than one, parses as csv
-                dateObs: $("#date-obs").val(),
+                dateObs: dateObs,
                 timeObs: $("#time-obs").val(),
                 latitude: window.userPin.position.lat(),
                 longitude: window.userPin.position.lng(),
-                category: $("#obs-category").val(),
+                category: category,
                 firstConfidence: $("#first-confidence").val(),
                 briefDescription: $("#brief-desc").val().trim(),
                 extendedDescription: $("#extended-desc").val().trim(),
@@ -55,7 +60,6 @@ $(document).ready(function() {
             type: "POST",
             data: newObs
         }).then(function() {
-            // $("#obs-submission-form")[0].reset();
             location.reload();
         }).then(function() {
             alert("Observation successfully submitted");
@@ -67,20 +71,18 @@ $(document).ready(function() {
         e.preventDefault();
 
         let id_delete = $(this).parents("tr").attr("id");
-        // FIX THIS AJAX CALL (and api route)
-        console.log(id_delete);
+
         $.ajax({
             type: "DELETE",
             url: "/api/observations?id=" + id_delete
         }).then(function(response) {
-            console.log("delete: "+ response);
+            $(this).parents("tr").remove();
         });
 
-        $(this).parents("tr").detach(); // REPLACE WITH REMOVE() WHEN GOING INTO PRODUCTION)
+        // $(this).parents("tr").remove();
     });
 
     // GET request when requesting to download data
-    // UGH!
     $("#request-data").on("click", function(e) {
         // e.preventDefault();
 
@@ -96,14 +98,27 @@ $(document).ready(function() {
             location.href="/download?minDate=" + minDate + "&maxDate=" + maxDate + "&category=" + category;
         }
 
-        let includePics;
+
+
+
+
+
+        // CLOUDINARY AJAX CALL
         if ($("#include-pictures").is(":checked")) {
-            includePics = true;
-        } else {
-            includePics = false;
+            console.log("pics included in download");
+
+            let queryUrl = ;
+
+            $.ajax({
+                url:,
+                data:,
+            }).then(function() {
+                console.log("success!");
+            })
         }
 
-        console.log("includepics: " + includePics);
+
+        //////////////////////////
 
         $("#data-request-form")[0].reset();
 
