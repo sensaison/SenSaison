@@ -17,6 +17,7 @@
     "express-handlebars": "^3.0.2",
     "git": "^0.1.5",
     "json2csv": "^4.4.1",
+    "jszip": "^3.2.1",
     "mime": "^2.4.0",
     "mysql2": "^1.6.5",
     "passport": "^0.4.0",
