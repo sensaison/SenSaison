@@ -1,13 +1,38 @@
 $(document).ready(function() {
 
     // POST request when submitting new observation
-    $("#submit-obs").on("click", function(e) { // THIS WORKS NO MORE TOUCHY!!!!
+    $("#submit-obs").on("click", function(e) {
         e.preventDefault(); // this line prevents front-end required validation from occurring
+
+        // USERID CODE FIRST
+
+
+
+
+        // CLOUDINARY
+        var picturesToUpload = $("input[type=file]").files; // returns a fileList object that contains the files
+        var pictureIds = [];
+
+        for (let i=0; i<picturesToUpload.length; i++) {
+            Cloudinary::Uploader.upload(
+                picturesToUpload.files[i],
+                options = {
+                    type: private,
+                    folder: userId    
+                }
+            ).then(function(response) { // response contains the unique public_id of the uploaded file
+                pictureIds.push(response);
+            })
+        };
+
+        
+        ///////////////
+
 
         if(window.userPin !== undefined) {
             var newObs = {
                 userId: 13579,
-                pictureId: 20202020202,
+                pictureId: pictureIds, // will this work? if more than one, parses as csv
                 dateObs: $("#date-obs").val(),
                 timeObs: $("#time-obs").val(),
                 latitude: window.userPin.position.lat(),
@@ -30,11 +55,10 @@ $(document).ready(function() {
             type: "POST",
             data: newObs
         }).then(function() {
+            // $("#obs-submission-form")[0].reset();
+            location.reload();
+        }).then(function() {
             alert("Observation successfully submitted");
-            $("#obs-submission-form")[0].reset();
-            // if reload then form is automatically reset and table of user's observations is reloaded too
-            // or do a get request here for the table
-
         });
     });
 
@@ -72,12 +96,14 @@ $(document).ready(function() {
             location.href="/download?minDate=" + minDate + "&maxDate=" + maxDate + "&category=" + category;
         }
 
-        // let includePics;
-        // if ($("#include-pictures").is(":checked")) {
-        //     includePics = true;
-        // } else {
-        //     includePics = false;
-        // }
+        let includePics;
+        if ($("#include-pictures").is(":checked")) {
+            includePics = true;
+        } else {
+            includePics = false;
+        }
+
+        console.log("includepics: " + includePics);
 
         $("#data-request-form")[0].reset();
 
