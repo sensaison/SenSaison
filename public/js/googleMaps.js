@@ -1,3 +1,5 @@
+const apiKey = "AIzaSyDexLO6StKoAhSrxypz3E6neGfT9PpJSlM";
+
 /* eslint-disable no-unused-vars */
 // This example adds a search box to a map, using the Google Place Autocomplete
 // feature. People can enter geographical searches. The search box will return a
@@ -7,17 +9,253 @@
 // parameter when you first load the API. For example:
 // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
 
-var searchBox;
-console.log("googleMaps.js has executed.");
+var startingPos;
+var userPin;
+var mapType = 0;
+var selectedLocationID;
+var coordinates = {};
+var nearbyMap;
+var userMap;
+getLocation();
 
-var map;
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(usePosition, showError);
+    } else {
+        console.log("Geolocation is not supported by this browser.");
+        generateMaps();
+        setUpForm();
+        enableButtons();
+    }
+}
 
-function initMap() {
-    var california = { lat: 37.4419, lng: -122.1419 };
-    map = new google.maps.Map(document.getElementById("map"), {
-        center: california,
-        zoom: 13
+function enableButtons() {
+    $(".g1").each(function() {
+        $(this).removeAttr("disabled");
+        $(this).attr("class", "btn waves-effect waves-light g1");
     });
+}
+
+function setUpForm() {
+    if(startingPos === undefined) {
+        $("#near-me").css("display", "none");
+    }
+}
+
+$("#me").click(function() {
+    $("#city-select").css("display", "none");
+});
+
+$("#city").click(function() {
+    $("#city-select").css("display", "block");
+});
+
+function usePosition(position) {
+    startingPos = position;
+    generateMaps();
+    setUpForm();
+    enableButtons();
+}
+
+function showError(error) {
+    generateMaps();
+    setUpForm();
+    enableButtons();
+    switch(error.code) {
+    case error.PERMISSION_DENIED:
+        console.log("User denied the request for Geolocation.");
+        break;
+    case error.POSITION_UNAVAILABLE:
+        console.log("Location information is unavailable.");
+        break;
+    case error.TIMEOUT:
+        console.log("The request to get user location timed out.");
+        break;
+    case error.UNKNOWN_ERROR:
+        console.log("An unknown error occurred.");
+        break;
+    }
+}
+
+function generateMaps() {
+    generateMap();
+    generateMap();
+    generateMap();
+}
+
+function generateMap() {
+    var latitude = 47.1585;
+    var longitude = 27.6014;
+    if(startingPos !== undefined) {
+        latitude = startingPos.coords.latitude;
+        longitude = startingPos.coords.longitude;
+    }
+    var centerPlace = { lat: latitude, lng: longitude};
+    var map = new google.maps.Map(document.getElementById("map-" + mapType), {
+        center: centerPlace,
+        zoom: 12,
+        clickableIcons: false,
+        mapTypeControl: false,
+        streetViewControl: false,
+        fullscreenControl: false
+    });
+    // Do some stuff to prepare a map where the user can indicate a choice of location.
+    if(mapType === 0) {
+        map.addListener("click", function(event) {
+            if(userPin === undefined) {
+                $("#pin-reminder").remove();
+                placeMarkerAndPanTo(event.latLng, map);
+            } else {
+                console.log("A pin has already been placed. Click 'clear pins' to clear them first.");
+            }
+        });
+    } else if(mapType === 1) {
+        // Do some stuff to pin all user observations
+        userMap = map;
+    } else if(mapType === 2) {
+        // Do some stuff to pin all nearby observations
+        nearbyMap = map;
+    }
+    mapType++;
+}
+
+function placeMarkerAndPanTo(latLng, map) {
+    var marker = new google.maps.Marker({
+        position: latLng,
+        map: map
+    });
+    map.panTo(latLng);
+    userPin = marker;
+}
+
+function placeMarker(latLng, map) {
+    var marker = new google.maps.Marker({
+        position: latLng,
+        map: map
+    });
+}
+
+$("#clear-pins").click(function deletePin() {
+    event.preventDefault();
+    if(userPin !== undefined) {
+        userPin.setMap(null);
+        userPin = undefined;
+    }
+});
+
+$("#get-nearby").click(function getNearby() {
+    event.preventDefault();
+    var radiusMeters = $("#location-radius").children("option:selected").val() * 1000;
+    var pointsToMark;
+    $.ajax("/api/observations", {
+        type: "GET"
+    }).then(function(res) {
+        if($("#me").is(":checked")) {
+            nearbyMap.panTo(new google.maps.LatLng(startingPos.coords.latitude, startingPos.coords.longitude));
+            pointsToMark = doCalcs(res, startingPos.coords.latitude, startingPos.coords.longitude, radiusMeters);
+        } else {
+            if(coordinates.lat !== undefined) {
+                nearbyMap.panTo(new google.maps.LatLng(coordinates.lat, coordinates.lng));
+                pointsToMark = doCalcs(res, coordinates.lat, coordinates.lng, radiusMeters);
+            } else {
+                console.log("User needs to pick a city");
+            }
+        }
+        if(pointsToMark !== undefined) {
+            for(var i = 0; i < pointsToMark.length; i++) {
+                placeMarker(new google.maps.LatLng(pointsToMark[i].latitude, pointsToMark[i].longitude), nearbyMap);
+            }
+        }
+        switch(radiusMeters) {
+        case 1000: 
+            nearbyMap.setZoom(13);
+            break;
+        case 10000:
+            nearbyMap.setZoom(11);
+            break;
+        case 50000:
+            nearbyMap.setZoom(10);
+            break;
+        case 100000:
+            nearbyMap.setZoom(9);
+            break;
+        case 500000:
+            nearbyMap.setZoom(7);
+            break;
+        case 1000000:
+            nearbyMap.setZoom(5);
+            break;
+        }
+    });
+});
+
+function doCalcs(obs, lat, long, radius) {
+    var validSet = [];
+    for(var i = 0; i < obs.length; i++) {
+        var lat2 = obs[i].latitude;
+        var long2 = obs[i].longitude;
+        var distance = getDistance(lat, long, lat2, long2);
+        console.log("Distance: " + distance);
+        if(distance <= radius) {
+            validSet.push(obs[i]);
+        }
+    }
+    return validSet;
+}
+
+function degreesToRadians(degrees) {
+    var pi = Math.PI;
+    return degrees * (pi/180);
+}
+
+$("#locationInput").keyup(function() {
+    $(".predictionButtons").remove();
+    var locationInput = $(this).val();    
+    var autoLocationUrl = "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/autocomplete/json?input=" 
+                            + locationInput + "&types=(cities)&key=" + apiKey;
+    $.ajax({
+        url : autoLocationUrl,
+        method : "GET"
+    }).then(function(autoLocationResponse) {
+        autoLocationResponse.predictions.forEach(function(locationPrediction) {
+            var predictionLink = $("<div>");
+            predictionLink.attr("data-placeId", locationPrediction.place_id);
+            predictionLink.attr("class", "predictionButtons");
+            predictionLink.text(locationPrediction.description);  
+            $(".autoComplete").append(predictionLink[0]);
+        });
+    });
+});
+
+$(document).on("click", ".predictionButtons", function(event){
+    selectedLocationID = $(this).attr("data-placeId");
+    coordinateUrl = "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/details/json?placeid=" 
+                    + selectedLocationID + "&key=" + apiKey;
+    $.ajax({
+        url : coordinateUrl,
+        method : "GET"
+    }).then(function(selectedCoordinate){
+        coordinates = selectedCoordinate.result.geometry.location;
+    });
+    document.getElementById("locationInput").value = $(this).text();
+    $(".predictionButtons").remove();
+    return false;
+});
+
+function getDistance(lat1, lon1, lat2, lon2) {
+    var R = 6371e3; // metres
+    var φ1 = degreesToRadians(lat1);
+    var φ2 = degreesToRadians(lat2);
+    var Δφ = degreesToRadians(lat2 - lat1);
+    var Δλ = degreesToRadians(lon2 - lon1);
+
+    var a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
+        Math.cos(φ1) * Math.cos(φ2) *
+        Math.sin(Δλ/2) * Math.sin(Δλ/2);
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+
+    var d = R * c;
+    return Math.abs(d);
 }
 
 /*
@@ -27,7 +265,6 @@ function initAutocomplete() {
     zoom: 13,
     mapTypeId: "roadmap"
   });
-
   
   // Create the search box and link it to the UI element.
   var input = document.getElementById("event-location");

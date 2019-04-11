@@ -14,6 +14,7 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
   <link href="css/navbar.css" media="screen" rel="stylesheet" type="text/css" />
   <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link rel="stylesheet" type="text/css" href="styles/googleMaps.css">
 
   <!-- Swatchbook -->
   <meta charset="UTF-8" />
@@ -132,7 +133,12 @@
             <div class="row">
               <div class="col s12 m6">
                 <label for="googlemap">Location of observation*</label>
-                <!-- STEFAN PUT GOOGLE MAP HERE -->
+                <div id="map-wrapper">
+                    <form>
+                    <button class="btn waves-effect waves-light g1 disabled" type="button" id="clear-pins" disabled="true">Clear Pin</button>
+                    </form>
+                    <div class="mapDisplayed" id="map-0"></div>
+                </div>
               </div>
 
               <div class="col s12 m6">
@@ -178,7 +184,6 @@
                 </div>
 
               </div>
-
             </div>
 
             <br>
@@ -208,8 +213,9 @@
             </div>
             <br>
             <div class="row">
-              <button class="btn waves-effect waves-light" type="submit" id="submit-obs">Submit
-              </button>     
+              <form>
+                <button class="btn waves-effect waves-light g1 disabled" type="submit" id="submit-obs" disabled="true">Submit</button> 
+              </form>
             </div>
 
           </form>
@@ -266,16 +272,52 @@
 
         </div>
         <div class="col s12 m6 l6">
-
-          <!-- STEFAN PUT MAP WITH USER'S OBSERVATIONS HERE -->
-
+          <div id="map-wrapper">
+              <div class="mapDisplayed" id="map-1"></div>
+          </div>
         </div>
       </div>
 
       <div class="row hidden" id="view-near-obs">
-        <h5>Nearby observations</h5>
-        <br>
-        <!-- STEFAN PUT MAP WITH NEARBY OBSERVATIONS HERE -->
+        <h5>Nearby observations</h5><br>
+        <div class="row">
+          <div class="input-field col s12 m4">
+            <h6>Nearby Where?</h6>
+            <form>
+              <label id="near-me">
+                <input class="with-gap" type="radio" name="group-1" id="me" value="near-me" /><span>Near Me!</span><br>
+              </label>
+              <label>
+                <input class="with-gap" type="radio" name="group-1" id="city" value="near-city" checked /><span>Near A Specified City!</span><br>
+              </label>
+            </form><br>
+            <div id="city-select">
+              <form autocomplete="off">
+                <div class="autoComplete">
+                  <label for="event-location" class="form-label">Location*</label>
+                  <input id="locationInput" type="text" name="location" placeholder="City, State">
+                </div><br>
+              </form>
+            </div>
+            <form>
+              <label for="radius" class="form-label">Search Radius</label><br>      
+                  <select id="location-radius" class="form-control">
+                    <option id="1-mi" value="1">1 Kilometer</option>
+                    <option id="10-mi" value="10" selected="selected">10 Kilometers</option>
+                    <option id="50-mi" value="50">50 Kilometers</option>
+                    <option id="100-mi" value="100">100 Kilometers</option>
+                    <option id="5-mi" value="500">500 Kilometers</option>
+                    <option id="20-mi" value="1000">1000 Kilometers</option>
+                  </select><br>
+              <button class="btn waves-effect waves-light g1" type="button" id="get-nearby" disabled>Search</button>
+            </form>
+          </div>
+          <div class="col s12 m8 l8">
+              <div id="map-wrapper">
+                  <div class="mapDisplayed" id="map-2"></div>
+              </div>
+            </div>
+        </div>
       </div>
 
       <div class="row hidden" id="download-data">
@@ -376,12 +418,14 @@
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
   <script type="text/javascript" src="js/init.js"></script>
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDexLO6StKoAhSrxypz3E6neGfT9PpJSlM"></script>
 
   <!-- Scripts specific to user account page -->
   <script type="text/javascript" src="js/forminitialization.js"></script>
   <script type="text/javascript" src="js/useraccount.js"></script>
-  <script type="text/javascript" src="js/submit_delete_request_data.js"></script>
 
+  <script type="text/javascript" src="js/submit_delete_request_data.js"></script>
+  <script src="js/googleMaps.js"></script>
 
   </body>
 </html>

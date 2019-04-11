@@ -1,10 +1,7 @@
 /* Always set the map height explicitly to define the size of the div
 * element that contains the map. */
-h1 {
-    color: #4d90fe;
-}
-
-#map {
+div[id^="map"] {
+    display: inline-block;
     height: 350px;
     width: 100%;
     position: relative;
@@ -26,7 +23,7 @@ h1 {
     display: none;
 }
 
-#map #infowindow-content {
+div[id^="map"] #infowindow-content {
     display: inline;
 }
 
@@ -100,7 +97,7 @@ h1 {
     position: absolute;
 }
 
-#map.active {
+div[id^="map"].active {
     height: 350px;
     width: 100%;
     float: left;
@@ -110,4 +107,30 @@ h1 {
 
 #pop-searches {
     padding-left:30px;
+}
+
+#map-wrapper {
+    position: relative;
+}
+
+#clear-pins {
+    position: absolute;
+    z-index: 10;
+    left: 10px;
+    top: 10px;
+}
+
+#pin-reminder {
+    text-align: center;
+    width: 38%;
+    border: 0.5px solid lightgray;
+    background-color: white;
+    color: darkslategray;
+    position: absolute;
+    top: 360px;
+    left: 0;
+    font-size: 0.85rem;
+    text-align: initial;
+    z-index: 11;
+    padding: 10px 10px;
 }
