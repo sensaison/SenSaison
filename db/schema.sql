@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS Observations (
 
 CREATE TABLE IF NOT EXISTS Users (
     id INT NOT NULL AUTO_INCREMENT,
-    userId INT NOT NULL, /* needs to be auto generated - based on UUID? */
+    userId VARCHAR(30) NOT NULL, /* --Switching to varchar to increase the number limit, testing with google userId for right now. */
     firstName VARCHAR(20) NOT NULL,
     lastName VARCHAR(20) NOT NULL,
     email VARCHAR(50) NOT NULL,

@@ -97,6 +97,7 @@ $(document).ready(function() {
     function showUserObs(user) {
         // let userID = User || "";
         // how to get userId from page? AURI!!
+        
 
         $.ajax("/api/userobservations", {
             type: "GET",

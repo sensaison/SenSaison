@@ -2,10 +2,11 @@ module.exports = function(sequelize, DataTypes) {
     let Users = sequelize.define("Users", {
         id: {
             primaryKey: true,
-            type: DataTypes.INTEGER
+            type: DataTypes.INTEGER,
+            autoIncrement: true
         },
         userId: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.STRING,
             unique: {
                 args: true
             }
