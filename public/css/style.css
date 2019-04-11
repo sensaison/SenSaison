@@ -139,9 +139,9 @@ table {
   width: 100%;
 }
 
-td {
+td.desc-cell {
   max-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
+  white-space: pre-wrap;
 }

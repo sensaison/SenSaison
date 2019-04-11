@@ -2,16 +2,9 @@ $(document).ready(function() {
 
     // POST request when submitting new observation
     $("#submit-obs").on("click", function(e) { // THIS WORKS NO MORE TOUCHY!!!!
-<<<<<<< HEAD
-        e.preventDefault(); // this line prevents front-end validation from occurring
-        console.log("submit clicked");
-
-        if (window.userPin !== undefined) {
-=======
         e.preventDefault(); // this line prevents front-end required validation from occurring
 
         if(window.userPin !== undefined) {
->>>>>>> f7ed68694e7329a3460e9e014f1ba5e67a8a9f8a
             var newObs = {
                 userId: 13579,
                 pictureId: 20202020202,
@@ -32,7 +25,6 @@ $(document).ready(function() {
             $("#map-wrapper").append($("<label for='map-wrapper' id='pin-reminder'>Please place a pin on the map.</label>"));
             throw "User didn't place a pin on the map.";
         }
-        console.log("new obs: " + newObs);
 
         $.ajax("/api/observations", {
             type: "POST",
@@ -55,13 +47,13 @@ $(document).ready(function() {
         console.log(id_delete);
         $.ajax({
             type: "DELETE",
-            url: "/api/observations/" + id_delete, // something wrong with url here
-            success: function(response) {
-                console.log("successful delete: "+ response);
-                $(this).parents("tr").remove(); // REPLACE WITH REMOVE() WHEN GOING INTO PRODUCTION
-            }
+            url: "/api/observations?id=" + id_delete
+        }).then(function(response) {
+            console.log("delete: "+ response);
         });
-    })
+
+        $(this).parents("tr").detach(); // REPLACE WITH REMOVE() WHEN GOING INTO PRODUCTION)
+    });
 
     // GET request when requesting to download data
     // UGH!
@@ -73,9 +65,11 @@ $(document).ready(function() {
 
         let category;
         if ($("#category-download").val() === "all") {
-            category = ["animal", "plant", "fungus", "weather", "land_water"];
+            category = ["animal%20plant%20fungus%20weather%20land_water"];
+            location.href="/download?minDate=" + minDate + "&maxDate=" + maxDate + "&category=animal&category=plant&category=fungus&category=weather&category=land_water";
         } else {
             category = $("#category-download").val();
+            location.href="/download?minDate=" + minDate + "&maxDate=" + maxDate + "&category=" + category;
         }
 
         // let includePics;
@@ -85,16 +79,7 @@ $(document).ready(function() {
         //     includePics = false;
         // }
 
-        $.ajax("/download", {
-            type: "GET",
-            data: {
-                category: category,
-                minDate: minDate,
-                maxDate: maxDate
-            }
-        }).then(function() {
-            console.log("Data request successfully submitted");
-            $("#data-request-form")[0].reset();
-        });
+        $("#data-request-form")[0].reset();
+
     });
 });
