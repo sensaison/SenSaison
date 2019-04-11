@@ -17,18 +17,18 @@ $(document).ready(function() {
         let pictureIds = [];
 
         // need code (and cdn) for cloudinary jquery plug in?
-        for (let i=0; i<picturesToUpload.length; i++) {
-            Cloudinary::Uploader.upload(
-                picturesToUpload.files[i],
-                options = {
-                    type: private,
-                    folder: userId,
-                    tags: [category, dateObs, userId]
-                }
-            ).then(function(response) { // response contains the unique public_id of the uploaded file
-                pictureIds.push(response);
-            })
-        };
+        // for (let i=0; i<picturesToUpload.length; i++) {
+        //     cloudinary.v2.uploader.upload(
+        //         picturesToUpload.files[i],
+        //         options = {
+        //             type: private,
+        //             folder: userId,
+        //             tags: [category, dateObs, userId]
+        //         }
+        //     ).then(function(response) { // response contains the unique public_id of the uploaded file
+        //         pictureIds.push(response);
+        //     })
+        // };
 
         
         ///////////////
@@ -36,7 +36,7 @@ $(document).ready(function() {
 
         if(window.userPin !== undefined) {
             var newObs = {
-                userId: 13579,
+                userId: "13579",
                 pictureId: pictureIds, // will this work? if more than one, parses as csv
                 dateObs: dateObs,
                 timeObs: $("#time-obs").val(),
@@ -76,10 +76,10 @@ $(document).ready(function() {
             type: "DELETE",
             url: "/api/observations?id=" + id_delete
         }).then(function(response) {
-            $(this).parents("tr").remove();
+            // $(this).parents("tr").remove(); // why does this line not work here?
         });
 
-        // $(this).parents("tr").remove();
+        $(this).parents("tr").remove();
     });
 
     // GET request when requesting to download data
@@ -89,33 +89,28 @@ $(document).ready(function() {
         let minDate = $("#start-date-download").val();
         let maxDate = $("#end-date-download").val();
 
-        let category;
         if ($("#category-download").val() === "all") {
-            category = ["animal%20plant%20fungus%20weather%20land_water"];
             location.href="/download?minDate=" + minDate + "&maxDate=" + maxDate + "&category=animal&category=plant&category=fungus&category=weather&category=land_water";
         } else {
-            category = $("#category-download").val();
+            let category = $("#category-download").val();
             location.href="/download?minDate=" + minDate + "&maxDate=" + maxDate + "&category=" + category;
         }
 
 
 
-
-
-
         // CLOUDINARY AJAX CALL
-        if ($("#include-pictures").is(":checked")) {
-            console.log("pics included in download");
+        // if ($("#include-pictures").is(":checked")) {
+        //     console.log("pics included in download");
 
-            let queryUrl = ;
+        //     let queryUrl = ;
 
-            $.ajax({
-                url:,
-                data:,
-            }).then(function() {
-                console.log("success!");
-            })
-        }
+        //     $.ajax({
+        //         url:,
+        //         data:,
+        //     }).then(function() {
+        //         console.log("success!");
+        //     })
+        // }
 
 
         //////////////////////////

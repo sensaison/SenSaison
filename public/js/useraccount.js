@@ -121,6 +121,6 @@ $(document).ready(function() {
     };
 
     // let userId = //AURI!!!;
-    showUserObs(13579);
+    showUserObs("13579");
 
 });

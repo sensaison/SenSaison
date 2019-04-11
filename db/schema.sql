@@ -3,10 +3,10 @@ USE SenSaison_db;
 
 CREATE TABLE IF NOT EXISTS Observations (
     id INT NOT NULL AUTO_INCREMENT,
-    userId VARCHAR NOT NULL REFERENCES Users (userId)
+    userId VARCHAR(30) NOT NULL REFERENCES Users (userId)
         ON DELETE NO ACTION
-        ON UPDATE CASCADE, /* tied to the id in next table */
-    pictureId VARCHAR NOT NULL,
+        ON UPDATE CASCADE,
+    pictureId VARCHAR(30) NOT NULL,
     dateObs DATE NOT NULL,
     timeObs TIME NOT NULL,
     latitude FLOAT NOT NULL,
@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS Observations (
 
 CREATE TABLE IF NOT EXISTS Users (
     id INT NOT NULL AUTO_INCREMENT,
-    userId VARCHAR NOT NULL, /* FOR NOW use google id */
+    userId VARCHAR(30) NOT NULL,
     firstName VARCHAR(20) NOT NULL,
     lastName VARCHAR(20) NOT NULL,
     email VARCHAR(50) NOT NULL,

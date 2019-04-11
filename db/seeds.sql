@@ -1,25 +1,25 @@
 USE SenSaison_db;
 
 INSERT IGNORE INTO Observations
-    (userId, pictureId, dateObs, timeObs, latitude, longitude, category, species, speciesConfidence, firstConfidence, briefDescription)
-    VALUES ("12345", "5", "1989-12-31", "23:59:59", 47.608013, -122.335167, "animal", "red-footed booby", 4, 3, "lalalallalalalala"),
-    ("678910", "4", "1990-12-31", "23:59:59", 69.50, -161.50, "animal", "blue-footed booby", 3, 5, "rurururururururuur"),
-    ("678910", "3", "1883-12-31", "23:59:59", 70.50, -163.50, "plant", "white oak", 1, 1, "kjkjkjkjkjkjkjkjkjkjk"),
-    ("246810", "2", "2015-12-31", "23:59:59", 68.55, -162.51, "plant", "low-bush blueberry", 2, 2, "dfdfdfdfdhfdffdfdfdfdf"),
-    ("246810", "1", "1630-12-31", "23:59:59", 68.50, -162.00, "fungus", "morelle", 3, 5, "ctctctctctctctctct"),
-    ("246810", "100", "1998-12-31", "23:59:59", 55.50, -132.50, "weather", "hurricane", null, 1, "sisisisisisisisisisis"),
-    ("13579", "29", "2000-12-31", "23:59:59", 45.50, 32.50, "weather", "monsoon rain", null, 5, "mfmfmfmfmfmfmfmfmfmfm"),
-    ("13579", "13", "1766-12-31", "23:59:59", 88.50, 162.50, "weather", "above freezing", null, 5, "bbebebebebebebebebebe"),
-    ("13579", "35", "2045-12-31", "23:59:59", 50.50, -150.50, "fungus", "oyster mushroom", 4, 5, "hihihihihihihihihiihihi"),
-    ("13579", "esr", "1995-12-31", "23:59:59", 68.20, -161.90, "land_water", "freeze", null, 3, "hahahahahahahahahaha"),
-    ("13579", "456", "1995-12-01", "23:59:59", 68.10, -161.90, "other", "something", null, 2, "hahahahahahahahahaha");
+    (userId, pictureId, dateObs, timeObs, latitude, longitude, category, species, speciesSciName, speciesConfidence, firstConfidence, briefDescription, extendedDescription)
+    VALUES ("12345", "12345001", "2018-12-11", "13:59:00", 48.0840, -121.9687, "weather", NULL, NULL, NULL, 3, "First frost", NULL),
+    ("678910", "678910001", "2019-02-09", "06:29:00", 47.6062, -122.3321, "animal", "White-Crowned Sparrow", "Zonotrichia leucophrys", 5, 4, "First WCSP seen this spring", "Two male WCSP seen in backyard bird feeder early this morning"),
+    ("678910", "678910002", "2017-09-15", "10:31:00", 35.0603, -83.3876, "plant", "White oak", "Quercus alba", 3, 2, "White oaks losing leaves", NULL),
+    ("246810", "246810001", "2018-07-21", "07:50:00", 39.7817, -89.6501, "plant", "Low-bush blueberry", NULL, 4, 4, "First blueberries", "Warm sunny day, first blueberries of the summer, birds feasting"),
+    ("246810", "246810002", "2017-07-01", "06:42:00", 39.8732, -89.6730, "fungus", "Oyster mushrooms", "Pleurotus ostreatus", 3, 1, "First oyster mushrooms", NULL),
+    ("246810", "246810003", "2018-07-30", "17:20:00", 33.6891, -78.8867, "weather", NULL, NULL, NULL, 5, "First hurricane of the year hits town", NULL),
+    ("13579", "13579001", "2017-04-03", "14:15:00", 39.0997, -94.5786, "weather", NULL, NULL, NULL, 5, "First tornado of the year", NULL),
+    ("13579", "13579002", "2018-02-27", "07:13:00", 39.0465, -95.6850, "animal", "White-tailed deer", NULL, 5, 4, "Bucks losing their antlers", NULL),
+    ("13579", "13579003", "2019-03-08", "10:27:00", 47.4230, -120.3110, "fungus", "Morel mushrooms", "Morchella spp.", 4, 2, "Found first morels of the season", NULL),
+    ("13579", "13579004", "2018-11-27", "08:48:00", 37.6872, -97.3301, "land_water", NULL, NULL, NULL, 3, "Local lake frozen over", "The lake had previously had a few patches of ice. Completely froze over last night. Not solid enough to walk on."),
+    ("13579", "13579005", "2019-04-21", "07:58:00", 37.8239, -96.2892, "animal", "Raccoon", NULL, 5, 3, "First raccoon kits", "Family of raccoons seen in the local park this morning, babies look very young");
 
 INSERT IGNORE INTO Users
     (userId, firstName, lastName, email, username)
-    VALUES ("12345", "Catherine", "Pham", "acpham028@gmail.com", "catherine"),
-    ("678910", "Stefan", "Apreutesei", "sapreut@uw.edu", "stefan"),
-    ("246810", "Julie", "Mathews", "julie@mathews.com", "julie"),
-    ("13579", "Auri", "Robbins-Phillips", "auri@r-b.com", "auri");
+    VALUES ("12345", "Catherine", "Pham", "crypticwoodwhite@gmail.com", "catherinep"),
+    ("678910", "Stefan", "Apreutesei", "sapreut@uw.edu", "stefana"),
+    ("246810", "Julie", "Mathews", "julie@mathews.com", "juliem"),
+    ("13579", "Auri", "Robbins-Phillips", "auri@r-b.com", "aurirb");
 
 
 /*  unhex(replace(uuid(),'-','')) */
