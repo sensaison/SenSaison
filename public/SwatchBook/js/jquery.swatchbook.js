@@ -244,4 +244,5 @@ $.fn.swatchbook			= function( options ) {
 		
 };
 	
+
 ( jQuery, window );
