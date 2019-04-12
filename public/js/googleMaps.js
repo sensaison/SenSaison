@@ -1,14 +1,5 @@
 const apiKey = "AIzaSyDexLO6StKoAhSrxypz3E6neGfT9PpJSlM";
 
-/* eslint-disable no-unused-vars */
-// This example adds a search box to a map, using the Google Place Autocomplete
-// feature. People can enter geographical searches. The search box will return a
-// pick list containing a mix of places and predicted search terms.
-
-// This example requires the Places library. Include the libraries=places
-// parameter when you first load the API. For example:
-// <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
-
 var startingPos;
 var userPin;
 var mapType = 0;
@@ -16,7 +7,7 @@ var selectedLocationID;
 var coordinates = {};
 var nearbyMap;
 var userMap;
-getLocation();
+allowTime();
 
 function getLocation() {
     if (navigator.geolocation) {
@@ -174,13 +165,13 @@ $("#get-nearby").click(function getNearby() {
             nearbyMap.setZoom(11);
             break;
         case 50000:
-            nearbyMap.setZoom(10);
-            break;
-        case 100000:
             nearbyMap.setZoom(9);
             break;
+        case 100000:
+            nearbyMap.setZoom(8);
+            break;
         case 500000:
-            nearbyMap.setZoom(7);
+            nearbyMap.setZoom(6);
             break;
         case 1000000:
             nearbyMap.setZoom(5);
@@ -218,29 +209,58 @@ $("#locationInput").keyup(function() {
         method : "GET"
     }).then(function(autoLocationResponse) {
         autoLocationResponse.predictions.forEach(function(locationPrediction) {
-            var predictionLink = $("<div>");
+            var predictionLink = $("<option>");
             predictionLink.attr("data-placeId", locationPrediction.place_id);
             predictionLink.attr("class", "predictionButtons");
             predictionLink.text(locationPrediction.description);  
-            $(".autoComplete").append(predictionLink[0]);
+            $("#suggestion-list").append(predictionLink[0]);
         });
     });
 });
 
-$(document).on("click", ".predictionButtons", function(event){
-    selectedLocationID = $(this).attr("data-placeId");
-    coordinateUrl = "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/details/json?placeid=" 
-                    + selectedLocationID + "&key=" + apiKey;
-    $.ajax({
-        url : coordinateUrl,
-        method : "GET"
-    }).then(function(selectedCoordinate){
-        coordinates = selectedCoordinate.result.geometry.location;
+/*
+    $(document).on("click", ".predictionButtons", function(event){
+        console.log("Clicked a prediction button.");
+        selectedLocationID = $(this).attr("data-placeId");
+        coordinateUrl = "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/details/json?placeid=" 
+                        + selectedLocationID + "&key=" + apiKey;
+        $.ajax({
+            url : coordinateUrl,
+            method : "GET"
+        }).then(function(selectedCoordinate){
+            coordinates = selectedCoordinate.result.geometry.location;
+        });
+        document.getElementById("locationInput").value = $(this).text();
+        $(".predictionButtons").remove();
+        return false;
     });
-    document.getElementById("locationInput").value = $(this).text();
-    $(".predictionButtons").remove();
-    return false;
+*/
+
+$("#locationInput").bind('input', function () {
+    if(checkExists($('#locationInput').val()) === true){
+        coordinateUrl = "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/details/json?placeid=" 
+                        + selectedLocationID + "&key=" + apiKey;
+        $.ajax({
+            url : coordinateUrl,
+            method : "GET"
+        }).then(function(selectedCoordinate){
+            coordinates = selectedCoordinate.result.geometry.location;
+        });
+        $(".predictionButtons").remove();
+        return false;
+    }
 });
+
+function checkExists(inputValue) {
+    var x = document.getElementById("suggestion-list");
+    for (var i = 0; i < x.options.length; i++) {
+        if(inputValue == x.options[i].value){
+            selectedLocationID = x.options[i].getAttribute("data-placeId");
+            return true;
+        }
+    }
+    return false;
+}
 
 function getDistance(lat1, lon1, lat2, lon2) {
     var R = 6371e3; // metres
@@ -256,6 +276,17 @@ function getDistance(lat1, lon1, lat2, lon2) {
 
     var d = R * c;
     return Math.abs(d);
+}
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+  
+async function allowTime() {
+    console.log('Give Google time to respond...');
+    await sleep(250);
+    console.log('One quarter of a second later. Maps can load now.');
+    getLocation();
 }
 
 /*
