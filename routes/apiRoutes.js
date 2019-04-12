@@ -3,6 +3,7 @@ const Sequelize = require("sequelize");
 const Op = Sequelize.Op;
 const json2csv = require("json2csv").parse;
 const cloudinary = require("../config/cloudinary");
+const jszip = require("jszip");
 
 module.exports = function (app) {
 
@@ -140,14 +141,16 @@ module.exports = function (app) {
 
     // UPLOAD one picture to cloudinary
     app.post("https://api.cloudinary.com/v1_1/sensaison/image/upload", function(req, res) {
+
         console.log("REQ: " + req);
         console.log("REQ.QUERY: " + req.query);
+
         cloudinary.v2.uploader.upload(
-            req.query.files.path,
+            req.body.files,
             {
                 type: "private",
-                folder: req.query.tagUserIdVal,
-                tags: [req.query.tagCategoryVal, req.query.tagDateObsVal, req.query.tagUserIdVal] 
+                folder: req.body.tagUserIdVal,
+                tags: [req.body.tagCategoryVal, req.body.tagDateObsVal, req.body.tagUserIdVal] 
             },
             function(err, res) {
                 console.log("RES.PUBLIC_ID: " + res.public_id);

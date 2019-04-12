@@ -44,7 +44,7 @@
             <!-- Home -->
 			<li><a href="home.html"><span class=""></span> Home</a></li>
             <!-- US -->
-			<li><a href="contact.html"><span class=""></span> About Us</a></li>
+			<li><a href="team.html"><span class=""></span> About Us</a></li>
 		</ul>
         <div class="clearfix"></div>
 	</nav>
@@ -76,7 +76,8 @@
             <div class="col s12 center">
             <h5>Add new observation</h5>
             <br>
-
+            <p><i>Fields marked with an asterisk (*) are required.</i></p>
+            <br>
             <form id="obs-submission-form" onsubmit="return false">
                 <div class="row">
                 <div class="input-field col s12 m4">
@@ -93,9 +94,9 @@
                 <div class="input-field col s12 m4">
                     <select id="obs-category" required="" aria-required="true">
                     <option value="" disabled selected class="form-option">Choose an option</option>
-                    <option value="animal" class="form-option">Animal</option>
-                    <option value="plant" class="form-option">Plant</option>
-                    <option value="fungus" class="form-option">Fungus</option>
+                    <option value="animal" class="form-option">Animal&dagger;</option>
+                    <option value="plant" class="form-option">Plant&dagger;</option>
+                    <option value="fungus" class="form-option">Fungus&dagger;</option>
                     <option value="weather" class="form-option">Weather</option>
                     <option value="land_water" class="form-option">Land or water</option>
                     <option value="other" class="form-option">Other (please explain in Description fields)</option>
@@ -151,7 +152,7 @@
                         <input type="file" id="pic-file" required="" aria-required="true">
                         </button>
                         <div class="file-path-wrapper">
-                        <input class="file-path validate" id="pic-path" type="text" placeholder="Upload ONE picture*">
+                        <input class="file-path validate" id="pic-path" type="text" placeholder="Upload ONE picture*" required="" aria-required="true">
                         </div>
                         
                     </div>
@@ -162,10 +163,10 @@
 
                 <br>
                 <div class="row">
-                <p><i>The following section is required if you selected animal, plant, or fungus.</i></p>
+                <p>&dagger;<i>The following section is required if you selected animal, plant, or fungus.</i></p>
                 <br>
                 <div class="input-field col s12 m6 l4">
-                    <label for="species">Species common name*</label>
+                    <label for="species">Species common name&dagger;</label>
                     <input type="text" class="validate" id="species" data-length="50">
                 </div>
 
@@ -183,7 +184,7 @@
                     <option value="4" class="form-option">4</option>
                     <option value="5" class="form-option">5 - high confidence</option>
                     </select>
-                    <label for="species-confidence">Species ID confidence*</label>
+                    <label for="species-confidence">Species ID confidence&dagger;</label>
                 </div>
                 </div>
                 <br>

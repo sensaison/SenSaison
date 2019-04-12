@@ -15,10 +15,9 @@ $(document).ready(function() {
 
             let categoryVal = $("#obs-category").val();
             let dateObsVal = $("#date-obs").val();
-            let pictureIdVal;
 
-            let imgFile = $("#pic-file").files[0];
-            console.log("IMGFILE: " + imgFile);
+            let imgFile = $("#pic-file[type=file]").val();
+            // console.log("IMGFILE: " + imgFile);
     
             let newImgUpld = {
                 files: imgFile,
@@ -26,7 +25,9 @@ $(document).ready(function() {
                 tagCategoryVal: categoryVal,
                 tagDateObsVal: dateObsVal
             }
-    
+            
+            let pictureIdVal;
+
             $.ajax("https://api.cloudinary.com/v1_1/sensaison/image/upload", {
                 type: "POST",
                 data: newImgUpld
@@ -34,9 +35,6 @@ $(document).ready(function() {
                 pictureIdVal = response.public_id;
                 console.log(pictureIdVal);
             });
-
-
-
 
 
             var newObs = {
