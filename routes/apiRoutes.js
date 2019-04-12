@@ -3,7 +3,9 @@ const Sequelize = require("sequelize");
 const Op = Sequelize.Op;
 const json2csv = require("json2csv").parse;
 const cloudinary = require("../config/cloudinary");
-const jszip = require("jszip");
+const fs = require("fs");
+const archiver = require("archiver");
+
 
 module.exports = function (app) {
 
@@ -100,30 +102,19 @@ module.exports = function (app) {
             }
         }).then(function(result) {
 
-            let zip = new jszip();
-            let images = zip.folder("images");
+            
 
             for (let i=0; i<result.length; i++) {
 
                 let picForDownload ="https://res.cloudinary.com/sensaison/image/" + result[i].pictureId;
 
-                JSZipUtils.getBinaryContent(picForDownload, function (err, data) {
-                    if (err) throw err;
-                    images.file(
-                        result[i].pictureId,
-                        data,
-                        {
-                            binary: true
-                        }
-                    );
-                 });
             }
 
             let csv = json2csv(result, {
                 fields: ["id", "userId", "pictureId", "dateObs", "timeObs", "latitude", "longitude", "category", "species", "speciesSciName", "speciesConfidence", "firstConfidence", "briefDescription", "extendedDescription"]
             });
 
-            zip.file("sensaisondownload.csv", csv);
+            
 
             res.setHeader("Content-disposition", "attachment; filename=sensaisondownload_withpics.zip");
             res.setHeader("Content-Type", "application/octet-stream");

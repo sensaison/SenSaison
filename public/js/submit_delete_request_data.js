@@ -113,13 +113,8 @@ $(document).ready(function() {
                 location.href="/download?minDate=" + minDate + "&maxDate=" + maxDate + "&category=" + category;
             }
         }
-            })
-        }
-
-
-        //////////////////////////
-
         $("#data-request-form")[0].reset();
+    })
+})
 
-    });
-});
+        
