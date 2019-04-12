@@ -202,7 +202,7 @@ span.sb-icon{
 	display: block;
 	height: 70px;
 	width: 70px;
-	margin: 20px auto;
+  margin: 20px auto;
 	-webkit-touch-callout: none;
 	-webkit-user-select: none;
 	-khtml-user-select: none;
@@ -212,9 +212,6 @@ span.sb-icon{
 }
 
 span.sb-icon:before {
-	font-family: 'icons';
-	font-style: normal;
-	font-weight: normal;
 	speak: none;
 	display: block;
 	text-decoration: inherit;
