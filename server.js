@@ -1,11 +1,9 @@
 require("dotenv").config();
 const express = require("express");
-const exphbs = require("express-handlebars");
 
 // reqs for google OAuth
 const authRoutes = require('./routes/auth-routes')
 const passportSetup = require('./config/passport');
-//
 
 const db = require("./models");
 
@@ -16,20 +14,10 @@ let PORT = process.env.PORT || 3000;
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(express.static("public"));
-app.use('/auth', authRoutes);
-
-// Handlebars
-app.engine(
-    "handlebars",
-    exphbs({
-        defaultLayout: "main"
-    })
-);
-app.set("view engine", "handlebars");
+app.use("/auth", authRoutes);
 
 // Routes
 require("./routes/apiRoutes")(app);
-// require("./routes/htmlRoutes")(app);
 
 let syncOptions = { force: false };
 

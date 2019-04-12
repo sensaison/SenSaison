@@ -1,7 +1,7 @@
 require("dotenv").config();
-const Cloudinary = require("cloudinary");
+const Cloudinary = require("cloudinary").v2;
 
-Cloudinary.config({ 
+const cloudinary = Cloudinary.config({ 
     "cloud_name": "sensaison", 
     "api_key": process.env.CLOUDINARY_APIKEY, 
     "api_secret": process.env.CLOUDINARY_SECRET 

@@ -7,30 +7,39 @@ $(document).ready(function() {
         // USERID CODE FIRST
 
         ///////////////////////////////
-        let userIdVal;
+        let userIdVal="12345"
 
-        // CLOUDINARY
-        let categoryVal = $("#obs-category").val();
-        let dateObsVal = $("#date-obs").val();
 
-        let pictureIdVal;
-        cloudinary.v2.uploader.upload(
-            $("input[type=file]").files[0],
-            options = {
-                type: private,
-                folder: userIdVal, // each user will have their own folder
-                tags: [categoryVal, dateObsVal, userIdVal] // will add tag with obs ID after data is uploaded to mysql
-            }).then(function(res) { // response contains the unique public_id of the uploaded file
-                pictureIdVal = res.public_id;
-            }
-        );
         
-        
-        ///////////////
-
-        let newObs;
         if(window.userPin !== undefined) {
-            newObs = {
+
+            let categoryVal = $("#obs-category").val();
+            let dateObsVal = $("#date-obs").val();
+            let pictureIdVal;
+
+            let imgFile = $("#pic-file").files[0];
+            console.log("IMGFILE: " + imgFile);
+    
+            let newImgUpld = {
+                files: imgFile,
+                tagUserIdVal: userIdVal,
+                tagCategoryVal: categoryVal,
+                tagDateObsVal: dateObsVal
+            }
+    
+            $.ajax("https://api.cloudinary.com/v1_1/sensaison/image/upload", {
+                type: "POST",
+                data: newImgUpld
+            }).then(function(response) {
+                pictureIdVal = response.public_id;
+                console.log(pictureIdVal);
+            });
+
+
+
+
+
+            var newObs = {
                 userId: userIdVal,
                 pictureId: pictureIdVal,
                 dateObs: dateObsVal,
@@ -51,17 +60,12 @@ $(document).ready(function() {
             throw "User didn't place a pin on the map.";
         }
 
-        var newObsId;
         $.ajax("/api/observations", {
             type: "POST",
             data: newObs
         }).then(function(response) {
-            newObsId = response.id;
-
-            // tag pic with newObsId
-
-
-
+            console.log("response.id: " + response.id);
+            // cloudinary.v2.uploader.add_tag(response.id, newObs.pictureId);
             location.reload();
         }).then(function() {
             alert("Observation successfully submitted");
@@ -77,7 +81,7 @@ $(document).ready(function() {
         $.ajax({
             type: "DELETE",
             url: "/api/observations?id=" + id_delete
-        }).then(function(response) {
+        }).then(function() {
             // $(this).parents("tr").remove(); // why does this line not work here?
         });
 
