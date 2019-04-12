@@ -79,16 +79,15 @@ $(document).ready(function() {
         $.ajax({
             type: "DELETE",
             url: "/api/observations?id=" + id_delete
-        }).then(function() {
-            // $(this).parents("tr").remove(); // why does this line not work here?
+        }).then(function(res) {
+            $(this).parents("tr").remove();
         });
 
-        $(this).parents("tr").remove();
+        
     });
 
-    // GET request when requesting to download data
+    // request to download data
     $("#request-data").on("click", function(e) {
-        // e.preventDefault();
 
         let minDate = $("#start-date-download").val();
         let maxDate = $("#end-date-download").val();

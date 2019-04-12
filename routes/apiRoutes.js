@@ -3,10 +3,8 @@ const Sequelize = require("sequelize");
 const Op = Sequelize.Op;
 const json2csv = require("json2csv").parse;
 const cloudinary = require("../config/cloudinary");
-const fs = require("fs");
 const archiver = require("archiver");
-const async = require("async");
-const request = require("request");
+const zipURLs = require("./zipURLs");
 
 
 module.exports = function (app) {
@@ -104,39 +102,36 @@ module.exports = function (app) {
             }
         }).then(function(result) {
 
-            let zip = archiver.create("zip");
-
-            for (let i=0; i<result.length; i++) {
-
-                let picForDownload ="https://res.cloudinary.com/sensaison/image/" + result[i].pictureId;
-
-                async.eachLimit(urls, 3, function(picForDownload, done) {
-                    var stream = request.get(picForDownload);
-            
-                    stream.on("error", function(err) {
-                        return done(err);
-                    }).on("end", function() {
-                        return done();
-                    });
-            
-                    zip.append(stream, {
-                        name : result[i].pictureId
-                    });
-                }, function(err) {
-                    if (err) throw err;
-                    zip.finalize().pipe("/download-with-pictures");
-                });
-            }
-
-
-
-            }
-
             let csv = json2csv(result, {
-                fields: ["id", "userId", "pictureId", "dateObs", "timeObs", "latitude", "longitude", "category", "species", "speciesSciName", "speciesConfidence", "firstConfidence", "briefDescription", "extendedDescription"]
+                fields: [
+                    "id",
+                    "userId",
+                    "pictureId",
+                    "dateObs",
+                    "timeObs",
+                    "latitude",
+                    "longitude",
+                    "category",
+                    "species",
+                    "speciesSciName",
+                    "speciesConfidence",
+                    "firstConfidence",
+                    "briefDescription",
+                    "extendedDescription"
+                ]
             });
 
-          
+            let picsDownloadArr = []
+            for (let i=0; i<result.length; i++) {
+                let picForDownload ="https://res.cloudinary.com/sensaison/image/" + result[i].pictureId;
+                picsDownloadArr.push(picForDownload);
+            }
+
+            let zip = archiver.create("zip");
+            zip.append(csv, {
+                name: "sensaisondownload_withpics.csv"
+            })
+            zipURLs(picsDownloadArr, zip, "/download-with-pictures");
 
             res.setHeader("Content-disposition", "attachment; filename=sensaisondownload_withpics.zip");
             res.setHeader("Content-Type", "application/octet-stream");
@@ -159,7 +154,21 @@ module.exports = function (app) {
         }).then(function (result) {
             
             let csv = json2csv(result, {
-                fields: ["id", "userId", "dateObs", "timeObs", "latitude", "longitude", "category", "species", "speciesSciName", "speciesConfidence", "firstConfidence", "briefDescription", "extendedDescription"]
+                fields: [
+                    "id",
+                    "userId",
+                    "dateObs",
+                    "timeObs",
+                    "latitude",
+                    "longitude",
+                    "category",
+                    "species",
+                    "speciesSciName",
+                    "speciesConfidence",
+                    "firstConfidence",
+                    "briefDescription",
+                    "extendedDescription"
+                ]
             });
             res.setHeader("Content-disposition", "attachment; filename=sensaisondownload_nopics.csv");
             res.setHeader("Content-Type", "text/csv");
