@@ -22,7 +22,6 @@ $(document).ready(function() {
             $("#view-usr-obs").addClass("show");
             $("#view-usr-obs").removeClass("hidden");
 
-            // make sure all other div's are hidden
             $("#add-obs").addClass("hidden");
             $("#add-obs").removeClass("show");
             $("#view-near-obs").addClass("hidden");
@@ -37,7 +36,6 @@ $(document).ready(function() {
             $("#view-near-obs").addClass("show");
             $("#view-near-obs").removeClass("hidden");
 
-            // make sure all other div's are hidden
             $("#view-usr-obs").addClass("hidden");
             $("#view-usr-obs").removeClass("show");
             $("#add-obs").addClass("hidden");
@@ -45,7 +43,6 @@ $(document).ready(function() {
             $("#download-data").addClass("hidden");
             $("#download-data").removeClass("show");
         }
-        // NO ELSE because if it's already showing do nothing
     });
 
     $("#download-data-btn").on("click", function() {
@@ -53,7 +50,6 @@ $(document).ready(function() {
             $("#download-data").addClass("show");
             $("#download-data").removeClass("hidden");
 
-            // make sure all other div's are hidden
             $("#view-usr-obs").addClass("hidden");
             $("#view-usr-obs").removeClass("show");
             $("#view-near-obs").addClass("hidden");
@@ -61,10 +57,9 @@ $(document).ready(function() {
             $("#add-obs").addClass("hidden");
             $("#add-obs").removeClass("show");
         }
-        // NO ELSE because if it's already showing do nothing
     });
 
-    // paginate() function is for pagination of table showing all of the user's observations
+    // pagination of table showing all of the user's observations
     function paginate() {
         $("#all-your-obs").after("<br><ul class='pagination'><li class='waves-effect' id='start-pagination'><a href='#'><i class='material-icons'>chevron_left</i></a></li><li class='waves-effect' id='end-pagination'><a href='#'><i class='material-icons'>chevron_right</i></a></li></div>");
 
@@ -93,11 +88,8 @@ $(document).ready(function() {
     }
     paginate();
 
-    // // showUserObs() function is for displaying user's observations in table mentioned above
+    // displaying user's observations in table mentioned above
     function showUserObs(user) {
-        // let userID = User || "";
-        // how to get userId from page? AURI!!
-
         $.ajax("/api/userobservations", {
             type: "GET",
             data: {
@@ -128,7 +120,7 @@ $(document).ready(function() {
         });
     };
 
-    // let user = //AURI!!!;
-    showUserObs(13579);
+    // let userId = //AURI!!!;
+    showUserObs("13579");
 
 });
