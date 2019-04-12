@@ -139,9 +139,6 @@ module.exports = function (app) {
         })
     });
 
-
-
-
     // FIND observations for data request, convert to csv, and download client side NO PICTURES
     app.get("/download", function (req, res) {
         db.Observations.findAll({
@@ -214,11 +211,11 @@ module.exports = function (app) {
         console.log("REQ.QUERY: " + req.query);
 
         cloudinary.v2.uploader.upload(
-            req.body.files,
+            req.query.file,
             {
                 type: "private",
-                folder: req.body.tagUserIdVal,
-                tags: [req.body.tagCategoryVal, req.body.tagDateObsVal, req.body.tagUserIdVal] 
+                folder: req.query.tagUserIdVal,
+                tags: [req.query.tagCategoryVal, req.query.tagDateObsVal, req.query.tagUserIdVal] 
             },
             function(err, res) {
                 console.log("RES.PUBLIC_ID: " + res.public_id);

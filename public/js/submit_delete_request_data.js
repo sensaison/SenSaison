@@ -20,20 +20,23 @@ $(document).ready(function() {
             // console.log("IMGFILE: " + imgFile);
     
             let newImgUpld = {
-                files: imgFile,
+                file: imgFile,
                 tagUserIdVal: userIdVal,
                 tagCategoryVal: categoryVal,
                 tagDateObsVal: dateObsVal
             }
+
+            // console.log("newImgUpld: " + newImgUpld);
             
             let pictureIdVal;
 
             $.ajax("https://api.cloudinary.com/v1_1/sensaison/image/upload", {
                 type: "POST",
                 data: newImgUpld
-            }).then(function(response) {
-                pictureIdVal = response.public_id;
-                console.log(pictureIdVal);
+            }).then(function(err, res) {
+                if (err) throw err;
+                pictureIdVal = res.public_id;
+                console.log("pictureIdVal: " + pictureIdVal);
             });
 
 

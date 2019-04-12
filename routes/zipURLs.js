@@ -1,11 +1,12 @@
-var async    = require("async");
-var request  = require("request");
+const async = require("async");
+const request = require("request");
+const fs = require("fs");
 
 function zipURLs(urls, zip, outStream) {
     //create zip file outside of function
 
     async.eachLimit(urls, 3, function(url, done) {
-        var stream = request.get(url);
+        let stream = request.get(url);
 
         stream.on("zip", function(err) {
         return done(err);
