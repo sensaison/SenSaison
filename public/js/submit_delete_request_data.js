@@ -99,7 +99,8 @@ $(document).ready(function() {
         }
 
 
-
+        // if pictures downloading too, need to send everything in a zip file
+        
         // CLOUDINARY AJAX CALL
         // if ($("#include-pictures").is(":checked")) {
         //     console.log("pics included in download");
