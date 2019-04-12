@@ -89,7 +89,52 @@ module.exports = function (app) {
         });
     });
 
-    // FIND observations for data request, convert to csv, and download client side
+    // FIND observations for data request WITH PICTURES
+    app.get("/download-with-pictures", function (req, res) {
+        db.Observations.findAll({
+            where: {
+                category: req.query.category,
+                dateObs: {
+                    [Op.between]: [req.query.minDate, req.query.maxDate]
+                }
+            }
+        }).then(function(result) {
+
+            let zip = new jszip();
+            let images = zip.folder("images");
+
+            for (let i=0; i<result.length; i++) {
+
+                let picForDownload ="https://res.cloudinary.com/sensaison/image/" + result[i].pictureId;
+
+                JSZipUtils.getBinaryContent(picForDownload, function (err, data) {
+                    if (err) throw err;
+                    images.file(
+                        result[i].pictureId,
+                        data,
+                        {
+                            binary: true
+                        }
+                    );
+                 });
+            }
+
+            let csv = json2csv(result, {
+                fields: ["id", "userId", "pictureId", "dateObs", "timeObs", "latitude", "longitude", "category", "species", "speciesSciName", "speciesConfidence", "firstConfidence", "briefDescription", "extendedDescription"]
+            });
+
+            zip.file("sensaisondownload.csv", csv);
+
+            res.setHeader("Content-disposition", "attachment; filename=sensaisondownload_withpics.zip");
+            res.setHeader("Content-Type", "application/octet-stream");
+            res.status(200).send(zip);
+        })
+    });
+
+
+
+
+    // FIND observations for data request, convert to csv, and download client side NO PICTURES
     app.get("/download", function (req, res) {
         db.Observations.findAll({
             where: {
@@ -100,9 +145,9 @@ module.exports = function (app) {
             }
         }).then(function (result) {
             let csv = json2csv(result, {
-                fields: ["id", "userId", "pictureId", "dateObs", "timeObs", "latitude", "longitude", "category", "species", "speciesSciName", "speciesConfidence", "firstConfidence", "briefDescription", "extendedDescription"]
+                fields: ["id", "userId", "dateObs", "timeObs", "latitude", "longitude", "category", "species", "speciesSciName", "speciesConfidence", "firstConfidence", "briefDescription", "extendedDescription"]
             });
-            res.setHeader("Content-disposition", "attachment; filename=sensaisondownload.csv");
+            res.setHeader("Content-disposition", "attachment; filename=sensaisondownload_nopics.csv");
             res.setHeader("Content-Type", "text/csv");
             res.status(200).send(csv);
         }).done(function() {
