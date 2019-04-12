@@ -92,29 +92,23 @@ $(document).ready(function() {
 
         let minDate = $("#start-date-download").val();
         let maxDate = $("#end-date-download").val();
-
-        // if pictures downloading too, need to send everything in a zip file
         
-        // CLOUDINARY AJAX CALL
-        if ($("#include-pictures").is(":checked")) {
+        if ($("#include-pictures").is(":checked")) { // PICTURES IN DOWNLOAD
             console.log("pics included in download");
 
-            $.ajax("/api/observations", {
-                method: "GET",
-                data: 
-            }).then(function(response) {
-                
-            })
+            if ($("#category-download").val() === "all") { // ALL categories selected
+                location.href="/download-with-pictures?minDate=" + minDate + "&maxDate=" + maxDate + "&category=animal&category=plant&category=fungus&category=weather&category=land_water";
 
-            "https://res.cloudinary.com/sensaison/image/" + 
+            } else { // single category selected
+                let category = $("#category-download").val();
+                location.href="/download-with-pictures?minDate=" + minDate + "&maxDate=" + maxDate + "&category=" + category;
+            }
 
-
-
-        
-        } else {
-            if ($("#category-download").val() === "all") {
+        } else { // NO PICTURES
+            console.log("NO pics included in download");
+            if ($("#category-download").val() === "all") { // ALL categories selected
                 location.href="/download?minDate=" + minDate + "&maxDate=" + maxDate + "&category=animal&category=plant&category=fungus&category=weather&category=land_water";
-            } else {
+            } else { // single category selected
                 let category = $("#category-download").val();
                 location.href="/download?minDate=" + minDate + "&maxDate=" + maxDate + "&category=" + category;
             }
