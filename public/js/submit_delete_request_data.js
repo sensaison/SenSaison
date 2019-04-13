@@ -1,3 +1,5 @@
+// import { picture } from "cloudinary/lib-es5/cloudinary";
+
 $(document).ready(function() {
 
     // POST request when submitting new observation
@@ -18,18 +20,17 @@ $(document).ready(function() {
 
 
 
-            let pictureData = null;
 
-            $("#pic-file").on("change", function() {
-                let reader = new FileReader();
-                reader.onload = function() {
-                    let arrayBuffer = this.result;
-                    let array = new Uint8Array(arrayBuffer);
-                    let binaryString = String.fromCharCode.apply(null, array);
-                    pictureData = binaryString;
-                }
-                reader.readAsArrayBuffer(this.files[0]);
-            }, false);
+            
+            let reader = new FileReader();
+            let arrayBuffer = $("#pic-file").result;
+            let array = new Uint8Array(arrayBuffer);
+            let binaryString = String.fromCharCode.apply(null, array);
+            let pictureData = binaryString;
+            console.log("pictureData 1: " + pictureData);
+            reader.readAsArrayBuffer($("#pic-file").prop("files")[0]);
+
+            console.log("picturedata 2: " + pictureData);
 
 
             // let imgFile = $("#pic-file").prop("files")[0];
