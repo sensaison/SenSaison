@@ -7,6 +7,7 @@ var selectedLocationID;
 var coordinates = {};
 var nearbyMap;
 var userMap;
+var userObs;
 allowTime();
 
 function getLocation() {
@@ -103,6 +104,10 @@ function generateMap() {
     } else if(mapType === 1) {
         // Do some stuff to pin all user observations
         userMap = map;
+        console.log(userObs);
+        for(var i = 0; i < userObs.length; i++) {
+            placeYourMarker(new google.maps.LatLng(userObs[i].latitude, userObs[i].longitude), userMap);
+        }
     } else if(mapType === 2) {
         // Do some stuff to pin all nearby observations
         nearbyMap = map;
@@ -119,7 +124,16 @@ function placeMarkerAndPanTo(latLng, map) {
     userPin = marker;
 }
 
-function placeMarker(latLng, map) {
+function placeNearbyMarker(latLng, map, obsValues) {
+    console.log("Nearby Observation Deets:");
+    console.log(obsValues);
+    var marker = new google.maps.Marker({
+        position: latLng,
+        map: map
+    });
+}
+
+function placeYourMarker(latLng, map) {
     var marker = new google.maps.Marker({
         position: latLng,
         map: map
@@ -154,7 +168,7 @@ $("#get-nearby").click(function getNearby() {
         }
         if(pointsToMark !== undefined) {
             for(var i = 0; i < pointsToMark.length; i++) {
-                placeMarker(new google.maps.LatLng(pointsToMark[i].latitude, pointsToMark[i].longitude), nearbyMap);
+                placeNearbyMarker(new google.maps.LatLng(pointsToMark[i].latitude, pointsToMark[i].longitude), nearbyMap, pointsToMark[i]);
             }
         }
         switch(radiusMeters) {

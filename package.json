@@ -16,6 +16,7 @@
     "cloudinary": "^1.14.0",
     "dotenv": "^6.0.0",
     "express": "^4.16.3",
+    "faker": "^4.1.0",
     "fs": "0.0.1-security",
     "git": "^0.1.5",
     "json2csv": "^4.4.1",
