@@ -88,6 +88,8 @@ $(document).ready(function() {
     });
     
     // DELETE request when deleting observation
+        $("#all-your-obs-body").on("click", ".delete", function(e) {
+        e.preventDefault();
       $.ajax("/api/observations", {
           type: "POST",
           data: newObs
