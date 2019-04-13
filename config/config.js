@@ -6,14 +6,14 @@ module.exports = {
         password: process.env.MYSQLPWD,
         database: process.env.MYSQLDB,
         host: process.env.MYSQLHOST,
-        "dialect": "mysql"  
+        dialect: "mysql"  
     },
     test: {
         username: "root",
         password: "",
         database: "",
         host: "127.0.0.1",
-        "dialect": "mysql"
+        dialect: "mysql"
     },
     production: {
     // eslint-disable-next-line camelcase
