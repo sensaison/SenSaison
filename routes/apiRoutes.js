@@ -6,6 +6,8 @@ const Sequelize = require("sequelize");
 const Op = Sequelize.Op;
 const json2csv = require("json2csv").parse;
 const cloudinary = require("../config/cloudinary");
+const archiver = require("archiver");
+const zipURLs = require("./zipURLs");
 
 module.exports = function (app) {
 
@@ -101,7 +103,55 @@ module.exports = function (app) {
         });
     });
 
-    // FIND observations for data request, convert to csv, and download client side
+    // FIND observations for data request WITH PICTURES
+    app.get("/download-with-pictures", function (req, res) {
+        db.Observations.findAll({
+            where: {
+                category: req.query.category,
+                dateObs: {
+                    [Op.between]: [req.query.minDate, req.query.maxDate]
+                }
+            }
+        }).then(function(result) {
+
+            let csv = json2csv(result, {
+                fields: [
+                    "id",
+                    "userId",
+                    "pictureId",
+                    "dateObs",
+                    "timeObs",
+                    "latitude",
+                    "longitude",
+                    "category",
+                    "species",
+                    "speciesSciName",
+                    "speciesConfidence",
+                    "firstConfidence",
+                    "briefDescription",
+                    "extendedDescription"
+                ]
+            });
+
+            let picsDownloadArr = []
+            for (let i=0; i<result.length; i++) {
+                let picForDownload ="https://res.cloudinary.com/sensaison/image/" + result[i].pictureId;
+                picsDownloadArr.push(picForDownload);
+            }
+
+            let zip = archiver.create("zip");
+            zip.append(csv, {
+                name: "sensaisondownload_withpics.csv"
+            })
+            zipURLs(picsDownloadArr, zip, "/download-with-pictures");
+
+            res.setHeader("Content-disposition", "attachment; filename=sensaisondownload_withpics.zip");
+            res.setHeader("Content-Type", "application/octet-stream");
+            res.status(200).send(zip);
+        })
+    });
+
+    // FIND observations for data request, convert to csv, and download client side NO PICTURES
     app.get("/download", function (req, res) {
         db.Observations.findAll({
             where: {
@@ -111,10 +161,25 @@ module.exports = function (app) {
                 }
             }
         }).then(function (result) {
+            
             let csv = json2csv(result, {
-                fields: ["id", "userId", "pictureId", "dateObs", "timeObs", "latitude", "longitude", "category", "species", "speciesSciName", "speciesConfidence", "firstConfidence", "briefDescription", "extendedDescription"]
+                fields: [
+                    "id",
+                    "userId",
+                    "dateObs",
+                    "timeObs",
+                    "latitude",
+                    "longitude",
+                    "category",
+                    "species",
+                    "speciesSciName",
+                    "speciesConfidence",
+                    "firstConfidence",
+                    "briefDescription",
+                    "extendedDescription"
+                ]
             });
-            res.setHeader("Content-disposition", "attachment; filename=sensaisondownload.csv");
+            res.setHeader("Content-disposition", "attachment; filename=sensaisondownload_nopics.csv");
             res.setHeader("Content-Type", "text/csv");
             res.status(200).send(csv);
         }).done(function() {
@@ -152,19 +217,23 @@ module.exports = function (app) {
     });
 
     // UPLOAD one picture to cloudinary
-    app.post("https://api.cloudinary.com/v1_1/sensaison/image/upload", function(req, res) {
-        console.log("REQ: " + req);
-        console.log("REQ.QUERY: " + req.query);
-        cloudinary.v2.uploader.upload(
-            req.query.files.path,
-            {
-                type: "private",
-                folder: req.query.tagUserIdVal,
-                tags: [req.query.tagCategoryVal, req.query.tagDateObsVal, req.query.tagUserIdVal] 
-            },
-            function(err, res) {
-                console.log("RES.PUBLIC_ID: " + res.public_id);
-            }
-        )
-    });
+    // app.post("https://api.cloudinary.com/v1_1/sensaison/image/upload", function(req, res) {
+
+    //     console.log("REQ: " + req);
+    //     console.log("REQ.body: " + req.params);
+
+    //     cloudinary.v2.uploader.unsigned_upload(
+    //         req.params.file,
+    //         "default_preset",
+    //         {
+    //             cloud_name: "sensaison",
+    //             folder: req.params.tagUserIdVal,
+    //             tags: [req.params.tagCategoryVal, req.params.tagDateObsVal, req.params.tagUserIdVal] 
+    //         },
+    //         function(err, res) {
+    //             if (err) throw err;
+    //             console.log("RES.PUBLIC_ID: " + res.public_id);
+    //         }
+    //     )
+    // });
 }
