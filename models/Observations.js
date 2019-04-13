@@ -14,7 +14,7 @@ module.exports = function(sequelize, DataTypes) {
             allowNull: false
         },
         pictureId: {
-            type: DataTypes.STRING,
+            type: DataTypes.INTEGER,
             allowNull: false
         },
         dateObs: {
