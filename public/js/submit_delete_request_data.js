@@ -16,7 +16,7 @@ $(document).ready(function() {
             let categoryVal = $("#obs-category").val();
             let dateObsVal = $("#date-obs").val();
 
-            let imgFile = $("#pic-file[type=file]").val();
+            let imgFile = $("#pic-file[type=file]").files;
             // console.log("IMGFILE: " + imgFile);
     
             let newImgUpld = {
