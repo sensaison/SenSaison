@@ -1,6 +1,3 @@
-const fs = require('fs');
-const path = require('path');
-const imagePath = path.resolve(__dirname, '..', 'public', 'images');
 const db = require("../models");
 const Sequelize = require("sequelize");
 const Op = Sequelize.Op;
@@ -76,21 +73,11 @@ module.exports = function (app) {
 
     // CREATE new observation
     app.post("/api/observations", function (req, res) {
-      db.Observations.create(req.body)
-          .then(function (dbObs) {
-              if (req.body.pictureData) {
-                  var base64Data = req.body.pictureData.replace(/^data:image\/[a-z]+;base64,/, '');
-                  fs.writeFile(`${imagePath}/${req.body.pictureId}`, base64Data, 'base64', function (err) {
-                      if (err) {
-                          console.log(err);
-                      }
-                      res.json(dbObs);
-                  });
-              } else {
-                  res.json(dbObs);
-              }
-          });
-  });
+                db.Observations.create(req.body)
+            .then(function (dbObs) {
+                res.json(dbObs);
+            });
+    });
 
     // DESTROY one observation
     app.delete("/api/observations", function (req, res) {
