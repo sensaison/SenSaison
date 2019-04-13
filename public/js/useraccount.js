@@ -59,41 +59,12 @@ $(document).ready(function() {
         }
     });
 
-    // pagination of table showing all of the user's observations
-    function paginate() {
-        $("#all-your-obs").after("<br><ul class='pagination'><li class='waves-effect' id='start-pagination'><a href='#'><i class='material-icons'>chevron_left</i></a></li><li class='waves-effect' id='end-pagination'><a href='#'><i class='material-icons'>chevron_right</i></a></li></div>");
-
-        let rowsShown = 10;
-        let rowsTotal = $("#all-your-obs tbody tr").length;
-        let numPages = rowsTotal/rowsShown;
-
-        for (i = 0; i < numPages; i++) {
-            let pageNum = i + 1;
-            $("#end-pagination").before("<li class='btn waves-effect waves-light btn-flat'><a href='#' rel='" + i + "'>" + pageNum + "</a></li>");
-        }
-
-        $("#all-your-obs tbody tr").hide();
-        $("#all-your-obs tbody tr").slice(0, rowsShown).show();
-        $(".pagination a:first").addClass("active");
-
-        $(".pagination a").bind("click", function(e) {
-            e.preventDefault();
-            $(".pagination a").parent("li").removeClass("active");
-            $(this).parent("li").addClass("active");
-            let currPage = $(this).attr("rel");
-            let startItem = currPage * rowsShown;
-            var endItem = startItem + rowsShown;
-            $("#all-your-obs tbody tr").css("opacity","0.0").hide().slice(startItem, endItem).css("display","table-row").animate({opacity:1}, 300);
-        });   
-    }
-    paginate();
 
     // displaying user's observations in table mentioned above
-    function showUserObs(user) {
         $.ajax("/api/userobservations", {
             type: "GET",
             data: {
-                userId: user
+                userId: "13579"
             }
         }).then(function(data) {
             window.userObs = data;
@@ -117,10 +88,31 @@ $(document).ready(function() {
                     );
                 }
             }
-        });
-    }
-
-    // let userId = //AURI!!!;
-    showUserObs("13579");
+        }).then(function () {
+            $("#all-your-obs").after("<br><ul class='pagination'><li class='waves-effect' id='start-pagination'><a href='#'><i class='material-icons'>chevron_left</i></a></li><li class='waves-effect' id='end-pagination'><a href='#'><i class='material-icons'>chevron_right</i></a></li></div>");
+    
+            let rowsShown = 10;
+            let rowsTotal = $("#all-your-obs tbody tr").length;
+            let numPages = rowsTotal/rowsShown;
+    
+            for (i = 0; i < numPages; i++) {
+                let pageNum = i + 1;
+                $("#end-pagination").before("<li class='btn waves-effect waves-light btn-flat'><a href='#' rel='" + i + "'>" + pageNum + "</a></li>");
+            }
+    
+            $("#all-your-obs tbody tr").hide();
+            $("#all-your-obs tbody tr").slice(0, rowsShown).show();
+            $(".pagination a:first").addClass("active");
+    
+            $(".pagination a").bind("click", function(e) {
+                e.preventDefault();
+                $(".pagination a").parent("li").removeClass("active");
+                $(this).parent("li").addClass("active");
+                let currPage = $(this).attr("rel");
+                let startItem = currPage * rowsShown;
+                var endItem = startItem + rowsShown;
+                $("#all-your-obs tbody tr").css("opacity","0.0").hide().slice(startItem, endItem).css("display","table-row").animate({opacity:1}, 300);
+            });   
+        })
 
 });
