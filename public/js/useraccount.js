@@ -96,7 +96,7 @@ $(document).ready(function() {
                 userId: user
             }
         }).then(function(data) {
-
+            window.userObs = data;
             if (!data || !data.length) {
                 // if no data then add a row saying so
                 $("#all-your-obs-body").prepend("<tr class='no-data'><td></td><td></td><td>No observations to display</td><td></td></tr>"
