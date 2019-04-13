@@ -3319,9 +3319,10 @@ td, th {
   text-align: right;
 }
 
-.center, .center-align {
+.center-align {
   text-align: center;
 }
+
 
 .left {
   float: left !important;

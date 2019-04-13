@@ -5,6 +5,7 @@ const db = require("../models");
 const Sequelize = require("sequelize");
 const Op = Sequelize.Op;
 const json2csv = require("json2csv").parse;
+const cloudinary = require("../config/cloudinary");
 
 module.exports = function (app) {
 
@@ -15,17 +16,6 @@ module.exports = function (app) {
                 model: db.Users,
                 attributes: ["userId", "firstName", "lastName", "username"]
             }]
-        }).then(function (dbObs) {
-            res.json(dbObs);
-        });
-    });
-
-    // FIND ONE user's observations
-    app.get("/api/userobservations", function (req, res) {
-        db.Observations.findAll({
-            where: {
-                userId: req.query.userId
-            }
         }).then(function (dbObs) {
             res.json(dbObs);
         });
@@ -83,7 +73,6 @@ module.exports = function (app) {
     });
 
     // CREATE new observation
-    // need to test this with oauth
     app.post("/api/observations", function (req, res) {
       db.Observations.create(req.body)
           .then(function (dbObs) {
@@ -125,14 +114,23 @@ module.exports = function (app) {
             let csv = json2csv(result, {
                 fields: ["id", "userId", "pictureId", "dateObs", "timeObs", "latitude", "longitude", "category", "species", "speciesSciName", "speciesConfidence", "firstConfidence", "briefDescription", "extendedDescription"]
             });
-            // below line does not work locally but does in postman
-            // browser not redirecting or some such
             res.setHeader("Content-disposition", "attachment; filename=sensaisondownload.csv");
             res.setHeader("Content-Type", "text/csv");
             res.status(200).send(csv);
         }).done(function() {
             console.log("successful");
         })
+    });
+
+    // FIND ONE user's observations
+    app.get("/api/userobservations", function (req, res) {
+        db.Observations.findAll({
+            where: {
+                userId: req.query.userId
+            }
+        }).then(function (dbObs) {
+            res.json(dbObs);
+        });
     });
 
     // FIND ALL users
@@ -146,7 +144,6 @@ module.exports = function (app) {
     });
 
     // CREATE new user
-    // need to test this with oauth
     app.post("/api/users", function (req, res) {
         db.Users.create(req.body)
             .then(function (newusr) {
@@ -154,4 +151,20 @@ module.exports = function (app) {
             });
     });
 
-};
+    // UPLOAD one picture to cloudinary
+    app.post("https://api.cloudinary.com/v1_1/sensaison/image/upload", function(req, res) {
+        console.log("REQ: " + req);
+        console.log("REQ.QUERY: " + req.query);
+        cloudinary.v2.uploader.upload(
+            req.query.files.path,
+            {
+                type: "private",
+                folder: req.query.tagUserIdVal,
+                tags: [req.query.tagCategoryVal, req.query.tagDateObsVal, req.query.tagUserIdVal] 
+            },
+            function(err, res) {
+                console.log("RES.PUBLIC_ID: " + res.public_id);
+            }
+        )
+    });
+}
