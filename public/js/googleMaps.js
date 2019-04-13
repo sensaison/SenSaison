@@ -107,6 +107,9 @@ function generateMap() {
         console.log(userObs);
         for(var i = 0; i < userObs.length; i++) {
             placeYourMarker(new google.maps.LatLng(userObs[i].latitude, userObs[i].longitude), userMap);
+            if(i === 0) {
+                userMap.panTo(new google.maps.LatLng(userObs[i].latitude, userObs[i].longitude));
+            }
         }
     } else if(mapType === 2) {
         // Do some stuff to pin all nearby observations
