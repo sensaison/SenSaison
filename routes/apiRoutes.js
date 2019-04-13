@@ -6,7 +6,6 @@ const cloudinary = require("../config/cloudinary");
 const archiver = require("archiver");
 const zipURLs = require("./zipURLs");
 
-
 module.exports = function (app) {
 
     // FIND ALL observations
