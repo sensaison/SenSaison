@@ -205,21 +205,23 @@ module.exports = function (app) {
     });
 
     // UPLOAD one picture to cloudinary
-    app.post("https://api.cloudinary.com/v1_1/sensaison/image/upload", function(req, res) {
+    // app.post("https://api.cloudinary.com/v1_1/sensaison/image/upload", function(req, res) {
 
-        console.log("REQ: " + req);
-        console.log("REQ.body: " + req.body);
+    //     console.log("REQ: " + req);
+    //     console.log("REQ.body: " + req.params);
 
-        cloudinary.v2.uploader.upload(
-            req.body.file,
-            {
-                type: "private",
-                folder: req.body.tagUserIdVal,
-                tags: [req.body.tagCategoryVal, req.body.tagDateObsVal, req.body.tagUserIdVal] 
-            },
-            function(err, res) {
-                console.log("RES.PUBLIC_ID: " + res.public_id);
-            }
-        )
-    });
+    //     cloudinary.v2.uploader.unsigned_upload(
+    //         req.params.file,
+    //         "default_preset",
+    //         {
+    //             cloud_name: "sensaison",
+    //             folder: req.params.tagUserIdVal,
+    //             tags: [req.params.tagCategoryVal, req.params.tagDateObsVal, req.params.tagUserIdVal] 
+    //         },
+    //         function(err, res) {
+    //             if (err) throw err;
+    //             console.log("RES.PUBLIC_ID: " + res.public_id);
+    //         }
+    //     )
+    // });
 }

@@ -78,120 +78,118 @@
             <br>
             <p><i>Fields marked with an asterisk (*) are required.</i></p>
             <br>
-            <form id="obs-submission-form" onsubmit="return false">
+            <form id="obs-submission-form" >
                 <div class="row">
-                <div class="input-field col s12 m4">
-                    <input type="text" class="datepicker" id="date-obs" required="" aria-required="true">
-                    <label for="date-obs">Date of observation*</label>
-                </div>
+                    <div class="input-field col s12 m4">
+                        <input type="text" class="datepicker" id="date-obs" required="" aria-required="true">
+                        <label for="date-obs">Date of observation*</label>
+                    </div>
 
-                <div class="input-field col s12 m4">
-                    <!-- step="1" is to change time format to hh:mm:ss -->
-                    <input type="text" class="timepicker" step="1" id="time-obs" required="" aria-required="true">
-                    <label for="time-obs">Time of observation*</label>
-                </div>
+                    <div class="input-field col s12 m4">
+                        <!-- step="1" is to change time format to hh:mm:ss -->
+                        <input type="text" class="timepicker" step="1" id="time-obs" required="" aria-required="true">
+                        <label for="time-obs">Time of observation*</label>
+                    </div>
 
-                <div class="input-field col s12 m4">
-                    <select id="obs-category" required="" aria-required="true">
-                    <option value="" disabled selected class="form-option">Choose an option</option>
-                    <option value="animal" class="form-option">Animal&dagger;</option>
-                    <option value="plant" class="form-option">Plant&dagger;</option>
-                    <option value="fungus" class="form-option">Fungus&dagger;</option>
-                    <option value="weather" class="form-option">Weather</option>
-                    <option value="land_water" class="form-option">Land or water</option>
-                    <option value="other" class="form-option">Other (please explain in Description fields)</option>
-                    </select>
-                    <label for="obs-category">Category of observation*</label>
-                </div>
+                    <div class="input-field col s12 m4">
+                        <select id="obs-category" required="" aria-required="true">
+                        <option value="" disabled selected class="form-option">Choose an option</option>
+                        <option value="animal" class="form-option">Animal&dagger;</option>
+                        <option value="plant" class="form-option">Plant&dagger;</option>
+                        <option value="fungus" class="form-option">Fungus&dagger;</option>
+                        <option value="weather" class="form-option">Weather</option>
+                        <option value="land_water" class="form-option">Land or water</option>
+                        <option value="other" class="form-option">Other (please explain in Description fields)</option>
+                        </select>
+                        <label for="obs-category">Category of observation*</label>
+                    </div>
                 </div>
 
                 <div class="row">
-                <div class="col s12 m6">
-                    <label for="googlemap">Location of observation*</label>
-                    <div id="map-wrapper">
-                        <form>
-                        <button class="btn waves-effect waves-light g1 disabled" type="button" id="clear-pins" disabled="true">Clear Pin</button>
-                        </form>
-                        <div class="mapDisplayed" id="map-0"></div>
+                    <div class="col s12 m6">
+                        <label for="googlemap">Location of observation*</label>
+                        <div id="map-wrapper">
+                            <form>
+                            <button class="btn waves-effect waves-light g1 disabled" type="button" id="clear-pins" disabled="true">Clear Pin</button>
+                            </form>
+                            <div class="mapDisplayed" id="map-0"></div>
+                        </div>
+                    </div>
+
+                    <div class="col s12 m6">
+
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <textarea id="brief-desc" class="materialize-textarea validate" data-length="50" required=""  aria-required="true" placeholder="Ex. First Canada geese to return from winter"></textarea>
+                                <label for="brief-desc">Brief description of observation*</label>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <textarea id="extended-desc" class="materialize-textarea validate" data-length="500" placeholder="Ex. Cold day, some patches of ice on Mirror Lake. Four Canada geese showed up early this morning."></textarea>
+                                <label for="extended-desc">Extended description of observation</label>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <select id="first-confidence" required="" aria-required="true">
+                                <option value="1" selected class="form-option">1 - low confidence (default)</option>
+                                <option value="2" class="form-option">2</option>
+                                <option value="3" class="form-option">3</option>
+                                <option value="4" class="form-option">4</option>
+                                <option value="5" class="form-option">5 - high confidence</option>
+                                </select>
+                                <label for="first-confidence">Confidence that your observation is the first of its type in your area*</label>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="file-field input-field col s12">
+                                <button class="btn waves-effect waves-teal btn-flat btn-small" id="pic-button">
+                                Upload
+                                <input type="file" id="pic-file" accept="image/*" required="" aria-required="true">
+                                </button>
+                                <div class="file-path-wrapper">
+                                <input class="file-path validate" id="pic-path" type="text" placeholder="Upload ONE picture*" required="" aria-required="true">
+                                </div>
+                                
+                            </div>
+                        </div>
+
                     </div>
                 </div>
 
-                <div class="col s12 m6">
-
-                    <div class="row">
-                    <div class="input-field col s12">
-                        <textarea id="brief-desc" class="materialize-textarea validate" data-length="50" required=""  aria-required="true" placeholder="Ex. First Canada geese to return from winter"></textarea>
-                        <label for="brief-desc">Brief description of observation*</label>
-                    </div>
-                    </div>
-
-                    <div class="row">
-                    <div class="input-field col s12">
-                        <textarea id="extended-desc" class="materialize-textarea validate" data-length="500" placeholder="Ex. Cold day, some patches of ice on Mirror Lake. Four Canada geese showed up early this morning."></textarea>
-                        <label for="extended-desc">Extended description of observation</label>
-                    </div>
+                <br>
+                <div class="row">
+                    <p>&dagger;<i>The following section is required if you selected animal, plant, or fungus.</i></p>
+                    <br>
+                    <div class="input-field col s12 m6 l4">
+                        <label for="species">Species common name&dagger;</label>
+                        <input type="text" class="validate" id="species" data-length="50">
                     </div>
 
-                    <div class="row">
-                    <div class="input-field col s12">
-                        <select id="first-confidence" required="" aria-required="true">
-                        <option value="1" selected class="form-option">1 - low confidence (default)</option>
+                    <div class="input-field col s12 m6 l4">
+                        <label for="species-sci-name">Species scientific name (if known)</label>
+                        <input type="text" class="validate" id="species-sci-name" data-length="50">
+                    </div>
+
+                    <div class="input-field col s12 m6 l4">
+                        <select id="species-confidence">
+                        <option value="" disabled selected class="form-option">Choose an option</option>
+                        <option value="1" class="form-option">1 - low confidence</option>
                         <option value="2" class="form-option">2</option>
                         <option value="3" class="form-option">3</option>
                         <option value="4" class="form-option">4</option>
                         <option value="5" class="form-option">5 - high confidence</option>
                         </select>
-                        <label for="first-confidence">Confidence that your observation is the first of its type in your area*</label>
+                        <label for="species-confidence">Species ID confidence&dagger;</label>
                     </div>
-                    </div>
-
-                    <div class="row">
-                    <div class="file-field input-field col s12">
-                        <button class="btn waves-effect waves-teal btn-flat btn-small" id="pic-button">
-                        Upload
-                        <input type="file" id="pic-file" required="" aria-required="true">
-                        </button>
-                        <div class="file-path-wrapper">
-                        <input class="file-path validate" id="pic-path" type="text" placeholder="Upload ONE picture*" required="" aria-required="true">
-                        </div>
-                        
-                    </div>
-                    </div>
-
-                </div>
-                </div>
-
-                <br>
-                <div class="row">
-                <p>&dagger;<i>The following section is required if you selected animal, plant, or fungus.</i></p>
-                <br>
-                <div class="input-field col s12 m6 l4">
-                    <label for="species">Species common name&dagger;</label>
-                    <input type="text" class="validate" id="species" data-length="50">
-                </div>
-
-                <div class="input-field col s12 m6 l4">
-                    <label for="species-sci-name">Species scientific name (if known)</label>
-                    <input type="text" class="validate" id="species-sci-name" data-length="50">
-                </div>
-
-                <div class="input-field col s12 m6 l4">
-                    <select id="species-confidence">
-                    <option value="" disabled selected class="form-option">Choose an option</option>
-                    <option value="1" class="form-option">1 - low confidence</option>
-                    <option value="2" class="form-option">2</option>
-                    <option value="3" class="form-option">3</option>
-                    <option value="4" class="form-option">4</option>
-                    <option value="5" class="form-option">5 - high confidence</option>
-                    </select>
-                    <label for="species-confidence">Species ID confidence&dagger;</label>
-                </div>
                 </div>
                 <br>
                 <div class="row">
-                <form>
-                    <button class="btn waves-effect waves-light g1 disabled" type="submit" id="submit-obs" disabled="true">Submit</button> 
-                </form>
+                    <button class="btn waves-effect waves-light g1" type="submit" id="submit-obs">Submit</button> 
                 </div>
             </form>
             </div>
@@ -257,6 +255,7 @@
                 </tr>
                 </thead>
                 <tbody id="all-your-obs-body">
+                    <!-- this table gets populated dynamically -->
                 </tbody>
             </table>
 

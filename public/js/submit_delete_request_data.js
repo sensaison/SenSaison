@@ -2,13 +2,13 @@ $(document).ready(function() {
 
     // POST request when submitting new observation
     $("#submit-obs").on("click", function(e) {
-        e.preventDefault(); // this line prevents front-end required validation from occurring
+        // e.preventDefault(); // this line prevents front-end required validation from occurring
 
         // USERID CODE FIRST
 
-        ///////////////////////////////
         let userIdVal="12345"
 
+        ///////////////////////////////
 
         
         if(window.userPin !== undefined) {
@@ -16,61 +16,64 @@ $(document).ready(function() {
             let categoryVal = $("#obs-category").val();
             let dateObsVal = $("#date-obs").val();
 
-            let imgFile = $("#pic-file[type=file]").files;
-            // console.log("IMGFILE: " + imgFile);
-    
-            let newImgUpld = {
-                file: imgFile,
-                tagUserIdVal: userIdVal,
-                tagCategoryVal: categoryVal,
-                tagDateObsVal: dateObsVal
-            }
+            let imgFile = $("#pic-file").prop("files")[0];
+            console.log("IMGFILE: " + imgFile);
 
-            // console.log("newImgUpld: " + newImgUpld);
-            
             let pictureIdVal;
 
-            $.ajax("https://api.cloudinary.com/v1_1/sensaison/image/upload", {
-                type: "POST",
-                data: newImgUpld
-            }).then(function(err, res) {
-                if (err) throw err;
+            $.ajax({
+                method: "POST",
+                url: "https://api.cloudinary.com/v1_1/sensaison/image/upload",
+                data: {
+                    file: imgFile,
+                    upload_preset: "default_preset",
+                    folder: userIdVal,
+                    tags: [categoryVal, dateObsVal, userIdVal] 
+                },
+                error: function(xhr, err) {
+                    console.log(xhr);
+                    console.log(err);
+                }
+            }).then(function(res) {
                 pictureIdVal = res.public_id;
                 console.log("pictureIdVal: " + pictureIdVal);
-            });
+            }).then(function() {
+                var newObs = {
+                    userId: userIdVal,
+                    pictureId: pictureIdVal,
+                    dateObs: dateObsVal,
+                    timeObs: $("#time-obs").val(),
+                    latitude: window.userPin.position.lat(),
+                    longitude: window.userPin.position.lng(),
+                    category: categoryVal,
+                    firstConfidence: $("#first-confidence").val(),
+                    briefDescription: $("#brief-desc").val().trim(),
+                    extendedDescription: $("#extended-desc").val().trim(),
+                    species: $("#species").val().trim(),
+                    speciesSciName: $("#species-sci-name").val().trim(),
+                    speciesConfidence: $("#species-confidence").val(),
+                };
+                $.ajax("/api/observations", {
+                    method: "POST",
+                    data: newObs
+                }).then(function(response) {
+                    console.log("response.id: " + response.id);
+                    // cloudinary.v2.uploader.add_tag(response.id, newObs.pictureId);
+                    location.reload();
+                }).then(function() {
+                    alert("Observation successfully submitted");
+                });
+            })
 
 
-            var newObs = {
-                userId: userIdVal,
-                pictureId: pictureIdVal,
-                dateObs: dateObsVal,
-                timeObs: $("#time-obs").val(),
-                latitude: window.userPin.position.lat(),
-                longitude: window.userPin.position.lng(),
-                category: categoryVal,
-                firstConfidence: $("#first-confidence").val(),
-                briefDescription: $("#brief-desc").val().trim(),
-                extendedDescription: $("#extended-desc").val().trim(),
-                species: $("#species").val().trim(),
-                speciesSciName: $("#species-sci-name").val().trim(),
-                speciesConfidence: $("#species-confidence").val(),
-            };
+
         } else {
             $("#pin-reminder").remove();
             $("#map-wrapper").append($("<label for='map-wrapper' id='pin-reminder'>Please place a pin on the map.</label>"));
             throw "User didn't place a pin on the map.";
         }
 
-        $.ajax("/api/observations", {
-            type: "POST",
-            data: newObs
-        }).then(function(response) {
-            console.log("response.id: " + response.id);
-            // cloudinary.v2.uploader.add_tag(response.id, newObs.pictureId);
-            location.reload();
-        }).then(function() {
-            alert("Observation successfully submitted");
-        });
+
     });
 
     // DELETE request when deleting observation
@@ -80,7 +83,7 @@ $(document).ready(function() {
         let id_delete = $(this).parents("tr").attr("id");
 
         $.ajax({
-            type: "DELETE",
+            method: "DELETE",
             url: "/api/observations?id=" + id_delete
         }).then(function(res) {
             $(this).parents("tr").remove();
