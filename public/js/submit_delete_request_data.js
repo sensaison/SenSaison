@@ -18,23 +18,14 @@ $(document).ready(function() {
             let categoryVal = $("#obs-category").val();
             let dateObsVal = $("#date-obs").val();
 
+            let img = $("#pic-file").prop("files")[0];
 
-
-
-            
             let reader = new FileReader();
-            let arrayBuffer = $("#pic-file").result;
-            let array = new Uint8Array(arrayBuffer);
-            let binaryString = String.fromCharCode.apply(null, array);
-            let pictureData = binaryString;
-            console.log("pictureData 1: " + pictureData);
-            reader.readAsArrayBuffer($("#pic-file").prop("files")[0]);
-
-            console.log("picturedata 2: " + pictureData);
-
-
-            // let imgFile = $("#pic-file").prop("files")[0];
-            // console.log("IMGFILE: " + imgFile);
+            reader.onloadend = function() {
+                base64data = reader.result;                
+                base64data.substr(base64data.indexOf(',')+1);
+            }
+            let imgUpld = reader.readAsDataURL(img); 
 
             let pictureIdVal;
 
@@ -42,10 +33,10 @@ $(document).ready(function() {
                 method: "POST",
                 url: "https://api.cloudinary.com/v1_1/sensaison/image/upload",
                 data: {
-                    file: pictureData,
+                    file: imgUpld,
                     upload_preset: "default_preset",
                     folder: userIdVal,
-                    tags: [categoryVal, dateObsVal, userIdVal] 
+                    tags: userIdVal + "," + categoryVal + "," +  dateObsVal,
                 },
                 error: function(xhr, err) {
                     console.log(xhr);
