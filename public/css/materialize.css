@@ -3319,7 +3319,7 @@ td, th {
   text-align: right;
 }
 
-.center, .center-align
+.center, .center-align {
   text-align: center;
 }
 
