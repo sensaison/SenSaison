@@ -2,7 +2,7 @@ USE SenSaison_db;
 
 INSERT IGNORE INTO Observations
     (userId, pictureId, dateObs, timeObs, latitude, longitude, category, species, speciesSciName, speciesConfidence, firstConfidence, briefDescription, extendedDescription)
-    VALUES ("12345", "12345001", "2018-12-11", "13:59:00", 48.0840, -121.9687, "weather", NULL, NULL, NULL, 3, "First frost", NULL),
+    VALUES ("101443989316208815761", "12345001", "2018-12-11", "13:59:00", 48.0840, -121.9687, "weather", NULL, NULL, NULL, 3, "First frost", NULL),
     ("678910", "678910001", "2019-02-09", "06:29:00", 47.6062, -122.3321, "animal", "White-Crowned Sparrow", "Zonotrichia leucophrys", 5, 4, "First WCSP seen this spring", "Two male WCSP seen in backyard bird feeder early this morning"),
     ("678910", "678910002", "2017-09-15", "10:31:00", 35.0603, -83.3876, "plant", "White oak", "Quercus alba", 3, 2, "White oaks losing leaves", NULL),
     ("246810", "246810001", "2018-07-21", "07:50:00", 39.7817, -89.6501, "plant", "Low-bush blueberry", NULL, 4, 4, "First blueberries", "Warm sunny day, first blueberries of the summer, birds feasting"),

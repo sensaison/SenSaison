@@ -3,7 +3,7 @@ USE SenSaison_db;
 
 CREATE TABLE IF NOT EXISTS Observations (
     id INT NOT NULL AUTO_INCREMENT,
-    userId INT NOT NULL REFERENCES Users (userId)
+    userId VARCHAR(30) NOT NULL REFERENCES Users (userId)
         ON DELETE NO ACTION
         ON UPDATE CASCADE, /* tied to the id in next table */
     pictureId VARCHAR(50) NOT NULL, /* cloudinary */

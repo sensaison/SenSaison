@@ -1,222 +1,273 @@
 
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-    <title>SenSaison</title>
+        <title>SenSaison</title>
 
-    <!-- CSS  -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-    <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+        <!-- CSS  -->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+        <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+        <link href="css/navbar.css" media="screen" rel="stylesheet" type="text/css" />
 
-  <!-- Google sign in -->
-  		<meta name="google-signin-scope" content="profile email">
-		<meta name="google-signin-client_id" content="785370225233-mc4i390arqv9e4pilq7vu4tn7ncstl2n.apps.googleusercontent.com">
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
-    
-    <link href="css/navbar.css" media="screen" rel="stylesheet" type="text/css" />
-  </head>
+        <!-- Google sign in -->
+        <meta name="google-signin-scope" content="profile email">
+        <meta name="google-signin-client_id" content="785370225233-mc4i390arqv9e4pilq7vu4tn7ncstl2n.apps.googleusercontent.com">
+        <script src="https://apis.google.com/js/platform.js" async defer></script>
 
-  <body>
-    <div class="wrap">
-      <nav>
-		    <ul class="menu">
-          <li><img src="images/sensaisonNew.png"></li>
-		    </ul>
-        <div class="clearfix"></div>
-	    </nav>
-    </div>
+          <!-- Swatchbook -->
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+        <meta name="description" content="Animated Swatch Book with CSS3 and jQuery" />
+        <meta name="keywords" content="swatch book, css3, jquery, animated, rotation, transition, folding fan" />
+        <meta name="author" content="Codrops" />
+        <link rel="stylesheet" type="text/css" href="SwatchBook/css/style3.css" />
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:700,300,300italic' rel='stylesheet' type='text/css'>
+        <script type="text/javascript" src="SwatchBook/js/modernizr.custom.79639.js"></script>
+        <script type="text/javascript" src="SwatchBook/js/jquery.swatchbook.js"></script>
+        
+    </head>
 
-    <!-- MAIN -->
-  <div id="index-banner" class="parallax-container">
-    <div class="section no-pad-bot">
-      <div class="container">
-        <br><br>
-        <h1 class="header center teal-text text-lighten-2" >SenSaison</h1>
-        <div class="row center">
-          <h5 class="header col s12 light" style="text-shadow: 0 0 7px white;">For citizen scientists to record natural history observations</h5>
+    <body>
+        <div class="wrap">
+            <nav>
+                <ul class="menu">
+                    <li><img src="images/sensaisonNew.png"></li>
+
+                    <li><a href="team.html"><span class=""></span> About us</a></li>
+                    <li><a href="additionalresources.html"><span class=""></span> Additional resources</a></li>
+                </ul>
+                <div class="clearfix"></div>
+            </nav>
         </div>
-        <div class="row center">
 
-            <!-- Sign in with google-->
-          <a href="/auth/google" id="download-button" class="btn-large waves-effect waves-light teal lighten-1">Sign In</a>
-        	<div class="g-signin2" href='/auth/google' data-onsuccess="onSignIn" data-theme="dark"></div>
-
-        </div>
-        <br><br>
-
-      </div>
-    </div>
-    <div class="parallax"><img src="images/image1.jpg" alt="img 1"></div>
-  </div>
-
-
-  <div class="container">
-    <div class="section">
-
-          <!--   Icon Section   -->
-          <div class="row">
-            <div class="col s12 m4">
-              <div class="icon-block">
-                <img src="images/land.png">
-                <h5 class="center">Animal</h5>
-                <p class="light">Animal migrations, breeding biology. Like when monarch butterflies first show up, when geese start migrating south, when frogs start laying eggs, when cicadas come out of the ground. life history events basically. Life history events being important "biological events" in an individual's life</p>
-              </div>
-            </div>
-
-            <div class="col s12 m4">
-              <div class="icon-block">
-                <img src ="images/fungi.jpg">
-                <h5 class="center">Fungus</h5>
-                <p class="light">Mushrooms.</p>
-              </div>
-            </div>
-
-            <div class="col s12 m4">
-              <div class="icon-block">
-                <img src ="images/water.png">
-                <h5 class="center">Land & Water</h5>
-                <p class="light">Permafrost hits the surface, local creek goes dry, lake freezes over</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col s12 m6">
-              <div class="icon-block">
-                <img src ="images/plant.png">
-                <h5 class="center">Plants</h5>
-                  <p class="light">Trees, bushes, flowers.</p>
-              </div>
-            </div>
-
-            <div class="col s12 m6">
-              <div class="icon-block">
-                <img src="images/weather.png">
-                <h5 class="center">Weather</h5>
-                <p class="light">First frost, first snowstorm, first thunderstorm, first hurricane of the season.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="parallax-container valign-wrapper">
+        <!-- MAIN -->
+    <div id="index-banner" class="parallax-container">
         <div class="section no-pad-bot">
-          <div class="container">
+        <div class="container">
+            <br><br>
+            <h1 class="header center teal-text text-lighten-2" style="text-shadow:4px 4px 4px black;">SenSaison</h1>
             <div class="row center">
-              <h5 class="header col s12 light" style="text-shadow: 0 0 7px white;">
-                
-              </h5>
+            <h5 class="header col s12 light" style="text-shadow: 2px 2px 2px black;">For citizen scientists to record seasonal natural history observations</h5>
             </div>
-          </div>
+            <div class="row center">
+
+                <!-- Sign in with google-->
+                <!-- <a href="/auth/google" id="download-button" class="btn-large waves-effect waves-light teal lighten-1">Sign In</a>
+                <div class="g-signin2" href='/auth/google' data-onsuccess="onSignIn" data-theme="dark"></div> -->
+                <a href="/useraccount.html" id="download-button" class="btn-large waves-effect waves-light teal lighten-1">Sign In</a>
+                <!-- <div class="g-signin2 center-align" href='/auth/google' data-onsuccess="onSignIn" data-theme="dark"></div> -->
+                
+
+            </div>
+            <br><br>
+
         </div>
-      <div class="parallax"><img src="images/image2.jpg" alt="img 2"></div>
+        </div>
+        <div class="parallax"><img src="images/image1.jpg" alt="img 1"></div>
     </div>
+
 
     <div class="container">
-      <div class="section">
-        <div class="row">
-          <div class="col s12 center">
-            <h3><i class="mdi-content-send brown-text"></i></h3>
-            <h4>Contact Us</h4>
-            <p class="left-align light">We are a team of four working on a school project.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="parallax-container valign-wrapper">
-      <div class="section no-pad-bot">
-        <div class="container">
-          <div class="row center">
-            <h5 class="header col s12 light" style="text-shadow: 0 0 7px white;">
-              
-            </h5>
-          </div>
-        </div>
-      </div>
-      <div class="parallax"><img src="images/image1a.jpg" alt="img 3"></div>
-    </div>
-
-    <footer class="page-footer teal">
-      <div class="container">
-        <div class="row">
-            <div class="col l2 s12">
-              <h5 class="white-text">Team</h5>
-              <ul>
-              <li><a class="grey-text text-lighten-4">Stefan</a></li>
-              <li><a class="grey-text text-lighten-4">Auri</a></li>
-              <li><a class="grey-text text-lighten-4">Catherine</a></li>
-              <li><a class="grey-text text-lighten-4">Julie</a></li>
-              </ul>
+        <section class="main">
+            <div class="row">
+                <div class="col s12">
+                    <h5 class="center-align">What SenSaison is all about</h5>
+                    <p>Climate change is causing our seasons to shift - winter is shorter, summer is longer, and the timing of seasonal transitions have changed. The purpose of SenSaison is to record the timing of seasonal events to as to increase our understanding of how these changes work and how they will affect us in the short- and long-term.</p>
+                </div>
             </div>
-    
-          <div class="col l2 s12">
-            <h5 class="white-text">Github</h5>
-              <ul>
-                <li><a class="white-text" href="#!">Link</a></li>
-                <li><a class="white-text" href="#!">Link</a></li>
-                <li><a class="white-text" href="#!">Link</a></li>
-                <li><a class="white-text" href="https://github.com/JulieMathews?tab=repositories">Link</a></li>
-              </ul>
+        </section>
+        <section class="main">
+            <h5 class="center-align">Latest observations uploaded by citizen scientists</h5>
+            <div id="sb-container" class="sb-container">
+                <div>
+                    <span class="sb-icon">
+                        <img  src="images/thunderstorm.jpg" />
+                    </span>
+                    <h4><span>Weather</span></h4>
+                </div>
+                <div>
+                    <span class="sb-icon">
+                        <img  src="images/tulips.jpeg" />
+                    </span>
+                    <h4><span>Plants</span></h4>
+                </div>	
+                <div>
+                    <span class="sb-icon">
+                        <img  src="images/permafrost.jpg" />
+                    </span>
+                    <h4><span>Land & Water</span></h4>
+                </div>	
+                <div>
+                    <span class="sb-icon">
+                        <img  src="images/fungus.jpg" />
+                    </span>
+                    <h4><span>Fungus</span></h4>
+                </div>	
+                <div>
+                    <span class="sb-icon">
+                        <img  src="images/goose.jpg" />
+                    </span>
+                    <h4><span>Animals</span></h4>
+                </div>	
+                <div>
+                <h4><span style="text-shadow: 0px 0px 3px black">Latest Observations</span></h4>
+                <span class="sb-toggle" style="text-shadow: 0px 0px 3px white">Click to open/close</span>
+        
+                <!-- CURRENT_TIMESTAMP -->
+                </div>
+            </div>
+        </section>
+    </div>
+
+        <div class="parallax-container valign-wrapper">
+            <div class="section no-pad-bot">
+
+            </div>
+        <div class="parallax"><img src="images/image2.jpg" alt="img 2"></div>
+        </div>
+
+        <div class="container">
+            <div class="section">
+                <div class="row">
+                    <div class="col s12 center">
+                        <h3><i class="mdi-content-send brown-text"></i></h3>
+                        <div class="row">
+                            <div class="col s12 center-align">
+                                <div class="icon-block">
+                                    <img style="display: inline;" src="images/land.png">  
+                                    <img style="display: inline;" src ="images/plant.png">  
+                                    <img style="display: inline;" src ="images/fungi.jpg">
+                                    <h5>Animals, plants, and fungi</h5>
+                                    Living organisms such as animals, plants, and fungi, respond to changes in temperature, the timing of seasonal transitions, and the duration of seasons in different ways. For example, some insects might start reproducing earlier in the year. Birds that respond less to temperature and more to daylight or to historical migration patterns continue to lay their eggs about the same time they always have. That means that the peak season for insects no longer coincides with the period when chicks need the most food. That can cause long term declines in bird populations. Effects like these are common across all living organisms.      
+                                </div>
+                            </div>
+                        </div>
+            
+                        <div class="row">
+                            <div class="col s12 center-align">
+                                <div class="icon-block">
+                                    <img style="display: inline;" src="images/weather.png">
+                                    <img style="display: inline;" src ="images/water.png">
+                                    <h5>Weather, water, and land</h5>
+                                    Changes in the timing and duration of seasons and seasonal transitions can also affect the non-living parts of the environment. For example, the length and timing of hurricane season might change, as well as how long lakes and seas are frozen for during the winter. These changes affect living organisms, including us.            
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="parallax-container valign-wrapper">
+            <div class="section no-pad-bot">
+            </div>
+        <div class="parallax"><img src="images/image1a.jpg" alt="img 3"></div>
+        </div>
+
+        <footer class="page-footer teal">
+        <div class="container">
+            <div class="row">
+                <div class="col s2">
+                    <h5 class="white-text">Team</h5>
+                    <ul>
+                    <li class="grey-text text-lighten-4">Stefan</li>
+                    <li class="grey-text text-lighten-4">Auri</li>
+                    <li class="grey-text text-lighten-4">Catherine</li>
+                    <li class="grey-text text-lighten-4">Julie</li>
+                    </ul>
+                    </div>   
+            
+                    <div class="col s10">
+                    <h5 class="white-text">Contact</h5>
+                        <ul>
+                        <li><a class="white-text" href="https://github.com/stefan-apr">Github</a> | <a class="white-text" href="https://stefan-apr.github.io/Responsive-Portfolio/portfolio.html">Portfolio</a> | <a class="white-text" href="https://www.linkedin.com/in/stefan-apreutesei-592514171/">LinkedIn</a></li>
+                        <li><a class="white-text" href="#!">Github | Portfolio | LinkedIn</a></li>
+                        <li><a class="white-text" href="https://github.com/crypticwoodwhite">Github</a> | <a class="white-text" href="https://crypticwoodwhite.github.io/">Portfolio</a> | <a class="white-text" href="https://www.linkedin.com/in/catherinepham-cww/">LinkedIn</a></li>
+                        <li><a class="white-text" href="https://github.com/JulieMathews?tab=repositories">Github</a> | <a class="white-text" href="https://juliemathews.github.io/New_Port/">Portfolio</a> | <a class="white-text" href="https://www.linkedin.com/in/julie-mathews/">LinkedIn</a></li>
+                        </ul>
+                    </div>
+            </div>
             </div>
             
-            <div class="col l2 s12">
-              <h5 class="white-text">Portfolio</h5>
-              <ul>
-                <li><a class="white-text" href="#!">Link</a></li>
-                <li><a class="white-text" href="#!">Link</a></li>
-                <li><a class="white-text" href="#!">Link</a></li>
-                <li><a class="white-text" href="https://juliemathews.github.io/New_Port/">Link</a></li>
-              </ul>
+            <div class="footer-copyright center-align">
+                <div class="container">
+                    Copyright 2019 The SenSaison Team. All rights reserved.
+                    <br>
+                    Layout made by <a class="brown-text text-lighten-3" href="http://materializecss.com">Materialize</a>
+                </div>
             </div>
+        </footer>
 
-            <div class="col l2 s12">
-              <h5 class="white-text">LinkedIn</h5>
-              <ul>
-                <li><a class="white-text" href="#!">Link</a></li>
-                <li><a class="white-text" href="#!">Link</a></li>
-                <li><a class="white-text" href="#!">Link</a></li>
-                <li><a class="white-text" href="https://www.linkedin.com/in/julie-mathews/">Link</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
+        <!--  Scripts-->
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        <script src="js/init.js"></script>
+
+        <!-- Google sign in -->
+        <script>
+            function onSignIn(googleUser) {
+                // Useful data for your client-side scripts:
+                var profile = googleUser.getBasicProfile();
+                // console.log("ID: " + profile.getId()); // Don't send this directly to your server!
+                // console.log('Full Name: ' + profile.getName());
+                // console.log('Given Name: ' + profile.getGivenName());
+                // console.log('Family Name: ' + profile.getFamilyName());
+                // console.log("Image URL: " + profile.getImageUrl());
+                // console.log("Email: " + profile.getEmail());
+
+                // The ID token you need to pass to your backend:
+                var id_token = googleUser.getAuthResponse().id_token;
+            //	console.log("ID Token: " + id_token);
+            };
+        </script>
+
+            <!-- SWATCHBOOK SCRIPT -->
+        <script type="text/javascript" src="SwatchBook/js/jquery.swatchbook.js"></script>
+        <script type="text/javascript">
+            $(function() {
+                $( '#sb-container' ).swatchbook( {
+                    // number of degrees that is between each item
+                    angleInc : 30,
+                    neighbor : 15,
+                    // if it should be closed by default
+            initclosed : true,
+            // index of the element that when clicked, triggers the open/close function
+                    // by default there is no such element
+                    closeIdx : 5
+        });
+            
+        var randomNumber = Math.floor(Math.random() * 11) + 1;
+            $('#sb-container div:last-child').addClass('img'+randomNumber);
+            });
+    </script>
+    
+    <!-- SWATCHBOOK category images -->
+    <!-- <script>
+        $.get('/api/swatchPics', function(data) {
+        $('#animals').css('background-image', 'url(' + data.animalImage + ')');
+        })
         
-        <div class="footer-copyright">
-          <div class="container">
-          Made by <a class="brown-text text-lighten-3" href="http://materializecss.com">Materialize</a>
-          </div>
-        </div>
-      </footer>
+        $.get('/api/swatchPics', function(data) {
+        $('#fungus').css('background-image', 'url(' + data.fungusImage + ')');
+        })
+        
+        $.get('/api/swatchPics', function(data) {
+        $('#landwater').css('background-image', 'url(' + data.landwaterImage + ')');
+        })
+        
+        $.get('/api/swatchPics', function(data) {
+        $('#plants').css('background-image', 'url(' + data.plantsImage + ')');
+        })
+        
+        $.get('/api/swatchPics', function(data) {
+        $('#weather').css('background-image', 'url(' + data.weatherImage + ')');
+        })
+    </script> -->
 
-    <!--  Scripts-->
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script src="js/init.js"></script>
-
-    <!-- Google sign in -->
-  <script>
-
-  function onSignIn(googleUser) {
-	// Useful data for your client-side scripts:
-	var profile = googleUser.getBasicProfile();
-	console.log("ID: " + profile.getId()); // Don't send this directly to your server!
-	console.log('Full Name: ' + profile.getName());
-	console.log('Given Name: ' + profile.getGivenName());
-	console.log('Family Name: ' + profile.getFamilyName());
-	console.log("Image URL: " + profile.getImageUrl());
-	console.log("Email: " + profile.getEmail());
-
-	// The ID token you need to pass to your backend:
-	var id_token = googleUser.getAuthResponse().id_token;
-//	console.log("ID Token: " + id_token);
-  };
-</script>
-
-  </body>
+    </body>
 </html>

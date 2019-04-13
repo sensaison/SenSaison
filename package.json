@@ -1,7 +1,7 @@
 {
-  "name": "project_2",
+  "name": "SenSaison",
   "version": "1.0.0",
-  "description": "Project 2 Starter",
+  "description": "An app for citizen scientists to record seasonal natural history observations",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",

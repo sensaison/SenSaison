@@ -1,5 +1,20 @@
 $(document).ready(function() {
 
+    function cookieParse(userId){
+        var cookieArray = userId.split(";");
+        var cookieObj = {};
+        for(var i = 0; i < cookieArray.length; i++){
+            cookieArray[i] = cookieArray[i].trim();
+            var cookieKvArray = cookieArray[i].split('=');
+            cookieObj[cookieKvArray[0]] = cookieKvArray[1];
+
+        }
+        return cookieObj
+    };
+     
+    var userId = cookieParse(document.cookie).uId;
+    console.log(userId);
+
     // following four event listeners show/hide what the user can do from their account page
     $("#add-obs-btn").on("click", function() {
         if ($("#add-obs").hasClass("hidden")) {
@@ -121,24 +136,6 @@ $(document).ready(function() {
         });
     }
 
-
-    console.log(document.cookie)
-
-    let userId = cookieParse(document.cookie).uId;
-    console.log(userId);
-
-    function cookieParse(userId){
-        var cookieArray = userId.split(";");
-        var cookieObj = {};
-        for(var i = 0; i < cookieArray.length; i++){
-            cookieArray[i] = cookieArray[i].trim();
-            var cookieKvArray = cookieArray[i].split('=');
-            cookieObj[cookieKvArray[0]] = cookieKvArray[1];
-
-        }
-        return cookieObj
-    }
-     
 
     showUserObs(userId);
 
