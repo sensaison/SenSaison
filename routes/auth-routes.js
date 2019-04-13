@@ -2,7 +2,7 @@ const router = require("express").Router();
 const passport = require("passport");
 // OAuth Login
 router.get("/login", (req, res) => {
-    res.render("login");
+    res.redirect("/google");
 });
 
 //OAuth logout
@@ -21,9 +21,9 @@ router.get("/google", passport.authenticate("google", {
 // google OAuth redirect route
 
 router.get("/google/redirect", passport.authenticate("google"), (req, res) => {
-    res.send("You've reached the callback URI");
+    res.cookie('uId', req.user.userId);
+    res.redirect("/profile/");
     
-    res.send(req.user);
 });
 
 module.exports = router;

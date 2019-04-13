@@ -5,7 +5,7 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.INTEGER
         },
         userId: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.STRING,
             unique: {
                 args: true
             }

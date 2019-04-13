@@ -59,6 +59,7 @@ $(document).ready(function() {
         }
     });
 
+
     // pagination of table showing all of the user's observations
     function paginate() {
         $("#all-your-obs").after("<br><ul class='pagination'><li class='waves-effect' id='start-pagination'><a href='#'><i class='material-icons'>chevron_left</i></a></li><li class='waves-effect' id='end-pagination'><a href='#'><i class='material-icons'>chevron_right</i></a></li></div>");
@@ -96,7 +97,7 @@ $(document).ready(function() {
                 userId: user
             }
         }).then(function(data) {
-            window.userObs = data;
+
             if (!data || !data.length) {
                 // if no data then add a row saying so
                 $("#all-your-obs-body").prepend("<tr class='no-data'><td></td><td></td><td>No observations to display</td><td></td></tr>"
@@ -120,7 +121,25 @@ $(document).ready(function() {
         });
     }
 
-    // let userId = //AURI!!!;
-    showUserObs("13579");
+
+    console.log(document.cookie)
+
+    let userId = cookieParse(document.cookie).uId;
+    console.log(userId);
+
+    function cookieParse(userId){
+        var cookieArray = userId.split(";");
+        var cookieObj = {};
+        for(var i = 0; i < cookieArray.length; i++){
+            cookieArray[i] = cookieArray[i].trim();
+            var cookieKvArray = cookieArray[i].split('=');
+            cookieObj[cookieKvArray[0]] = cookieKvArray[1];
+
+        }
+        return cookieObj
+    }
+     
+
+    showUserObs(userId);
 
 });

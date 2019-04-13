@@ -1,7 +1,21 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20');
+const Sequelize = require('sequelize');
+let Users = require('../models').Users;
 require("dotenv").config();
-const Users = require('../models/Users')
+let userId
+
+passport.serializeUser((userResult, done)=> {
+    done(null, userResult.userId);
+});
+
+passport.deserializeUser((id, done)=> {
+    Users.findById(id).then((userResult)=>{
+        done(null, userResult);
+    });
+  
+});
+
 
 passport.use(
     new GoogleStrategy ({
@@ -12,24 +26,42 @@ passport.use(
      
      callbackURL: "/auth/google/redirect"
     }, (accessToken, refreshToken, email, done) => {
-        //I've console logged information I think we'll need for user creation.
-        console.log("passport callback fired");
-        console.log(email.emails[0].value)
-        console.log(email.displayName)
-        console.log(email.id)
-        //Un-comment the below line to see the full tree if anymore information is needed for user creation.
-        //console.log(email)
+    
+        let userIdNow = email.id;
+        let firstName = email.name.givenName;
+        let lastName = email.name.familyName;
+        let userName = email.displayName.replace(/\s+/g, '');
+        let userEmail = email.emails[0].value;
 
-        //use the email object to pull the required info for user submission, check out the console log to reference the tree.
-        //                                                             ie.  email.displayName 
-        
-        //need some sequilize magic here to create userData and send it to the server, 
-        //Will need an if statement check to see if the user exists in the DB before adding them.
+        var connection = new Sequelize(process.env.MYSQLDB, process.env.MYSQLUSER, process.env.MYSQLPWD, {
+            dialect: 'mysql'
+        });
 
-
-        // Catherine comments below:
-        // will have to module.exports email info to another file, since this should just be config stuff
-        // how to connect to Users.js model?
-
+        connection.sync().then(function () {
+            Users.sequelize.transaction(function(t){
+                return Users.findOrCreate({
+                    where: {
+                        
+                        userId: userIdNow,
+                        firstName: firstName,
+                        lastName: lastName,
+                        username: userName,
+                        email: userEmail
+                    },
+                    transaction: t
+                })
+                .spread(function(userResult, created){
+                    if (created) {
+                        console.log('new user created!')
+                    }
+                    console.log('old user logged in!')
+                    console.log(userResult)
+                    userId = userResult.userId;
+                    module.exports = userId;
+                    done(null, userResult);
+                })
+            });
+        });
     })
+
 )
