@@ -2,8 +2,8 @@ require("dotenv").config();
 const express = require("express");
 
 // reqs for google OAuth
-const authRoutes = require('./routes/auth-routes')
-const passportSetup = require('./config/passport');
+const authRoutes = require("./routes/auth-routes")
+const passportSetup = require("./config/passport");
 
 const db = require("./models");
 
