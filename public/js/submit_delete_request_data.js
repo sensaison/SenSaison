@@ -18,37 +18,38 @@ $(document).ready(function() {
             let categoryVal = $("#obs-category").val();
             let dateObsVal = $("#date-obs").val();
 
-            let img = $("#pic-file").prop("files")[0];
+            // let img = $("#pic-file").prop("files")[0];
 
-            let reader = new FileReader();
-            reader.onloadend = function() {
-                base64data = reader.result;                
-                base64data.substr(base64data.indexOf(',')+1);
-            }
-            let imgUpld = reader.readAsDataURL(img); 
+            // let reader = new FileReader();
+            // reader.onloadend = function() {
+            //     base64data = reader.result;                
+            //     base64data.substr(base64data.indexOf(',')+1);
+            // }
+            // let imgUpld = reader.readAsDataURL(img); 
 
-            let pictureIdVal;
+            // let pictureIdVal;
 
-            $.ajax({
-                method: "POST",
-                url: "https://api.cloudinary.com/v1_1/sensaison/image/upload",
-                data: {
-                    file: imgUpld,
-                    upload_preset: "default_preset",
-                    folder: userIdVal,
-                    tags: userIdVal + "," + categoryVal + "," +  dateObsVal,
-                },
-                error: function(xhr, err) {
-                    console.log(xhr);
-                    console.log(err);
-                }
-            }).then(function(res) {
-                pictureIdVal = res.public_id;
-                console.log("pictureIdVal: " + pictureIdVal);
-            }).then(function() {
+            // $.ajax({
+            //     method: "POST",
+            //     url: "https://api.cloudinary.com/v1_1/sensaison/image/upload",
+            //     data: {
+            //         file: imgUpld,
+            //         upload_preset: "default_preset",
+            //         folder: userIdVal,
+            //         tags: userIdVal + ", " + categoryVal + ", " +  dateObsVal,
+            //     },
+            //     error: function(xhr, err) {
+            //         console.log(xhr);
+            //         console.log(err);
+            //     }
+            // }).then(function(res) {
+            //     pictureIdVal = res.public_id;
+            //     console.log("pictureIdVal: " + pictureIdVal);
+            // }).then(
+            // function () {
                 var newObs = {
                     userId: userIdVal,
-                    pictureId: pictureIdVal,
+                    pictureId: "4500234",
                     dateObs: dateObsVal,
                     timeObs: $("#time-obs").val(),
                     latitude: window.userPin.position.lat(),
@@ -66,16 +67,16 @@ $(document).ready(function() {
                     data: newObs
                 }).then(function(response) {
                     console.log("response.id: " + response.id);
-                    // cloudinary.v2.uploader.add_tag(response.id, newObs.pictureId);
+                    // cloudinary update photo tag with response.id
                     location.reload();
                 }).then(function() {
                     alert("Observation successfully submitted");
                 });
-            })
+            }
 
 
 
-        } else {
+         else {
             $("#pin-reminder").remove();
             $("#map-wrapper").append($("<label for='map-wrapper' id='pin-reminder'>Please place a pin on the map.</label>"));
             throw "User didn't place a pin on the map.";
