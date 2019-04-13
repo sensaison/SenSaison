@@ -2,6 +2,9 @@ const db = require("../models");
 const Sequelize = require("sequelize");
 const Op = Sequelize.Op;
 const json2csv = require("json2csv").parse;
+const cloudinary = require("../config/cloudinary");
+const archiver = require("archiver");
+const zipURLs = require("./zipURLs");
 
 module.exports = function (app) {
 
@@ -12,17 +15,6 @@ module.exports = function (app) {
                 model: db.Users,
                 attributes: ["userId", "firstName", "lastName", "username"]
             }]
-        }).then(function (dbObs) {
-            res.json(dbObs);
-        });
-    });
-
-    // FIND ONE user's observations
-    app.get("/api/userobservations", function (req, res) {
-        db.Observations.findAll({
-            where: {
-                userId: req.query.userId
-            }
         }).then(function (dbObs) {
             res.json(dbObs);
         });
@@ -80,9 +72,8 @@ module.exports = function (app) {
     });
 
     // CREATE new observation
-    // need to test this with oauth
     app.post("/api/observations", function (req, res) {
-        db.Observations.create(req.body)
+                db.Observations.create(req.body)
             .then(function (dbObs) {
                 res.json(dbObs);
             });
@@ -99,7 +90,55 @@ module.exports = function (app) {
         });
     });
 
-    // FIND observations for data request, convert to csv, and download client side
+    // FIND observations for data request WITH PICTURES
+    app.get("/download-with-pictures", function (req, res) {
+        db.Observations.findAll({
+            where: {
+                category: req.query.category,
+                dateObs: {
+                    [Op.between]: [req.query.minDate, req.query.maxDate]
+                }
+            }
+        }).then(function(result) {
+
+            let csv = json2csv(result, {
+                fields: [
+                    "id",
+                    "userId",
+                    "pictureId",
+                    "dateObs",
+                    "timeObs",
+                    "latitude",
+                    "longitude",
+                    "category",
+                    "species",
+                    "speciesSciName",
+                    "speciesConfidence",
+                    "firstConfidence",
+                    "briefDescription",
+                    "extendedDescription"
+                ]
+            });
+
+            let picsDownloadArr = []
+            for (let i=0; i<result.length; i++) {
+                let picForDownload ="https://res.cloudinary.com/sensaison/image/" + result[i].pictureId;
+                picsDownloadArr.push(picForDownload);
+            }
+
+            let zip = archiver.create("zip");
+            zip.append(csv, {
+                name: "sensaisondownload_withpics.csv"
+            })
+            zipURLs(picsDownloadArr, zip, "/download-with-pictures");
+
+            res.setHeader("Content-disposition", "attachment; filename=sensaisondownload_withpics.zip");
+            res.setHeader("Content-Type", "application/octet-stream");
+            res.status(200).send(zip);
+        })
+    });
+
+    // FIND observations for data request, convert to csv, and download client side NO PICTURES
     app.get("/download", function (req, res) {
         db.Observations.findAll({
             where: {
@@ -109,17 +148,41 @@ module.exports = function (app) {
                 }
             }
         }).then(function (result) {
+            
             let csv = json2csv(result, {
-                fields: ["id", "userId", "pictureId", "dateObs", "timeObs", "latitude", "longitude", "category", "species", "speciesSciName", "speciesConfidence", "firstConfidence", "briefDescription", "extendedDescription"]
+                fields: [
+                    "id",
+                    "userId",
+                    "dateObs",
+                    "timeObs",
+                    "latitude",
+                    "longitude",
+                    "category",
+                    "species",
+                    "speciesSciName",
+                    "speciesConfidence",
+                    "firstConfidence",
+                    "briefDescription",
+                    "extendedDescription"
+                ]
             });
-            // below line does not work locally but does in postman
-            // browser not redirecting or some such
-            res.setHeader("Content-disposition", "attachment; filename=sensaisondownload.csv");
+            res.setHeader("Content-disposition", "attachment; filename=sensaisondownload_nopics.csv");
             res.setHeader("Content-Type", "text/csv");
             res.status(200).send(csv);
         }).done(function() {
             console.log("successful");
         })
+    });
+
+    // FIND ONE user's observations
+    app.get("/api/userobservations", function (req, res) {
+        db.Observations.findAll({
+            where: {
+                userId: req.query.userId
+            }
+        }).then(function (dbObs) {
+            res.json(dbObs);
+        });
     });
 
     // FIND ALL users
@@ -133,7 +196,6 @@ module.exports = function (app) {
     });
 
     // CREATE new user
-    // need to test this with oauth
     app.post("/api/users", function (req, res) {
         db.Users.create(req.body)
             .then(function (newusr) {
@@ -141,4 +203,24 @@ module.exports = function (app) {
             });
     });
 
-};
+    // UPLOAD one picture to cloudinary
+    // app.post("https://api.cloudinary.com/v1_1/sensaison/image/upload", function(req, res) {
+
+    //     console.log("REQ: " + req);
+    //     console.log("REQ.body: " + req.params);
+
+    //     cloudinary.v2.uploader.unsigned_upload(
+    //         req.params.file,
+    //         "default_preset",
+    //         {
+    //             cloud_name: "sensaison",
+    //             folder: req.params.tagUserIdVal,
+    //             tags: [req.params.tagCategoryVal, req.params.tagDateObsVal, req.params.tagUserIdVal] 
+    //         },
+    //         function(err, res) {
+    //             if (err) throw err;
+    //             console.log("RES.PUBLIC_ID: " + res.public_id);
+    //         }
+    //     )
+    // });
+}
