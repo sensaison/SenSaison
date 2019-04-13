@@ -211,6 +211,12 @@ span.sb-icon{
 	user-select: none;
 }
 
+span.sb-icon img {
+	display: block;
+	height: 80px;
+	width: 80px;
+}
+
 span.sb-icon:before {
 	speak: none;
 	display: block;

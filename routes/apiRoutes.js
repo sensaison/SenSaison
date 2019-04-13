@@ -73,7 +73,7 @@ module.exports = function (app) {
 
     // CREATE new observation
     app.post("/api/observations", function (req, res) {
-        db.Observations.create(req.body)
+                db.Observations.create(req.body)
             .then(function (dbObs) {
                 res.json(dbObs);
             });

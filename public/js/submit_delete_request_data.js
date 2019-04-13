@@ -86,10 +86,11 @@ $(document).ready(function() {
 
 
     });
-
+    
     // DELETE request when deleting observation
-    $("#all-your-obs-body").on("click", ".delete", function(e) {
+        $("#all-your-obs-body").on("click", ".delete", function(e) {
         e.preventDefault();
+    
 
         let id_delete = $(this).parents("tr").attr("id");
 
@@ -108,6 +109,7 @@ $(document).ready(function() {
 
         let minDate = $("#start-date-download").val();
         let maxDate = $("#end-date-download").val();
+
         
         if ($("#include-pictures").is(":checked")) { // PICTURES IN DOWNLOAD
             console.log("pics included in download");
@@ -130,7 +132,5 @@ $(document).ready(function() {
             }
         }
         $("#data-request-form")[0].reset();
-    })
-})
-
-        
+    });
+});
