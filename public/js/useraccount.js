@@ -118,7 +118,7 @@ $(document).ready(function() {
                 }
             }
         });
-    };
+    }
 
     // let userId = //AURI!!!;
     showUserObs("13579");

@@ -193,10 +193,54 @@
                     <button class="btn waves-effect waves-light g1 disabled" type="submit" id="submit-obs" disabled="true">Submit</button> 
                 </form>
                 </div>
+            </form>
+            </div>
+        </div>
 
+        <div class="row hidden" id="view-near-obs">
+        <h5>Nearby observations</h5><br>
+        <div class="row">
+          <div class="input-field col s12 m4">
+            <h6>Where?</h6>
+            <form>
+              <label id="near-me">
+                <input class="with-gap" type="radio" name="group-1" id="me" value="near-me" /><span>Near me!</span><br>
+              </label>
+              <label>
+                <input class="with-gap" type="radio" name="group-1" id="city" value="near-city" checked /><span>Near a specified city!</span><br>
+              </label>
+            </form><br>
+            <div id="city-select">
+              <form autocomplete="off">
+                <div class="autoComplete">
+                  <label for="event-location" class="form-label">Location*</label>
+                  <input id="locationInput" type="text" name="location" list="suggestion-list" placeholder="City, State">
+                  <datalist id="suggestion-list">
+
+                  </datalist>
+                </div><br>
+              </form>
+            </div>
+            <form>
+              <label for="radius" class="form-label">Search Radius</label><br>      
+                  <select id="location-radius" class="form-control">
+                    <option id="1-mi" value="1">1 Kilometer</option>
+                    <option id="10-mi" value="10" selected="selected">10 Kilometers</option>
+                    <option id="50-mi" value="50">50 Kilometers</option>
+                    <option id="100-mi" value="100">100 Kilometers</option>
+                    <option id="5-mi" value="500">500 Kilometers</option>
+                    <option id="20-mi" value="1000">1000 Kilometers</option>
+                  </select><br>
+              <button class="btn waves-effect waves-light g1" type="button" id="get-nearby" disabled>Search</button>
             </form>
 
             </div>
+            <div class="col s12 m8 l8">
+                <div id="map-wrapper">
+                    <div class="mapDisplayed" id="map-2"></div>
+                </div>
+            </div>
+        </div>
         </div>
 
         <div class="row hidden" id="view-usr-obs">
@@ -223,6 +267,8 @@
             </div>
             </div>
         </div>
+
+        <!-- THIS IS A MONUMENT TO MY MISTAKES -Stefan
 
         <div class="row hidden" id="view-near-obs">
             <h5>Nearby observations</h5><br>
@@ -265,6 +311,7 @@
                 </div>
             </div>
         </div>
+        -->
 
         <div class="row hidden" id="download-data">
             <h5>Download data</h5>
@@ -320,8 +367,6 @@
 
         </div>
     </div>
-
-
 
     <footer class="page-footer teal">
         <div class="container">
