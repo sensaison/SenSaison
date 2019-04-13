@@ -90,14 +90,7 @@ $(document).ready(function() {
     // DELETE request when deleting observation
         $("#all-your-obs-body").on("click", ".delete", function(e) {
         e.preventDefault();
-      $.ajax("/api/observations", {
-          type: "POST",
-          data: newObs
-      }).then(function() {
-          alert("Observation successfully submitted");
-          $("#obs-submission-form")[0].reset();
-          // if reload then form is automatically reset and table of user's observations is reloaded too
-          // or do a get request here for the table
+    
 
         let id_delete = $(this).parents("tr").attr("id");
 
@@ -113,9 +106,8 @@ $(document).ready(function() {
 
     // request to download data
     $("#request-data").on("click", function(e) {
-
-      $(this).parents("tr").detach(); // REPLACE WITH REMOVE() WHEN GOING INTO PRODUCTION)
-  });
+        let minDate = $("#start-date-download").val();
+        let maxDate = $("#end-date-download").val();
 
         if ($("#category-download").val() === "all") {
             location.href="/download?minDate=" + minDate + "&maxDate=" + maxDate + "&category=animal&category=plant&category=fungus&category=weather&category=land_water";
@@ -152,19 +144,5 @@ $(document).ready(function() {
             }
         }
         $("#data-request-form")[0].reset();
-    })
-})
-
-
-      // let includePics;
-      // if ($("#include-pictures").is(":checked")) {
-      //     includePics = true;
-      // } else {
-      //     includePics = false;
-      // }
-
-      $("#data-request-form")[0].reset();
-
-  });
+    });
 });
-
