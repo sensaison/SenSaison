@@ -141,9 +141,9 @@ $(document).ready(function() {
             method: "DELETE",
             url: "/api/observations?id=" + id_delete
         }).then(function(res) {
-            $(this).parents("tr").remove();
+            
         });
-
+        $(this).parents("tr").remove();
         
     });
 
