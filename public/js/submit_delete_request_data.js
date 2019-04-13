@@ -106,18 +106,6 @@ $(document).ready(function() {
 
     // request to download data
     $("#request-data").on("click", function(e) {
-        let minDate = $("#start-date-download").val();
-        let maxDate = $("#end-date-download").val();
-
-        if ($("#category-download").val() === "all") {
-            location.href="/download?minDate=" + minDate + "&maxDate=" + maxDate + "&category=animal&category=plant&category=fungus&category=weather&category=land_water";
-        } else {
-            let category = $("#category-download").val();
-            location.href="/download?minDate=" + minDate + "&maxDate=" + maxDate + "&category=" + category;
-        }
-
-
-        // if pictures downloading too, need to send everything in a zip file
 
         let minDate = $("#start-date-download").val();
         let maxDate = $("#end-date-download").val();
