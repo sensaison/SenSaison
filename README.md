@@ -11,4 +11,5 @@ SenSaison is in active development. Our team intends to add many additional feat
 The app is developed using NodeJS and the database is maintained using MySQL. Styling on the page is primarily powered by Materialize. User credentials are handled by Google OAuth. Data mapping is done with Google Maps and Places APIs.
 
 © The SenSaison Team
+
 April 14, 2019
