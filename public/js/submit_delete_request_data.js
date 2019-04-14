@@ -133,18 +133,16 @@ $(document).ready(function() {
     // DELETE request when deleting observation
         $("#all-your-obs-body").on("click", ".delete", function(e) {
         e.preventDefault();
-    
 
         let id_delete = $(this).parents("tr").attr("id");
 
         $.ajax({
             method: "DELETE",
             url: "/api/observations?id=" + id_delete
-        }).then(function(res) {
-            
-        });
+        })
+
         $(this).parents("tr").remove();
-        
+    
     });
 
     // request to download data
