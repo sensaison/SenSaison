@@ -2,9 +2,54 @@
 
 $(document).ready(function() {
 
+    $("#obs-category").on("change", function() {
+        if ($("#obs-category").val() === "animal" && $("#species-info").hasClass("hidden")) {
+            $("#species-info").removeClass("hidden");
+            $("#species-info").addClass("show");
+            $("#species").attr("required");
+            $("#species").attr("aria-required", "true");
+            $("#species-confidence").attr("required");
+            $("#species-confidence").attr("aria-required", "true");
+        } else if ($("#obs-category").val() === "plant" && $("#species-info").hasClass("hidden")) {
+            $("#species-info").removeClass("hidden");
+            $("#species-info").addClass("show");
+            $("#species").attr("required");
+            $("#species").attr("aria-required", "true");
+            $("#species-confidence").attr("required");
+            $("#species-confidence").attr("aria-required", "true");
+        } else if ($("#obs-category").val() === "fungus" && $("#species-info").hasClass("hidden")) {
+            $("#species-info").removeClass("hidden");
+            $("#species-info").addClass("show");
+            $("#species").attr("required");
+            $("#species").attr("aria-required", "true");
+            $("#species-confidence").attr("required");
+            $("#species-confidence").attr("aria-required", "true");
+        } else if ($("#obs-category").val() === "weather" && $("#species-info").hasClass("show")) {
+            $("#species-info").removeClass("show");
+            $("#species-info").addClass("hidden");
+            $("#species").removeAttr("required");
+            $("#species").removeAttr("aria-required");
+            $("#species-confidence").removeAttr("required");
+            $("#species-confidence").removeAttr("aria-required", "true");
+        } else if ($("#obs-category").val() === "land_water" && $("#species-info").hasClass("show")) {
+            $("#species-info").removeClass("show");
+            $("#species-info").addClass("hidden");
+            $("#species").removeAttr("required");
+            $("#species").removeAttr("aria-required");
+            $("#species-confidence").removeAttr("required");
+            $("#species-confidence").removeAttr("aria-required", "true");
+        } else if ($("#obs-category").val() === "other" && $("#species-info").hasClass("show")) {
+            $("#species-info").removeClass("show");
+            $("#species-info").addClass("hidden");
+            $("#species").removeAttr("required");
+            $("#species").removeAttr("aria-required");
+            $("#species-confidence").removeAttr("required");
+            $("#species-confidence").removeAttr("aria-required", "true");
+        }
+    });
+
     // POST request when submitting new observation
     $("#submit-obs").on("click", function(e) {
-        // e.preventDefault(); // this line prevents front-end required validation from occurring
 
         // USERID CODE FIRST
 
@@ -96,9 +141,9 @@ $(document).ready(function() {
             method: "DELETE",
             url: "/api/observations?id=" + id_delete
         }).then(function(res) {
-            $(this).parents("tr").remove();
+            
         });
-
+        $(this).parents("tr").remove();
         
     });
 
