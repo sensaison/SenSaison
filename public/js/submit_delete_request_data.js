@@ -2,6 +2,7 @@
 
 $(document).ready(function() {
 
+    // make last 3 fields in submission form required if animal plant or fungus selected
     $("#obs-category").on("change", function() {
         if ($("#obs-category").val() === "animal" && $("#species-info").hasClass("hidden")) {
             $("#species-info").removeClass("hidden");
@@ -58,70 +59,80 @@ $(document).ready(function() {
         ///////////////////////////////
 
         
-        if(window.userPin !== undefined) {
+        if (window.userPin !== undefined) {
+
+            let img = $("#pic-file").prop("files")[0];
+
+            function getBase64(file) {
+                return new Promise(function(resolve, reject) {
+                    var reader = new FileReader();
+                    reader.readAsDataURL(file);
+                    reader.onload = function() {
+                        resolve(reader.result);
+                    };
+                    reader.onerror = reject;
+                });
+            };
 
             let categoryVal = $("#obs-category").val();
             let dateObsVal = $("#date-obs").val();
+            let pictureIdVal;
+            let newObs;
 
-            // let img = $("#pic-file").prop("files")[0];
-
-            // let reader = new FileReader();
-            // reader.onloadend = function() {
-            //     base64data = reader.result;                
-            //     base64data.substr(base64data.indexOf(',')+1);
-            // }
-            // let imgUpld = reader.readAsDataURL(img); 
-
-            // let pictureIdVal;
-
-            // $.ajax({
-            //     method: "POST",
-            //     url: "https://api.cloudinary.com/v1_1/sensaison/image/upload",
-            //     data: {
-            //         file: imgUpld,
-            //         upload_preset: "default_preset",
-            //         folder: userIdVal,
-            //         tags: userIdVal + ", " + categoryVal + ", " +  dateObsVal,
-            //     },
-            //     error: function(xhr, err) {
-            //         console.log(xhr);
-            //         console.log(err);
-            //     }
-            // }).then(function(res) {
-            //     pictureIdVal = res.public_id;
-            //     console.log("pictureIdVal: " + pictureIdVal);
-            // }).then(
-            // function () {
-                var newObs = {
-                    userId: userIdVal,
-                    pictureId: "4500234",
-                    dateObs: dateObsVal,
-                    timeObs: $("#time-obs").val(),
-                    latitude: window.userPin.position.lat(),
-                    longitude: window.userPin.position.lng(),
-                    category: categoryVal,
-                    firstConfidence: $("#first-confidence").val(),
-                    briefDescription: $("#brief-desc").val().trim(),
-                    extendedDescription: $("#extended-desc").val().trim(),
-                    species: $("#species").val().trim(),
-                    speciesSciName: $("#species-sci-name").val().trim(),
-                    speciesConfidence: $("#species-confidence").val(),
-                };
-                $.ajax("/api/observations", {
+            getBase64(img).then(function(result) {
+                $.ajax({
                     method: "POST",
-                    data: newObs
+                    url: "https://api.cloudinary.com/v1_1/sensaison/image/upload",
+                    data: {
+                        file: result,
+                        upload_preset: "default_preset",
+                        folder: userIdVal,
+                        tags: userIdVal + ", " + categoryVal + ", " +  dateObsVal,
+                    }
                 }).then(function(response) {
-                    console.log("response.id: " + response.id);
-                    // cloudinary update photo tag with response.id
-                    location.reload();
-                }).then(function() {
-                    alert("Observation successfully submitted");
+                    pictureIdVal = response.public_id;
+                }).then(function () {
+                    newObs = {
+                        userId: userIdVal,
+                        pictureId: pictureIdVal,
+                        dateObs: dateObsVal,
+                        timeObs: $("#time-obs").val(),
+                        latitude: window.userPin.position.lat(),
+                        longitude: window.userPin.position.lng(),
+                        category: categoryVal,
+                        firstConfidence: $("#first-confidence").val(),
+                        briefDescription: $("#brief-desc").val().trim(),
+                        extendedDescription: $("#extended-desc").val().trim(),
+                        species: $("#species").val().trim(),
+                        speciesSciName: $("#species-sci-name").val().trim(),
+                        speciesConfidence: $("#species-confidence").val(),
+                    };
+                    $.ajax("/api/observations", {
+                        method: "POST",
+                        data: newObs,
+                        async: false,
+                        // complete: function(response) {
+                        //     console.log(JSON.stringify(response.id));
+                        //     // for some reason returned id is null
+                        //     // might have to do a get request here instead
+                        //     $.ajax({
+                        //         method: "PUT",
+                        //         url: "https://api.cloudinary.com/v1_1/sensaison/image/upload",
+                        //         data: {
+                        //             public_ids: pictureIdVal,
+                        //             tags: response.id
+                        //         }
+                        //     });
+                        // }
+                    }).then(function() {
+                        alert("Observation successfully submitted");
+                        location.reload();
+                    });
+                }).catch(function(error) {
+                    if (error) throw error;
                 });
-            }
-
-
-
-         else {
+            })
+        } else {
             $("#pin-reminder").remove();
             $("#map-wrapper").append($("<label for='map-wrapper' id='pin-reminder'>Please place a pin on the map.</label>"));
             throw "User didn't place a pin on the map.";

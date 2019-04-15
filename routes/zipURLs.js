@@ -1,6 +1,6 @@
 const async = require("async");
 const request = require("request");
-const fs = require("fs");
+require("fs");
 
 function zipURLs(urls, zip, outStream) {
     //create zip file outside of function
