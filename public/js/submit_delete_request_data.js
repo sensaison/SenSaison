@@ -32,6 +32,7 @@ $(document).ready(function() {
             $("#species").removeAttr("aria-required");
             $("#species-confidence").removeAttr("required");
             $("#species-confidence").removeAttr("aria-required", "true");
+            // $("#species-confidence").val(null);
         } else if ($("#obs-category").val() === "land_water" && $("#species-info").hasClass("show")) {
             $("#species-info").removeClass("show");
             $("#species-info").addClass("hidden");
@@ -39,6 +40,7 @@ $(document).ready(function() {
             $("#species").removeAttr("aria-required");
             $("#species-confidence").removeAttr("required");
             $("#species-confidence").removeAttr("aria-required", "true");
+            // $("#species-confidence").val(null);
         } else if ($("#obs-category").val() === "other" && $("#species-info").hasClass("show")) {
             $("#species-info").removeClass("show");
             $("#species-info").addClass("hidden");
@@ -46,6 +48,7 @@ $(document).ready(function() {
             $("#species").removeAttr("aria-required");
             $("#species-confidence").removeAttr("required");
             $("#species-confidence").removeAttr("aria-required", "true");
+            // $("#species-confidence").val(null);
         }
     });
 
@@ -114,7 +117,8 @@ $(document).ready(function() {
                         // complete: function(response) {
                         //     console.log(JSON.stringify(response.id));
                         //     // for some reason returned id is null
-                        //     // might have to do a get request here instead
+                        //     // might have to do a get request here instead but that's inefficient
+                        //     // setting async to false isn't doing anything nor is using .then() vs complete/success
                         //     $.ajax({
                         //         method: "PUT",
                         //         url: "https://api.cloudinary.com/v1_1/sensaison/image/upload",
@@ -161,7 +165,6 @@ $(document).ready(function() {
 
         let minDate = $("#start-date-download").val();
         let maxDate = $("#end-date-download").val();
-
         
         if ($("#include-pictures").is(":checked")) { // PICTURES IN DOWNLOAD
             console.log("pics included in download");

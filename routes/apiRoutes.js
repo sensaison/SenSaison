@@ -129,6 +129,8 @@ module.exports = function (app) {
             res.setHeader("Content-disposition", "attachment; filename=sensaisondownload_withpics.zip");
             res.setHeader("Content-Type", "application/zip, application/octet-stream");
             res.status(200).send(res);
+        }).done(function() {
+            console.log("successful download with pics");
         })
     });
 
@@ -142,7 +144,6 @@ module.exports = function (app) {
                 }
             }
         }).then(function (result) {
-            
             let csv = json2csv(result, {
                 fields: [
                     "id",
@@ -164,7 +165,7 @@ module.exports = function (app) {
             res.setHeader("Content-Type", "text/csv");
             res.status(200).send(csv);
         }).done(function() {
-            console.log("successful download");
+            console.log("successful download with no pictures");
         })
     });
 
