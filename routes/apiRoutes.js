@@ -2,9 +2,8 @@ const db = require("../models");
 const Sequelize = require("sequelize");
 const Op = Sequelize.Op;
 const json2csv = require("json2csv").parse;
-const cloudinary = require("../config/cloudinary");
-const archiver = require("archiver");
 const zipURLs = require("./zipURLs");
+const fs = require("fs");
 
 module.exports = function (app) {
 
@@ -100,7 +99,6 @@ module.exports = function (app) {
                 }
             }
         }).then(function(result) {
-
             let csv = json2csv(result, {
                 fields: [
                     "id",
@@ -122,19 +120,17 @@ module.exports = function (app) {
 
             let picsDownloadArr = []
             for (let i=0; i<result.length; i++) {
-                let picForDownload ="https://res.cloudinary.com/sensaison/image/" + result[i].pictureId;
+                let picForDownload ="https://res.cloudinary.com/sensaison/image/upload/" + result[i].pictureId + ".jpg";
                 picsDownloadArr.push(picForDownload);
             }
 
-            let zip = archiver.create("zip");
-            zip.append(csv, {
-                name: "sensaisondownload_withpics.csv"
-            })
-            zipURLs(picsDownloadArr, zip, "/download-with-pictures");
+            zipURLs(picsDownloadArr, csv, res);
 
             res.setHeader("Content-disposition", "attachment; filename=sensaisondownload_withpics.zip");
-            res.setHeader("Content-Type", "application/octet-stream");
-            res.status(200).send(zip);
+            res.setHeader("Content-Type", "application/zip, application/octet-stream");
+            res.status(200).send(res);
+        }).done(function() {
+            console.log("successful download with pics");
         })
     });
 
@@ -148,7 +144,6 @@ module.exports = function (app) {
                 }
             }
         }).then(function (result) {
-            
             let csv = json2csv(result, {
                 fields: [
                     "id",
@@ -170,7 +165,7 @@ module.exports = function (app) {
             res.setHeader("Content-Type", "text/csv");
             res.status(200).send(csv);
         }).done(function() {
-            console.log("successful");
+            console.log("successful download with no pictures");
         })
     });
 
@@ -202,25 +197,4 @@ module.exports = function (app) {
                 res.json(newusr);
             });
     });
-
-    // UPLOAD one picture to cloudinary
-    // app.post("https://api.cloudinary.com/v1_1/sensaison/image/upload", function(req, res) {
-
-    //     console.log("REQ: " + req);
-    //     console.log("REQ.body: " + req.params);
-
-    //     cloudinary.v2.uploader.unsigned_upload(
-    //         req.params.file,
-    //         "default_preset",
-    //         {
-    //             cloud_name: "sensaison",
-    //             folder: req.params.tagUserIdVal,
-    //             tags: [req.params.tagCategoryVal, req.params.tagDateObsVal, req.params.tagUserIdVal] 
-    //         },
-    //         function(err, res) {
-    //             if (err) throw err;
-    //             console.log("RES.PUBLIC_ID: " + res.public_id);
-    //         }
-    //     )
-    // });
 }

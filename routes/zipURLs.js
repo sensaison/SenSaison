@@ -1,24 +1,28 @@
 const async = require("async");
 const request = require("request");
-const fs = require("fs");
+const archiver = require("archiver");
 
-function zipURLs(urls, zip, outStream) {
-    //create zip file outside of function
+function zipURLs(urls, csv, outStream) {
+    let zip = archiver.create("zip");
 
-    async.eachLimit(urls, 3, function(url, done) {
+    // this isn't working
+    zip.file(csv, {name: "sensaisondownload_withpics.csv"});
+
+    async.eachLimit(urls, 5, function(url, done) {
         let stream = request.get(url);
 
         stream.on("zip", function(err) {
-        return done(err);
+            return done(err);
         }).on("end", function() {
-        return done();
+            return done();
         });
 
         // Use the last part of the URL as a filename within the ZIP archive.
         zip.append(stream, { name : url.replace(/^.*\//, '') });
     }, function(err) {
         if (err) throw err;
-        zip.finalize().pipe(outStream);
+        zip.finalize();
+        zip.pipe(outStream);
     });
 }
 
