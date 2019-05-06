@@ -97,7 +97,7 @@ module.exports = function (app) {
                 dateObs: {
                     [Op.between]: [req.query.minDate, req.query.maxDate]
                 }
-            }
+            } 
         }).then(function(result) {
             let csv = json2csv(result, {
                 fields: [
