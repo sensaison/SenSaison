@@ -98,7 +98,7 @@ module.exports = function (app) {
                     [Op.between]: [req.query.minDate, req.query.maxDate]
                 }
             } 
-        }).then(function(result) {
+        }).then(async function(result) {
             let csv = json2csv(result, {
                 fields: [
                     "id",
@@ -124,11 +124,11 @@ module.exports = function (app) {
                 picsDownloadArr.push(picForDownload);
             }
 
-            zipURLs(picsDownloadArr, csv, res);
+            let zip = await zipURLs(picsDownloadArr, csv, res);
 
             res.setHeader("Content-disposition", "attachment; filename=sensaisondownload_withpics.zip");
             res.setHeader("Content-Type", "application/zip, application/octet-stream");
-            res.status(200).send(res);
+            res.status(200).send(zip);
         }).done(function() {
             console.log("successful download with pics");
         })
