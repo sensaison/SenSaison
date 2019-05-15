@@ -18,20 +18,20 @@ function zipURLs(urls, csv, outStream) {
         let stream = request.get(url);
 
         stream.on("zip", function(err) {
-            return done(err);
+            console.log(err);
+            done(err);
         }).on("end", function() {
-            return done();
+            console.log("done");
+            done();
         });
 
-        // Use the last part of the URL as a filename within the ZIP archive.
         zip.append(stream, { name : url.replace(/^.*[\\\/]/, '') });
         zip.pipe(outStream);
 
     }, function(err) {
         if (err) throw err;
-
-        // zip.finalize();
+        zip.finalize();
     });
-}
+};
 
 module.exports = zipURLs;

@@ -122,7 +122,7 @@ module.exports = function (app) {
             for (let i=0; i<result.length; i++) {
                 let picForDownload ="https://res.cloudinary.com/sensaison/image/upload/" + result[i].pictureId + ".jpg";
                 picsDownloadArr.push(picForDownload);
-            }
+            };
 
             let zip = await zipURLs(picsDownloadArr, csv, res);
 
