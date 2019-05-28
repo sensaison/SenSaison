@@ -1,12 +1,11 @@
-const db = require("../models");
-const Sequelize = require("sequelize");
-const Op = Sequelize.Op;
-const json2csv = require("json2csv").parse;
-const zipURLs = require("./zipURLs");
 require("archiver");
-const Passport = require("../config/passportStrategy");
-const ensureLoggedIn = require("connect-ensure-login");
-// const fs = require("fs");
+const db = require("../models");
+    Sequelize = require("sequelize"),
+    Op = Sequelize.Op,
+    json2csv = require("json2csv").parse,
+    zipURLs = require("./zipURLs"),
+    Passport = require("../config/passportStrategy"),
+    ensureLoggedIn = require("connect-ensure-login").ensureLoggedIn;
 
 module.exports = (app) => {
 
@@ -216,20 +215,20 @@ module.exports = (app) => {
         }),	(req, res) => {
             console.log(res);
             console.log(req);
-            res.json(req.body.user);
-            res.json(req.body.id_token);
-            res.json(req.body.access_token);
+            res.json(req.user);
+            res.json(req.id_token);
+            res.json(req.access_token);
             res.json(req.user);
             res.redirect('/useraccount.html');
             console.log('SUCCESSFUL AUTHENTICATION');
-            const token = req.body.access_token;
-            const user = req.body.user;
+            const token = req.access_token;
+            const user = req.user;
             return (user, token);
 	    }
     );
 
-    routes.get('/useraccount.html',
-        ensureLoggedIn('/user'),
+    app.get('/useraccount.html',
+        ensureLoggedIn("/"),
         (req, res) => {
             res.send(req.user);
             res.send(req.body.access_token);
@@ -243,7 +242,7 @@ module.exports = (app) => {
     app.get('/logout', (req, res) => {
         console.log('LOGGING OUT SESSION: ', req.session);
         req.logout;
-        req.session.destroy(() => res.redirect('http://localhost:3000/'));
+        req.session.destroy(() => res.redirect('/'));
     });
 
 };

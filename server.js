@@ -13,7 +13,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(express.static("public"));
 app.use(flash());
-// app.use("/auth", authRoutes);
 
 app.use(session({
     secret: process.env.SESSION_SECRET,

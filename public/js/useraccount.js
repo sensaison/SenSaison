@@ -60,59 +60,75 @@ $(document).ready(function() {
     });
 
 
+    // getting user id from openid
+
+    const user,
+        token;
+
+    $.ajax("/auth/openidconnect", {
+        type: "GET",
+        data: {
+            user: user,
+            token: token
+        }
+    }).then(data => {
+        user = user;
+        token = token;
+    })
+
     // displaying user's observations in table mentioned above
-        $.ajax("/api/userobservations", {
-            type: "GET",
-            data: {
-                userId: "13579"
+    $.ajax("/api/userobservations", {
+        type: "GET",
+        data: {
+            userId: "13579"
+        }
+    }).then(data => {
+        window.userObs = data;
+        if (!data || !data.length) {
+            // if no data then add a row saying so
+            $("#all-your-obs-body").prepend("<tr class='no-data'><td></td><td></td><td>No observations to display</td><td></td></tr>"
+            );
+        } else {
+            // remove no data row if there is such a row
+            if ($("#all-your-obs-body").children("tr").hasClass("no-data")) {
+                $(this).children("tr").hasClass("no-data").remove();
             }
-        }).then(function(data) {
-            window.userObs = data;
-            if (!data || !data.length) {
-                // if no data then add a row saying so
-                $("#all-your-obs-body").prepend("<tr class='no-data'><td></td><td></td><td>No observations to display</td><td></td></tr>"
+            //prepend rows of data
+            for (let i=0; i<data.length; i++) {
+                let obsId = data[i].id;
+                let date = data[i].dateObs;
+                let category = data[i].category;
+                let briefDesc = data[i].briefDescription;
+    
+                $("#all-your-obs-body").prepend("<tr id='" + obsId + "'><td>" + date + "</td><td>" + category + "</td><td class='desc-cell'>" + briefDesc + "</td><td><button class='btn waves-effect waves-light btn-small delete'>X</button></tr>"
                 );
-            } else {
-                // remove no data row if there is such a row
-                if ($("#all-your-obs-body").children("tr").hasClass("no-data")) {
-                    $(this).children("tr").hasClass("no-data").remove();
-                }
-                //prepend rows of data
-                for (let i=0; i<data.length; i++) {
-                    let obsId = data[i].id;
-                    let date = data[i].dateObs;
-                    let category = data[i].category;
-                    let briefDesc = data[i].briefDescription;
-        
-                    $("#all-your-obs-body").prepend("<tr id='" + obsId + "'><td>" + date + "</td><td>" + category + "</td><td class='desc-cell'>" + briefDesc + "</td><td><button class='btn waves-effect waves-light btn-small delete'>X</button></tr>"
-                    );
-                }
             }
-        }).then(function () {
-            $("#all-your-obs").after("<br><ul class='pagination'><li class='waves-effect' id='start-pagination'><a href='#'><i class='material-icons'>chevron_left</i></a></li><li class='waves-effect' id='end-pagination'><a href='#'><i class='material-icons'>chevron_right</i></a></li></div>");
-    
-            let rowsShown = 10;
-            let rowsTotal = $("#all-your-obs tbody tr").length;
-            let numPages = rowsTotal/rowsShown;
-    
-            for (i = 0; i < numPages; i++) {
-                let pageNum = i + 1;
-                $("#end-pagination").before("<li class='btn waves-effect waves-light btn-flat'><a href='#' rel='" + i + "'>" + pageNum + "</a></li>");
-            }
-    
-            $("#all-your-obs tbody tr").hide();
-            $("#all-your-obs tbody tr").slice(0, rowsShown).show();
-            $(".pagination a:first").addClass("active");
-    
-            $(".pagination a").bind("click", function(e) {
-                e.preventDefault();
-                $(".pagination a").parent("li").removeClass("active");
-                $(this).parent("li").addClass("active");
-                let currPage = $(this).attr("rel");
-                let startItem = currPage * rowsShown;
-                var endItem = startItem + rowsShown;
-                $("#all-your-obs tbody tr").css("opacity","0.0").hide().slice(startItem, endItem).css("display","table-row").animate({opacity:1}, 300);
-            });   
-        })
+        }
+    }).then(function () {
+        $("#all-your-obs").after("<br><ul class='pagination'><li class='waves-effect' id='start-pagination'><a href='#'><i class='material-icons'>chevron_left</i></a></li><li class='waves-effect' id='end-pagination'><a href='#'><i class='material-icons'>chevron_right</i></a></li></div>");
+
+        let rowsShown = 10;
+        let rowsTotal = $("#all-your-obs tbody tr").length;
+        let numPages = rowsTotal/rowsShown;
+
+        for (i = 0; i < numPages; i++) {
+            let pageNum = i + 1;
+            $("#end-pagination").before("<li class='btn waves-effect waves-light btn-flat'><a href='#' rel='" + i + "'>" + pageNum + "</a></li>");
+        }
+
+        $("#all-your-obs tbody tr").hide();
+        $("#all-your-obs tbody tr").slice(0, rowsShown).show();
+        $(".pagination a:first").addClass("active");
+
+        $(".pagination a").bind("click", function(e) {
+            e.preventDefault();
+            $(".pagination a").parent("li").removeClass("active");
+            $(this).parent("li").addClass("active");
+            let currPage = $(this).attr("rel");
+            let startItem = currPage * rowsShown;
+            var endItem = startItem + rowsShown;
+            $("#all-your-obs tbody tr").css("opacity","0.0").hide().slice(startItem, endItem).css("display","table-row").animate({opacity:1}, 300);
+        });   
+    })
 
 });

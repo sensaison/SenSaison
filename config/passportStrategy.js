@@ -1,10 +1,11 @@
-const Passport = require("passport");
-const Strategy = require("openid-client").Strategy;
 require("dotenv").config();
-const Users = require('../models/Users');
+const Passport = require("passport"),
+    Issuer = require("openid-client").Issuer,
+    Strategy = require("openid-client").Strategy,
+    generators = require("openid-client").generators,
+    Users = require('../models/Users');
 
 Issuer.discover('https://accounts.google.com/.well-known/openid-configuration')
-
     .then(googleIssuer => {
 
         const client = new googleIssuer.Client({
@@ -53,7 +54,6 @@ Issuer.discover('https://accounts.google.com/.well-known/openid-configuration')
                     firstName: id_token.given_name,
                     lastName: id_token.family_name,
                     email: id_token.email,
-                    picture: id_token.picture,
                 });
             } catch (err) {
                 done(err, null);

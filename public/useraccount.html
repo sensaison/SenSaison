@@ -1,54 +1,54 @@
-<!-- After signing in -->
+    <!-- After signing in -->
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
 
-  <title>SenSaison</title>
+    <title>SenSaison</title>
 
-  <!-- CSS  -->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-  <link href="css/navbar.css" media="screen" rel="stylesheet" type="text/css" />
-  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-  <link rel="stylesheet" type="text/css" href="css/googleMaps.css">
+    <!-- CSS  -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="css/navbar.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link rel="stylesheet" type="text/css" href="css/googleMaps.css">
 
-</head>
+    </head>
 
-<body>
+    <body>
 
-    <!-- NAV BAR -->
-    <!-- <nav class="white" role="navigation">
-        <div class="nav-wrapper container">
-            <a id="logo-container" href="#" class="brand-logo">Logo</a>
-            <ul class="right hide-on-med-and-down">
-                <li><a href="#">Navbar Link</a></li>
+        <!-- NAV BAR -->
+        <!-- <nav class="white" role="navigation">
+            <div class="nav-wrapper container">
+                <a id="logo-container" href="#" class="brand-logo">Logo</a>
+                <ul class="right hide-on-med-and-down">
+                    <li><a href="#">Navbar Link</a></li>
+                </ul>
+
+                <ul id="nav-mobile" class="sidenav">
+                    <li><a href="#">About Us</a></li>
+                </ul>
+                <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+            </div>
+        </nav>
+    -->
+
+    <div class="wrap">
+    <nav>
+            <ul class="menu" id="top">
+                <li><img src="images/sensaisonNew.png"></li>
+
+                <li><a href="index.html"><span class=""></span> Home</a></li>
+                <li><a href="team.html"><span class=""></span> About us</a></li>
+                <li><a href="additionalresources.html"><span class=""></span> Additional resources</a></li>
+                <li><a href="/logout"><span class=""></span> Log out</a></li>
             </ul>
-
-            <ul id="nav-mobile" class="sidenav">
-                <li><a href="#">About Us</a></li>
-            </ul>
-            <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-        </div>
-    </nav>
--->
-
-<div class="wrap">
-  <nav>
-		<ul class="menu" id="top">
-            <li><img src="images/sensaisonNew.png"></li>
-
-            <li><a href="index.html"><span class=""></span> Home</a></li>
-            <li><a href="team.html"><span class=""></span> About us</a></li>
-            <li><a href="additionalresources.html"><span class=""></span> Additional resources</a></li>
-            <li><a href="index.html"><span class=""></span> Log out</a></li>
-		</ul>
-        <div class="clearfix"></div>
-	</nav>
-</div>
+            <div class="clearfix"></div>
+        </nav>
+    </div>
 
     <!-- MAIN -->
     <div id="index-banner" class="success">
@@ -198,38 +198,38 @@
         <div class="row hidden" id="view-near-obs">
         <h5>Nearby observations</h5><br>
         <div class="row">
-          <div class="input-field col s12 m4">
+        <div class="input-field col s12 m4">
             <h6>Where?</h6>
             <form>
-              <label id="near-me">
+            <label id="near-me">
                 <input class="with-gap" type="radio" name="group-1" id="me" value="near-me" /><span>Near me!</span><br>
-              </label>
-              <label>
+            </label>
+            <label>
                 <input class="with-gap" type="radio" name="group-1" id="city" value="near-city" checked /><span>Near a specified city!</span><br>
-              </label>
+            </label>
             </form><br>
             <div id="city-select">
-              <form autocomplete="off">
+            <form autocomplete="off">
                 <div class="autoComplete">
-                  <label for="event-location" class="form-label">Location*</label>
-                  <input id="locationInput" type="text" name="location" list="suggestion-list" placeholder="City, State">
-                  <datalist id="suggestion-list">
+                <label for="event-location" class="form-label">Location*</label>
+                <input id="locationInput" type="text" name="location" list="suggestion-list" placeholder="City, State">
+                <datalist id="suggestion-list">
 
-                  </datalist>
+                </datalist>
                 </div><br>
-              </form>
+            </form>
             </div>
             <form>
-              <label for="radius" class="form-label">Search Radius</label><br>      
-                  <select id="location-radius" class="form-control">
+            <label for="radius" class="form-label">Search Radius</label><br>      
+                <select id="location-radius" class="form-control">
                     <option id="1-mi" value="1">1 Kilometer</option>
                     <option id="10-mi" value="10" selected="selected">10 Kilometers</option>
                     <option id="50-mi" value="50">50 Kilometers</option>
                     <option id="100-mi" value="100">100 Kilometers</option>
                     <option id="5-mi" value="500">500 Kilometers</option>
                     <option id="20-mi" value="1000">1000 Kilometers</option>
-                  </select><br>
-              <button class="btn waves-effect waves-light g1" type="button" id="get-nearby" disabled>Search</button>
+                </select><br>
+            <button class="btn waves-effect waves-light g1" type="button" id="get-nearby" disabled>Search</button>
             </form>
 
             </div>
@@ -361,7 +361,7 @@
         </div>  
 
 
-  <footer class="page-footer teal">
+<footer class="page-footer teal">
     <div class="container">
         <div class="row">
             <div class="col s2">
@@ -378,7 +378,7 @@
                 <ul>
                     <li><a class="white-text" href="https://github.com/stefan-apr">Github</a> | <a class="white-text" href="https://stefan-apr.github.io/Responsive-Portfolio/portfolio.html">Portfolio</a> | <a class="white-text" href="https://www.linkedin.com/in/stefan-apreutesei-592514171/">LinkedIn</a></li>
                     <li><a class="white-text" href="https://github.com/crypticwoodwhite">Github</a> | <a class="white-text" href="https://crypticwoodwhite.github.io/">Portfolio</a> | <a class="white-text" href="https://www.linkedin.com/in/catherinepham-cww/">LinkedIn</a></li>
-                    <li><a class="white-text" href="https://github.com/JulieMathews?tab=repositories">Github</a> | <a class="white-text" href="https://juliemathews.github.io/New_Port/">Portfolio</a> | <a class="white-text" href="https://www.linkedin.com/in/julie-mathews/">LinkedIn</a></li>
+                    <li><a class="white-text" href="https://github.com/JulieMathews">Github</a> | <a class="white-text" href="https://juliemathews.github.io/New_Port/">Portfolio</a> | <a class="white-text" href="https://www.linkedin.com/in/julie-mathews/">LinkedIn</a></li>
                 </ul>
             </div>
 

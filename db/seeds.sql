@@ -10,16 +10,22 @@ INSERT IGNORE INTO Observations
     ("246810", "246810003", "2018-07-30", "17:20:00", 33.6891, -78.8867, "weather", NULL, NULL, NULL, 5, "First hurricane of the year hits town", NULL),
     ("13579", "13579001", "2017-04-03", "14:15:00", 39.0997, -94.5786, "weather", NULL, NULL, NULL, 5, "First tornado of the year", NULL),
     ("13579", "13579002", "2018-02-27", "07:13:00", 39.0465, -95.6850, "animal", "White-tailed deer", NULL, 5, 4, "Bucks losing their antlers", NULL),
-    ("13579", "13579003", "2019-03-08", "10:27:00", 47.4230, -120.3110, "fungus", "Morel mushrooms", "Morchella spp.", 4, 2, "Found first morels of the season", NULL),
+    ("364789", "13579003", "2019-03-08", "10:27:00", 47.4230, -120.3110, "fungus", "Morel mushrooms", "Morchella spp.", 4, 2, "Found first morels of the season", NULL),
     ("13579", "13579004", "2018-11-27", "08:48:00", 37.6872, -97.3301, "land_water", NULL, NULL, NULL, 3, "Local lake frozen over", "The lake had previously had a few patches of ice. Completely froze over last night. Not solid enough to walk on."),
-    ("13579", "13579005", "2019-04-21", "07:58:00", 37.8239, -96.2892, "animal", "Raccoon", NULL, 5, 3, "First raccoon kits", "Family of raccoons seen in the local park this morning, babies look very young");
+    ("241882", "13579005", "2019-04-21", "07:58:00", 37.8239, -96.2892, "animal", "Raccoon", NULL, 5, 3, "First raccoon kits", "Family of raccoons seen in the local park this morning, babies look very young");
 
 INSERT IGNORE INTO Users
     (userId, firstName, lastName, email, username)
     VALUES ("12345", "Catherine", "Pham", "crypticwoodwhite@gmail.com", "catherinep"),
     ("678910", "Stefan", "Apreutesei", "sapreut@uw.edu", "stefana"),
     ("246810", "Julie", "Mathews", "julie@mathews.com", "juliem"),
-    ("13579", "Auri", "Robbins-Phillips", "auri@r-b.com", "aurirb");
+    ("13759", "John", "Smith", "john@smith.com", "johnsmith"),
+    ("540884", "Jane", "Doe", "jane@doe.com", "janedoe"),
+    ("763781", "Bonnie", "Outlaw", "bonnie@outlaw.com", "bonnieoutlaw"),
+    ("037289", "Clyde", "Outlaw", "clyde@outlaw.com", "clydeoutlaw"),
+    ("364789", "Gwen", "Stefani", "gwen@stefani.com", "gwenstefani"),
+    ("241882", "Spider", "Man", "spider@man.com", "spiderman");
+    
 
 
 /*  unhex(replace(uuid(),'-','')) */
