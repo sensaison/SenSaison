@@ -3,7 +3,8 @@ const Sequelize = require("sequelize");
 const Op = Sequelize.Op;
 const json2csv = require("json2csv").parse;
 const zipURLs = require("./zipURLs");
-const fs = require("fs");
+require("archiver");
+// const fs = require("fs");
 
 module.exports = function (app) {
 
@@ -98,8 +99,8 @@ module.exports = function (app) {
                     [Op.between]: [req.query.minDate, req.query.maxDate]
                 }
             } 
-        }).then(async function(result) {
-            let csv = json2csv(result, {
+        }).then(async function(results) {
+            const csv = json2csv(results, {
                 fields: [
                     "id",
                     "userId",
@@ -118,20 +119,21 @@ module.exports = function (app) {
                 ]
             });
 
-            let picsDownloadArr = []
-            for (let i=0; i<result.length; i++) {
-                let picForDownload ="https://res.cloudinary.com/sensaison/image/upload/" + result[i].pictureId + ".jpg";
-                picsDownloadArr.push(picForDownload);
-            };
+            let picsDownloadArr = results.map(r => `https://res.cloudinary.com/sensaison/image/upload/${r.pictureId}.jpg`);
 
-            let zip = await zipURLs(picsDownloadArr, csv, res);
-
-            res.setHeader("Content-disposition", "attachment; filename=sensaisondownload_withpics.zip");
-            res.setHeader("Content-Type", "application/zip, application/octet-stream");
-            res.status(200).send(zip);
-        }).done(function() {
-            console.log("successful download with pics");
-        })
+            try {
+                let zip = await zipURLs(picsDownloadArr, csv);
+                res.setHeader("Content-disposition", "attachment; filename=sensaisondownload_withpics.zip");
+                res.setHeader("Content-Type", "application/zip, application/octet-stream");
+                res.status(200);
+                zip.pipe(res);
+            }
+            catch (err) {
+                res.status(404).send(err);
+            }
+        }).catch(function(err) {
+            res.status(404).send(err);
+        });
     });
 
     // FIND observations for data request, convert to csv, and download client side NO PICTURES
