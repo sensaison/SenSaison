@@ -1,9 +1,7 @@
-// import { picture } from "cloudinary/lib-es5/cloudinary";
-
-$(document).ready(function() {
+$(document).ready(() => {
 
     // make last 3 fields in submission form required if animal plant or fungus selected
-    $("#obs-category").on("change", function() {
+    $("#obs-category").on("change", () => {
         if ($("#obs-category").val() === "animal" && $("#species-info").hasClass("hidden")) {
             $("#species-info").removeClass("hidden");
             $("#species-info").addClass("show");
@@ -53,11 +51,11 @@ $(document).ready(function() {
     });
 
     // POST request when submitting new observation
-    $("#submit-obs").on("click", function(e) {
+    $("#submit-obs").on("click", e => {
 
         // USERID CODE FIRST
 
-        let userIdVal="13579"
+        let openIdVal="13579"
 
         ///////////////////////////////
 
@@ -66,8 +64,8 @@ $(document).ready(function() {
 
             let img = $("#pic-file").prop("files")[0];
 
-            function getBase64(file) {
-                return new Promise(function(resolve, reject) {
+            getBase64 = (file) => {
+                return new Promise((resolve, reject) => {
                     var reader = new FileReader();
                     reader.readAsDataURL(file);
                     reader.onload = function() {
@@ -82,21 +80,21 @@ $(document).ready(function() {
             let pictureIdVal;
             let newObs;
 
-            getBase64(img).then(function(result) {
+            getBase64(img).then(result => {
                 $.ajax({
                     method: "POST",
                     url: "https://api.cloudinary.com/v1_1/sensaison/image/upload",
                     data: {
                         file: result,
                         upload_preset: "default_preset",
-                        folder: userIdVal,
-                        tags: userIdVal + ", " + categoryVal + ", " +  dateObsVal,
+                        folder: openIdVal,
+                        tags: openIdVal + ", " + categoryVal + ", " +  dateObsVal,
                     }
-                }).then(function(response) {
+                }).then(response => {
                     pictureIdVal = response.public_id;
-                }).then(function () {
+                }).then(() => {
                     newObs = {
-                        userId: userIdVal,
+                        openId: openIdVal,
                         pictureId: pictureIdVal,
                         dateObs: dateObsVal,
                         timeObs: $("#time-obs").val(),
@@ -128,11 +126,11 @@ $(document).ready(function() {
                         //         }
                         //     });
                         // }
-                    }).then(function() {
+                    }).then(() => {
                         alert("Observation successfully submitted");
                         location.reload();
                     });
-                }).catch(function(error) {
+                }).catch(error => {
                     if (error) throw error;
                 });
             })
@@ -146,7 +144,7 @@ $(document).ready(function() {
     });
     
     // DELETE request when deleting observation
-        $("#all-your-obs-body").on("click", ".delete", function(e) {
+        $("#all-your-obs-body").on("click", ".delete", e => {
         e.preventDefault();
 
         let id_delete = $(this).parents("tr").attr("id");
@@ -161,7 +159,7 @@ $(document).ready(function() {
     });
 
     // request to download data
-    $("#request-data").on("click", function(e) {
+    $("#request-data").on("click", e => {
 
         let minDate = $("#start-date-download").val();
         let maxDate = $("#end-date-download").val();

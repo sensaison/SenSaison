@@ -3,7 +3,7 @@ USE SenSaison_db;
 
 CREATE TABLE IF NOT EXISTS Observations (
     id INT NOT NULL AUTO_INCREMENT,
-    openId VARCHAR(30) NOT NULL REFERENCES Users (userId)
+    openId VARCHAR(30) NOT NULL REFERENCES Users (openId)
         ON DELETE NO ACTION
         ON UPDATE CASCADE,
     pictureId VARCHAR(30) NOT NULL,
@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS Users (
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
     updatedAt TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (id),
-    UNIQUE KEY (userId), 
+    UNIQUE KEY (openId), 
     UNIQUE KEY (email),
     UNIQUE KEY (username)
 );

@@ -59,11 +59,9 @@ $(document).ready(function() {
         }
     });
 
-
-    // getting user id from openid
-
-    const user,
-        token;
+    // getting user id from user auth
+    let user;
+    let token;
 
     $.ajax("/auth/openidconnect", {
         type: "GET",
@@ -74,13 +72,14 @@ $(document).ready(function() {
     }).then(data => {
         user = user;
         token = token;
-    })
+        console.log(data);
+    });
 
     // displaying user's observations in table mentioned above
     $.ajax("/api/userobservations", {
         type: "GET",
         data: {
-            userId: "13579"
+            openId: user.openId
         }
     }).then(data => {
         window.userObs = data;
@@ -104,7 +103,7 @@ $(document).ready(function() {
                 );
             }
         }
-    }).then(function () {
+    }).then(() => {
         $("#all-your-obs").after("<br><ul class='pagination'><li class='waves-effect' id='start-pagination'><a href='#'><i class='material-icons'>chevron_left</i></a></li><li class='waves-effect' id='end-pagination'><a href='#'><i class='material-icons'>chevron_right</i></a></li></div>");
 
         let rowsShown = 10;
