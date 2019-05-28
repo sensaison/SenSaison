@@ -8,22 +8,22 @@ const Passport = require("../config/passportStrategy");
 const ensureLoggedIn = require("connect-ensure-login");
 // const fs = require("fs");
 
-module.exports = function (app) {
+module.exports = (app) => {
 
     // FIND ALL observations
-    app.get("/api/observations", function (req, res) {
+    app.get("/api/observations", (req, res) => {
         db.Observations.findAll({
             include: [{
                 model: db.Users,
                 attributes: ["userId", "firstName", "lastName", "username"]
             }]
-        }).then(function (dbObs) {
+        }).then(dbObs => {
             res.json(dbObs);
         });
     });
 
     // FIND ALL observations grouped by category
-    app.get("/api/categories/:category", function (req, res) {
+    app.get("/api/categories/:category", (req, res) => {
         db.Observations.findAll({
             where: {
                 category: req.params.category
@@ -32,13 +32,13 @@ module.exports = function (app) {
                 model: db.Users,
                 attributes: ["userId", "firstName", "lastName", "username"]
             }]
-        }).then(function (dbObs) {
+        }).then(dbObs => {
             res.json(dbObs);
         });
     });
 
     // GET most recent ONE observation of each category by TIMESTAMP
-    app.get("/api/:category/mostrecentone", function (req, res) {
+    app.get("/api/:category/mostrecentone", (req, res) => {
         db.Observations.findAll({
             limit: 1,
             where: {
@@ -50,13 +50,13 @@ module.exports = function (app) {
                 model: db.Users,
                 attributes: ["username"]
             }]
-        }).then(function (recentObs) {
+        }).then(recentObs => {
             res.json(recentObs);
         });
     });
 
     // GET most recent FIVE observations of each category by TIMESTAMP
-    app.get("/api/:category/mostrecentfive", function (req, res) {
+    app.get("/api/:category/mostrecentfive", (req, res) => {
         db.Observations.findAll({
             limit: 5,
             where: {
@@ -68,32 +68,32 @@ module.exports = function (app) {
                 model: db.Users,
                 attributes: ["username"]
             }]
-        }).then(function (recentObs) {
+        }).then(recentObs => {
             res.json(recentObs);
         });
     });
 
     // CREATE new observation
-    app.post("/api/observations", function (req, res) {
+    app.post("/api/observations", (req, res) => {
                 db.Observations.create(req.body)
-            .then(function (dbObs) {
+            .then(dbObs => {
                 res.json(dbObs);
             });
     });
 
     // DESTROY one observation
-    app.delete("/api/observations", function (req, res) {
+    app.delete("/api/observations", (req, res) => {
         db.Observations.destroy({
             where: {
                 id: req.query.id
             }
-        }).then(function (dbObs) {
+        }).then(dbObs => {
             res.json(dbObs);
         });
     });
 
     // FIND observations for data request WITH PICTURES
-    app.get("/download-with-pictures", function (req, res) {
+    app.get("/download-with-pictures", (req, res) => {
         db.Observations.findAll({
             where: {
                 category: req.query.category,
@@ -101,7 +101,7 @@ module.exports = function (app) {
                     [Op.between]: [req.query.minDate, req.query.maxDate]
                 }
             } 
-        }).then(async function(results) {
+        }).then(async results => {
             const csv = json2csv(results, {
                 fields: [
                     "id",
@@ -133,13 +133,13 @@ module.exports = function (app) {
             catch (err) {
                 res.status(404).send(err);
             }
-        }).catch(function(err) {
+        }).catch(err => {
             res.status(404).send(err);
         });
     });
 
     // FIND observations for data request, convert to csv, and download client side NO PICTURES
-    app.get("/download", function (req, res) {
+    app.get("/download", (req, res) => {
         db.Observations.findAll({
             where: {
                 category: req.query.category,
@@ -147,7 +147,7 @@ module.exports = function (app) {
                     [Op.between]: [req.query.minDate, req.query.maxDate]
                 }
             }
-        }).then(function (result) {
+        }).then(result => {
             let csv = json2csv(result, {
                 fields: [
                     "id",
@@ -168,13 +168,13 @@ module.exports = function (app) {
             res.setHeader("Content-disposition", "attachment; filename=sensaisondownload_nopics.csv");
             res.setHeader("Content-Type", "text/csv");
             res.status(200).send(csv);
-        }).done(function() {
+        }).done(() => {
             console.log("successful download with no pictures");
         })
     });
 
     // FIND ONE user's observations
-    app.get("/api/userobservations", function (req, res) {
+    app.get("/api/userobservations", (req, res) => {
         db.Observations.findAll({
             where: {
                 userId: req.query.userId
@@ -185,19 +185,19 @@ module.exports = function (app) {
     });
 
     // FIND ALL users
-    app.get("/api/users", function (req, res) {
+    app.get("/api/users", (req, res) => {
         db.Users.findAll({
             attributes: ["userId", "firstName", "lastName", "username"],
             include: [db.Observations]
-        }).then(function (allusr) {
+        }).then(allusr => {
             res.json(allusr);
         });
     });
 
     // CREATE new user
-    app.post("/api/users", function (req, res) {
+    app.post("/api/users", (req, res) => {
         db.Users.create(req.body)
-            .then(function (newusr) {
+            .then(newusr => {
                 res.json(newusr);
             });
     });
@@ -246,4 +246,4 @@ module.exports = function (app) {
         req.session.destroy(() => res.redirect('http://localhost:3000/'));
     });
 
-}
+};
