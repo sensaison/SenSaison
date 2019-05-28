@@ -4,6 +4,8 @@ const Op = Sequelize.Op;
 const json2csv = require("json2csv").parse;
 const zipURLs = require("./zipURLs");
 require("archiver");
+const Passport = require("../config/passportStrategy");
+const ensureLoggedIn = require("connect-ensure-login");
 // const fs = require("fs");
 
 module.exports = function (app) {
@@ -199,4 +201,49 @@ module.exports = function (app) {
                 res.json(newusr);
             });
     });
+
+    /***********************
+    * USER AUTHENTICATION
+    ************************/
+   
+    app.post('/auth/openidconnect', Passport.authenticate('openid-client'));
+
+    app.get('/auth/openidconnect',
+        Passport.authenticate('openid-client', {
+            session: true,
+            failureRedirect: 'http://localhost:3000/' ,
+            failureFlash: 'Invalid login, try again',
+        }),	(req, res) => {
+            console.log(res);
+            console.log(req);
+            res.json(req.body.user);
+            res.json(req.body.id_token);
+            res.json(req.body.access_token);
+            res.json(req.user);
+            res.redirect('/useraccount.html');
+            console.log('SUCCESSFUL AUTHENTICATION');
+            const token = req.body.access_token;
+            const user = req.body.user;
+            return (user, token);
+	    }
+    );
+
+    routes.get('/useraccount.html',
+        ensureLoggedIn('/user'),
+        (req, res) => {
+            res.send(req.user);
+            res.send(req.body.access_token);
+            console.log(req);
+            console.log(req.body);
+            console.log('USER: ', req.user);
+            res.render('http://localhost:3000/useraccount.html');
+        },
+    );
+
+    app.get('/logout', (req, res) => {
+        console.log('LOGGING OUT SESSION: ', req.session);
+        req.logout;
+        req.session.destroy(() => res.redirect('http://localhost:3000/'));
+    });
+
 }
