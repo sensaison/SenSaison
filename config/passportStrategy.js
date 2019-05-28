@@ -20,7 +20,7 @@ Issuer.discover('https://accounts.google.com/.well-known/openid-configuration')
             response_type: 'code token id_token',
             scope: 'openid profile email',
             nonce: generators.nonce(),
-            redirect_uri: 'http://localhost:3000/useraccount.html',
+            redirect_uri: 'https://sensaison.herokuapp.com/useraccount.html',
             state: generators.state(),
             prompt: 'select_account',
             display: 'popup',
@@ -32,33 +32,20 @@ Issuer.discover('https://accounts.google.com/.well-known/openid-configuration')
             console.log('id_token: ', id_token);
             console.log('expires_in: ', expires_in);
             console.log('token_type: ', token_type);
-            // User.findOrCreate({
-            //     openId: id_token.sub,
-            //     firstName: id_token.given_name,
-            //     lastName: id_token.family_name,
-            //     email: id_token.email,
-            //     picture: id_token.picture
-            // }, (err: any, user: any) => {
-            //     if (err) {
-            //         done(err, user);
-            //     }
-            //     if (!user) {
-            //         done(null, false);
-            //     }
-            //     done(null, user);
-            // });
-            // let user: IUser | null = null;
-            try {
-                user = await User.findOrCreate({
-                    openId: id_token.sub,
-                    firstName: id_token.given_name,
-                    lastName: id_token.family_name,
-                    email: id_token.email,
-                });
-            } catch (err) {
-                done(err, null);
-            }
-            return done(null, {user, access_token, id_token});
+            User.findOrCreate({
+                openId: id_token.sub,
+                firstName: id_token.given_name,
+                lastName: id_token.family_name,
+                email: id_token.email
+            }, (err, user) => {
+                if (err) {
+                    done(err, user);
+                }
+                if (!user) {
+                    done(null, false);
+                }
+                done(null, {user, access_token, id_token});
+            });
         };
 
         const passReqToCallback = false;
@@ -80,7 +67,6 @@ Issuer.discover('https://accounts.google.com/.well-known/openid-configuration')
         }
     });
 
-// session stuff
 Passport.serializeUser((user, done) => {
         console.log('SERIALIZED USER: ', user);
         done(null, user);

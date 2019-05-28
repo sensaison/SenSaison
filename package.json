@@ -19,6 +19,7 @@
         "cloudinary": "^1.14.0",
         "connect-ensure-login": "^0.1.1",
         "connect-flash": "^0.1.1",
+        "cors": "^2.8.5",
         "dotenv": "^6.0.0",
         "express": "^4.16.3",
         "express-mysql-session": "^2.1.0",

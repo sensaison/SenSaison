@@ -4,6 +4,7 @@ const session = require('express-session');
 const MySQLStore = require("express-mysql-session")(session);
 const Passport = require("./config/passportStrategy");
 const flash = require('connect-flash');
+const cors = require("cors");
 const db = require("./models");
 
 const app = express();
@@ -13,10 +14,10 @@ let PORT = process.env.PORT || 3000;
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(express.static("public"));
+app.use(cors());
 app.use(flash());
 
 let sqlStore;
-
 if (process.env.NODE_ENV === "production") {
     sqlStore = new MySQLStore ({
         host: process.env.JAWSDB_HOST,
@@ -33,7 +34,7 @@ if (process.env.NODE_ENV === "production") {
         password: process.env.MYSQLPWD,
         database: process.env.MYSQLDB
     });
-}
+};
 
 app.use(session({
     secret: process.env.SESSION_SECRET,
