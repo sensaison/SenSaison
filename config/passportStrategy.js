@@ -3,7 +3,7 @@ const Passport = require("passport"),
     Issuer = require("openid-client").Issuer,
     Strategy = require("openid-client").Strategy,
     generators = require("openid-client").generators,
-    Users = require('../models/Users');
+    User = require('../models/Users');
 
 Issuer.discover('https://accounts.google.com/.well-known/openid-configuration')
     .then(googleIssuer => {

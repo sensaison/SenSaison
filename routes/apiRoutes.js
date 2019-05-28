@@ -213,6 +213,9 @@ module.exports = (app) => {
             failureRedirect: 'http://localhost:3000/' ,
             failureFlash: 'Invalid login, try again',
         }),	(req, res) => {
+
+            res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+            res.setHeader('Access-Control-Allow-Credentials', 'true');
             console.log(res);
             console.log(req);
             res.json(req.user);
