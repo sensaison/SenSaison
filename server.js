@@ -1,20 +1,28 @@
 require("dotenv").config();
 const express = require("express");
-
-// reqs for google OAuth
-const authRoutes = require("./routes/auth-routes")
-const passportSetup = require("./config/passport");
-
+const session = require('express-session');
+const Passport = require("./config/passportStrategy");
+const flash = require('connect-flash');
 const db = require("./models");
-
 const app = express();
+
 let PORT = process.env.PORT || 3000;
 
 // Middleware
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(express.static("public"));
-app.use("/auth", authRoutes);
+app.use(flash());
+// app.use("/auth", authRoutes);
+
+app.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: true,
+    cookie: {},
+ }));
+app.use(Passport.initialize());
+app.use(Passport.session());
 
 // Routes
 require("./routes/apiRoutes")(app);
