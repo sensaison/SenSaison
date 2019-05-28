@@ -2,6 +2,9 @@
     "name": "SenSaison",
     "version": "1.0.0",
     "description": "An app for citizen scientists to record seasonal natural history observations",
+    "engines": {
+        "node": "12.3.1"
+    },
     "main": "server.js",
     "scripts": {
         "start": "node server.js",
@@ -27,7 +30,6 @@
         "mysql2": "^1.6.5",
         "openid-client": "^3.1.1",
         "passport": "^0.4.0",
-        "passport-google-oauth20": "^2.0.0",
         "request": "^2.88.0",
         "sequelize": "^4.43.1"
     },
