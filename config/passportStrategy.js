@@ -37,8 +37,7 @@ Issuer.discover('https://accounts.google.com/.well-known/openid-configuration')
                 openId: id_token.sub,
                 firstName: id_token.given_name,
                 lastName: id_token.family_name,
-                email: id_token.email,
-                picture: id_token.picture
+                email: id_token.email
             }, (err, user) => {
                 if (err) {
                     done(err, user);

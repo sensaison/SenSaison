@@ -15,7 +15,7 @@ module.exports = (app) => {
         db.Observation.findAll({
             include: [{
                 model: db.User,
-                attributes: ["userId", "firstName", "lastName", "username"]
+                attributes: ["openId", "firstName", "lastName", "username"]
             }]
         }).then(dbObs => {
             res.json(dbObs);
@@ -30,7 +30,7 @@ module.exports = (app) => {
             },
             include: [{
                 model: db.User,
-                attributes: ["userId", "firstName", "lastName", "username"]
+                attributes: ["openId", "firstName", "lastName", "username"]
             }]
         }).then(dbObs => {
             res.json(dbObs);
@@ -75,7 +75,7 @@ module.exports = (app) => {
 
     // CREATE new observation
     app.post("/api/observations", (req, res) => {
-                db.Observation.create(req.body)
+        db.Observation.create(req.body)
             .then(dbObs => {
                 res.json(dbObs);
             });

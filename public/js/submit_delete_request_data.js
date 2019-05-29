@@ -3,7 +3,7 @@
 $(document).ready(function() {
 
     // make last 3 fields in submission form required if animal plant or fungus selected
-    $("#obs-category").on("change", function() {
+    $("#obs-category").on("change", () => {
         if ($("#obs-category").val() === "animal" && $("#species-info").hasClass("hidden")) {
             $("#species-info").removeClass("hidden");
             $("#species-info").addClass("show");
@@ -53,7 +53,7 @@ $(document).ready(function() {
     });
 
     // POST request when submitting new observation
-    $("#submit-obs").on("click", function(e) {
+    $("#submit-obs").on("click", e => {
 
         // USERID CODE FIRST
 
@@ -82,7 +82,7 @@ $(document).ready(function() {
             let pictureIdVal;
             let newObs;
 
-            getBase64(img).then(function(result) {
+            getBase64(img).then(result => {
                 $.ajax({
                     method: "POST",
                     url: "https://api.cloudinary.com/v1_1/sensaison/image/upload",
@@ -92,9 +92,9 @@ $(document).ready(function() {
                         folder: userIdVal,
                         tags: userIdVal + ", " + categoryVal + ", " +  dateObsVal,
                     }
-                }).then(function(response) {
+                }).then(response => {
                     pictureIdVal = response.public_id;
-                }).then(function () {
+                }).then(() => {
                     newObs = {
                         userId: userIdVal,
                         pictureId: pictureIdVal,
@@ -128,11 +128,11 @@ $(document).ready(function() {
                         //         }
                         //     });
                         // }
-                    }).then(function() {
+                    }).then(() => {
                         alert("Observation successfully submitted");
                         location.reload();
                     });
-                }).catch(function(error) {
+                }).catch(error => {
                     if (error) throw error;
                 });
             })
@@ -154,14 +154,14 @@ $(document).ready(function() {
         $.ajax({
             method: "DELETE",
             url: "/api/observations?id=" + id_delete
-        })
+        });
 
         $(this).parents("tr").remove();
     
     });
 
     // request to download data
-    $("#request-data").on("click", function(e) {
+    $("#request-data").on("click", e => {
 
         let minDate = $("#start-date-download").val();
         let maxDate = $("#end-date-download").val();

@@ -64,9 +64,9 @@ $(document).ready(function() {
         $.ajax("/api/userobservations", {
             type: "GET",
             data: {
-                userId: "13579"
+                openId: "13579"
             }
-        }).then(function(data) {
+        }).then( data => {
             window.userObs = data;
             if (!data || !data.length) {
                 // if no data then add a row saying so
