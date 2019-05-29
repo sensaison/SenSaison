@@ -24,7 +24,6 @@ require("./routes/apiRoutes")(app);
 
 if (process.env.NODE_ENV === "production") {
 	app.set("trust proxy", 1);
-	session.cookie.secure = true;
 }
 
 let sqlStore = new mySQLStore({
