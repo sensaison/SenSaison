@@ -21,14 +21,14 @@ function getLocation() {
     }
 }
 
-const enableButtons = () => {
+function enableButtons() {
     $(".g1").each(() => {
         $(this).removeAttr("disabled");
         $(this).attr("class", "btn waves-effect waves-light g1");
     });
 }
 
-const setUpForm = () => {
+function setUpForm() {
     if(startingPos === undefined) {
         $("#near-me").css("display", "none");
     }
@@ -42,14 +42,14 @@ $("#city").click(() => {
     $("#city-select").css("display", "block");
 });
 
-const usePosition = position => {
+function usePosition(position) {
     startingPos = position;
     generateMaps();
     setUpForm();
     enableButtons();
 }
 
-const showError = error => {
+function showError(error) {
     generateMaps();
     setUpForm();
     enableButtons();
@@ -69,13 +69,13 @@ const showError = error => {
     }
 }
 
-const generateMaps = () => {
+function generateMaps() {
     generateMap();
     generateMap();
     generateMap();
 }
 
-const generateMap = () => {
+function generateMap() {
     var latitude = 47.1585;
     var longitude = 27.6014;
     if(startingPos !== undefined) {
@@ -118,7 +118,7 @@ const generateMap = () => {
     mapType++;
 }
 
-const placeMarkerAndPanTo = (latLng, map) => {
+function placeMarkerAndPanTo(latLng, map) {
     var marker = new google.maps.Marker({
         position: latLng,
         map: map
@@ -127,7 +127,7 @@ const placeMarkerAndPanTo = (latLng, map) => {
     userPin = marker;
 }
 
-const placeNearbyMarker = (latLng, map, obsValues) => {
+function placeNearbyMarker(latLng, map, obsValues) {
     // console.log("Nearby Observation Deets:");
     // console.log(obsValues);
     var marker = new google.maps.Marker({
@@ -136,7 +136,7 @@ const placeNearbyMarker = (latLng, map, obsValues) => {
     });
 }
 
-const placeYourMarker = (latLng, map) => {
+function placeYourMarker(latLng, map) {
     var marker = new google.maps.Marker({
         position: latLng,
         map: map
@@ -197,7 +197,7 @@ $("#get-nearby").click(function getNearby() {
     });
 });
 
-const doCalcs = (obs, lat, long, radius) => {
+function doCalcs(obs, lat, long, radius) {
     var validSet = [];
     for(var i = 0; i < obs.length; i++) {
         var lat2 = obs[i].latitude;
@@ -211,7 +211,7 @@ const doCalcs = (obs, lat, long, radius) => {
     return validSet;
 }
 
-const degreesToRadians = degrees => {
+function degreesToRadians(degrees) {
     var pi = Math.PI;
     return degrees * (pi/180);
 }
@@ -266,7 +266,7 @@ $("#locationInput").bind('input', () => {
     }
 });
 
-const checkExists = inputValue => {
+function checkExists (inputValue) {
     var x = document.getElementById("suggestion-list");
     for (var i = 0; i < x.options.length; i++) {
         if(inputValue == x.options[i].value){
@@ -277,7 +277,7 @@ const checkExists = inputValue => {
     return false;
 }
 
-const getDistance = (lat1, lon1, lat2, lon2) => {
+function getDistance(lat1, lon1, lat2, lon2) {
     var R = 6371e3; // metres
     var φ1 = degreesToRadians(lat1);
     var φ2 = degreesToRadians(lat2);
@@ -293,11 +293,11 @@ const getDistance = (lat1, lon1, lat2, lon2) => {
     return Math.abs(d);
 }
 
-const sleep = ms => {
+function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
   
-const allowTime = async () => {
+async function allowTime() {
     // console.log('Give Google time to respond...');
     await sleep(250);
     // console.log('One quarter of a second later. Maps can load now.');

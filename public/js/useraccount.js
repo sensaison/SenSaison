@@ -64,7 +64,7 @@ $(document).ready(function() {
         $.ajax("/api/userobservations", {
             type: "GET",
             data: {
-                openId: "13579"
+                openId: "12345"
             }
         }).then(data => {
             window.userObs = data;
