@@ -52,12 +52,12 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/stefan-apr/SenSaison.git"
+        "url": "git+https://github.com/sensaison/SenSaison.git"
     },
     "keywords": [],
     "author": "",
     "bugs": {
-        "url": "https://github.com/stefan-apr/SenSaison/issues"
+        "url": "https://github.com/sensaison/SenSaison/issues"
     },
-    "homepage": "https://github.com/stefan-apr/SenSaison#readme"
+    "homepage": "https://github.com/sensaison/SenSaison#readme"
 }
