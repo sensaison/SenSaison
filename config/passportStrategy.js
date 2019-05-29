@@ -31,7 +31,7 @@ Issuer.discover("https://accounts.google.com/.well-known/openid-configuration")
 			console.log("id_token: ", id_token);
 			console.log("expires_in: ", expires_in);
 			console.log("token_type: ", token_type);
-			db.Users.findOrCreate({
+			await db.Users.findOrCreate({
 				where: {
 					openId: id_token.sub,
 					firstName: id_token.given_name,
@@ -55,6 +55,7 @@ Issuer.discover("https://accounts.google.com/.well-known/openid-configuration")
 		const passReqToCallback = false,
 			sessionKey = generators.random(),
 			usePKCE = false;
+			
 		const options = {
 			client,
 			params,
