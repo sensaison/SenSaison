@@ -10,7 +10,7 @@ module.exports = function(sequelize, DataTypes) {
             }
         },
         openId: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.STRING,
             allowNull: false
         },
         pictureId: {

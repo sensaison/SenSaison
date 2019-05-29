@@ -7,14 +7,14 @@ document.addEventListener("DOMContentLoaded", function() {
         maxDate: new Date(),
         autoClose: true,
         format: "yyyy-mm-dd"
-    }
+    };
     let elemsDate = document.querySelectorAll(".datepicker");
     let instancesDate = M.Datepicker.init(elemsDate, dateOptions);
 
     let timeOptions = {
         autoClose: true,
         twelveHour: false
-    }
+    };
     let elemsTime = document.querySelectorAll(".timepicker");
     let instancesTime = M.Timepicker.init(elemsTime, timeOptions);
 

@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
     // following four event listeners show/hide what the user can do from their account page
-    $("#add-obs-btn").on("click", function() {
+    $("#add-obs-btn").on("click", () => {
         if ($("#add-obs").hasClass("hidden")) {
             $("#add-obs").addClass("show");
             $("#add-obs").removeClass("hidden");
@@ -17,7 +17,7 @@ $(document).ready(function() {
         // NO ELSE because if it's already showing do nothing
     });
 
-    $("#view-usr-obs-btn").on("click", function() {
+    $("#view-usr-obs-btn").on("click", () => {
         if ($("#view-usr-obs").hasClass("hidden")) {
             $("#view-usr-obs").addClass("show");
             $("#view-usr-obs").removeClass("hidden");
@@ -66,7 +66,7 @@ $(document).ready(function() {
             data: {
                 openId: "13579"
             }
-        }).then( data => {
+        }).then(data => {
             window.userObs = data;
             if (!data || !data.length) {
                 // if no data then add a row saying so
@@ -88,7 +88,7 @@ $(document).ready(function() {
                     );
                 }
             }
-        }).then(function () {
+        }).then(() => {
             $("#all-your-obs").after("<br><ul class='pagination'><li class='waves-effect' id='start-pagination'><a href='#'><i class='material-icons'>chevron_left</i></a></li><li class='waves-effect' id='end-pagination'><a href='#'><i class='material-icons'>chevron_right</i></a></li></div>");
     
             let rowsShown = 10;
@@ -104,7 +104,7 @@ $(document).ready(function() {
             $("#all-your-obs tbody tr").slice(0, rowsShown).show();
             $(".pagination a:first").addClass("active");
     
-            $(".pagination a").bind("click", function(e) {
+            $(".pagination a").bind("click", e => {
                 e.preventDefault();
                 $(".pagination a").parent("li").removeClass("active");
                 $(this).parent("li").addClass("active");
