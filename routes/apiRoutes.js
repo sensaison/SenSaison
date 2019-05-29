@@ -228,16 +228,20 @@ module.exports = (app) => {
 	    }
     );
 
+
     app.get('/useraccount.html',
-        ensureLoggedIn(),
         (req, res) => {
-            res.send(req.user);
-            res.send(req.body.access_token);
-            console.log(req);
-            console.log(req.body);
-            console.log('USER: ', req.user);
-            res.send('access granted');
-            res.render("/useraccount.html");
+            if (req.isAuthenticated()) {
+                res.send(req.user);
+                res.send(req.user);
+                res.send(req.body.access_token);
+                console.log(req);
+                console.log(req.body);
+                console.log('USER: ', req.user);
+                res.render("/useraccount.html");
+            } else {
+                res.render("/");
+            }
         }
     );
 

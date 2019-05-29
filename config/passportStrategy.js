@@ -3,10 +3,9 @@ const Strategy = require("openid-client").Strategy;
 const Issuer = require("openid-client").Issuer;
 const generators = require("openid-client").generators;
 require("dotenv").config();
-const User = require('../models/User');
+const db = require('../models');
 
 Issuer.discover('https://accounts.google.com/.well-known/openid-configuration')
-
     .then(googleIssuer => {
 
         const client = new googleIssuer.Client({
@@ -21,7 +20,7 @@ Issuer.discover('https://accounts.google.com/.well-known/openid-configuration')
             response_type: 'code token id_token',
             scope: 'openid profile email',
             nonce: generators.nonce(),
-            redirect_uri: 'http://localhost:3000/useraccount.html',
+            redirect_uri: 'http://localhost:3000/useraccount',
             state: generators.state(),
             prompt: 'select_account',
             display: 'popup',
@@ -33,19 +32,19 @@ Issuer.discover('https://accounts.google.com/.well-known/openid-configuration')
             console.log('id_token: ', id_token);
             console.log('expires_in: ', expires_in);
             console.log('token_type: ', token_type);
-            User.findOrCreate({
+            db.Users.findOrCreate({
                 openId: id_token.sub,
                 firstName: id_token.given_name,
                 lastName: id_token.family_name,
                 email: id_token.email
             }, (err, user) => {
                 if (err) {
-                    done(err, user);
+                    return done(err, user);
                 }
                 if (!user) {
-                    done(null, false);
+                    return done(null, false);
                 }
-                done(null, {user, access_token, id_token});
+                return done(null, {user, access_token, id_token});
             });
         };
 
@@ -76,7 +75,7 @@ Passport.serializeUser((user, done) => {
 );
 
 Passport.deserializeUser((openId, done) => {
-        User.findById(openId, (err, user) => {
+        db.Users.findById(openId, (err, user) => {
             console.log('DESERIALIZED USER: ', user);
             done(err, user);
             });

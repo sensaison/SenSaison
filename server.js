@@ -28,20 +28,20 @@ if (process.env.NODE_ENV === 'production') {
 let sqlStore;
 if (process.env.NODE_ENV === "production") {
     sqlStore = new mySQLStore({
-        user: process.env.MYSQLUSER,
-        password: process.env.MYSQLPWD,
-        database: process.env.MYSQLDB,
-        host: process.env.MYSQLHOST,
-        port: process.env.MYSQLPORT  
-    })
-} else {
-    sqlStore = new mySQLStore({
         user: process.env.JAWSDB_USER,
         password: process.env.JAWSDB_PWD,
         database: process.env.JAWSDB_DB,
         host: process.env.JAWSDB_HOST,
         port: process.env.JAWSDB_PORT
-    })
+    });
+} else {
+    sqlStore = new mySQLStore({
+        user: process.env.MYSQLUSER,
+        password: process.env.MYSQLPWD,
+        database: process.env.MYSQLDB,
+        host: process.env.MYSQLHOST,
+        port: process.env.MYSQLPORT  
+    });
 };
 
 app.use(session({
