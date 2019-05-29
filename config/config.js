@@ -7,8 +7,8 @@ module.exports = {
 		username: process.env.MYSQLUSER,
 		password: process.env.MYSQLPWD,
 		database: process.env.MYSQLDB,
-		host: process.env.MYSQLHOST,
-		dialect: "mysql"  
+		config: {host: process.env.MYSQLHOST,
+			dialect: "mysql"}
 	},
 	"test": {
 		username: "root",
@@ -22,7 +22,7 @@ module.exports = {
 		username: process.env.JAWSDB_USER,
 		password: process.env.JAWSDB_PWD,
 		database: process.env.JAWSDB_DB,
-		host: process.env.JAWSDB_HOST,
-		dialect: "mysql"
+		config: {host: process.env.JAWSDB_HOST,
+			dialect: "mysql"}
 	}
 };
