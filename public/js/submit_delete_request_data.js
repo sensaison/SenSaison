@@ -1,6 +1,6 @@
 // import { picture } from "cloudinary/lib-es5/cloudinary";
 
-$(document).ready(function() {
+$(document).ready(() => {
 
 	// make last 3 fields in submission form required if animal plant or fungus selected
 	$("#obs-category").on("change", () => {
@@ -61,21 +61,21 @@ $(document).ready(function() {
 
 		///////////////////////////////
 
+		const getBase64 = (file) => {
+			return new Promise((resolve, reject) => {
+				var reader = new FileReader();
+				reader.readAsDataURL(file);
+				reader.onload = function() {
+					resolve(reader.result);
+				};
+				reader.onerror = reject;
+			});
+		};
+
         
 		if (window.userPin !== undefined) {
 
 			let img = $("#pic-file").prop("files")[0];
-
-			function getBase64(file) {
-				return new Promise(function(resolve, reject) {
-					var reader = new FileReader();
-					reader.readAsDataURL(file);
-					reader.onload = function() {
-						resolve(reader.result);
-					};
-					reader.onerror = reject;
-				});
-			}
 
 			let categoryVal = $("#obs-category").val();
 			let dateObsVal = $("#date-obs").val();
@@ -146,7 +146,7 @@ $(document).ready(function() {
 	});
     
 	// DELETE request when deleting observation
-	$("#all-your-obs-body").on("click", ".delete", function(e) {
+	$("#all-your-obs-body").on("click", ".delete", e => {
 		e.preventDefault();
 
 		let id_delete = $(this).parents("tr").attr("id");

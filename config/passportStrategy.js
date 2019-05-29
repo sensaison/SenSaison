@@ -19,7 +19,7 @@ Issuer.discover("https://accounts.google.com/.well-known/openid-configuration")
 			response_type: "code token id_token",
 			scope: "openid profile email",
 			nonce: generators.nonce(),
-			redirect_uri: "http://localhost:3000/useraccount",
+			redirect_uri: "https://sensaison.herokuapp.com/useraccount",
 			state: generators.state(),
 			prompt: "select_account",
 			display: "popup",

@@ -54,7 +54,6 @@ app.use(session({
 app.use(Passport.initialize());
 app.use(Passport.session());
 
-// Routes
 require("./routes/authRoutes")(app);
 
 let syncOptions = { force: false };

@@ -13,19 +13,19 @@ $.ajax("/api/observations", {
 		if(i % 51 === 0) {
 			var userIdVal = 12345;
 		} else if(i % 51 === 1) {
-			var userIdVal = 678910;
+			userIdVal = 678910;
 		} else if(i % 51 === 2) {
-			var userIdVal = 246810;
+			userIdVal = 246810;
 		} else if(i % 51 === 3) {
-			var userIdVal = 13579;
+			userIdVal = 13579;
 		} else {
-			var userIdVal = Math.floor(Math.random() * 1000000);
+			userIdVal = Math.floor(Math.random() * 1000000);
 		}
 		var day = Math.ceil(Math.random() * 28);
 		if(day < 10) {
 			var dateObsVal = (2017 + Math.floor(Math.random() * 3)) + "-" + Math.ceil(Math.random() * 12)  + "-0" + day;
 		} else {
-			var dateObsVal = (2017 + Math.floor(Math.random() * 3)) + "-" + Math.ceil(Math.random() * 12)  + "-" + day;
+			dateObsVal = (2017 + Math.floor(Math.random() * 3)) + "-" + Math.ceil(Math.random() * 12)  + "-" + day;
 		}
 		var timeObsVal = Math.floor(Math.random() * 24) + ":" + Math.floor(Math.random() * 60) + ":00";
 		var latitudeVal = getRandomInRange(-180, 180, 3);
@@ -37,9 +37,9 @@ $.ajax("/api/observations", {
 			var speciesSciNameVal = "";
 			var speciesConfidenceVal = 1;
 		} else {
-			var speciesVal = randomWords(1, 0);
-			var speciesSciNameVal = randomWords(2, 0);
-			var speciesConfidenceVal = Math.ceil(Math.random() * 5);
+			speciesVal = randomWords(1, 0);
+			speciesSciNameVal = randomWords(2, 0);
+			speciesConfidenceVal = Math.ceil(Math.random() * 5);
 		}
 		console.log(dateObsVal);
 		var firstConfidenceVal = Math.ceil(Math.random() * 5);
