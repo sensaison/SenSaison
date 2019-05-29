@@ -1,61 +1,64 @@
 {
-  "name": "SenSaison",
-  "version": "1.0.0",
-  "description": "An app for citizen scientists to record seasonal natural history observations",
-  "main": "server.js",
-  "scripts": {
-    "start": "node server.js",
-    "lint": "eslint **/*.js --quiet",
-    "fix": "eslint --fix .",
-    "test": "npm run lint && cross-env NODE_ENV=test mocha -u tdd --reporter spec --exit"
-  },
-  "license": "ISC",
-  "dependencies": {
-    "archiver": "^3.0.0",
-    "async": "^2.6.2",
-    "cloudinary": "^1.14.0",
-    "connect-ensure-login": "^0.1.1",
-    "connect-flash": "^0.1.1",
-    "cookie-parser": "^1.4.4",
-    "cors": "^2.8.5",
-    "dotenv": "^6.0.0",
-    "express": "^4.16.3",
-    "express-mysql-session": "^2.1.0",
-    "express-session": "^1.16.1",
-    "faker": "^4.1.0",
-    "fs": "0.0.1-security",
-    "git": "^0.1.5",
-    "json2csv": "^4.4.1",
-    "mime": "^2.4.0",
-    "mysql2": "^1.6.5",
-    "openid-client": "^3.1.1",
-    "passport": "^0.4.0",
-    "passport-google-oauth20": "^2.0.0",
-    "path": "^0.12.7",
-    "request": "^2.88.0",
-    "sequelize": "^4.43.1"
-  },
-  "devDependencies": {
-    "chai": "^4.1.2",
-    "chai-http": "^4.0.0",
-    "cross-env": "^5.2.0",
-    "eslint": "^4.19.1",
-    "eslint-config-prettier": "^2.9.0",
-    "eslint-plugin-prettier": "^2.6.2",
-    "mocha": "^5.2.0",
-    "prettier": "^1.13.7"
-  },
-  "directories": {
-    "test": "test"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/stefan-apr/Project_2.git"
-  },
-  "keywords": [],
-  "author": "",
-  "bugs": {
-    "url": "https://github.com/stefan-apr/Project_2/issues"
-  },
-  "homepage": "https://github.com/stefan-apr/Project_2#readme"
+    "name": "SenSaison",
+    "version": "1.0.0",
+    "description": "An app for citizen scientists to record seasonal natural history observations",
+    "main": "server.js",
+    "engines" : {
+        "node" : ">=11.0.0"
+    },
+    "scripts": {
+        "start": "node server.js",
+        "lint": "eslint **/*.js --quiet",
+        "fix": "eslint --fix .",
+        "test": "npm run lint && cross-env NODE_ENV=test mocha -u tdd --reporter spec --exit"
+    },
+    "license": "ISC",
+    "dependencies": {
+        "archiver": "^3.0.0",
+        "async": "^2.6.2",
+        "cloudinary": "^1.14.0",
+        "connect-ensure-login": "^0.1.1",
+        "connect-flash": "^0.1.1",
+        "cookie-parser": "^1.4.4",
+        "cors": "^2.8.5",
+        "dotenv": "^6.0.0",
+        "express": "^4.16.3",
+        "express-mysql-session": "^2.1.0",
+        "express-session": "^1.16.1",
+        "faker": "^4.1.0",
+        "fs": "0.0.1-security",
+        "git": "^0.1.5",
+        "json2csv": "^4.4.1",
+        "mime": "^2.4.0",
+        "mysql2": "^1.6.5",
+        "openid-client": "^3.1.1",
+        "passport": "^0.4.0",
+        "passport-google-oauth20": "^2.0.0",
+        "path": "^0.12.7",
+        "request": "^2.88.0",
+        "sequelize": "^4.43.1"
+    },
+    "devDependencies": {
+        "chai": "^4.1.2",
+        "chai-http": "^4.0.0",
+        "cross-env": "^5.2.0",
+        "eslint": "^4.19.1",
+        "eslint-config-prettier": "^2.9.0",
+        "eslint-plugin-prettier": "^2.6.2",
+        "mocha": "^5.2.0",
+        "prettier": "^1.13.7"
+    },
+    "directories": {
+        "test": "test"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/stefan-apr/Project_2.git"
+    },
+    "keywords": [],
+    "author": "",
+    "bugs": {
+        "url": "https://github.com/stefan-apr/Project_2/issues"
+    },
+    "homepage": "https://github.com/stefan-apr/Project_2#readme"
 }
