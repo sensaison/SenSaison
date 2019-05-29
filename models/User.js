@@ -1,10 +1,10 @@
 module.exports = function(sequelize, DataTypes) {
-    let Users = sequelize.define("Users", {
+    let User = sequelize.define("Users", {
         id: {
             primaryKey: true,
             type: DataTypes.INTEGER
         },
-        userId: {
+        openId: {
             type: DataTypes.INTEGER,
             unique: {
                 args: true
@@ -51,14 +51,14 @@ module.exports = function(sequelize, DataTypes) {
         freezeTableName: true
     });
 
-    Users.associate = function(models) {
-        Users.hasMany(models.Observations, {
-            foreignKey: "userId",
-            sourceKey: "userId",
+    User.associate = models => {
+        User.hasMany(models.Observations, {
+            foreignKey: "openId",
+            sourceKey: "openId",
             onDelete: "no action",
             onUpdate: "cascade"
         });
     };
 
-    return Users;
+    return User;
 };

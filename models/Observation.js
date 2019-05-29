@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
 module.exports = function(sequelize, DataTypes) {
-    let Observations = sequelize.define("Observations", {
+    let Observation = sequelize.define("Observations", {
         id: {
             primaryKey: true,
             type: DataTypes.INTEGER,
@@ -9,7 +9,7 @@ module.exports = function(sequelize, DataTypes) {
                 args: true
             }
         },
-        userId: {
+        openId: {
             type: DataTypes.INTEGER,
             allowNull: false
         },
@@ -74,13 +74,13 @@ module.exports = function(sequelize, DataTypes) {
         freezeTableName: true
     });
 
-    Observations.associate = function(models) {
-        Observations.belongsTo(models.Users, {
-            foreignKey: "userId",
-            targetKey: "userId",
+    Observation.associate = models => {
+        Observation.belongsTo(models.Users, {
+            foreignKey: "openId",
+            targetKey: "openId",
             onDelete: "no action",
             onUpdate: "cascade"
         });
     };
-    return Observations;
+    return Observation;
 };

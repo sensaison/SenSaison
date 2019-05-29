@@ -5,16 +5,16 @@ const json2csv = require("json2csv").parse;
 const zipURLs = require("./zipURLs");
 require("archiver");
 const Passport = require("../config/passportStrategy");
-const ensureLoggedIn = require("connect-ensure-login");
+const ensureLoggedIn = require("connect-ensure-login").ensureLoggedIn;
 // const fs = require("fs");
 
 module.exports = (app) => {
 
     // FIND ALL observations
     app.get("/api/observations", (req, res) => {
-        db.Observations.findAll({
+        db.Observation.findAll({
             include: [{
-                model: db.Users,
+                model: db.User,
                 attributes: ["userId", "firstName", "lastName", "username"]
             }]
         }).then(dbObs => {
@@ -24,12 +24,12 @@ module.exports = (app) => {
 
     // FIND ALL observations grouped by category
     app.get("/api/categories/:category", (req, res) => {
-        db.Observations.findAll({
+        db.Observation.findAll({
             where: {
                 category: req.params.category
             },
             include: [{
-                model: db.Users,
+                model: db.User,
                 attributes: ["userId", "firstName", "lastName", "username"]
             }]
         }).then(dbObs => {
@@ -39,7 +39,7 @@ module.exports = (app) => {
 
     // GET most recent ONE observation of each category by TIMESTAMP
     app.get("/api/:category/mostrecentone", (req, res) => {
-        db.Observations.findAll({
+        db.Observation.findAll({
             limit: 1,
             where: {
                 category: req.params.category,
@@ -47,7 +47,7 @@ module.exports = (app) => {
             },
             order: [["createdAt", "DESC"]],
             include: [{
-                model: db.Users,
+                model: db.User,
                 attributes: ["username"]
             }]
         }).then(recentObs => {
@@ -57,7 +57,7 @@ module.exports = (app) => {
 
     // GET most recent FIVE observations of each category by TIMESTAMP
     app.get("/api/:category/mostrecentfive", (req, res) => {
-        db.Observations.findAll({
+        db.Observation.findAll({
             limit: 5,
             where: {
                 category: req.params.category,
@@ -65,7 +65,7 @@ module.exports = (app) => {
             },
             order: [["createdAt", "DESC"]],
             include: [{
-                model: db.Users,
+                model: db.User,
                 attributes: ["username"]
             }]
         }).then(recentObs => {
@@ -75,7 +75,7 @@ module.exports = (app) => {
 
     // CREATE new observation
     app.post("/api/observations", (req, res) => {
-                db.Observations.create(req.body)
+                db.Observation.create(req.body)
             .then(dbObs => {
                 res.json(dbObs);
             });
@@ -83,7 +83,7 @@ module.exports = (app) => {
 
     // DESTROY one observation
     app.delete("/api/observations", (req, res) => {
-        db.Observations.destroy({
+        db.Observation.destroy({
             where: {
                 id: req.query.id
             }
@@ -94,7 +94,7 @@ module.exports = (app) => {
 
     // FIND observations for data request WITH PICTURES
     app.get("/download-with-pictures", (req, res) => {
-        db.Observations.findAll({
+        db.Observation.findAll({
             where: {
                 category: req.query.category,
                 dateObs: {
@@ -105,7 +105,7 @@ module.exports = (app) => {
             const csv = json2csv(results, {
                 fields: [
                     "id",
-                    "userId",
+                    "openId",
                     "pictureId",
                     "dateObs",
                     "timeObs",
@@ -140,7 +140,7 @@ module.exports = (app) => {
 
     // FIND observations for data request, convert to csv, and download client side NO PICTURES
     app.get("/download", (req, res) => {
-        db.Observations.findAll({
+        db.Observation.findAll({
             where: {
                 category: req.query.category,
                 dateObs: {
@@ -151,7 +151,7 @@ module.exports = (app) => {
             let csv = json2csv(result, {
                 fields: [
                     "id",
-                    "userId",
+                    "openId",
                     "dateObs",
                     "timeObs",
                     "latitude",
@@ -175,20 +175,20 @@ module.exports = (app) => {
 
     // FIND ONE user's observations
     app.get("/api/userobservations", (req, res) => {
-        db.Observations.findAll({
+        db.Observation.findAll({
             where: {
-                userId: req.query.userId
+                openId: req.query.openId
             }
-        }).then(function (dbObs) {
+        }).then(dbObs => {
             res.json(dbObs);
         });
     });
 
     // FIND ALL users
     app.get("/api/users", (req, res) => {
-        db.Users.findAll({
-            attributes: ["userId", "firstName", "lastName", "username"],
-            include: [db.Observations]
+        db.User.findAll({
+            attributes: ["openId", "firstName", "lastName", "username"],
+            include: [db.Observation]
         }).then(allusr => {
             res.json(allusr);
         });
@@ -196,7 +196,7 @@ module.exports = (app) => {
 
     // CREATE new user
     app.post("/api/users", (req, res) => {
-        db.Users.create(req.body)
+        db.User.create(req.body)
             .then(newusr => {
                 res.json(newusr);
             });
@@ -228,7 +228,7 @@ module.exports = (app) => {
 	    }
     );
 
-    routes.get('/useraccount.html',
+    app.get('/useraccount.html',
         ensureLoggedIn('/user'),
         (req, res) => {
             res.send(req.user);
