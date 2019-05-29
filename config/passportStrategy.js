@@ -1,13 +1,12 @@
-const Passport = require("passport");
-const Strategy = require("openid-client").Strategy;
-const Issuer = require("openid-client").Issuer;
-const generators = require("openid-client").generators;
 require("dotenv").config();
-const db = require("../models");
+const Passport = require("passport"),
+	Strategy = require("openid-client").Strategy,
+	Issuer = require("openid-client").Issuer,
+	generators = require("openid-client").generators,
+	db = require("../models");
 
 Issuer.discover("https://accounts.google.com/.well-known/openid-configuration")
 	.then(googleIssuer => {
-
 		const client = new googleIssuer.Client({
 			client_id: process.env.GOOGLE_CLIENTID,
 			client_secret: process.env.GOOGLE_SECRET,
@@ -33,10 +32,12 @@ Issuer.discover("https://accounts.google.com/.well-known/openid-configuration")
 			console.log("expires_in: ", expires_in);
 			console.log("token_type: ", token_type);
 			db.Users.findOrCreate({
-				openId: id_token.sub,
-				firstName: id_token.given_name,
-				lastName: id_token.family_name,
-				email: id_token.email
+				where: {
+					openId: id_token.sub,
+					firstName: id_token.given_name,
+					lastName: id_token.family_name,
+					email: id_token.email
+				}
 			}, (err, user) => {
 				if (err) {
 					console.log("ERROR LOGGING IN");
@@ -51,9 +52,9 @@ Issuer.discover("https://accounts.google.com/.well-known/openid-configuration")
 			});
 		};
 
-		const passReqToCallback = false;
-		const sessionKey = generators.random();
-		const usePKCE = false;
+		const passReqToCallback = false,
+			sessionKey = generators.random(),
+			usePKCE = false;
 		const options = {
 			client,
 			params,
@@ -74,11 +75,13 @@ Issuer.discover("https://accounts.google.com/.well-known/openid-configuration")
 Passport.serializeUser((user, done) => {
 	console.log("SERIALIZED USER: ", user);
 	done(null, user);
-}
-);
+});
 
 Passport.deserializeUser((id, done) => {
-	db.Users.findById({openid: id}, (err, user) => {
+	db.Users.findOne({
+		where: 
+			{openid: id}
+	}, (err, user) => {
 		console.log("DESERIALIZED USER: ", user);
 		done(err, user);
 	});

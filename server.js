@@ -23,9 +23,15 @@ app.use(cookieParser(process.env.COOKIE_SECRET));
 if (process.env.NODE_ENV === "production") {
 	app.set("trust proxy", 1);
 	session.cookie.secure = true;
-}
+};
 
-let sqlStore;
+let sqlStore = new mySQLStore({
+	user: process.env.MYSQLUSER,
+	password: process.env.MYSQLPWD,
+	database: process.env.MYSQLDB,
+	host: process.env.MYSQLHOST,
+	port: process.env.MYSQLPORT  
+});
 if (process.env.NODE_ENV === "production") {
 	sqlStore = new mySQLStore({
 		user: process.env.JAWSDB_USER,
@@ -34,15 +40,7 @@ if (process.env.NODE_ENV === "production") {
 		host: process.env.JAWSDB_HOST,
 		port: process.env.JAWSDB_PORT
 	});
-} else {
-	sqlStore = new mySQLStore({
-		user: process.env.MYSQLUSER,
-		password: process.env.MYSQLPWD,
-		database: process.env.MYSQLDB,
-		host: process.env.MYSQLHOST,
-		port: process.env.MYSQLPORT  
-	});
-}
+};
 
 app.use(session({
 	secret: process.env.SESSION_SECRET,
