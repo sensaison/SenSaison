@@ -8,12 +8,12 @@
 
 nav ul a,
 nav .brand-logo {
-  color: #444;
+  color: #fff;
 }
 
-/* nav {
-  background-color: #26a69a;
-} */
+.material-icons {
+  color: rgba(255, 255, 255, 1);
+}
 
 p {
   line-height: 2rem;
