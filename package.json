@@ -3,8 +3,8 @@
     "version": "1.0.0",
     "description": "An app for citizen scientists to record seasonal natural history observations",
     "main": "server.js",
-    "engines" : {
-        "node" : ">=11.0.0"
+    "engines": {
+        "node": ">=11.0.0"
     },
     "scripts": {
         "start": "node server.js",
@@ -33,7 +33,6 @@
         "mysql2": "^1.6.5",
         "openid-client": "^3.1.1",
         "passport": "^0.4.0",
-        "passport-google-oauth20": "^2.0.0",
         "path": "^0.12.7",
         "request": "^2.88.0",
         "sequelize": "^4.43.1"
@@ -53,12 +52,12 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/stefan-apr/Project_2.git"
+        "url": "git+https://github.com/stefan-apr/SenSaison.git"
     },
     "keywords": [],
     "author": "",
     "bugs": {
-        "url": "https://github.com/stefan-apr/Project_2/issues"
+        "url": "https://github.com/stefan-apr/SenSaison/issues"
     },
-    "homepage": "https://github.com/stefan-apr/Project_2#readme"
+    "homepage": "https://github.com/stefan-apr/SenSaison#readme"
 }
