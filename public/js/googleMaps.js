@@ -11,227 +11,227 @@ var userObs;
 allowTime();
 
 function getLocation() {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(usePosition, showError);
-    } else {
-        console.log("Geolocation is not supported by this browser.");
-        generateMaps();
-        setUpForm();
-        enableButtons();
-    }
+	if (navigator.geolocation) {
+		navigator.geolocation.getCurrentPosition(usePosition, showError);
+	} else {
+		console.log("Geolocation is not supported by this browser.");
+		generateMaps();
+		setUpForm();
+		enableButtons();
+	}
 }
 
 function enableButtons() {
-    $(".g1").each(() => {
-        $(this).removeAttr("disabled");
-        $(this).attr("class", "btn waves-effect waves-light g1");
-    });
+	$(".g1").each(() => {
+		$(this).removeAttr("disabled");
+		$(this).attr("class", "btn waves-effect waves-light g1");
+	});
 }
 
 function setUpForm() {
-    if(startingPos === undefined) {
-        $("#near-me").css("display", "none");
-    }
+	if(startingPos === undefined) {
+		$("#near-me").css("display", "none");
+	}
 }
 
 $("#me").click(() => {
-    $("#city-select").css("display", "none");
+	$("#city-select").css("display", "none");
 });
 
 $("#city").click(() => {
-    $("#city-select").css("display", "block");
+	$("#city-select").css("display", "block");
 });
 
 function usePosition(position) {
-    startingPos = position;
-    generateMaps();
-    setUpForm();
-    enableButtons();
+	startingPos = position;
+	generateMaps();
+	setUpForm();
+	enableButtons();
 }
 
 function showError(error) {
-    generateMaps();
-    setUpForm();
-    enableButtons();
-    switch(error.code) {
-    case error.PERMISSION_DENIED:
-        console.log("User denied the request for Geolocation.");
-        break;
-    case error.POSITION_UNAVAILABLE:
-        console.log("Location information is unavailable.");
-        break;
-    case error.TIMEOUT:
-        console.log("The request to get user location timed out.");
-        break;
-    case error.UNKNOWN_ERROR:
-        console.log("An unknown error occurred.");
-        break;
-    }
+	generateMaps();
+	setUpForm();
+	enableButtons();
+	switch(error.code) {
+	case error.PERMISSION_DENIED:
+		console.log("User denied the request for Geolocation.");
+		break;
+	case error.POSITION_UNAVAILABLE:
+		console.log("Location information is unavailable.");
+		break;
+	case error.TIMEOUT:
+		console.log("The request to get user location timed out.");
+		break;
+	case error.UNKNOWN_ERROR:
+		console.log("An unknown error occurred.");
+		break;
+	}
 }
 
 function generateMaps() {
-    generateMap();
-    generateMap();
-    generateMap();
+	generateMap();
+	generateMap();
+	generateMap();
 }
 
 function generateMap() {
-    var latitude = 47.1585;
-    var longitude = 27.6014;
-    if(startingPos !== undefined) {
-        latitude = startingPos.coords.latitude;
-        longitude = startingPos.coords.longitude;
-    }
-    var centerPlace = { lat: latitude, lng: longitude};
-    var map = new google.maps.Map(document.getElementById("map-" + mapType), {
-        center: centerPlace,
-        zoom: 12,
-        clickableIcons: false,
-        mapTypeControl: false,
-        streetViewControl: false,
-        fullscreenControl: false
-    });
-    // Do some stuff to prepare a map where the user can indicate a choice of location.
-    if(mapType === 0) {
-        map.addListener("click", event => {
-            if(userPin === undefined) {
-                $("#pin-reminder").remove();
-                placeMarkerAndPanTo(event.latLng, map);
-            } else {
-                console.log("A pin has already been placed. Click 'clear pins' to clear them first.");
-            }
-        });
-    } else if(mapType === 1) {
-        // Do some stuff to pin all user observations
-        userMap = map;
-        // console.log(userObs);
-        for(var i = 0; i < userObs.length; i++) {
-            placeYourMarker(new google.maps.LatLng(userObs[i].latitude, userObs[i].longitude), userMap);
-            if(i === 0) {
-                userMap.panTo(new google.maps.LatLng(userObs[i].latitude, userObs[i].longitude));
-            }
-        }
-    } else if(mapType === 2) {
-        // Do some stuff to pin all nearby observations
-        nearbyMap = map;
-    }
-    mapType++;
+	var latitude = 47.1585;
+	var longitude = 27.6014;
+	if(startingPos !== undefined) {
+		latitude = startingPos.coords.latitude;
+		longitude = startingPos.coords.longitude;
+	}
+	var centerPlace = { lat: latitude, lng: longitude};
+	var map = new google.maps.Map(document.getElementById("map-" + mapType), {
+		center: centerPlace,
+		zoom: 12,
+		clickableIcons: false,
+		mapTypeControl: false,
+		streetViewControl: false,
+		fullscreenControl: false
+	});
+	// Do some stuff to prepare a map where the user can indicate a choice of location.
+	if(mapType === 0) {
+		map.addListener("click", event => {
+			if(userPin === undefined) {
+				$("#pin-reminder").remove();
+				placeMarkerAndPanTo(event.latLng, map);
+			} else {
+				console.log("A pin has already been placed. Click 'clear pins' to clear them first.");
+			}
+		});
+	} else if(mapType === 1) {
+		// Do some stuff to pin all user observations
+		userMap = map;
+		// console.log(userObs);
+		for(var i = 0; i < userObs.length; i++) {
+			placeYourMarker(new google.maps.LatLng(userObs[i].latitude, userObs[i].longitude), userMap);
+			if(i === 0) {
+				userMap.panTo(new google.maps.LatLng(userObs[i].latitude, userObs[i].longitude));
+			}
+		}
+	} else if(mapType === 2) {
+		// Do some stuff to pin all nearby observations
+		nearbyMap = map;
+	}
+	mapType++;
 }
 
 function placeMarkerAndPanTo(latLng, map) {
-    var marker = new google.maps.Marker({
-        position: latLng,
-        map: map
-    });
-    map.panTo(latLng);
-    userPin = marker;
+	var marker = new google.maps.Marker({
+		position: latLng,
+		map: map
+	});
+	map.panTo(latLng);
+	userPin = marker;
 }
 
 function placeNearbyMarker(latLng, map, obsValues) {
-    // console.log("Nearby Observation Deets:");
-    // console.log(obsValues);
-    var marker = new google.maps.Marker({
-        position: latLng,
-        map: map
-    });
+	// console.log("Nearby Observation Deets:");
+	// console.log(obsValues);
+	var marker = new google.maps.Marker({
+		position: latLng,
+		map: map
+	});
 }
 
 function placeYourMarker(latLng, map) {
-    var marker = new google.maps.Marker({
-        position: latLng,
-        map: map
-    });
+	var marker = new google.maps.Marker({
+		position: latLng,
+		map: map
+	});
 }
 
 $("#clear-pins").click(function deletePin() {
-    event.preventDefault();
-    if(userPin !== undefined) {
-        userPin.setMap(null);
-        userPin = undefined;
-    }
+	event.preventDefault();
+	if(userPin !== undefined) {
+		userPin.setMap(null);
+		userPin = undefined;
+	}
 });
 
 $("#get-nearby").click(function getNearby() {
-    event.preventDefault();
-    var radiusMeters = $("#location-radius").children("option:selected").val() * 1000;
-    var pointsToMark;
-    $.ajax("/api/observations", {
-        type: "GET"
-    }).then(res => {
-        if($("#me").is(":checked")) {
-            nearbyMap.panTo(new google.maps.LatLng(startingPos.coords.latitude, startingPos.coords.longitude));
-            pointsToMark = doCalcs(res, startingPos.coords.latitude, startingPos.coords.longitude, radiusMeters);
-        } else {
-            if(coordinates.lat !== undefined) {
-                nearbyMap.panTo(new google.maps.LatLng(coordinates.lat, coordinates.lng));
-                pointsToMark = doCalcs(res, coordinates.lat, coordinates.lng, radiusMeters);
-            } else {
-                console.log("User needs to pick a city");
-            }
-        }
-        if(pointsToMark !== undefined) {
-            for(var i = 0; i < pointsToMark.length; i++) {
-                placeNearbyMarker(new google.maps.LatLng(pointsToMark[i].latitude, pointsToMark[i].longitude), nearbyMap, pointsToMark[i]);
-            }
-        }
-        switch(radiusMeters) {
-        case 1000: 
-            nearbyMap.setZoom(13);
-            break;
-        case 10000:
-            nearbyMap.setZoom(11);
-            break;
-        case 50000:
-            nearbyMap.setZoom(9);
-            break;
-        case 100000:
-            nearbyMap.setZoom(8);
-            break;
-        case 500000:
-            nearbyMap.setZoom(6);
-            break;
-        case 1000000:
-            nearbyMap.setZoom(5);
-            break;
-        }
-    });
+	event.preventDefault();
+	var radiusMeters = $("#location-radius").children("option:selected").val() * 1000;
+	var pointsToMark;
+	$.ajax("/api/observations", {
+		type: "GET"
+	}).then(res => {
+		if($("#me").is(":checked")) {
+			nearbyMap.panTo(new google.maps.LatLng(startingPos.coords.latitude, startingPos.coords.longitude));
+			pointsToMark = doCalcs(res, startingPos.coords.latitude, startingPos.coords.longitude, radiusMeters);
+		} else {
+			if(coordinates.lat !== undefined) {
+				nearbyMap.panTo(new google.maps.LatLng(coordinates.lat, coordinates.lng));
+				pointsToMark = doCalcs(res, coordinates.lat, coordinates.lng, radiusMeters);
+			} else {
+				console.log("User needs to pick a city");
+			}
+		}
+		if(pointsToMark !== undefined) {
+			for(var i = 0; i < pointsToMark.length; i++) {
+				placeNearbyMarker(new google.maps.LatLng(pointsToMark[i].latitude, pointsToMark[i].longitude), nearbyMap, pointsToMark[i]);
+			}
+		}
+		switch(radiusMeters) {
+		case 1000: 
+			nearbyMap.setZoom(13);
+			break;
+		case 10000:
+			nearbyMap.setZoom(11);
+			break;
+		case 50000:
+			nearbyMap.setZoom(9);
+			break;
+		case 100000:
+			nearbyMap.setZoom(8);
+			break;
+		case 500000:
+			nearbyMap.setZoom(6);
+			break;
+		case 1000000:
+			nearbyMap.setZoom(5);
+			break;
+		}
+	});
 });
 
 function doCalcs(obs, lat, long, radius) {
-    var validSet = [];
-    for(var i = 0; i < obs.length; i++) {
-        var lat2 = obs[i].latitude;
-        var long2 = obs[i].longitude;
-        var distance = getDistance(lat, long, lat2, long2);
-        console.log("Distance: " + distance);
-        if(distance <= radius) {
-            validSet.push(obs[i]);
-        }
-    }
-    return validSet;
+	var validSet = [];
+	for(var i = 0; i < obs.length; i++) {
+		var lat2 = obs[i].latitude;
+		var long2 = obs[i].longitude;
+		var distance = getDistance(lat, long, lat2, long2);
+		console.log("Distance: " + distance);
+		if(distance <= radius) {
+			validSet.push(obs[i]);
+		}
+	}
+	return validSet;
 }
 
 function degreesToRadians(degrees) {
-    var pi = Math.PI;
-    return degrees * (pi/180);
+	var pi = Math.PI;
+	return degrees * (pi/180);
 }
 
 $("#locationInput").keyup(() => {
-    $(".predictionButtons").remove();
-    var locationInput = $(this).val();    
-    var autoLocationUrl = "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/autocomplete/json?input=" + locationInput + "&types=(cities)&key=" + apiKey;
-    $.ajax({
-        url : autoLocationUrl,
-        method : "GET"
-    }).then(autoLocationResponse => {
-        autoLocationResponse.predictions.forEach(function(locationPrediction) {
-            var predictionLink = $("<option>");
-            predictionLink.attr("data-placeId", locationPrediction.place_id);
-            predictionLink.attr("class", "predictionButtons");
-            predictionLink.text(locationPrediction.description);  
-            $("#suggestion-list").append(predictionLink[0]);
-        });
-    });
+	$(".predictionButtons").remove();
+	var locationInput = $(this).val();    
+	var autoLocationUrl = "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/autocomplete/json?input=" + locationInput + "&types=(cities)&key=" + apiKey;
+	$.ajax({
+		url : autoLocationUrl,
+		method : "GET"
+	}).then(autoLocationResponse => {
+		autoLocationResponse.predictions.forEach(function(locationPrediction) {
+			var predictionLink = $("<option>");
+			predictionLink.attr("data-placeId", locationPrediction.place_id);
+			predictionLink.attr("class", "predictionButtons");
+			predictionLink.text(locationPrediction.description);  
+			$("#suggestion-list").append(predictionLink[0]);
+		});
+	});
 });
 
 /*
@@ -252,56 +252,56 @@ $("#locationInput").keyup(() => {
     });
 */
 
-$("#locationInput").bind('input', () => {
-    if(checkExists($('#locationInput').val()) === true){
-        coordinateUrl = "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/details/json?placeid=" + selectedLocationID + "&key=" + apiKey;
-        $.ajax({
-            url : coordinateUrl,
-            method : "GET"
-        }).then(selectedCoordinate => {
-            coordinates = selectedCoordinate.result.geometry.location;
-        });
-        $(".predictionButtons").remove();
-        return false;
-    }
+$("#locationInput").bind("input", () => {
+	if(checkExists($("#locationInput").val()) === true){
+		coordinateUrl = "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/details/json?placeid=" + selectedLocationID + "&key=" + apiKey;
+		$.ajax({
+			url : coordinateUrl,
+			method : "GET"
+		}).then(selectedCoordinate => {
+			coordinates = selectedCoordinate.result.geometry.location;
+		});
+		$(".predictionButtons").remove();
+		return false;
+	}
 });
 
 function checkExists (inputValue) {
-    var x = document.getElementById("suggestion-list");
-    for (var i = 0; i < x.options.length; i++) {
-        if(inputValue == x.options[i].value){
-            selectedLocationID = x.options[i].getAttribute("data-placeId");
-            return true;
-        }
-    }
-    return false;
+	var x = document.getElementById("suggestion-list");
+	for (var i = 0; i < x.options.length; i++) {
+		if(inputValue == x.options[i].value){
+			selectedLocationID = x.options[i].getAttribute("data-placeId");
+			return true;
+		}
+	}
+	return false;
 }
 
 function getDistance(lat1, lon1, lat2, lon2) {
-    var R = 6371e3; // metres
-    var φ1 = degreesToRadians(lat1);
-    var φ2 = degreesToRadians(lat2);
-    var Δφ = degreesToRadians(lat2 - lat1);
-    var Δλ = degreesToRadians(lon2 - lon1);
+	var R = 6371e3; // metres
+	var φ1 = degreesToRadians(lat1);
+	var φ2 = degreesToRadians(lat2);
+	var Δφ = degreesToRadians(lat2 - lat1);
+	var Δλ = degreesToRadians(lon2 - lon1);
 
-    var a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
+	var a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
         Math.cos(φ1) * Math.cos(φ2) *
         Math.sin(Δλ/2) * Math.sin(Δλ/2);
-    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+	var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
 
-    var d = R * c;
-    return Math.abs(d);
+	var d = R * c;
+	return Math.abs(d);
 }
 
 function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
+	return new Promise(resolve => setTimeout(resolve, ms));
 }
   
 async function allowTime() {
-    // console.log('Give Google time to respond...');
-    await sleep(500);
-    // console.log('Half a second later. Maps can load now.');
-    getLocation();
+	// console.log('Give Google time to respond...');
+	await sleep(500);
+	// console.log('Half a second later. Maps can load now.');
+	getLocation();
 }
 
 /*
