@@ -10,7 +10,7 @@ Issuer.discover("https://accounts.google.com/.well-known/openid-configuration")
 		const client = new googleIssuer.Client({
 			client_id: process.env.GOOGLE_CLIENTID,
 			client_secret: process.env.GOOGLE_SECRET,
-			redirect_uris: ["https://sensaison.herokuapp.com/useraccount", "https://sensaison.herokuapp.com/useraccount.html", "http://localhost:3000/useraccount", "http://localhost:3000/useraccount"],
+			redirect_uris: ["https://sensaison.herokuapp.com/useraccount", "http://localhost:3000/useraccount"],
 			response_types: ["code token id_token"],
 		});
 
@@ -52,10 +52,10 @@ Issuer.discover("https://accounts.google.com/.well-known/openid-configuration")
 			});
 		};
 
-		const passReqToCallback = false,
+		const passReqToCallback = true,
 			sessionKey = generators.random(),
 			usePKCE = false;
-			
+
 		const options = {
 			client,
 			params,

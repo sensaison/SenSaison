@@ -20,10 +20,12 @@ app.use(cors());
 app.use(flash());
 app.use(cookieParser(process.env.COOKIE_SECRET));
 
+require("./routes/apiRoutes")(app);
+
 if (process.env.NODE_ENV === "production") {
 	app.set("trust proxy", 1);
 	session.cookie.secure = true;
-};
+}
 
 let sqlStore = new mySQLStore({
 	user: process.env.MYSQLUSER,
@@ -40,7 +42,7 @@ if (process.env.NODE_ENV === "production") {
 		host: process.env.JAWSDB_HOST,
 		port: process.env.JAWSDB_PORT
 	});
-};
+}
 
 app.use(session({
 	secret: process.env.SESSION_SECRET,
@@ -53,7 +55,7 @@ app.use(Passport.initialize());
 app.use(Passport.session());
 
 // Routes
-require("./routes/apiRoutes")(app);
+require("./routes/authRoutes")(app);
 
 let syncOptions = { force: false };
 // If running a test, set syncOptions.force to true
