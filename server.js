@@ -1,6 +1,8 @@
 require("dotenv").config();
 const express = require("express");
 const session = require('express-session');
+const cookieParser = require('cookie-parser');
+const path = require("path");
 const mySQLStore = require("express-mysql-session")(session);
 const Passport = require("./config/passportStrategy");
 const cors = require("cors");
@@ -11,11 +13,17 @@ const app = express();
 let PORT = process.env.PORT || 3000;
 
 // Middleware
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static("public", { extensions: ['html'] }));
 app.use(cors());
 app.use(flash());
+app.use(cookieParser(process.env.COOKIE_SECRET));
+
+if (process.env.NODE_ENV === 'production') {
+    app.set('trust proxy', 1);
+    session.cookie.secure = true;
+};
 
 let sqlStore;
 if (process.env.NODE_ENV === "production") {
@@ -50,7 +58,6 @@ app.use(Passport.session());
 require("./routes/apiRoutes")(app);
 
 let syncOptions = { force: false };
-
 // If running a test, set syncOptions.force to true
 // clearing the `testdb`
 if (process.env.NODE_ENV === "test") {

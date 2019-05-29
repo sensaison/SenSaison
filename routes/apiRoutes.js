@@ -208,7 +208,7 @@ module.exports = (app) => {
    
     app.post('/auth/openidconnect', Passport.authenticate('openid-client'));
 
-    app.get('/auth/openidconnect',
+    app.get('/auth/openidconnect/return',
         Passport.authenticate('openid-client', {
             session: true,
             failureRedirect: 'http://localhost:3000/' ,
@@ -229,21 +229,22 @@ module.exports = (app) => {
     );
 
     app.get('/useraccount.html',
-        ensureLoggedIn('/user'),
+        ensureLoggedIn(),
         (req, res) => {
             res.send(req.user);
             res.send(req.body.access_token);
             console.log(req);
             console.log(req.body);
             console.log('USER: ', req.user);
-            res.render('http://localhost:3000/useraccount.html');
-        },
+            res.send('access granted');
+            res.render("/useraccount.html");
+        }
     );
 
     app.get('/logout', (req, res) => {
-        console.log('LOGGING OUT SESSION: ', req.session);
+        console.log("LOGGING OUT");
         req.logout;
-        req.session.destroy(() => res.redirect('http://localhost:3000/'));
+        req.session.destroy(() => res.redirect('/'));
     });
 
 };
