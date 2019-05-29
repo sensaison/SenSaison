@@ -29,25 +29,34 @@ p {
   height: auto;
   color: rgba(255,255,255,.9);
 }
+
 .parallax-container .section {
   position: absolute;
   top: 40%;
 }
+
 #index-banner .section {
   top: 10%;
   width: 100%;
 }
+
 html,
 body {
   height: 100%;
-  font-size: 110%
+  font-size: 105%
 }
+
 .container {
 	min-height: 75%;
 	position: relative;
 }
+
 footer {
 	position: relative;
+}
+
+.hide {
+  display: none;
 }
 
 @media only screen and (max-width : 992px) {
