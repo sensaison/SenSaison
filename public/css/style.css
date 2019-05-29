@@ -39,7 +39,8 @@ p {
 }
 html,
 body {
-	height: 100%;
+  height: 100%;
+  font-size: 110%
 }
 .container {
 	min-height: 75%;
