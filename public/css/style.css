@@ -11,6 +11,10 @@ nav .brand-logo {
   color: #fff;
 }
 
+#logo {
+  width: 30%;
+}
+
 .material-icons {
   color: rgba(255, 255, 255, 1);
 }
@@ -67,11 +71,17 @@ footer {
   #index-banner .section {
     top: 10%;
   }
+  #logo {
+    width: 70%;
+  }
 }
 
 @media only screen and (max-width : 600px) {
   #index-banner .section {
     top: 10%;
+  }
+  #logo {
+    width: 100%;
   }
 }
 
@@ -104,8 +114,6 @@ overflow: hidden;
 .show {
   display: block;
 }
-
-
 
 .icon-block img {
   width:51px;
