@@ -11,6 +11,10 @@ nav .brand-logo {
   color: #444;
 }
 
+/* nav {
+  background-color: #26a69a;
+} */
+
 p {
   line-height: 2rem;
 }
@@ -26,7 +30,12 @@ p {
   color: rgba(255,255,255,.9);
 }
 .parallax-container .section {
-    width: 100%;
+  position: absolute;
+  top: 40%;
+}
+#index-banner .section {
+  top: 10%;
+  width: 100%;
 }
 html,
 body {
@@ -52,7 +61,7 @@ footer {
 
 @media only screen and (max-width : 600px) {
   #index-banner .section {
-    top: 0;
+    top: 10%;
   }
 }
 

@@ -11,7 +11,7 @@
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
         <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-        <link href="css/navbar.css" media="screen" rel="stylesheet" type="text/css" />
+        <!-- <link href="css/navbar.css" media="screen" rel="stylesheet" type="text/css" /> -->
 
         <!-- Google sign in
         <meta name="google-signin-scope" content="profile email">
@@ -33,7 +33,7 @@
     </head>
 
     <body>
-        <div class="wrap">
+        <!-- <div class="wrap">
             <nav>
                 <ul class="menu">
                     <li><img src="images/sensaisonNew.png"></li>
@@ -43,30 +43,46 @@
                 </ul>
                 <div class="clearfix"></div>
             </nav>
-        </div>
+        </div> -->
+
+        <nav class="teal">
+            <div class="nav-wrapper">
+                <a href="/" class="brand-logo white-text">SENSAISON</a>
+                <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li><a href="team" class="white-text"> About us</a></li>
+                    <li><a href="additional resources" class="white-text">Additional resources</a></li>
+                </ul>    
+            </div>
+        </nav>
+        <ul id="mobile-demo" class="sidenav">
+            <li><a href="/"> Home</a></li>
+            <li><a href="team"> About us</a></li>
+            <li><a href="additional resources">Additional resources</a></li>
+        </ul>
 
         <!-- MAIN -->
     <div id="index-banner" class="parallax-container">
         <div class="section no-pad-bot">
-        <div class="container">
-            <br><br>
-            <h1 class="header center teal-text text-lighten-2" style="text-shadow:4px 4px 4px black;">SenSaison</h1>
-            <div class="row center">
-            <h5 class="header col s12 light" style="text-shadow: 2px 2px 2px black;">For citizen scientists to record seasonal natural history observations</h5>
+            <div class="container">
+                <br><br>
+                <h1 class="header center teal-text text-lighten-2" style="text-shadow:4px 4px 4px black;">SenSaison</h1>
+                <div class="row center">
+                    <h5 class="header col s12 light" style="text-shadow: 2px 2px 2px black;">For citizen scientists to record seasonal natural history observations</h5>
+                </div>
+                <div class="row center">
+
+                    <!-- Sign in with google-->
+                    <!-- <a href="/auth/google" id="download-button" class="btn-large waves-effect waves-light teal lighten-1">Sign In</a>
+                    <div class="g-signin2" href='/auth/google' data-onsuccess="onSignIn" data-theme="dark"></div> -->
+                    <a href="/auth/openidconnect" data-onsuccess="onSignIn" id="signin-button" class="btn-large waves-effect waves-light teal lighten-1">Sign In</a>
+                    <!-- <div class="g-signin2 center-align" href='/auth/google' data-onsuccess="onSignIn" data-theme="dark"></div> -->
+                    
+
+                </div>
+                <br><br>
+
             </div>
-            <div class="row center">
-
-                <!-- Sign in with google-->
-                <!-- <a href="/auth/google" id="download-button" class="btn-large waves-effect waves-light teal lighten-1">Sign In</a>
-                <div class="g-signin2" href='/auth/google' data-onsuccess="onSignIn" data-theme="dark"></div> -->
-                <a href="/auth/openidconnect" id="signin-button" class="btn-large waves-effect waves-light teal lighten-1">Sign In</a>
-                <!-- <div class="g-signin2 center-align" href='/auth/google' data-onsuccess="onSignIn" data-theme="dark"></div> -->
-                
-
-            </div>
-            <br><br>
-
-        </div>
         </div>
         <div class="parallax"><img src="images/image1.jpg" alt="img 1"></div>
     </div>
@@ -124,122 +140,103 @@
         </section>
     </div>
 
-        <div class="parallax-container valign-wrapper">
-            <div class="section no-pad-bot">
-
-            </div>
+    <div class="parallax-container valign-wrapper">
+        <div class="section no-pad-bot"></div>
         <div class="parallax"><img src="images/image2.jpg" alt="img 2"></div>
-        </div>
+    </div>
 
-        <div class="container">
-            <div class="section">
-                <div class="row">
-                    <div class="col s12 center">
-                        <h3><i class="mdi-content-send brown-text"></i></h3>
-                        <div class="row">
-                            <div class="col s12 center-align">
-                                <div class="icon-block">
-                                    <img style="display: inline;" src="images/land.png">  
-                                    <img style="display: inline;" src ="images/plant.png">  
-                                    <img style="display: inline;" src ="images/fungi.png">
-                                    <h5>Animals, plants, and fungi</h5>
-                                    Living organisms such as animals, plants, and fungi, respond to changes in temperature, the timing of seasonal transitions, and the duration of seasons in different ways. For example, some insects might start reproducing earlier in the year. Birds that respond less to temperature and more to daylight or to historical migration patterns continue to lay their eggs about the same time they always have. That means that the peak season for insects no longer coincides with the period when chicks need the most food. That can cause long term declines in bird populations. Effects like these are common across all living organisms.      
-                                </div>
+    <div class="container">
+        <div class="section">
+            <div class="row">
+                <div class="col s12 center">
+                    <h3><i class="mdi-content-send brown-text"></i></h3>
+                    <div class="row">
+                        <div class="col s12 center-align">
+                            <div class="icon-block">
+                                <img style="display: inline;" src="images/land.png">  
+                                <img style="display: inline;" src ="images/plant.png">  
+                                <img style="display: inline;" src ="images/fungi.png">
+                                <h5>Animals, plants, and fungi</h5>
+                                Living organisms such as animals, plants, and fungi, respond to changes in temperature, the timing of seasonal transitions, and the duration of seasons in different ways. For example, some insects might start reproducing earlier in the year. Birds that respond less to temperature and more to daylight or to historical migration patterns continue to lay their eggs about the same time they always have. That means that the peak season for insects no longer coincides with the period when chicks need the most food. That can cause long term declines in bird populations. Effects like these are common across all living organisms.      
                             </div>
                         </div>
-            
-                        <div class="row">
-                            <div class="col s12 center-align">
-                                <div class="icon-block">
-                                    <img style="display: inline;" src="images/weather.png">
-                                    <img style="display: inline;" src ="images/water.png">
-                                    <h5>Weather, water, and land</h5>
-                                    Changes in the timing and duration of seasons and seasonal transitions can also affect the non-living parts of the environment. For example, the length and timing of hurricane season might change, as well as how long lakes and seas are frozen for during the winter. These changes affect living organisms, including us.            
-                                </div>
+                    </div>
+        
+                    <div class="row">
+                        <div class="col s12 center-align">
+                            <div class="icon-block">
+                                <img style="display: inline;" src="images/weather.png">
+                                <img style="display: inline;" src ="images/water.png">
+                                <h5>Weather, water, and land</h5>
+                                Changes in the timing and duration of seasons and seasonal transitions can also affect the non-living parts of the environment. For example, the length and timing of hurricane season might change, as well as how long lakes and seas are frozen for during the winter. These changes affect living organisms, including us.            
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="parallax-container valign-wrapper">
-            <div class="section no-pad-bot">
-            </div>
+    <div class="parallax-container valign-wrapper">
+        <div class="section no-pad-bot"></div>
         <div class="parallax"><img src="images/image1a.jpg" alt="img 3"></div>
-        </div>
+    </div>
 
-        <footer class="page-footer teal">
-            <div class="container">
-                <div class="row">
-                    <div class="col s2">
-                        <h5 class="white-text">Team</h5>
+    <footer class="page-footer teal">
+        <div class="container">
+            <div class="row">
+                <div class="col s2">
+                    <h5 class="white-text">Team</h5>
+                    <ul>
+                    <li class="grey-text text-lighten-4">Stefan</li>
+                    <li class="grey-text text-lighten-4">Catherine</li>
+                    <li class="grey-text text-lighten-4">Julie</li>
+                    </ul>
+                    </div>   
+            
+                    <div class="col s10">
+                    <h5 class="white-text">Contact</h5>
                         <ul>
-                        <li class="grey-text text-lighten-4">Stefan</li>
-                        <li class="grey-text text-lighten-4">Catherine</li>
-                        <li class="grey-text text-lighten-4">Julie</li>
+                        <li><a class="white-text" href="https://github.com/stefan-apr">Github</a> | <a class="white-text" href="https://stefan-apr.github.io/Responsive-Portfolio/portfolio.html">Portfolio</a> | <a class="white-text" href="https://www.linkedin.com/in/stefan-apreutesei-592514171/">LinkedIn</a></li>
+                        <li><a class="white-text" href="https://github.com/crypticwoodwhite">Github</a> | <a class="white-text" href="https://crypticwoodwhite.github.io/">Portfolio</a> | <a class="white-text" href="https://www.linkedin.com/in/catherinephamcww/">LinkedIn</a></li>
+                        <li><a class="white-text" href="https://github.com/JulieMathews?tab=repositories">Github</a> | <a class="white-text" href="https://juliemathews.github.io/New_Port/">Portfolio</a> | <a class="white-text" href="https://www.linkedin.com/in/julie-mathews/">LinkedIn</a></li>
                         </ul>
-                        </div>   
-                
-                        <div class="col s10">
-                        <h5 class="white-text">Contact</h5>
-                            <ul>
-                            <li><a class="white-text" href="https://github.com/stefan-apr">Github</a> | <a class="white-text" href="https://stefan-apr.github.io/Responsive-Portfolio/portfolio.html">Portfolio</a> | <a class="white-text" href="https://www.linkedin.com/in/stefan-apreutesei-592514171/">LinkedIn</a></li>
-                            <li><a class="white-text" href="https://github.com/crypticwoodwhite">Github</a> | <a class="white-text" href="https://crypticwoodwhite.github.io/">Portfolio</a> | <a class="white-text" href="https://www.linkedin.com/in/catherinephamcww/">LinkedIn</a></li>
-                            <li><a class="white-text" href="https://github.com/JulieMathews?tab=repositories">Github</a> | <a class="white-text" href="https://juliemathews.github.io/New_Port/">Portfolio</a> | <a class="white-text" href="https://www.linkedin.com/in/julie-mathews/">LinkedIn</a></li>
-                            </ul>
-                        </div>
-                </div>
+                    </div>
             </div>
-            
-            <div class="footer-copyright center-align">
-                <div class="container">
-                    Copyright 2019 The SenSaison Team. All rights reserved.
-                    <br>
-                    Layout made by <a class="brown-text text-lighten-3" href="http://materializecss.com">Materialize</a>
-                    <br>
-                    Icons made by <a class="brown-text text-lighten-3" href="https://www.freepik.com/?__hstc=57440181.0eb3d779ec5765d0fe6d5707603795e0.1556587780268.1557020807941.1557370549277.8&__hssc=57440181.8.1557370549277&__hsfp=2810556" title="Freepik">Freepik</a> from <a class="brown-text text-lighten-3" href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> and is licensed by <a class="brown-text text-lighten-3" href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC BY 3.0</a></div>
-            </div>
-        </footer>
+        </div>
+        
+        <div class="footer-copyright center-align">
+            <div class="container">
+                Copyright 2019 The SenSaison Team. All rights reserved.
+                <br>
+                Layout made by <a class="brown-text text-lighten-3" href="http://materializecss.com">Materialize</a>
+                <br>
+                Icons made by <a class="brown-text text-lighten-3" href="https://www.freepik.com/?__hstc=57440181.0eb3d779ec5765d0fe6d5707603795e0.1556587780268.1557020807941.1557370549277.8&__hssc=57440181.8.1557370549277&__hsfp=2810556" title="Freepik">Freepik</a> from <a class="brown-text text-lighten-3" href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> and is licensed by <a class="brown-text text-lighten-3" href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC BY 3.0</a></div>
+        </div>
+    </footer>
 
-        <!--  Scripts-->
-        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-        <script src="js/init.js"></script>
+    <!--  Scripts-->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script type="text/javascript" src="js/init.js"></script>
+    <script type="text/javascript" src="js/userAuth.js"></script>
 
-        <!-- Google sign in -->
-        <script>
-            function onSignIn(googleUser) {
-                // Useful data for your client-side scripts:
-                var profile = googleUser.getBasicProfile();
-                // console.log("ID: " + profile.getId()); // Don't send this directly to your server!
-                // console.log('Full Name: ' + profile.getName());
-                // console.log('Given Name: ' + profile.getGivenName());
-                // console.log('Family Name: ' + profile.getFamilyName());
-                // console.log("Image URL: " + profile.getImageUrl());
-                // console.log("Email: " + profile.getEmail());
 
-                // The ID token you need to pass to your backend:
-                var id_token = googleUser.getAuthResponse().id_token;
-            //	console.log("ID Token: " + id_token);
-            };
-        </script>
-
-            <!-- SWATCHBOOK SCRIPT -->
-        <script type="text/javascript" src="SwatchBook/js/jquery.swatchbook.js"></script>
-        <script type="text/javascript">
-            $(function() {
-                $( '#sb-container' ).swatchbook( {
-                    // number of degrees that is between each item
-                    angleInc : 30,
-                    neighbor : 15,
-                    // if it should be closed by default
-            initclosed : true,
-            // index of the element that when clicked, triggers the open/close function
-                    // by default there is no such element
-                    closeIdx : 5
+    <!-- SWATCHBOOK SCRIPT -->
+    <script type="text/javascript" src="SwatchBook/js/jquery.swatchbook.js"></script>
+    <script type="text/javascript">
+        $(function() {
+            $( '#sb-container' ).swatchbook( {
+                // number of degrees that is between each item
+                angleInc : 30,
+                neighbor : 15,
+                // if it should be closed by default
+        initclosed : true,
+        // index of the element that when clicked, triggers the open/close function
+                // by default there is no such element
+                closeIdx : 5
         });
-            
+        
         var randomNumber = Math.floor(Math.random() * 11) + 1;
             $('#sb-container div:last-child').addClass('img'+randomNumber);
             });

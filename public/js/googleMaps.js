@@ -104,7 +104,7 @@ function generateMap() {
     } else if(mapType === 1) {
         // Do some stuff to pin all user observations
         userMap = map;
-        console.log(userObs);
+        // console.log(userObs);
         for(var i = 0; i < userObs.length; i++) {
             placeYourMarker(new google.maps.LatLng(userObs[i].latitude, userObs[i].longitude), userMap);
             if(i === 0) {
