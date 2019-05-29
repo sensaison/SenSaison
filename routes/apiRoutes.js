@@ -12,7 +12,7 @@ module.exports = (app) => {
 
     // FIND ALL observations
     app.get("/api/observations", (req, res) => {
-        db.Observation.findAll({
+        db.Observations.findAll({
             include: [{
                 model: db.User,
                 attributes: ["openId", "firstName", "lastName", "username"]
@@ -24,7 +24,7 @@ module.exports = (app) => {
 
     // FIND ALL observations grouped by category
     app.get("/api/categories/:category", (req, res) => {
-        db.Observation.findAll({
+        db.Observations.findAll({
             where: {
                 category: req.params.category
             },
@@ -39,7 +39,7 @@ module.exports = (app) => {
 
     // GET most recent ONE observation of each category by TIMESTAMP
     app.get("/api/:category/mostrecentone", (req, res) => {
-        db.Observation.findAll({
+        db.Observations.findAll({
             limit: 1,
             where: {
                 category: req.params.category,
@@ -57,7 +57,7 @@ module.exports = (app) => {
 
     // GET most recent FIVE observations of each category by TIMESTAMP
     app.get("/api/:category/mostrecentfive", (req, res) => {
-        db.Observation.findAll({
+        db.Observations.findAll({
             limit: 5,
             where: {
                 category: req.params.category,
@@ -75,7 +75,7 @@ module.exports = (app) => {
 
     // CREATE new observation
     app.post("/api/observations", (req, res) => {
-        db.Observation.create(req.body)
+        db.Observations.create(req.body)
             .then(dbObs => {
                 res.json(dbObs);
             });
@@ -83,7 +83,7 @@ module.exports = (app) => {
 
     // DESTROY one observation
     app.delete("/api/observations", (req, res) => {
-        db.Observation.destroy({
+        db.Observations.destroy({
             where: {
                 id: req.query.id
             }
@@ -94,7 +94,7 @@ module.exports = (app) => {
 
     // FIND observations for data request WITH PICTURES
     app.get("/download-with-pictures", (req, res) => {
-        db.Observation.findAll({
+        db.Observations.findAll({
             where: {
                 category: req.query.category,
                 dateObs: {
@@ -140,7 +140,7 @@ module.exports = (app) => {
 
     // FIND observations for data request, convert to csv, and download client side NO PICTURES
     app.get("/download", (req, res) => {
-        db.Observation.findAll({
+        db.Observations.findAll({
             where: {
                 category: req.query.category,
                 dateObs: {
@@ -175,7 +175,7 @@ module.exports = (app) => {
 
     // FIND ONE user's observations
     app.get("/api/userobservations", (req, res) => {
-        db.Observation.findAll({
+        db.Observations.findAll({
             where: {
                 openId: req.query.openId
             }
@@ -186,7 +186,7 @@ module.exports = (app) => {
 
     // FIND ALL users
     app.get("/api/users", (req, res) => {
-        db.User.findAll({
+        db.Users.findAll({
             attributes: ["openId", "firstName", "lastName", "username"],
             include: [db.Observation]
         }).then(allusr => {
@@ -196,7 +196,7 @@ module.exports = (app) => {
 
     // CREATE new user
     app.post("/api/users", (req, res) => {
-        db.User.create(req.body)
+        db.Users.create(req.body)
             .then(newusr => {
                 res.json(newusr);
             });
