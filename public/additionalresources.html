@@ -3,153 +3,170 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
 
-  <title>SenSaison</title>
+    <title>SenSaison</title>
 
-  <!-- CSS  -->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-  <link href="css/navbar.css" media="screen" rel="stylesheet" type="text/css" />
-  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <!-- CSS  -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <!-- <link href="css/navbar.css" media="screen" rel="stylesheet" type="text/css" /> -->
+    <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 
-  <!-- Swatchbook -->
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-  <meta name="description" content="Animated Swatch Book with CSS3 and jQuery" />
-  <meta name="keywords" content="swatch book, css3, jquery, animated, rotation, transition, folding fan" />
-  <meta name="author" content="Codrops" />
-  <link rel="stylesheet" type="text/css" href="Swatchbook/css/style.css" />
-  <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:700,300,300italic' rel='stylesheet' type='text/css'>
-  <script type="text/javascript" src="Swatchbook/js/modernizr.custom.79639.js"></script> 
+    <!-- Swatchbook -->
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <meta name="description" content="Animated Swatch Book with CSS3 and jQuery" />
+    <meta name="keywords" content="swatch book, css3, jquery, animated, rotation, transition, folding fan" />
+    <meta name="author" content="Codrops" />
+    <link rel="stylesheet" type="text/css" href="Swatchbook/css/style.css" />
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:700,300,300italic' rel='stylesheet' type='text/css'>
+    <script type="text/javascript" src="Swatchbook/js/modernizr.custom.79639.js"></script> 
 
 </head>
+<body>
+    <!-- <div class="wrap">
+    <nav>
+            <ul class="menu" id="top">
+                <li><img src="images/sensaisonNew.png"></li>
 
-<div class="wrap">
-  <nav>
-		<ul class="menu" id="top">
-            <li><img src="images/sensaisonNew.png"></li>
+                <li><a href="/"><span class=""></span> Home</a></li>
+                <li><a href="team"><span class=""></span> About us</a></li>
+                <li><a href="additionalresources"><span class=""></span> Additional resources</a></li>
+            </ul>
+            <div class="clearfix"></div>
+        </nav>
+    </div> -->
 
-            <li><a href="index.html"><span class=""></span> Home</a></li>
-            <li><a href="team.html"><span class=""></span> About us</a></li>
-            <li><a href="additionalresources.html"><span class=""></span> Additional resources</a></li>
-		</ul>
-        <div class="clearfix"></div>
-	</nav>
-</div>
-
-    <!-- MAIN -->
-  <div id="index-banner" class="success">
-    <div class="section no-pad-bot">
-      <div class="container">
-
-      </div>
-    </div>
-  </div>
-
-
-  <div class="container left-align">
-    <div class="section">
-        <h3 class="center-align">Additional resources</h3>
-        <br>
-
-        <div class="row center-align">
-            <a class="btn waves-effect waves-light btn-flat" id="add-obs-btn" href="#citizen-sci">What is citizen science?</a><br>
-            <a class="btn waves-effect waves-light btn-flat" id="add-obs-btn" href="#citizen-sci">More citizen science opportunities</a><br>
-            <a class="btn waves-effect waves-light btn-flat" id="view-near-obs-btn" href="#sci-lit">Scientific literature</a><br>
+    <nav class="teal">
+        <div class="nav-wrapper">
+            <a href="/" class="brand-logo white-text">SENSAISON</a>
+            <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="/" class="white-text"> Home</a></li>
+                <li><a href="team" class="white-text">About us</a></li>
+                <li><a href="additionalresources" class="white-text">Additional resources</a></li>
+            </ul>    
         </div>
-        <br>
-        
-        <div class="row">
+    </nav>
+    <ul id="mobile-demo" class="sidenav">
+        <li><a href="/"> Home</a></li>
+        <li><a href="team"> About us</a></li>
+        <li><a href="additionalresources">Additional resources</a></li>
+    </ul>
 
-            <h5>What is citizen science?</h5>
-            
-            <p>Citizen science is the involvement of the general public in the scientific process. This process includes, but is not limited to, collecting data, conducting experiments, analyzing data, interpretating results, and writing. Most commonly, citizen science projects are conducted in collaboration with professional scientists, and involve the general public at the data collection or experimental stage. Scientists benefit by obtaining data on a scale that is not possible to them alone and by being exposed to new ideas and perspectives. Members of the public benefit through increased understanding of the natural world and the scientific process, and how those relate to their own daily lives.<p>
-            <p>You can read more about citizen science and its importance in these scientific papers:</p>
-            <ul id="citizen-sci">
-                <li>&bull; Bonney, R., Cooper, C.B., Dickinson, J., Kelling, S., Phillips, T., Rosenberg, K.V. and Shirk, J. 2009. Citizen science: a developing tool for expanding science knowledge and scientific literacy. <i>BioScience</i> 59(11):977-984. [<a href="/public/pdf/Bonneyetal2010.pdf" target="_blank">pdf</a>]</li>
-                <li>&bull; Dickinson, J.L., Zuckerberg, B. and Bonter, D.N. 2010. Citizen science as an ecological research tool: challenges and benefits. <i>Annual review of ecology, evolution, and systematics</i> 41:149-172. [<a href="/public/pdf/Dickinsonetal2010.pdf" target="_blank">pdf</a>]</li>
-                <li>&bull; Silvertown, J. 2009. A new dawn for citizen science. <i>Trends in ecology & evolution</i> 24(9):467-471. [<a href="/public/pdf/Silvertown2009.pdf" target="_blank">pdf</a>]</li>
-            </ul>
+        <!-- MAIN -->
+    <div id="index-banner" class="success">
+        <div class="section no-pad-bot">
+        <div class="container">
+
+        </div>
+        </div>
+    </div>
+
+
+    <div class="container left-align">
+        <div class="section">
+            <h3 class="center-align">Additional resources</h3>
             <br>
 
-            <h5>Citizen science opportunities and information</h5>
-            
-            <ul id="citizen-sci">
-                <li>&bull; <a href="https://www.zooniverse.org/">Zooniverse</a></li>
-                <li>&bull; <a href="https://www.citizenscience.gov/catalog/#">citizenscience.gov</a></li>
-                <li>&bull; <a href="https://www.scientificamerican.com/citizen-science/">Scientific American</a></li>
-                <li>&bull; <a href="https://www.nationalgeographic.org/idea/citizen-science-projects/">National Geographic</a></li>
-            </ul>
+            <div class="row center-align">
+                <a class="btn waves-effect waves-light btn-flat" id="add-obs-btn" href="#citizen-sci">What is citizen science?</a><br>
+                <a class="btn waves-effect waves-light btn-flat" id="add-obs-btn" href="#citizen-sci">More citizen science opportunities</a><br>
+                <a class="btn waves-effect waves-light btn-flat" id="view-near-obs-btn" href="#sci-lit">Scientific literature</a><br>
+            </div>
             <br>
-
-            <h5>Scientific literature on climate change, phenology, and timing of natural history events</h5>
             
-            <ul id="sci-lit">
-                <li>&bull; Augspurger, C.K. 2013. Reconstructing patterns of temperature, phenology, and frost damage over 124 years: spring damage risk is increasing. <i>Ecology</i> 94(1):41-50. [<a href="/public/pdf/Augspurger2013.pdf" target="_blank">pdf</a>]</li>
-                <li>&bull; Badeck, F.W., Bondeau, A., Böttcher, K., Doktor, D., Lucht, W., Schaber, J. and Sitch, S. 2004. Responses of spring phenology to climate change. <i>New Phytologist</i> 162(2):295-309. [<a href="/public/pdf/Badecketal2004.pdf" target="_blank">pdf</a>]</li>
-                <li>&bull; Bartlett, M.G., Chapman, D.S. and Harris, R.N. 2004. Snow and the ground temperature record of climate change. <i>Journal of Geophysical Research: Earth Surface</i> 109(F4). [<a href="/public/pdf/Bartlettetal2004.pdf" target="_blank">pdf</a>]</li>
-                <li>&bull; Cheng, G. and Wu, T. 2007. Responses of permafrost to climate change and their environmental significance, Qinghai‐Tibet Plateau. <i>Journal of Geophysical Research: Earth Surface</i> 112(F2). [<a href="/public/pdf/ChengWu2007.pdf" target="_blank">pdf</a>]</li>
-                <li>&bull; Cotton, P.A. 2003. Avian migration phenology and global climate change. <i>Proceedings of the National Academy of Sciences</i> 100(21):12219-12222. [<a href="/public/pdf/Cotton2003.pdf" target="_blank">pdf</a>]</li>
-                <li>&bull; Edwards, M. and Richardson, A.J. 2004. Impact of climate change on marine pelagic phenology and trophic mismatch. <i>Nature</i> 430(7002):881-884. [<a href="/public/pdf/EdwardsRichardson2004.pdf" target="_blank">pdf</a>]</li>
-                <li>&bull; Inouye, D.W. 2000. The ecological and evolutionary significance of frost in the context of climate change. <i>Ecology Letters</i> 3(5):457-463. [<a href="/public/pdf/Inouye2000.pdf" target="_blank">pdf</a>]</li>
-                <li>&bull; Jensen, O.P., Benson, B.J., Magnuson, J.J., Card, V.M., Futter, M.N., Soranno, P.A. and Stewart, K.M. 2007. Spatial analysis of ice phenology trends across the Laurentian Great Lakes region during a recent warming period. <i>Limnology and Oceanography</i> 52(5):2013-2026. [<a href="/public/pdf/Jensenetal2013.pdf" target="_blank">pdf</a>]</li>
-                <li>&bull; Kauserud, H., Heegaard, E., Semenov, M.A., Boddy, L., Halvorsen, R., Stige, L.C., Sparks, T.H., Gange, A.C. and Stenseth, N.C. 2009. Climate change and spring-fruiting fungi. <i>Proceedings of the Royal Society B: Biological Sciences</i> 277(1685):1169-1177. [<a href="/public/pdf/Kauserudetal2010.pdf" target="_blank">pdf</a>]</li>
-                <li>&bull; Latifovic, R. and Pouliot, D. 2007. Analysis of climate change impacts on lake ice phenology in Canada using the historical satellite data record. <i>Remote Sensing of Environment</i> 106(4):492-507. [<a href="/public/pdf/LatifovicPouliot2007.pdf" target="_blank">pdf</a>]</li>
-                <li>&bull; Natali, S.M., Schuur, E.A. and Rubin, R.L. 2012. Increased plant productivity in Alaskan tundra as a result of experimental warming of soil and permafrost. <i>Journal of Ecology</i> 100(2):488-498. [<a href="/public/pdf/Natalietal2009.pdf" target="_blank">pdf</a>]</li>
-                <li>&bull; Ovaskainen, O., Skorokhodova, S., Yakovleva, M., Sukhov, A., Kutenkov, A., Kutenkova, N., Shcherbakov, A., Meyke, E. and del Mar Delgado, M. 2013. Community-level phenological response to climate change. <i>Proceedings of the National Academy of Sciences</i> 110(33):13434-13439. [<a href="/public/pdf/Ovaskainenaetal2013.pdf" target="_blank">pdf</a>]</li>
-                <li>&bull; Richardson, A.D., Keenan, T.F., Migliavacca, M., Ryu, Y., Sonnentag, O. and Toomey, M. 2013. Climate change, phenology, and phenological control of vegetation feedbacks to the climate system. <i>Agricultural and Forest Meteorology</i> 169:156-173. [<a href="/public/pdf/Richardsonetal2013.pdf" target="_blank">pdf</a>]</li>
-                <li>&bull; Vaganov, E.A., Hughes, M.K., Kirdyanov, A.V., Schweingruber, F.H. and Silkin, P.P. 1999. Influence of snowfall and melt timing on tree growth in subarctic Eurasia. <i>Nature</i> 400(6740):149-151. [<a href="/public/pdf/Vaganovetal1999.pdf" target="_blank">pdf</a>]</li>
-                <li>&bull; Visser, M.E. and Both, C. 2005. Shifts in phenology due to global climate change: the need for a yardstick. <i>Proceedings of the Royal Society B: Biological Sciences</i> 272(1581):2561-2569. [<a href="/public/pdf/VisserBoth2005.pdf" target="_blank">pdf</a>]</li>
-                <li>&bull; Wipf, S., Stoeckli, V. and Bebi, P. 2009. Winter climate change in alpine tundra: plant responses to changes in snow depth and snowmelt timing. <i>Climatic change</i> 94(1-2):105-121. [<a href="/public/pdf/Wipfetal2009.pdf" target="_blank">pdf</a>]</li>
-                <li>&bull; Zhang, T. 2005. Influence of the seasonal snow cover on the ground thermal regime: An overview. <i>Reviews of Geophysics</i> 43(4). [<a href="/public/pdf/Zhang2005.pdf" target="_blank">pdf</a>]</li>
-                <li>&bull; Zhang, T., Barry, R.G., Knowles, K., Ling, F. and Armstrong, R.L. 2003, July. Distribution of seasonally and perennially frozen ground in the Northern Hemisphere. <i>In</i> "Proceedings of the 8th International Conference on Permafrost" (Vol. 2, pp. 1289-1294). Zürich, Switzerland: AA Balkema Publishers. [<a href="/public/pdf/Zhangetal2003.pdf" target="_blank">pdf</a>]</li>
-              </ul>
+            <div class="row">
 
-              <h6>Significant Reports</h6>
-              <ul>
-                <li>&bull; IPCC, 2014: Climate Change 2014: Synthesis Report. Contribution of Working Groups I, II and III to the Fifth Assessment Report of the Intergovernmental Panel on Climate Change [Core Writing Team, R.K. Pachauri and L.A. Meyer (eds.)]. IPCC, Geneva, Switzerland, 151 pp. [<a href="https://www.ipcc.ch/report/ar5/syr/" target="_blank">link</a>]</li>
-                <li>&bull; USGCRP, 2017: Climate Science Special Report: Fourth National Climate Assessment, Volume I [Wuebbles, D.J., D.W. Fahey, K.A. Hibbard, D.J. Dokken, B.C. Stewart, and T.K. Maycock (eds.)]. U.S. Global Change Research Program, Washington, DC, USA, 470 pp. [<a href="https://science2017.globalchange.gov/" target="_blank">link</a>]</li>
-                <li>&bull; USGCRP, 2018: Impacts, Risks, and Adaptation in the United States: Fourth National Climate Assessment, Volume II [Reidmiller, D.R., C.W. Avery, D.R. Easterling, K.E. Kunkel, K.L.M. Lewis, T.K. Maycock, and B.C. Stewart (eds.)]. U.S. Global Change Research Program, Washington, DC, USA, 1515 pp. [<a href="https://nca2018.globalchange.gov/" target="_blank">link</a>]</li>
+                <h5>What is citizen science?</h5>
                 
-            </ul>
-
-        </div>
-
-
-        <br><br>
-        <div class="row center-align">
-        <a class="btn waves-effect waves-teal btn-flat" id="backtotop" href="#top">Back to top</a>
-        </div>
-
-    </div>
-  </div>
-
-
-
-  <footer class="page-footer teal">
-    <div class="container">
-        <div class="row">
-            <div class="col s2">
-                <h5 class="white-text">Team</h5>
-                <ul>
-                <li class="grey-text text-lighten-4">Stefan</li>
-                <li class="grey-text text-lighten-4">Catherine</li>
-                <li class="grey-text text-lighten-4">Julie</li>
+                <p>Citizen science is the involvement of the general public in the scientific process. This process includes, but is not limited to, collecting data, conducting experiments, analyzing data, interpretating results, and writing. Most commonly, citizen science projects are conducted in collaboration with professional scientists, and involve the general public at the data collection or experimental stage. Scientists benefit by obtaining data on a scale that is not possible to them alone and by being exposed to new ideas and perspectives. Members of the public benefit through increased understanding of the natural world and the scientific process, and how those relate to their own daily lives.<p>
+                <p>You can read more about citizen science and its importance in these scientific papers:</p>
+                <ul id="citizen-sci">
+                    <li>&bull; Bonney, R., Cooper, C.B., Dickinson, J., Kelling, S., Phillips, T., Rosenberg, K.V. and Shirk, J. 2009. Citizen science: a developing tool for expanding science knowledge and scientific literacy. <i>BioScience</i> 59(11):977-984. [<a href="/public/pdf/Bonneyetal2010.pdf" target="_blank">pdf</a>]</li>
+                    <li>&bull; Dickinson, J.L., Zuckerberg, B. and Bonter, D.N. 2010. Citizen science as an ecological research tool: challenges and benefits. <i>Annual review of ecology, evolution, and systematics</i> 41:149-172. [<a href="/public/pdf/Dickinsonetal2010.pdf" target="_blank">pdf</a>]</li>
+                    <li>&bull; Silvertown, J. 2009. A new dawn for citizen science. <i>Trends in ecology & evolution</i> 24(9):467-471. [<a href="/public/pdf/Silvertown2009.pdf" target="_blank">pdf</a>]</li>
                 </ul>
-                </div>
-        
-                <div class="col s10">
-                <h5 class="white-text">Contact</h5>
+                <br>
+
+                <h5>Citizen science opportunities and information</h5>
+                
+                <ul id="citizen-sci">
+                    <li>&bull; <a href="https://www.zooniverse.org/">Zooniverse</a></li>
+                    <li>&bull; <a href="https://www.citizenscience.gov/catalog/#">citizenscience.gov</a></li>
+                    <li>&bull; <a href="https://www.scientificamerican.com/citizen-science/">Scientific American</a></li>
+                    <li>&bull; <a href="https://www.nationalgeographic.org/idea/citizen-science-projects/">National Geographic</a></li>
+                </ul>
+                <br>
+
+                <h5>Scientific literature on climate change, phenology, and timing of natural history events</h5>
+                
+                <ul id="sci-lit">
+                    <li>&bull; Augspurger, C.K. 2013. Reconstructing patterns of temperature, phenology, and frost damage over 124 years: spring damage risk is increasing. <i>Ecology</i> 94(1):41-50. [<a href="/public/pdf/Augspurger2013.pdf" target="_blank">pdf</a>]</li>
+                    <li>&bull; Badeck, F.W., Bondeau, A., Böttcher, K., Doktor, D., Lucht, W., Schaber, J. and Sitch, S. 2004. Responses of spring phenology to climate change. <i>New Phytologist</i> 162(2):295-309. [<a href="/public/pdf/Badecketal2004.pdf" target="_blank">pdf</a>]</li>
+                    <li>&bull; Bartlett, M.G., Chapman, D.S. and Harris, R.N. 2004. Snow and the ground temperature record of climate change. <i>Journal of Geophysical Research: Earth Surface</i> 109(F4). [<a href="/public/pdf/Bartlettetal2004.pdf" target="_blank">pdf</a>]</li>
+                    <li>&bull; Cheng, G. and Wu, T. 2007. Responses of permafrost to climate change and their environmental significance, Qinghai‐Tibet Plateau. <i>Journal of Geophysical Research: Earth Surface</i> 112(F2). [<a href="/public/pdf/ChengWu2007.pdf" target="_blank">pdf</a>]</li>
+                    <li>&bull; Cotton, P.A. 2003. Avian migration phenology and global climate change. <i>Proceedings of the National Academy of Sciences</i> 100(21):12219-12222. [<a href="/public/pdf/Cotton2003.pdf" target="_blank">pdf</a>]</li>
+                    <li>&bull; Edwards, M. and Richardson, A.J. 2004. Impact of climate change on marine pelagic phenology and trophic mismatch. <i>Nature</i> 430(7002):881-884. [<a href="/public/pdf/EdwardsRichardson2004.pdf" target="_blank">pdf</a>]</li>
+                    <li>&bull; Inouye, D.W. 2000. The ecological and evolutionary significance of frost in the context of climate change. <i>Ecology Letters</i> 3(5):457-463. [<a href="/public/pdf/Inouye2000.pdf" target="_blank">pdf</a>]</li>
+                    <li>&bull; Jensen, O.P., Benson, B.J., Magnuson, J.J., Card, V.M., Futter, M.N., Soranno, P.A. and Stewart, K.M. 2007. Spatial analysis of ice phenology trends across the Laurentian Great Lakes region during a recent warming period. <i>Limnology and Oceanography</i> 52(5):2013-2026. [<a href="/public/pdf/Jensenetal2013.pdf" target="_blank">pdf</a>]</li>
+                    <li>&bull; Kauserud, H., Heegaard, E., Semenov, M.A., Boddy, L., Halvorsen, R., Stige, L.C., Sparks, T.H., Gange, A.C. and Stenseth, N.C. 2009. Climate change and spring-fruiting fungi. <i>Proceedings of the Royal Society B: Biological Sciences</i> 277(1685):1169-1177. [<a href="/public/pdf/Kauserudetal2010.pdf" target="_blank">pdf</a>]</li>
+                    <li>&bull; Latifovic, R. and Pouliot, D. 2007. Analysis of climate change impacts on lake ice phenology in Canada using the historical satellite data record. <i>Remote Sensing of Environment</i> 106(4):492-507. [<a href="/public/pdf/LatifovicPouliot2007.pdf" target="_blank">pdf</a>]</li>
+                    <li>&bull; Natali, S.M., Schuur, E.A. and Rubin, R.L. 2012. Increased plant productivity in Alaskan tundra as a result of experimental warming of soil and permafrost. <i>Journal of Ecology</i> 100(2):488-498. [<a href="/public/pdf/Natalietal2009.pdf" target="_blank">pdf</a>]</li>
+                    <li>&bull; Ovaskainen, O., Skorokhodova, S., Yakovleva, M., Sukhov, A., Kutenkov, A., Kutenkova, N., Shcherbakov, A., Meyke, E. and del Mar Delgado, M. 2013. Community-level phenological response to climate change. <i>Proceedings of the National Academy of Sciences</i> 110(33):13434-13439. [<a href="/public/pdf/Ovaskainenaetal2013.pdf" target="_blank">pdf</a>]</li>
+                    <li>&bull; Richardson, A.D., Keenan, T.F., Migliavacca, M., Ryu, Y., Sonnentag, O. and Toomey, M. 2013. Climate change, phenology, and phenological control of vegetation feedbacks to the climate system. <i>Agricultural and Forest Meteorology</i> 169:156-173. [<a href="/public/pdf/Richardsonetal2013.pdf" target="_blank">pdf</a>]</li>
+                    <li>&bull; Vaganov, E.A., Hughes, M.K., Kirdyanov, A.V., Schweingruber, F.H. and Silkin, P.P. 1999. Influence of snowfall and melt timing on tree growth in subarctic Eurasia. <i>Nature</i> 400(6740):149-151. [<a href="/public/pdf/Vaganovetal1999.pdf" target="_blank">pdf</a>]</li>
+                    <li>&bull; Visser, M.E. and Both, C. 2005. Shifts in phenology due to global climate change: the need for a yardstick. <i>Proceedings of the Royal Society B: Biological Sciences</i> 272(1581):2561-2569. [<a href="/public/pdf/VisserBoth2005.pdf" target="_blank">pdf</a>]</li>
+                    <li>&bull; Wipf, S., Stoeckli, V. and Bebi, P. 2009. Winter climate change in alpine tundra: plant responses to changes in snow depth and snowmelt timing. <i>Climatic change</i> 94(1-2):105-121. [<a href="/public/pdf/Wipfetal2009.pdf" target="_blank">pdf</a>]</li>
+                    <li>&bull; Zhang, T. 2005. Influence of the seasonal snow cover on the ground thermal regime: An overview. <i>Reviews of Geophysics</i> 43(4). [<a href="/public/pdf/Zhang2005.pdf" target="_blank">pdf</a>]</li>
+                    <li>&bull; Zhang, T., Barry, R.G., Knowles, K., Ling, F. and Armstrong, R.L. 2003, July. Distribution of seasonally and perennially frozen ground in the Northern Hemisphere. <i>In</i> "Proceedings of the 8th International Conference on Permafrost" (Vol. 2, pp. 1289-1294). Zürich, Switzerland: AA Balkema Publishers. [<a href="/public/pdf/Zhangetal2003.pdf" target="_blank">pdf</a>]</li>
+                </ul>
+
+                <h6>Significant Reports</h6>
+                <ul>
+                    <li>&bull; IPCC, 2014: Climate Change 2014: Synthesis Report. Contribution of Working Groups I, II and III to the Fifth Assessment Report of the Intergovernmental Panel on Climate Change [Core Writing Team, R.K. Pachauri and L.A. Meyer (eds.)]. IPCC, Geneva, Switzerland, 151 pp. [<a href="https://www.ipcc.ch/report/ar5/syr/" target="_blank">link</a>]</li>
+                    <li>&bull; USGCRP, 2017: Climate Science Special Report: Fourth National Climate Assessment, Volume I [Wuebbles, D.J., D.W. Fahey, K.A. Hibbard, D.J. Dokken, B.C. Stewart, and T.K. Maycock (eds.)]. U.S. Global Change Research Program, Washington, DC, USA, 470 pp. [<a href="https://science2017.globalchange.gov/" target="_blank">link</a>]</li>
+                    <li>&bull; USGCRP, 2018: Impacts, Risks, and Adaptation in the United States: Fourth National Climate Assessment, Volume II [Reidmiller, D.R., C.W. Avery, D.R. Easterling, K.E. Kunkel, K.L.M. Lewis, T.K. Maycock, and B.C. Stewart (eds.)]. U.S. Global Change Research Program, Washington, DC, USA, 1515 pp. [<a href="https://nca2018.globalchange.gov/" target="_blank">link</a>]</li>
+                    
+                </ul>
+
+            </div>
+
+
+            <br><br>
+            <div class="row center-align">
+            <a class="btn waves-effect waves-teal btn-flat" id="backtotop" href="#top">Back to top</a>
+            </div>
+
+        </div>
+    </div>
+
+
+
+    <footer class="page-footer teal">
+        <div class="container">
+            <div class="row">
+                <div class="col s2">
+                    <h5 class="white-text">Team</h5>
                     <ul>
-                    <li><a class="white-text" href="https://github.com/stefan-apr">Github</a> | <a class="white-text" href="https://stefan-apr.github.io/Responsive-Portfolio/portfolio.html">Portfolio</a> | <a class="white-text" href="https://www.linkedin.com/in/stefan-apreutesei-592514171/">LinkedIn</a></li>
-                    <li><a class="white-text" href="https://github.com/crypticwoodwhite">Github</a> | <a class="white-text" href="https://crypticwoodwhite.github.io/">Portfolio</a> | <a class="white-text" href="https://www.linkedin.com/in/catherinepham-cww/">LinkedIn</a></li>
-                    <li><a class="white-text" href="https://github.com/JulieMathews?tab=repositories">Github</a> | <a class="white-text" href="https://juliemathews.github.io/New_Port/">Portfolio</a> | <a class="white-text" href="https://www.linkedin.com/in/julie-mathews/">LinkedIn</a></li>
+                    <li class="grey-text text-lighten-4">Stefan</li>
+                    <li class="grey-text text-lighten-4">Catherine</li>
+                    <li class="grey-text text-lighten-4">Julie</li>
                     </ul>
-                </div>
+                    </div>   
+            
+                    <div class="col s10">
+                    <h5 class="white-text">Contact</h5>
+                        <ul>
+                        <li><a class="white-text" href="https://github.com/stefan-apr">Github</a> | <a class="white-text" href="https://stefan-apr.github.io/Responsive-Portfolio/portfolio.html">Portfolio</a> | <a class="white-text" href="https://www.linkedin.com/in/stefan-apreutesei-592514171/">LinkedIn</a></li>
+                        <li><a class="white-text" href="https://github.com/crypticwoodwhite">Github</a> | <a class="white-text" href="https://crypticwoodwhite.github.io/">Portfolio</a> | <a class="white-text" href="https://www.linkedin.com/in/catherinephamcww/">LinkedIn</a></li>
+                        <li><a class="white-text" href="https://github.com/JulieMathews?tab=repositories">Github</a> | <a class="white-text" href="https://juliemathews.github.io/New_Port/">Portfolio</a> | <a class="white-text" href="https://www.linkedin.com/in/julie-mathews/">LinkedIn</a></li>
+                        </ul>
+                    </div>
             </div>
         </div>
         
@@ -158,16 +175,18 @@
                 Copyright 2019 The SenSaison Team. All rights reserved.
                 <br>
                 Layout made by <a class="brown-text text-lighten-3" href="http://materializecss.com">Materialize</a>
-            </div>
+                <br>
+                Icons made by <a class="brown-text text-lighten-3" href="https://www.freepik.com/?__hstc=57440181.0eb3d779ec5765d0fe6d5707603795e0.1556587780268.1557020807941.1557370549277.8&__hssc=57440181.8.1557370549277&__hsfp=2810556" title="Freepik">Freepik</a> from <a class="brown-text text-lighten-3" href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> and is licensed by <a class="brown-text text-lighten-3" href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC BY 3.0</a></div>
         </div>
-        </footer>
+    </footer>
 
 
-  <!--  Scripts -->
-  <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-  <script type="text/javascript" src="js/init.js"></script>
+
+    <!--  Scripts -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script type="text/javascript" src="js/init.js"></script>
 
 
-  </body>
+</body>
 </html>

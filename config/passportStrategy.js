@@ -1,7 +1,9 @@
 const Passport = require("passport");
 const Strategy = require("openid-client").Strategy;
+const Issuer = require("openid-client").Issuer;
+const generators = require("openid-client").generators;
 require("dotenv").config();
-const Users = require('../models/Users');
+const User = require('../models/User');
 
 Issuer.discover('https://accounts.google.com/.well-known/openid-configuration')
 
@@ -31,34 +33,20 @@ Issuer.discover('https://accounts.google.com/.well-known/openid-configuration')
             console.log('id_token: ', id_token);
             console.log('expires_in: ', expires_in);
             console.log('token_type: ', token_type);
-            // User.findOrCreate({
-            //     openId: id_token.sub,
-            //     firstName: id_token.given_name,
-            //     lastName: id_token.family_name,
-            //     email: id_token.email,
-            //     picture: id_token.picture
-            // }, (err: any, user: any) => {
-            //     if (err) {
-            //         done(err, user);
-            //     }
-            //     if (!user) {
-            //         done(null, false);
-            //     }
-            //     done(null, user);
-            // });
-            // let user: IUser | null = null;
-            try {
-                user = await User.findOrCreate({
-                    openId: id_token.sub,
-                    firstName: id_token.given_name,
-                    lastName: id_token.family_name,
-                    email: id_token.email,
-                    picture: id_token.picture,
-                });
-            } catch (err) {
-                done(err, null);
-            }
-            return done(null, {user, access_token, id_token});
+            User.findOrCreate({
+                openId: id_token.sub,
+                firstName: id_token.given_name,
+                lastName: id_token.family_name,
+                email: id_token.email
+            }, (err, user) => {
+                if (err) {
+                    done(err, user);
+                }
+                if (!user) {
+                    done(null, false);
+                }
+                done(null, {user, access_token, id_token});
+            });
         };
 
         const passReqToCallback = false;

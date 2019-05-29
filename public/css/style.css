@@ -1,14 +1,18 @@
 /* Custom Stylesheet */
 /**
- * Use this file to override Materialize files so you can update
- * the core Materialize files in the future
- *
- * Made By MaterializeCSS.com
- */
+* Use this file to override Materialize files so you can update
+* the core Materialize files in the future
+*
+* Made By MaterializeCSS.com
+*/
 
 nav ul a,
 nav .brand-logo {
-  color: #444;
+  color: #fff;
+}
+
+.material-icons {
+  color: rgba(255, 255, 255, 1);
 }
 
 p {
@@ -25,9 +29,26 @@ p {
   height: auto;
   color: rgba(255,255,255,.9);
 }
-  .parallax-container .section {
-    width: 100%;
-  }
+.parallax-container .section {
+  position: absolute;
+  top: 40%;
+}
+#index-banner .section {
+  top: 10%;
+  width: 100%;
+}
+html,
+body {
+  height: 100%;
+  font-size: 110%
+}
+.container {
+	min-height: 75%;
+	position: relative;
+}
+footer {
+	position: relative;
+}
 
 @media only screen and (max-width : 992px) {
   .parallax-container .section {
@@ -41,7 +62,7 @@ p {
 
 @media only screen and (max-width : 600px) {
   #index-banner .section {
-    top: 0;
+    top: 10%;
   }
 }
 
@@ -65,29 +86,29 @@ overflow: hidden;
 }
 
 /* Home Screen after sign in */
- /* hide/show effects for personal account page */
+/* hide/show effects for personal account page */
 
 .hidden {
-   display: none;
+  display: none;
 }
 
 .show {
-   display: block;
- }
+  display: block;
+}
 
 
 
- .icon-block img {
-   width:51px;
-   height: 51px;
-   display: block;
-   margin-top: 30px;
-   margin-left: auto;
-   margin-right: auto;
- }
+.icon-block img {
+  width:51px;
+  height: 51px;
+  display: block;
+  margin-top: 30px;
+  margin-left: auto;
+  margin-right: auto;
+}
 
 
- /* make table more compact */
+/* make table more compact */
 td, th {
     padding: 5px;
 }
@@ -107,22 +128,22 @@ textarea.materialize-textarea {
 }
 
 .input-field {
-   margin-top: 0.5rem;
-   margin-bottom: 0.5rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 ::placeholder {
-   font-size: 85%;
+  font-size: 85%;
 }
 
 .dropdown-content li {
-   line-height: 1rem;
-   min-height: auto;
+  line-height: 1rem;
+  min-height: auto;
 }
 
 .dropdown-content li>a, .dropdown-content li>span {
-   padding: 7px 10px;
-   font-size: 95%;
+  padding: 7px 10px;
+  font-size: 95%;
 }
 
 .select-wrapper input.select-dropdown {

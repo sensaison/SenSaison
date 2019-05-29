@@ -5,7 +5,7 @@ const json2csv = require("json2csv").parse;
 const zipURLs = require("./zipURLs");
 require("archiver");
 const Passport = require("../config/passportStrategy");
-const ensureLoggedIn = require("connect-ensure-login");
+const ensureLoggedIn = require("connect-ensure-login").ensureLoggedIn;
 // const fs = require("fs");
 
 module.exports = (app) => {
@@ -14,8 +14,8 @@ module.exports = (app) => {
     app.get("/api/observations", (req, res) => {
         db.Observations.findAll({
             include: [{
-                model: db.Users,
-                attributes: ["userId", "firstName", "lastName", "username"]
+                model: db.User,
+                attributes: ["openId", "firstName", "lastName", "username"]
             }]
         }).then(dbObs => {
             res.json(dbObs);
@@ -29,8 +29,8 @@ module.exports = (app) => {
                 category: req.params.category
             },
             include: [{
-                model: db.Users,
-                attributes: ["userId", "firstName", "lastName", "username"]
+                model: db.User,
+                attributes: ["openId", "firstName", "lastName", "username"]
             }]
         }).then(dbObs => {
             res.json(dbObs);
@@ -47,7 +47,7 @@ module.exports = (app) => {
             },
             order: [["createdAt", "DESC"]],
             include: [{
-                model: db.Users,
+                model: db.User,
                 attributes: ["username"]
             }]
         }).then(recentObs => {
@@ -65,7 +65,7 @@ module.exports = (app) => {
             },
             order: [["createdAt", "DESC"]],
             include: [{
-                model: db.Users,
+                model: db.User,
                 attributes: ["username"]
             }]
         }).then(recentObs => {
@@ -75,7 +75,7 @@ module.exports = (app) => {
 
     // CREATE new observation
     app.post("/api/observations", (req, res) => {
-                db.Observations.create(req.body)
+        db.Observations.create(req.body)
             .then(dbObs => {
                 res.json(dbObs);
             });
@@ -105,7 +105,7 @@ module.exports = (app) => {
             const csv = json2csv(results, {
                 fields: [
                     "id",
-                    "userId",
+                    "openId",
                     "pictureId",
                     "dateObs",
                     "timeObs",
@@ -151,7 +151,7 @@ module.exports = (app) => {
             let csv = json2csv(result, {
                 fields: [
                     "id",
-                    "userId",
+                    "openId",
                     "dateObs",
                     "timeObs",
                     "latitude",
@@ -177,9 +177,9 @@ module.exports = (app) => {
     app.get("/api/userobservations", (req, res) => {
         db.Observations.findAll({
             where: {
-                userId: req.query.userId
+                openId: req.query.openId
             }
-        }).then(function (dbObs) {
+        }).then(dbObs => {
             res.json(dbObs);
         });
     });
@@ -187,8 +187,8 @@ module.exports = (app) => {
     // FIND ALL users
     app.get("/api/users", (req, res) => {
         db.Users.findAll({
-            attributes: ["userId", "firstName", "lastName", "username"],
-            include: [db.Observations]
+            attributes: ["openId", "firstName", "lastName", "username"],
+            include: [db.Observation]
         }).then(allusr => {
             res.json(allusr);
         });
@@ -228,7 +228,7 @@ module.exports = (app) => {
 	    }
     );
 
-    routes.get('/useraccount.html',
+    app.get('/useraccount.html',
         ensureLoggedIn('/user'),
         (req, res) => {
             res.send(req.user);

@@ -22,7 +22,7 @@ function getLocation() {
 }
 
 function enableButtons() {
-    $(".g1").each(function() {
+    $(".g1").each(() => {
         $(this).removeAttr("disabled");
         $(this).attr("class", "btn waves-effect waves-light g1");
     });
@@ -34,11 +34,11 @@ function setUpForm() {
     }
 }
 
-$("#me").click(function() {
+$("#me").click(() => {
     $("#city-select").css("display", "none");
 });
 
-$("#city").click(function() {
+$("#city").click(() => {
     $("#city-select").css("display", "block");
 });
 
@@ -93,7 +93,7 @@ function generateMap() {
     });
     // Do some stuff to prepare a map where the user can indicate a choice of location.
     if(mapType === 0) {
-        map.addListener("click", function(event) {
+        map.addListener("click", event => {
             if(userPin === undefined) {
                 $("#pin-reminder").remove();
                 placeMarkerAndPanTo(event.latLng, map);
@@ -157,7 +157,7 @@ $("#get-nearby").click(function getNearby() {
     var pointsToMark;
     $.ajax("/api/observations", {
         type: "GET"
-    }).then(function(res) {
+    }).then(res => {
         if($("#me").is(":checked")) {
             nearbyMap.panTo(new google.maps.LatLng(startingPos.coords.latitude, startingPos.coords.longitude));
             pointsToMark = doCalcs(res, startingPos.coords.latitude, startingPos.coords.longitude, radiusMeters);
@@ -216,15 +216,14 @@ function degreesToRadians(degrees) {
     return degrees * (pi/180);
 }
 
-$("#locationInput").keyup(function() {
+$("#locationInput").keyup(() => {
     $(".predictionButtons").remove();
     var locationInput = $(this).val();    
-    var autoLocationUrl = "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/autocomplete/json?input=" 
-                            + locationInput + "&types=(cities)&key=" + apiKey;
+    var autoLocationUrl = "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/autocomplete/json?input=" + locationInput + "&types=(cities)&key=" + apiKey;
     $.ajax({
         url : autoLocationUrl,
         method : "GET"
-    }).then(function(autoLocationResponse) {
+    }).then(autoLocationResponse => {
         autoLocationResponse.predictions.forEach(function(locationPrediction) {
             var predictionLink = $("<option>");
             predictionLink.attr("data-placeId", locationPrediction.place_id);
@@ -253,14 +252,13 @@ $("#locationInput").keyup(function() {
     });
 */
 
-$("#locationInput").bind('input', function () {
+$("#locationInput").bind('input', () => {
     if(checkExists($('#locationInput').val()) === true){
-        coordinateUrl = "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/details/json?placeid=" 
-                        + selectedLocationID + "&key=" + apiKey;
+        coordinateUrl = "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/details/json?placeid=" + selectedLocationID + "&key=" + apiKey;
         $.ajax({
             url : coordinateUrl,
             method : "GET"
-        }).then(function(selectedCoordinate){
+        }).then(selectedCoordinate => {
             coordinates = selectedCoordinate.result.geometry.location;
         });
         $(".predictionButtons").remove();
@@ -268,7 +266,7 @@ $("#locationInput").bind('input', function () {
     }
 });
 
-function checkExists(inputValue) {
+function checkExists (inputValue) {
     var x = document.getElementById("suggestion-list");
     for (var i = 0; i < x.options.length; i++) {
         if(inputValue == x.options[i].value){
@@ -301,8 +299,8 @@ function sleep(ms) {
   
 async function allowTime() {
     // console.log('Give Google time to respond...');
-    await sleep(250);
-    // console.log('One quarter of a second later. Maps can load now.');
+    await sleep(500);
+    // console.log('Half a second later. Maps can load now.');
     getLocation();
 }
 
