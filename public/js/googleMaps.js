@@ -104,7 +104,7 @@ function generateMap() {
     } else if(mapType === 1) {
         // Do some stuff to pin all user observations
         userMap = map;
-        // console.log(userObs);
+        console.log(userObs);
         for(var i = 0; i < userObs.length; i++) {
             placeYourMarker(new google.maps.LatLng(userObs[i].latitude, userObs[i].longitude), userMap);
             if(i === 0) {
@@ -299,8 +299,8 @@ function sleep(ms) {
   
 async function allowTime() {
     // console.log('Give Google time to respond...');
-    await sleep(250);
-    // console.log('One quarter of a second later. Maps can load now.');
+    await sleep(500);
+    // console.log('Half a second later. Maps can load now.');
     getLocation();
 }
 
