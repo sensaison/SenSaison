@@ -29,10 +29,17 @@ app.use((req, res, next) => {
 // non auth routes before passport and session code
 require("./routes/apiRoutes")(app);
 
+let sessionOptions = {
+	secret: process.env.SESSION_SECRET,
+	store: sqlStore,
+	resave: false,
+	saveUninitialized: true,
+	cookie: {}
+};
 // session and cookies
 if (process.env.NODE_ENV === "production") {
 	app.set("trust proxy", 1);
-	session.cookie.secure = true; // serve secure cookies only in production
+	sessionOptions.cookie.secure = true; // serve secure cookies only in production
 }
 let sqlStore = new mySQLStore({
 	user: process.env.MYSQLUSER,
@@ -50,13 +57,7 @@ if (process.env.NODE_ENV === "production") {
 		port: process.env.JAWSDB_PORT
 	});
 }
-app.use(session({
-	secret: process.env.SESSION_SECRET,
-	store: sqlStore,
-	resave: false,
-	saveUninitialized: true,
-	cookie: {}
-}));
+app.use(session(sessionOptions));
 app.use(Passport.initialize());
 app.use(Passport.session());
 
