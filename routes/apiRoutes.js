@@ -1,12 +1,9 @@
-const db = require("../models");
-const Sequelize = require("sequelize");
-const Op = Sequelize.Op;
-const json2csv = require("json2csv").parse;
-const zipURLs = require("./zipURLs");
 require("archiver");
-// const Passport = require("../config/passportStrategy");
-// const ensureLoggedIn = require("connect-ensure-login").ensureLoggedIn;
-// const fs = require("fs");
+const db = require("../models"),
+	Sequelize = require("sequelize"),
+	Op = Sequelize.Op,
+	json2csv = require("json2csv").parse,
+	zipURLs = require("./zipURLs");
 
 module.exports = function(app) {
 
@@ -200,6 +197,26 @@ module.exports = function(app) {
 			.then(function(newusr) {
 				res.json(newusr);
 			});
+	});
+
+	// app-level person vars
+	app.use((req, res, next) => {
+		if (req.session && req.session.user) {
+			db.Users.findOne({ openId: req.session.user.id }, (err, user) => {
+				if (user) {
+					window.person = req.user;
+					window.person = req.session.user;
+					window.person = res.locals.user;
+					console.log("PERSON: ", person);
+				} else {
+					console.log(err);
+				}
+				// finishing processing the middleware and run the route
+				next();
+			});
+		} else {
+			next();
+		}
 	});
 
 };
