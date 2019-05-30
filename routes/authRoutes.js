@@ -2,15 +2,15 @@ const Passport = require("../config/passportStrategy");
 // const ensureLoggedIn = require("connect-ensure-login").ensureLoggedIn;
 
 module.exports = (app) => {
-	app.post("/auth/openidconnect", Passport.authenticate("openid-client"));
+	app.post("/auth/openid-client", Passport.authenticate("openid-client"));
 
-	app.get("/auth/openidconnect/callback",
+	app.get("/auth/openid-client/callback",
 		Passport.authenticate("openid-client", {
 			session: true,
 			failureRedirect: "/" ,
 			failureFlash: true,
 		}),	(req, res) => {
-			// res.setHeader("Cookie", ["set-cookie"]);
+			res.setHeader("Cookie", ["set-cookie"]);
 			if (req.isAuthenticated()) {
 				console.log(req.user);
 				req.session.save(() => {

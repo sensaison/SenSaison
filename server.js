@@ -15,17 +15,23 @@ let PORT = process.env.PORT || 3000;
 // Middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.static("public", { extensions: ["html"] }));
-app.use(cors());
+app.use(express.static(path.join(__dirname, "/public"), { extensions: ["html"] }));
 app.use(flash());
-app.use(cookieParser(process.env.COOKIE_SECRET));
+
+app.use(cors());
+app.use((req, res, next) => {
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE, OPTIONS");
+	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+	next();
+});
 
 require("./routes/apiRoutes")(app);
 
+app.use(cookieParser(process.env.COOKIE_SECRET));
 if (process.env.NODE_ENV === "production") {
 	app.set("trust proxy", 1);
 }
-
 let sqlStore = new mySQLStore({
 	user: process.env.MYSQLUSER,
 	password: process.env.MYSQLPWD,
@@ -42,7 +48,6 @@ if (process.env.NODE_ENV === "production") {
 		port: process.env.JAWSDB_PORT
 	});
 }
-
 app.use(session({
 	secret: process.env.SESSION_SECRET,
 	store: sqlStore,
