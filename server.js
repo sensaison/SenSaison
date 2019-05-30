@@ -1,13 +1,14 @@
 require("dotenv").config();
-const express = require("express");
-const session = require("express-session");
-const cookieParser = require("cookie-parser");
-const path = require("path");
-const mySQLStore = require("express-mysql-session")(session);
-const Passport = require("./config/passportStrategy");
-const cors = require("cors");
-const flash = require("connect-flash");
-const db = require("./models");
+const express = require("express"),
+	session = require("express-session"),
+	cookieParser = require("cookie-parser"),
+	path = require("path"),
+	mySQLStore = require("express-mysql-session")(session),
+	Passport = require("./config/passportStrategy"),
+	cors = require("cors"),
+	flash = require("connect-flash"),
+	db = require("./models");
+
 const app = express();
 
 let PORT = process.env.PORT || 3000;
@@ -30,9 +31,6 @@ app.use((req, res, next) => {
 require("./routes/apiRoutes")(app);
 
 // session and cookies
-if (process.env.NODE_ENV === "production") {
-	app.set("trust proxy", 1);
-}
 app.use(cookieParser(process.env.COOKIE_SECRET));
 if (process.env.NODE_ENV === "production") {
 	app.set("trust proxy", 1);
@@ -63,13 +61,13 @@ app.use(session({
 app.use(Passport.initialize());
 app.use(Passport.session());
 
-// create app-level person vars
+// create app-level person vars // WHY IS THIS NOT WORKING
 app.use((req, res, next) => {
 	res.locals.success_messages = req.flash("success");
 	res.locals.error_messages = req.flash("error");
 
 	if (req.session && req.session.user) {
-		db.Users.findOrCreate({ openId: req.session.user.openId }, (err, user) => {
+		db.Users.findOne({ openId: req.session.user.openId }, (err, user) => {
 			if (user) {
 				req.user = person;
 				req.session.user = person;  //refresh the session value
