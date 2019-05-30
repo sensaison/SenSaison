@@ -111,7 +111,7 @@ $(document).ready(function() {
 						extendedDescription: $("#extended-desc").val().trim(),
 						species: $("#species").val().trim(),
 						speciesSciName: $("#species-sci-name").val().trim(),
-						speciesConfidence: $("#species-confidence").val(),
+						speciesConfidence: $("#species-confidence").val().trim(),
 					};
 					$.ajax("/api/observations", {
 						method: "POST",
