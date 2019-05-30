@@ -58,10 +58,16 @@ app.use(session({
 	store: sqlStore,
 	resave: false,
 	saveUninitialized: true,
-	cookie: { secure: false },
+	cookie: { secure: false } // change to true for production
 }));
 app.use(Passport.initialize());
 app.use(Passport.session());
+
+// create app-level user vars
+app.use((req, res, next) => {
+	res.locals.user = req.user;
+	next();
+});
 
 require("./routes/authRoutes")(app);
 
