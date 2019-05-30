@@ -1,7 +1,6 @@
 require("dotenv").config();
 const express = require("express"),
 	session = require("express-session"),
-	cookieParser = require("cookie-parser"),
 	path = require("path"),
 	mySQLStore = require("express-mysql-session")(session),
 	Passport = require("./config/passportStrategy"),
@@ -31,9 +30,9 @@ app.use((req, res, next) => {
 require("./routes/apiRoutes")(app);
 
 // session and cookies
-app.use(cookieParser(process.env.COOKIE_SECRET));
 if (process.env.NODE_ENV === "production") {
 	app.set("trust proxy", 1);
+	session.cookie.secure = true; // serve secure cookies only in production
 }
 let sqlStore = new mySQLStore({
 	user: process.env.MYSQLUSER,
@@ -56,7 +55,7 @@ app.use(session({
 	store: sqlStore,
 	resave: false,
 	saveUninitialized: true,
-	cookie: { secure: false } // change to true for production
+	cookie: {}
 }));
 app.use(Passport.initialize());
 app.use(Passport.session());

@@ -11,7 +11,7 @@ Issuer.discover("https://accounts.google.com/.well-known/openid-configuration")
 			client_id: process.env.GOOGLE_CLIENTID,
 			client_secret: process.env.GOOGLE_SECRET,
 			redirect_uris: ["https://sensaison.herokuapp.com/useraccount", "http://localhost:3000/useraccount"],
-			response_types: ["code token id_token"],
+			response_types: ["code", "token", "id_token"]
 		});
 
 		const params = {
@@ -19,7 +19,7 @@ Issuer.discover("https://accounts.google.com/.well-known/openid-configuration")
 			response_type: "code token id_token",
 			scope: "openid profile email",
 			nonce: generators.nonce(),
-			redirect_uri: "http://localhost:3000/useraccount",  
+			redirect_uri: "https://sensaison.herokuapp.com/useraccount",  // REMEMBER TO CHANGE THIS BETWEEN PROD AND DEV
 			state: generators.state(),
 			prompt: "select_account",
 			display: "popup",
