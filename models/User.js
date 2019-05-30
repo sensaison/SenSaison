@@ -4,7 +4,7 @@ module.exports = function(sequelize, DataTypes) {
 			primaryKey: true,
 			type: DataTypes.INTEGER
 		},
-		openId: {
+		userId: {
 			type: DataTypes.STRING,
 			unique: {
 				args: true
@@ -53,8 +53,8 @@ module.exports = function(sequelize, DataTypes) {
 
 	User.associate = models => {
 		User.hasMany(models.Observations, {
-			foreignKey: "openId",
-			sourceKey: "openId",
+			foreignKey: "userId",
+			sourceKey: "userId",
 			onDelete: "no action",
 			onUpdate: "cascade"
 		});
