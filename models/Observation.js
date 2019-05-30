@@ -9,7 +9,7 @@ module.exports = function(sequelize, DataTypes) {
 				args: true
 			}
 		},
-		userId: {
+		openId: {
 			type: DataTypes.STRING,
 			allowNull: false
 		},
@@ -77,8 +77,8 @@ module.exports = function(sequelize, DataTypes) {
 
 	Observation.associate = models => {
 		Observation.belongsTo(models.Users, {
-			foreignKey: "userId",
-			targetKey: "userId",
+			foreignKey: "openId",
+			targetKey: "openId",
 			onDelete: "no action",
 			onUpdate: "cascade"
 		});

@@ -99,7 +99,7 @@ $(document).ready(function() {
 					pictureIdVal = response.public_id;
 				}).then(function() {
 					newObs = {
-						userId: userIdVal,
+						openId: userIdVal,
 						pictureId: pictureIdVal,
 						dateObs: dateObsVal,
 						timeObs: $("#time-obs").val(),

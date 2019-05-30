@@ -64,7 +64,7 @@ $(document).ready(function() {
 	$.ajax("/api/userobservations", {
 		type: "GET",
 		data: {
-			userId: "678910" // will have to change this to openId for DEVELOPMENT and in future in jawsdb
+			openId: "678910" // will have to change this to openId for DEVELOPMENT and in future in jawsdb
 		}
 	}).then(function(data) {
 		console.log(data);

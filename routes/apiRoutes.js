@@ -15,7 +15,7 @@ module.exports = function(app) {
 		db.Observations.findAll({
 			include: [{
 				model: db.User,
-				attributes: ["userId", "firstName", "lastName", "username"]
+				attributes: ["openId", "firstName", "lastName", "username"]
 			}]
 		}).then(function(dbObs) {
 			res.json(dbObs);
@@ -30,7 +30,7 @@ module.exports = function(app) {
 			},
 			include: [{
 				model: db.User,
-				attributes: ["userId", "firstName", "lastName", "username"]
+				attributes: ["openId", "firstName", "lastName", "username"]
 			}]
 		}).then(function(dbObs) {
 			res.json(dbObs);
@@ -105,7 +105,7 @@ module.exports = function(app) {
 			const csv = json2csv(results, {
 				fields: [
 					"id",
-					"userId",
+					"openId",
 					"pictureId",
 					"dateObs",
 					"timeObs",
@@ -151,7 +151,7 @@ module.exports = function(app) {
 			let csv = json2csv(result, {
 				fields: [
 					"id",
-					"userId",
+					"openId",
 					"dateObs",
 					"timeObs",
 					"latitude",
@@ -177,7 +177,7 @@ module.exports = function(app) {
 	app.get("/api/userobservations", function(req, res) {
 		db.Observations.findAll({
 			where: {
-				userId: req.query.userId
+				openId: req.query.openId
 			}
 		}).then(function(dbObs) {
 			res.json(dbObs);
@@ -187,7 +187,7 @@ module.exports = function(app) {
 	// FIND ALL users
 	app.get("/api/users", function(req, res) {
 		db.Users.findAll({
-			attributes: ["userId", "firstName", "lastName", "username"],
+			attributes: ["openId", "firstName", "lastName", "username"],
 			include: [db.Observation]
 		}).then(function(allusr) {
 			res.json(allusr);
