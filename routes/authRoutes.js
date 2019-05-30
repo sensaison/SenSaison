@@ -13,12 +13,13 @@ module.exports = (app) => {
 			res.setHeader("Cookie", ["set-cookie"]);
 			if (req.isAuthenticated()) {
 				console.log(req.user);
+				person = req.user;
+				access_token = req.access_token;
+				res.send({person, access_token});
 				req.session.save(() => {
 					res.redirect("/useraccount");
 					console.log("SUCCESSFUL AUTHENTICATION");
-					const token = req.access_token;
-					const user = req.user;
-					return (user, token);
+					return (person, access_token);
 				});
 			} else {
 				req.flash("error");
