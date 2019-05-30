@@ -1,6 +1,7 @@
-// import { picture } from "cloudinary/lib-es5/cloudinary";
-
 $(document).ready(function() {
+
+	// console.log("PERSON", window.person); // this returns undefined
+	
 
 	// make last 3 fields in submission form required if animal plant or fungus selected
 	$("#obs-category").on("change", function() {
@@ -53,7 +54,8 @@ $(document).ready(function() {
 	});
 
 	// POST request when submitting new observation
-	$("#submit-obs").on("click", function() {
+	$("#submit-obs").on("click", function(event) {
+		event.preventDefault;
 
 		// USERID CODE FIRST
 
@@ -70,9 +72,8 @@ $(document).ready(function() {
 				};
 				reader.onerror = reject;
 			});
-		};
+		};	
 
-        
 		if (window.userPin !== undefined) {
 
 			let img = $("#pic-file").prop("files")[0];
@@ -81,24 +82,20 @@ $(document).ready(function() {
 			let dateObsVal = $("#date-obs").val();
 			let pictureIdVal;
 			let newObs;
-			// console.log("CATEGORY VAL: ", categoryVal);
-			// console.log("DATE VAL: ", dateObsVal);
 
 			getBase64(img).then(function(result) {
-				// console.log("RESULT: ", result);
-				const imgData = {
-					file: result,
-					upload_preset: "default_preset",
-					folder: userIdVal,
-					tags: userIdVal + ", " + categoryVal + ", " +  dateObsVal,
-				};
-				console.log("IMGDATA: ", imgData);
+				// console.log(result);
+				// AJAX METHOD BELOW IS BROKEN
 				$.ajax({
 					method: "POST",
 					url: "https://api.cloudinary.com/v1_1/sensaison/image/upload",
-					data: imgData
+					data: {
+						file: result,
+						upload_preset: "default_preset",
+						folder: userIdVal,
+						tags: userIdVal + ", " + categoryVal + ", " +  dateObsVal,
+					}
 				}).then(function(response) {
-					console.log("RESPONSE: ", response);
 					pictureIdVal = response.public_id;
 				}).then(function() {
 					newObs = {
@@ -116,7 +113,6 @@ $(document).ready(function() {
 						speciesSciName: $("#species-sci-name").val().trim(),
 						speciesConfidence: $("#species-confidence").val(),
 					};
-					console.log("NEWOBS: ", newObs);
 					$.ajax("/api/observations", {
 						method: "POST",
 						data: newObs,
@@ -126,7 +122,9 @@ $(document).ready(function() {
 						location.reload();
 					});
 				}).catch(function(error) {
-					if (error) throw error;
+					if (error) {
+						console.log(error);
+					};
 				});
 			});
 		} else {

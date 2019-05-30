@@ -7,7 +7,7 @@ const express = require("express"),
 	cors = require("cors"),
 	flash = require("connect-flash"),
 	db = require("./models");
-
+	
 const app = express();
 
 let PORT = process.env.PORT || 3000;
