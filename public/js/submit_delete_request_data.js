@@ -1,7 +1,4 @@
-$(document).ready(function() {
-
-	// console.log("PERSON", window.person); // this returns undefined
-	
+$(document).ready(function() {	
 
 	// make last 3 fields in submission form required if animal plant or fungus selected
 	$("#obs-category").on("change", function() {

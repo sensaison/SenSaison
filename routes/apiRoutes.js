@@ -202,4 +202,24 @@ module.exports = function(app) {
 			});
 	});
 
+	// app-level person vars
+	app.use((req, res, next) => {
+		if (req.session && req.session.user) {
+			db.Users.findOne({ openId: req.session.user.id }, (err, user) => {
+				if (user) {
+					window.person = req.user;
+					window.person = req.session.user;
+					window.person = res.locals.user;
+					console.log("PERSON: ", person);
+				} else {
+					console.log(err);
+				}
+				// finishing processing the middleware and run the route
+				next();
+			});
+		} else {
+			next();
+		}
+	});
+
 };

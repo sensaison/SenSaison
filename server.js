@@ -25,6 +25,8 @@ app.use(cors());
 // 	next();
 // });
 
+app.use(flash());
+
 // non auth routes before passport and session code
 require("./routes/apiRoutes")(app);
 
@@ -59,31 +61,8 @@ if (process.env.NODE_ENV === "production") {
 app.use(session(sessionOptions));
 app.use(Passport.initialize());
 app.use(Passport.session());
-app.use(flash());
 
-// app-level person vars
-// app.use((req, res, next) => {
-// 	res.locals.success_messages = req.flash("success");
-// 	res.locals.error_messages = req.flash("error");
-
-// 	if (req.session && req.session.user) {
-// 		db.Users.findOne({ openId: req.session.user.id }, (err, user) => {
-// 			if (user) {
-// 				person = req.user;
-// 				person = req.session.user;
-// 				person = res.locals.user;
-// 				console.log("PERSON: ", person);
-// 			} else {
-// 				console.log(err);
-// 			}
-// 			// finishing processing the middleware and run the route
-// 			next();
-// 		});
-// 	} else {
-// 		next();
-// 	}
-// });
-
+// auth routes
 require("./routes/authRoutes")(app);
 
 let syncOptions = { force: false };

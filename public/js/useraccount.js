@@ -1,5 +1,9 @@
 $(document).ready(function() {
 
+	var person;
+	console.log("PERSON", person); // this returns undefined
+
+
 	// following four event listeners show/hide what the user can do from their account page
 	$("#add-obs-btn").on("click", function() {
 		if ($("#add-obs").hasClass("hidden")) {
@@ -67,7 +71,6 @@ $(document).ready(function() {
 			openId: "678910" // will have to change this to openId for DEVELOPMENT and in future in jawsdb
 		}
 	}).then(function(data) {
-		console.log(data);
 		window.userObs = data;
 		if (!data || !data.length) {
 			// if no data then add a row saying so
