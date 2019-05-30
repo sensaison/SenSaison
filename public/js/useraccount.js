@@ -64,9 +64,10 @@ $(document).ready(function() {
 	$.ajax("/api/userobservations", {
 		type: "GET",
 		data: {
-			userId: "678910" // will have to change this to openId
+			userId: "678910" // will have to change this to openId for DEVELOPMENT and in future in jawsdb
 		}
 	}).then(function(data) {
+		console.log(data);
 		window.userObs = data;
 		if (!data || !data.length) {
 			// if no data then add a row saying so
