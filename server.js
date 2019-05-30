@@ -14,8 +14,9 @@ let PORT = process.env.PORT || 3000;
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.static(path.join(__dirname, "public"), { extensions: ["html"] }));
 app.use(flash());
+
+app.use(express.static(path.join(__dirname, "/public"), { extensions: ["html"] }));
 
 app.use(cors());
 app.use((req, res, next) => {
@@ -33,6 +34,9 @@ if (process.env.NODE_ENV === "production") {
 	app.set("trust proxy", 1);
 }
 app.use(cookieParser(process.env.COOKIE_SECRET));
+if (process.env.NODE_ENV === "production") {
+	app.set("trust proxy", 1);
+}
 let sqlStore = new mySQLStore({
 	user: process.env.MYSQLUSER,
 	password: process.env.MYSQLPWD,
