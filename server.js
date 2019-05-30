@@ -12,11 +12,11 @@ const app = express();
 
 let PORT = process.env.PORT || 3000;
 
-// Middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.static(path.join(__dirname, "/public"), { extensions: ["html"] }));
 app.use(flash());
+
+app.use(express.static(path.join(__dirname, "/public"), { extensions: ["html"] }));
 
 app.use(cors());
 app.use((req, res, next) => {
@@ -26,8 +26,13 @@ app.use((req, res, next) => {
 	next();
 });
 
+// non auth routes before passport and session code
 require("./routes/apiRoutes")(app);
 
+// session and cookies
+if (process.env.NODE_ENV === "production") {
+	app.set("trust proxy", 1);
+}
 app.use(cookieParser(process.env.COOKIE_SECRET));
 if (process.env.NODE_ENV === "production") {
 	app.set("trust proxy", 1);
@@ -61,8 +66,6 @@ app.use(Passport.session());
 require("./routes/authRoutes")(app);
 
 let syncOptions = { force: false };
-// If running a test, set syncOptions.force to true
-// clearing the `testdb`
 if (process.env.NODE_ENV === "test") {
 	syncOptions.force = true;
 }

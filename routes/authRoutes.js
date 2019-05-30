@@ -23,7 +23,7 @@ module.exports = (app) => {
 			} else {
 				req.flash("error");
 				res.redirect("/");
-			}
+			};
 		}
 	);
 
