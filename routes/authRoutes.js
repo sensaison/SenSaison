@@ -10,7 +10,7 @@ module.exports = (app) => {
 			failureRedirect: "/" ,
 			failureFlash: true,
 		}),	(req, res) => {
-			// res.setHeader("Cookie", ["set-cookie"]);
+			res.setHeader("Cookie", ["set-cookie"]);
 			if (req.isAuthenticated()) {
 				console.log(req.user);
 				req.session.save(() => {
