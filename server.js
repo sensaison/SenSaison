@@ -18,7 +18,7 @@ app.use(flash());
 
 app.use(express.static(path.join(__dirname, "/public"), { extensions: ["html"] }));
 
-app.use(cors());
+app.use(cors({ credentials: true }));
 app.use((req, res, next) => {
 	res.header("Access-Control-Allow-Origin", "*");
 	res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE, OPTIONS");
@@ -63,10 +63,27 @@ app.use(session({
 app.use(Passport.initialize());
 app.use(Passport.session());
 
-// create app-level user vars
+// create app-level person vars
 app.use((req, res, next) => {
-	res.locals.user = req.user;
-	next();
+	res.locals.success_messages = req.flash("success");
+	res.locals.error_messages = req.flash("error");
+
+	if (req.session && req.session.user) {
+		db.Users.findOrCreate({ openId: req.session.user.openId }, (err, user) => {
+			if (user) {
+				req.user = person;
+				req.session.user = person;  //refresh the session value
+				res.locals.user = person;
+				// person var should now be accessible to front end
+			} else {
+				console.log(err);
+			}
+			// finishing processing the middleware and run the route
+			next();
+		});
+	} else {
+		next();
+	}
 });
 
 require("./routes/authRoutes")(app);
