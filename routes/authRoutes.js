@@ -13,7 +13,7 @@ module.exports = (app) => {
 			res.setHeader("Cookie", ["set-cookie"]);
 			if (req.isAuthenticated()) {
 				console.log(req.user);
-				person = req.user;
+				window.person = req.user; // app-level variable
 				access_token = req.access_token;
 				res.send({person, access_token});
 				req.session.save(() => {
