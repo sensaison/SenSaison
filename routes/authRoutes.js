@@ -2,35 +2,40 @@ const Passport = require("../config/passportStrategy");
 // const ensureLoggedIn = require("connect-ensure-login").ensureLoggedIn;
 
 module.exports = (app) => {
-	app.post("/auth/openid-client/callback", Passport.authenticate("openid-client"));
 
+	// post user info to db
+	app.post("/auth/openid-client", Passport.authenticate("openid-client"));
+
+	// authentication
 	app.get("/auth/openid-client/callback",
 		Passport.authenticate("openid-client", {
 			session: true,
 			failureRedirect: "/" ,
-			failureFlash: true,
+			failureFlash: "Problem with authentication, try again",
 		}),	(req, res) => {
 			res.setHeader("Cookie", ["set-cookie"]);
-			if (req.isAuthenticated()) {
-				console.log(req.user);
+			console.log(req.isAuthenticated);
+			if (req.isAuthenticated) {
+				console.log("REQ.USER: ", req.user);
 				window.person = req.user; // app-level variable
-				access_token = req.access_token;
-				res.send({person, access_token});
+				window.access_token = req.access_token;
 				req.session.save(() => {
-					res.redirect("/useraccount");
+					res.send({person, access_token});
+					res.redirect("/useraccount")
 					console.log("SUCCESSFUL AUTHENTICATION");
-					return (person, access_token);
+					// return (person, access_token);
 				});
 			} else {
 				req.flash("error");
 				res.redirect("/");
-			};
+			}
 		}
 	);
-
+	
+	// protect user account page
 	app.get("/useraccount",
 		(req, res) => {
-			if (req.isAuthenticated()) {
+			if (req.isAuthenticated) {
 				res.send(req.user);
 				res.send(req.access_token);
 				console.log(req.access_token);

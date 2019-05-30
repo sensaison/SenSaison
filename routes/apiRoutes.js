@@ -1,12 +1,9 @@
-const db = require("../models");
-const Sequelize = require("sequelize");
-const Op = Sequelize.Op;
-const json2csv = require("json2csv").parse;
-const zipURLs = require("./zipURLs");
 require("archiver");
-// const Passport = require("../config/passportStrategy");
-// const ensureLoggedIn = require("connect-ensure-login").ensureLoggedIn;
-// const fs = require("fs");
+const db = require("../models"),
+	Sequelize = require("sequelize"),
+	Op = Sequelize.Op,
+	json2csv = require("json2csv").parse,
+	zipURLs = require("./zipURLs");
 
 module.exports = function(app) {
 
