@@ -2,9 +2,9 @@ const Passport = require("../config/passportStrategy");
 // const ensureLoggedIn = require("connect-ensure-login").ensureLoggedIn;
 
 module.exports = (app) => {
-	app.post("/auth/openidconnect", Passport.authenticate("openid-client"));
+	app.post("/auth/openid-client", Passport.authenticate("openid-client"));
 
-	app.get("/auth/openidconnect/callback",
+	app.get("/auth/openid-client/callback",
 		Passport.authenticate("openid-client", {
 			session: true,
 			failureRedirect: "/" ,
@@ -23,7 +23,7 @@ module.exports = (app) => {
 			} else {
 				req.flash("error");
 				res.redirect("/");
-			}
+			};
 		}
 	);
 
