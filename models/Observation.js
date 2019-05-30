@@ -47,7 +47,8 @@ module.exports = function(sequelize, DataTypes) {
 		},
 		speciesConfidence: {
 			type: DataTypes.INTEGER,
-			allowNull: true
+			allowNull: true,
+			default: null
 		},
 		firstConfidence: {
 			type: DataTypes.INTEGER,

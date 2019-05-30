@@ -22,7 +22,7 @@ function getLocation() {
 }
 
 function enableButtons() {
-	$(".g1").each(() => {
+	$(".g1").each(function() {
 		$(this).removeAttr("disabled");
 		$(this).attr("class", "btn waves-effect waves-light g1");
 	});
@@ -34,11 +34,11 @@ function setUpForm() {
 	}
 }
 
-$("#me").click(() => {
+$("#me").click(function() {
 	$("#city-select").css("display", "none");
 });
 
-$("#city").click(() => {
+$("#city").click(function() {
 	$("#city-select").css("display", "block");
 });
 
@@ -93,7 +93,7 @@ function generateMap() {
 	});
 	// Do some stuff to prepare a map where the user can indicate a choice of location.
 	if(mapType === 0) {
-		map.addListener("click", event => {
+		map.addListener("click", function(event) {
 			if(userPin === undefined) {
 				$("#pin-reminder").remove();
 				placeMarkerAndPanTo(event.latLng, map);
@@ -157,7 +157,7 @@ $("#get-nearby").click(function getNearby() {
 	var pointsToMark;
 	$.ajax("/api/observations", {
 		type: "GET"
-	}).then(res => {
+	}).then(function(res) {
 		if($("#me").is(":checked")) {
 			nearbyMap.panTo(new google.maps.LatLng(startingPos.coords.latitude, startingPos.coords.longitude));
 			pointsToMark = doCalcs(res, startingPos.coords.latitude, startingPos.coords.longitude, radiusMeters);
@@ -216,14 +216,14 @@ function degreesToRadians(degrees) {
 	return degrees * (pi/180);
 }
 
-$("#locationInput").keyup(() => {
+$("#locationInput").keyup(function() {
 	$(".predictionButtons").remove();
 	var locationInput = $(this).val();    
 	var autoLocationUrl = "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/autocomplete/json?input=" + locationInput + "&types=(cities)&key=" + apiKey;
 	$.ajax({
 		url : autoLocationUrl,
 		method : "GET"
-	}).then(autoLocationResponse => {
+	}).then(function(autoLocationResponse) {
 		autoLocationResponse.predictions.forEach(function(locationPrediction) {
 			var predictionLink = $("<option>");
 			predictionLink.attr("data-placeId", locationPrediction.place_id);
@@ -235,30 +235,30 @@ $("#locationInput").keyup(() => {
 });
 
 /*
-    $(document).on("click", ".predictionButtons", function(event){
-        console.log("Clicked a prediction button.");
-        selectedLocationID = $(this).attr("data-placeId");
-        coordinateUrl = "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/details/json?placeid=" 
-                        + selectedLocationID + "&key=" + apiKey;
-        $.ajax({
-            url : coordinateUrl,
-            method : "GET"
-        }).then(function(selectedCoordinate){
-            coordinates = selectedCoordinate.result.geometry.location;
-        });
-        document.getElementById("locationInput").value = $(this).text();
-        $(".predictionButtons").remove();
-        return false;
-    });
+		$(document).on("click", ".predictionButtons", function(event){
+				console.log("Clicked a prediction button.");
+				selectedLocationID = $(this).attr("data-placeId");
+				coordinateUrl = "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/details/json?placeid=" 
+												+ selectedLocationID + "&key=" + apiKey;
+				$.ajax({
+						url : coordinateUrl,
+						method : "GET"
+				}).then(function(selectedCoordinate){
+						coordinates = selectedCoordinate.result.geometry.location;
+				});
+				document.getElementById("locationInput").value = $(this).text();
+				$(".predictionButtons").remove();
+				return false;
+		});
 */
 
-$("#locationInput").bind("input", () => {
+$("#locationInput").bind("input", function() {
 	if(checkExists($("#locationInput").val()) === true){
 		coordinateUrl = "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/details/json?placeid=" + selectedLocationID + "&key=" + apiKey;
 		$.ajax({
 			url : coordinateUrl,
 			method : "GET"
-		}).then(selectedCoordinate => {
+		}).then(function(selectedCoordinate) {
 			coordinates = selectedCoordinate.result.geometry.location;
 		});
 		$(".predictionButtons").remove();
@@ -285,8 +285,8 @@ function getDistance(lat1, lon1, lat2, lon2) {
 	var Δλ = degreesToRadians(lon2 - lon1);
 
 	var a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
-        Math.cos(φ1) * Math.cos(φ2) *
-        Math.sin(Δλ/2) * Math.sin(Δλ/2);
+				Math.cos(φ1) * Math.cos(φ2) *
+				Math.sin(Δλ/2) * Math.sin(Δλ/2);
 	var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
 
 	var d = R * c;
@@ -294,9 +294,11 @@ function getDistance(lat1, lon1, lat2, lon2) {
 }
 
 function sleep(ms) {
-	return new Promise(resolve => setTimeout(resolve, ms));
+	return new Promise(function (resolve) {
+		setTimeout(resolve, ms);
+	});
 }
-  
+	
 async function allowTime() {
 	// console.log('Give Google time to respond...');
 	await sleep(500);
@@ -306,71 +308,71 @@ async function allowTime() {
 
 /*
 function initAutocomplete() {
-  var map = new google.maps.Map(document.getElementById("map"), {
-    center: { lat: 47.6062, lng: -122.3321 },
-    zoom: 13,
-    mapTypeId: "roadmap"
-  });
-  
-  // Create the search box and link it to the UI element.
-  var input = document.getElementById("event-location");
-  var searchBox = new google.maps.places.SearchBox(input);
-  // map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+	var map = new google.maps.Map(document.getElementById("map"), {
+		center: { lat: 47.6062, lng: -122.3321 },
+		zoom: 13,
+		mapTypeId: "roadmap"
+	});
+	
+	// Create the search box and link it to the UI element.
+	var input = document.getElementById("event-location");
+	var searchBox = new google.maps.places.SearchBox(input);
+	// map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
-  // Bias the SearchBox results towards current map's viewport.
-  map.addListener("bounds_changed", function() {
-    searchBox.setBounds(map.getBounds());
-  });
+	// Bias the SearchBox results towards current map's viewport.
+	map.addListener("bounds_changed", function() {
+		searchBox.setBounds(map.getBounds());
+	});
 
-  var markers = [];
-  // Listen for the event fired when the user selects a prediction and retrieve
-  // more details for that place.
-  searchBox.addListener("places_changed", function() {
-    var places = searchBox.getPlaces();
+	var markers = [];
+	// Listen for the event fired when the user selects a prediction and retrieve
+	// more details for that place.
+	searchBox.addListener("places_changed", function() {
+		var places = searchBox.getPlaces();
 
-    if (places.length === 0) {
-      return;
-    }
+		if (places.length === 0) {
+			return;
+		}
 
-    // Clear out the old markers.
-    markers.forEach(function(marker) {
-      marker.setMap(null);
-    });
-    markers = [];
+		// Clear out the old markers.
+		markers.forEach(function(marker) {
+			marker.setMap(null);
+		});
+		markers = [];
 
-    // For each place, get the icon, name and location.
-    var bounds = new google.maps.LatLngBounds();
-    places.forEach(function(place) {
-      if (!place.geometry) {
-        console.log("Returned place contains no geometry");
-        return;
-      }
-      var icon = {
-        url: place.icon,
-        size: new google.maps.Size(71, 71),
-        origin: new google.maps.Point(0, 0),
-        anchor: new google.maps.Point(17, 34),
-        scaledSize: new google.maps.Size(25, 25)
-      };
+		// For each place, get the icon, name and location.
+		var bounds = new google.maps.LatLngBounds();
+		places.forEach(function(place) {
+			if (!place.geometry) {
+				console.log("Returned place contains no geometry");
+				return;
+			}
+			var icon = {
+				url: place.icon,
+				size: new google.maps.Size(71, 71),
+				origin: new google.maps.Point(0, 0),
+				anchor: new google.maps.Point(17, 34),
+				scaledSize: new google.maps.Size(25, 25)
+			};
 
-      // Create a marker for each place.
-      markers.push(
-        new google.maps.Marker({
-          map: map,
-          icon: icon,
-          title: place.name,
-          position: place.geometry.location
-        })
-      );
+			// Create a marker for each place.
+			markers.push(
+				new google.maps.Marker({
+					map: map,
+					icon: icon,
+					title: place.name,
+					position: place.geometry.location
+				})
+			);
 
-      if (place.geometry.viewport) {
-        // Only geocodes have viewport.
-        bounds.union(place.geometry.viewport);
-      } else {
-        bounds.extend(place.geometry.location);
-      }
-    });
-    map.fitBounds(bounds);
-  });
+			if (place.geometry.viewport) {
+				// Only geocodes have viewport.
+				bounds.union(place.geometry.viewport);
+			} else {
+				bounds.extend(place.geometry.location);
+			}
+		});
+		map.fitBounds(bounds);
+	});
 }
-  */
+	*/

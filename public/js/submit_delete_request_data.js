@@ -1,9 +1,10 @@
-// import { picture } from "cloudinary/lib-es5/cloudinary";
+$(document).ready(function() {
 
-$(document).ready(() => {
+	// console.log("PERSON", window.person); // this returns undefined
+	
 
 	// make last 3 fields in submission form required if animal plant or fungus selected
-	$("#obs-category").on("change", () => {
+	$("#obs-category").on("change", function() {
 		if ($("#obs-category").val() === "animal" && $("#species-info").hasClass("hidden")) {
 			$("#species-info").removeClass("hidden");
 			$("#species-info").addClass("show");
@@ -53,16 +54,17 @@ $(document).ready(() => {
 	});
 
 	// POST request when submitting new observation
-	$("#submit-obs").on("click", e => {
+	$("#submit-obs").on("click", function(event) {
+		event.preventDefault;
 
 		// USERID CODE FIRST
 
-		let userIdVal="13579";
+		let userIdVal="678910";
 
 		///////////////////////////////
 
-		const getBase64 = (file) => {
-			return new Promise((resolve, reject) => {
+		const getBase64 = function(file) {
+			return new Promise(function(resolve, reject) {
 				var reader = new FileReader();
 				reader.readAsDataURL(file);
 				reader.onload = function() {
@@ -70,9 +72,8 @@ $(document).ready(() => {
 				};
 				reader.onerror = reject;
 			});
-		};
+		};	
 
-        
 		if (window.userPin !== undefined) {
 
 			let img = $("#pic-file").prop("files")[0];
@@ -82,7 +83,9 @@ $(document).ready(() => {
 			let pictureIdVal;
 			let newObs;
 
-			getBase64(img).then(result => {
+			getBase64(img).then(function(result) {
+				// console.log(result);
+				// AJAX METHOD BELOW IS BROKEN
 				$.ajax({
 					method: "POST",
 					url: "https://api.cloudinary.com/v1_1/sensaison/image/upload",
@@ -92,9 +95,9 @@ $(document).ready(() => {
 						folder: userIdVal,
 						tags: userIdVal + ", " + categoryVal + ", " +  dateObsVal,
 					}
-				}).then(response => {
+				}).then(function(response) {
 					pictureIdVal = response.public_id;
-				}).then(() => {
+				}).then(function() {
 					newObs = {
 						openId: userIdVal,
 						pictureId: pictureIdVal,
@@ -108,32 +111,20 @@ $(document).ready(() => {
 						extendedDescription: $("#extended-desc").val().trim(),
 						species: $("#species").val().trim(),
 						speciesSciName: $("#species-sci-name").val().trim(),
-						speciesConfidence: $("#species-confidence").val(),
+						speciesConfidence: $("#species-confidence").val().trim(),
 					};
 					$.ajax("/api/observations", {
 						method: "POST",
 						data: newObs,
 						async: false,
-						// complete: function(response) {
-						//     console.log(JSON.stringify(response.id));
-						//     // for some reason returned id is null
-						//     // might have to do a get request here instead but that's inefficient
-						//     // setting async to false isn't doing anything nor is using .then() vs complete/success
-						//     $.ajax({
-						//         method: "PUT",
-						//         url: "https://api.cloudinary.com/v1_1/sensaison/image/upload",
-						//         data: {
-						//             public_ids: pictureIdVal,
-						//             tags: response.id
-						//         }
-						//     });
-						// }
-					}).then(() => {
+					}).then(function() {
 						alert("Observation successfully submitted");
 						location.reload();
 					});
-				}).catch(error => {
-					if (error) throw error;
+				}).catch(function(error) {
+					if (error) {
+						console.log(error);
+					};
 				});
 			});
 		} else {
@@ -146,7 +137,7 @@ $(document).ready(() => {
 	});
     
 	// DELETE request when deleting observation
-	$("#all-your-obs-body").on("click", ".delete", e => {
+	$("#all-your-obs-body").on("click", ".delete", function(e) {
 		e.preventDefault();
 
 		let id_delete = $(this).parents("tr").attr("id");
@@ -161,7 +152,8 @@ $(document).ready(() => {
 	});
 
 	// request to download data
-	$("#request-data").on("click", e => {
+	$("#request-data").on("click", function(e) {
+		e.preventDefault();
 
 		let minDate = $("#start-date-download").val();
 		let maxDate = $("#end-date-download").val();
