@@ -3,10 +3,8 @@ const Passport = require("../config/passportStrategy");
 
 module.exports = (app) => {
 
-	// post user info to db
 	app.post("/auth/openid-client", Passport.authenticate("openid-client"));
 
-	// authentication
 	app.get("/auth/openid-client/callback",
 		Passport.authenticate("openid-client", {
 			session: true,
@@ -14,8 +12,8 @@ module.exports = (app) => {
 			failureFlash: "Problem with authentication, try again",
 		}),	(req, res) => {
 			res.setHeader("Cookie", ["set-cookie"]);
-			console.log("is authenticated? ", req.isAuthenticated);
-			if (req.isAuthenticated) {
+			console.log("is authenticated? ", req.isAuthenticated());
+			if (req.isAuthenticated()) {
 				console.log("REQ.USER: ", req.user);
 				window.person = req.user; // app-level variable
 				window.access_token = req.access_token;

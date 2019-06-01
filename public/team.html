@@ -23,8 +23,11 @@
                     <li><a href="/" class="white-text"> Home</a></li>
                     <li><a href="/team" class="white-text">About us</a></li>
                     <li><a href="/additionalresources" class="white-text">Additional resources</a></li>
-                    <li><a href="/auth/openid-client/callback" class="white-text" id="signin-resources">Sign in</a></li>
-                    <li><a href="/useraccount" class="white-text hide" id="account-resources">Your account</a></li>
+                    <li class="signin-li">
+                        <form action="/auth/openid-client" method="POST" class="signin-form">
+                            <button type="submit" class="white-text signin-button-link">Sign in</button>
+                        </form>
+                    </li>                    <li><a href="/useraccount" class="white-text hide" id="account-resources">Your account</a></li>
                     <li><a href="/logout" class="white-text hide" id="logout-resources">Log out</a></li>
                 </ul>    
             </div>
