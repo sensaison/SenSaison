@@ -1,6 +1,6 @@
 // selector form initialized
 (function($){
-	$(function(){
+	$(() => {
 
 		$(".sidenav").sidenav();
 		$(".parallax").parallax();

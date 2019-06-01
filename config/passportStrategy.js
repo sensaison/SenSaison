@@ -19,21 +19,21 @@ Issuer.discover("https://accounts.google.com/.well-known/openid-configuration")
 			response_type: "code token id_token",
 			scope: "openid profile email",
 			nonce: generators.nonce(),
-			redirect_uri: "https://sensaison.herokuapp.com/useraccount",  // REMEMBER TO CHANGE THIS BETWEEN PROD AND DEV
+			redirect_uri: "http://localhost:3000/useraccount",  // REMEMBER TO CHANGE THIS BETWEEN PROD AND DEV
 			state: generators.state(),
 			prompt: "select_account",
-			display: "popup",
 			login_hint: "sub",
 		};
 
-		const verify = async ( access_token, id_token, expires_in, token_type, done ) => {
+		const verify = async ( tokenset, userinfo, done ) => {
+			window.access_token = tokenset.access_token;
+			window.id_token = tokenset.id_token;
 			console.log("access_token: ", access_token);
 			console.log("id_token: ", id_token);
-			console.log("expires_in: ", expires_in);
-			console.log("token_type: ", token_type);
+			console.log("user info: ", userinfo);
 			await db.Users.findOrCreate({
 				where: {
-					openId: id_token.sub,
+					openId: tokenset.claims.sub,
 					firstName: id_token.given_name,
 					lastName: id_token.family_name,
 					email: id_token.email
@@ -48,6 +48,7 @@ Issuer.discover("https://accounts.google.com/.well-known/openid-configuration")
 					return done(null, false);
 				}
 				console.log("FIND OR CREATE");
+				window.person = user;
 				return done(null, {user, access_token, id_token});
 			});
 		};

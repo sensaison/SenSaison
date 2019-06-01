@@ -2,26 +2,26 @@ const async = require("async");
 const request = require("request");
 const archiver = require("archiver");
 
-async function zipURLs(urls, csv) {
+const zipURLs = async (urls, csv) => {
 	return new Promise(function (resolve, reject) {
 		let zip = archiver.create("zip");
 
-		zip.on("error", function (err) {
+		zip.on("error", err => {
 			reject(err);
 		});
 
 		zip.append(csv, { name: "sensaisondownload_withpics.csv" });
 
-		async.each(urls, function (url, done) {
+		async.each(urls, (url, done) => {
 			let stream = request.get(url);
-			stream.on("error", function (err) {
+			stream.on("error", err => {
 				done(err);
-			}).on("end", function () {
+			}).on("end", () => {
 				done();
 			});
 			zip.append(stream, { name: url.replace(/^.*[\\\/]/, "") });
 
-		}, function (err) {
+		}, err => {
 			if (err) {
 				reject(err);
 			} else {

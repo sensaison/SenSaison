@@ -1,7 +1,7 @@
 $(document).ready(() => {
 
 	// if user is logged in
-	if (window.person) {
+	if (person) {
 		// if there is a signed in user hide the sign in button
 		if ($("#signin-index").hasClass("hide")) {
 			// nothing
@@ -41,7 +41,7 @@ $(document).ready(() => {
 			// nothing
 		}
 
-	} else if(!window.person) {
+	} else if(!person) {
 		// if there is a signed in user hide the sign in button
 		if ($("#signin-index").hasClass("hide")) {
 			$("#signin-index").removeClass("hide");

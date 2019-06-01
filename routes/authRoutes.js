@@ -14,7 +14,7 @@ module.exports = (app) => {
 			failureFlash: "Problem with authentication, try again",
 		}),	(req, res) => {
 			res.setHeader("Cookie", ["set-cookie"]);
-			console.log(req.isAuthenticated);
+			console.log("is authenticated? ", req.isAuthenticated);
 			if (req.isAuthenticated) {
 				console.log("REQ.USER: ", req.user);
 				window.person = req.user; // app-level variable
