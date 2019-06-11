@@ -38,6 +38,16 @@ let sqlStore = new mySQLStore({
 	host: process.env.MYSQLHOST,
 	port: process.env.MYSQLPORT  
 });
+let sessionOptions = {
+	secret: process.env.SESSION_SECRET,
+	store: sqlStore,
+	resave: false,
+	saveUninitialized: true,
+	cookie: {
+		secure: false,
+		maxAge: 24*60*60*1000
+	}
+};
 if (process.env.NODE_ENV === "production") {
 	sqlStore = new mySQLStore({
 		user: process.env.JAWSDB_USER,
@@ -46,17 +56,9 @@ if (process.env.NODE_ENV === "production") {
 		host: process.env.JAWSDB_HOST,
 		port: process.env.JAWSDB_PORT
 	});
-}
-let sessionOptions = {
-	secret: process.env.SESSION_SECRET,
-	store: sqlStore,
-	resave: false,
-	saveUninitialized: true,
-	cookie: { secure: false }
-};
-if (process.env.NODE_ENV === "production") {
 	app.set("trust proxy", 1);
 	sessionOptions.cookie.secure = true; // serve secure cookies only in production
+
 }
 app.use(session(sessionOptions));
 app.use(Passport.initialize());
