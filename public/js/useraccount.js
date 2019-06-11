@@ -1,7 +1,7 @@
 $(document).ready(() => {
 
-	var person;
-	console.log("PERSON", person); // this returns undefined
+	// var person;
+	// console.log("PERSON", person); // this returns undefined
 
 
 	// following four event listeners show/hide what the user can do from their account page

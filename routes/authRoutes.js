@@ -1,12 +1,19 @@
-const Passport = require("../config/passportStrategy");
-const ensureAuthenticated = require("./ensureAuthenticated");
+const Passport = require("../config/passportStrategy"),
+	ensureAuthenticated = require("./ensureAuthenticated"),
+	db = require("../models");
 
-let person;
-let access_token;
+let person,
+	access_token;
 
 module.exports = (app) => {
 
-	app.post("/auth/openid-client", Passport.authenticate("openid-client"));
+	app.post("/auth/openid-client", Passport.authenticate("openid-client"), (req, res) => {
+		console.log(req);
+		db.Users.create(req.body)
+			.then(dbUser => {
+				res.json(dbUser);
+			});
+	});
 
 	app.get("/auth/openid-client/callback",
 		Passport.authenticate("openid-client", {
@@ -33,7 +40,7 @@ module.exports = (app) => {
 		console.log(person);
 		app.render("/useraccount", { user: person }, (err, html) => {
 			if (err) {
-				logger.warn(err);
+				console.log(err);
 				return;
 			}
 			res.send(html);

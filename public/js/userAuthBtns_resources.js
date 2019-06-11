@@ -1,7 +1,7 @@
-$(document).ready(() => {
+$(document).ready((req) => {
 
 	// if user is logged in
-	if (person) {
+	if (req.user) {
 		// if there is a signed in user hide the sign in button
 		if ($("#signin-resources").hasClass("hide")) {
 			// nothing
@@ -41,7 +41,7 @@ $(document).ready(() => {
 			// nothing
 		}
 
-	} else if(!person) {
+	} else {
 		// if there is a signed in user hide the sign in button
 		if ($("#signin-resources").hasClass("hide")) {
 			$("#signin-resources").removeClass("hide");
