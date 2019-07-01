@@ -49,7 +49,7 @@ Issuer.discover("https://accounts.google.com/.well-known/openid-configuration")
 				}
 				console.log("FIND OR CREATE");
 				window.person = user;
-				return done(null, {user, access_token, id_token});
+				return done(null, {person, access_token, id_token});
 			});
 		};
 

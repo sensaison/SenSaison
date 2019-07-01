@@ -7,13 +7,7 @@ let person,
 
 module.exports = (app) => {
 
-	app.post("/auth/openid-client", Passport.authenticate("openid-client"), (req, res) => {
-		console.log(req);
-		db.Users.create(req.body)
-			.then(dbUser => {
-				res.json(dbUser);
-			});
-	});
+	app.post("/auth/openid-client", Passport.authenticate("openid-client"));
 
 	app.get("/auth/openid-client/callback",
 		Passport.authenticate("openid-client", {
@@ -27,7 +21,7 @@ module.exports = (app) => {
 			window.access_token = req.access_token;
 			req.session.save(() => {
 				res.send({ person, access_token });
-				res.redirect("/useraccount")
+				res.redirect("/useraccount");
 				console.log("SUCCESSFUL AUTHENTICATION");
 				// return (person, access_token);
 			});
@@ -36,6 +30,7 @@ module.exports = (app) => {
 	
 	// protect user account page
 	app.get("/useraccount", ensureAuthenticated, (req, res) => {
+		console.log("user account page");
 		console.log(req.user);
 		console.log(person);
 		app.render("/useraccount", { user: person }, (err, html) => {
@@ -45,8 +40,7 @@ module.exports = (app) => {
 			}
 			res.send(html);
 		});
-	}
-	);
+	});
 
 	app.get("/logout", (req, res) => {
 		console.log("LOGGING OUT");

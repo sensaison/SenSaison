@@ -1,5 +1,7 @@
-const ensureAuthenticated = (req, res, next) => {
-	if (res.isAuthenticated) {
+module.exports = (req, res, next) => {
+	console.log("is authenticated?: ", req.isAuthenticated);
+
+	if (req.isAuthenticated) {
 		return next();
 	} else {
 		req.flash("error", "You must be logged in first!");
@@ -7,4 +9,3 @@ const ensureAuthenticated = (req, res, next) => {
 	}
 };
 
-module.exports = ensureAuthenticated;

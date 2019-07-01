@@ -1,8 +1,8 @@
-const async = require("async");
-const request = require("request");
-const archiver = require("archiver");
+const async = require("async"),
+	request = require("request"),
+	archiver = require("archiver");
 
-const zipURLs = async (urls, csv) => {
+module.exports = async (urls, csv) => {
 	return new Promise(function (resolve, reject) {
 		let zip = archiver.create("zip");
 
@@ -30,6 +30,4 @@ const zipURLs = async (urls, csv) => {
 			}
 		});
 	});
-}
-
-module.exports = zipURLs;
+};
