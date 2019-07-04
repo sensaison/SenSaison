@@ -26,17 +26,15 @@ Issuer.discover("https://accounts.google.com/.well-known/openid-configuration")
 		};
 
 		const verify = async ( tokenset, userinfo, done ) => {
-			window.access_token = tokenset.access_token;
-			window.id_token = tokenset.id_token;
-			console.log("access_token: ", access_token);
-			console.log("id_token: ", id_token);
+			console.log("access_token: ", tokenset.access_token);
+			console.log("id_token: ", tokenset.id_token);
 			console.log("user info: ", userinfo);
 			await db.Users.findOrCreate({
 				where: {
 					openId: tokenset.claims.sub,
-					firstName: id_token.given_name,
-					lastName: id_token.family_name,
-					email: id_token.email
+					firstName: tokenset.id_token.given_name,
+					lastName: tokenset.id_token.family_name,
+					email: tokenset.id_token.email
 				}
 			}, (err, user) => {
 				if (err) {
@@ -48,8 +46,7 @@ Issuer.discover("https://accounts.google.com/.well-known/openid-configuration")
 					return done(null, false);
 				}
 				console.log("FIND OR CREATE");
-				window.person = user;
-				return done(null, {person, access_token, id_token});
+				return done(null, { user, tokenset });
 			});
 		};
 
