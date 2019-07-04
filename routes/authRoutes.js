@@ -8,6 +8,24 @@ let person,
 
 module.exports = app => {
 
+	app.get("/", (req, res) => {
+		res.render("index", (err, html) => {
+			res.send(html);
+		});
+	});
+
+	app.get("/team", (req, res) => {
+		res.render("team", (err, html) => {
+			res.send(html);
+		});
+	});
+
+	app.get("/additionalresources", (req, res) => {
+		res.render("additionalresources", (err, html) => {
+			res.send(html);
+		});
+	});
+
 	app.post("/auth/openid-client", Passport.authenticate("openid-client"));
 	// above not working
 
@@ -17,7 +35,7 @@ module.exports = app => {
 			failureRedirect: "/" ,
 			failureFlash: "Problem with authentication, try again",
 		}),	(req, res) => {
-			// res.setHeader("Cookie", ["set-cookie"]);
+			res.setHeader("Cookie", ["set-cookie"]);
 			console.log("REQ.USER: ", req.user);
 
 			window.person = req.user; // app-level variable?????????????????
@@ -38,8 +56,6 @@ module.exports = app => {
 		console.log(req.user);
 		console.log(person);
 
-		// res.sendFile(path.join(__dirname, "../views/useraccount.html"));
-
 		res.render("useraccount", { user: person }, (err, html) => {
 			if (err) {
 				console.log(err);
@@ -53,24 +69,6 @@ module.exports = app => {
 		console.log("LOGGING OUT");
 		req.logout;
 		req.session.destroy(() => res.redirect("/"));
-	});
-
-	app.get("/", (req, res) => {
-		res.render("index", (err, html) => {
-			res.send(html);
-		});
-	});
-
-	app.get("/team", (req, res) => {
-		res.render("team", (err, html) => {
-			res.send(html);
-		});
-	});
-
-	app.get("/additionalresources", (req, res) => {
-		res.render("additionalresources", (err, html) => {
-			res.send(html);
-		});
 	});
 
 };
