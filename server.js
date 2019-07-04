@@ -15,7 +15,7 @@ let PORT = process.env.PORT || 3000;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.engine("html", require("./plugin/htmlEngine"));
+app.engine("html", require("./plugins/htmlEngine"));
 app.set("view engine", "html");
 
 app.use(express.static(path.join(__dirname, "/public"), { extensions: ["html"] }));
