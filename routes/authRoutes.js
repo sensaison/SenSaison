@@ -1,13 +1,15 @@
 const Passport = require("../config/passportStrategy"),
 	ensureAuthenticated = require("./ensureAuthenticated"),
-	db = require("../models");
+	db = require("../models"),
+	path = require("path");
 
 let person,
 	access_token;
 
-module.exports = (app) => {
+module.exports = app => {
 
 	app.post("/auth/openid-client", Passport.authenticate("openid-client"));
+	// above not working
 
 	app.get("/auth/openid-client/callback",
 		Passport.authenticate("openid-client", {
@@ -17,8 +19,10 @@ module.exports = (app) => {
 		}),	(req, res) => {
 			// res.setHeader("Cookie", ["set-cookie"]);
 			console.log("REQ.USER: ", req.user);
-			window.person = req.user; // app-level variable
+
+			window.person = req.user; // app-level variable?????????????????
 			window.access_token = req.access_token;
+
 			req.session.save(() => {
 				res.send({ person, access_token });
 				res.redirect("/useraccount");
@@ -33,7 +37,10 @@ module.exports = (app) => {
 		console.log("user account page");
 		console.log(req.user);
 		console.log(person);
-		app.render("/useraccount", { user: person }, (err, html) => {
+
+		// res.sendFile(path.join(__dirname, "../views/useraccount.html"));
+
+		res.render("useraccount", { user: person }, (err, html) => {
 			if (err) {
 				console.log(err);
 				return;
@@ -46,6 +53,12 @@ module.exports = (app) => {
 		console.log("LOGGING OUT");
 		req.logout;
 		req.session.destroy(() => res.redirect("/"));
+	});
+
+	app.get("/", (req, res) => {
+		res.render("index", (err, html) => {
+			res.send(html);
+		});
 	});
 
 };

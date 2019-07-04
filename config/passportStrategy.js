@@ -82,7 +82,7 @@ Passport.serializeUser((user, done) => {
 Passport.deserializeUser((id, done) => {
 	db.Users.findOne({
 		where: 
-			{openid: id}
+			{ openid: id }
 	}, (err, user) => {
 		console.log("DESERIALIZED USER: ", user);
 		done(err, user);
