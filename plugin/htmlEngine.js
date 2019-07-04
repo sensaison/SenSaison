@@ -10,4 +10,5 @@ module.exports = function (path, options, fn) {
 		return fn(null, module.exports.cache[cacheLocation] = data);
 	});
 };
+
 module.exports.cache = {};

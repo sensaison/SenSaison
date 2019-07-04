@@ -61,4 +61,16 @@ module.exports = app => {
 		});
 	});
 
+	app.get("/team", (req, res) => {
+		res.render("team", (err, html) => {
+			res.send(html);
+		});
+	});
+
+	app.get("/additionalresources", (req, res) => {
+		res.render("additionalresources", (err, html) => {
+			res.send(html);
+		});
+	});
+
 };
