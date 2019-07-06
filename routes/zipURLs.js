@@ -3,7 +3,7 @@ const async = require("async"),
 	archiver = require("archiver");
 
 module.exports = async (urls, csv) => {
-	return new Promise(function (resolve, reject) {
+	return new Promise((resolve, reject) => {
 		let zip = archiver.create("zip");
 
 		zip.on("error", err => {
