@@ -1,7 +1,7 @@
 const Passport = require("../config/passportStrategy"),
-	ensureAuthenticated = require("./ensureAuthenticated"),
-	db = require("../models"),
-	path = require("path");
+	ensureAuthenticated = require("./ensureAuthenticated");
+	// db = require("../models"),
+	// path = require("path");
 
 let person,
 	access_token;
@@ -10,18 +10,27 @@ module.exports = app => {
 
 	app.get("/", (req, res) => {
 		res.render("index", (err, html) => {
+			if (err) {
+				console.log(err);
+			}
 			res.send(html);
 		});
 	});
 
 	app.get("/team", (req, res) => {
 		res.render("team", (err, html) => {
+			if (err) {
+				console.log(err);
+			}
 			res.send(html);
 		});
 	});
 
 	app.get("/additionalresources", (req, res) => {
 		res.render("additionalresources", (err, html) => {
+			if (err) {
+				console.log(err);
+			}
 			res.send(html);
 		});
 	});
@@ -36,6 +45,7 @@ module.exports = app => {
 			failureFlash: "Problem with authentication, try again",
 		}),	(req, res) => {
 			res.setHeader("Cookie", ["set-cookie"]);
+
 			console.log("REQ.USER: ", req.user);
 
 			window.person = req.user; // app-level variable?????????????????
@@ -45,7 +55,6 @@ module.exports = app => {
 				res.send({ person, access_token });
 				res.redirect("/useraccount");
 				console.log("SUCCESSFUL AUTHENTICATION");
-				// return (person, access_token);
 			});
 		}
 	);
@@ -53,13 +62,12 @@ module.exports = app => {
 	// protect user account page
 	app.get("/useraccount", ensureAuthenticated, (req, res) => {
 		console.log("user account page");
-		console.log(req.user);
-		console.log(person);
+		console.log("req.user: ", req.user);
+		console.log("person: ", person);
 
-		res.render("useraccount", { user: person }, (err, html) => {
+		res.render("useraccount", { user: req.user }, (err, html) => {
 			if (err) {
 				console.log(err);
-				return;
 			}
 			res.send(html);
 		});

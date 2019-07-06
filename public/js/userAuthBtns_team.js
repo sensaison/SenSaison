@@ -1,4 +1,6 @@
-$(document).ready((req) => {
+$(document).ready(req => {
+
+	console.log("req:", req);
 
 	// if user is logged in
 	if (req.user) {

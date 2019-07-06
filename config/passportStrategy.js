@@ -26,9 +26,11 @@ Issuer.discover("https://accounts.google.com/.well-known/openid-configuration")
 		};
 
 		const verify = async ( tokenset, userinfo, done ) => {
+			console.log("tokenset: ", tokenset);
 			console.log("access_token: ", tokenset.access_token);
 			console.log("id_token: ", tokenset.id_token);
 			console.log("user info: ", userinfo);
+			
 			await db.Users.findOrCreate({
 				where: {
 					openId: tokenset.claims.sub,
