@@ -5,6 +5,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <meta http-equiv="Content-Security-Policy" content="font-src 'self' data: *">
 
         <title>SenSaison</title>
 
@@ -12,7 +13,6 @@
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
         <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-        <!-- <link href="css/navbar.css" media="screen" rel="stylesheet" type="text/css" /> -->
 
         <!-- Swatchbook -->
         <meta charset="UTF-8" />
@@ -29,17 +29,6 @@
     </head>
 
     <body>
-        <!-- <div class="wrap">
-            <nav>
-                <ul class="menu">
-                    <li><img src="images/senlogo.png" style="width: 20%"></li>
-
-                    <li><a href="team"><span class=""></span> About us</a></li>
-                    <li><a href="additionalresources"><span class=""></span> Additional resources</a></li>
-                </ul>
-                <div class="clearfix"></div>
-            </nav>
-        </div> -->
 
         <nav class="grey">
             <div class="nav-wrapper">
@@ -48,7 +37,11 @@
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
                     <li><a href="/team" class="white-text"> About us</a></li>
                     <li><a href="/additionalresources" class="white-text">Additional resources</a></li>
-                    <li><a href="/auth/openid-client/callback"class="white-text" id="signin-index">Sign in</a></li>
+                    <li class="signin-li">
+                        <form action="/auth/openid-client" method="POST" class="signin-form">
+                            <button type="submit" class="white-text signin-button-link">Sign in</button>
+                        </form>
+                    </li>
                     <li><a href="/useraccount" class="white-text hide" id="account-index">Your account</a></li>
                     <li><a href="/logout" class="white-text hide" id="logout-index">Log out</a></li>
                 </ul>    

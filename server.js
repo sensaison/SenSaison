@@ -15,17 +15,18 @@ let PORT = process.env.PORT || 3000;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+app.engine("html", require("./plugins/htmlEngine"));
+app.set("view engine", "html");
+
 app.use(express.static(path.join(__dirname, "/public"), { extensions: ["html"] }));
 
 app.use(cors());
-// app.use((req, res, next) => {
-// 	res.header("Access-Control-Allow-Origin", "*");
-// 	res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE, OPTIONS");
-// 	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-// 	next();
-// });
-
-app.use(flash());
+app.use((req, res, next) => {
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE, OPTIONS");
+	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+	next();
+});
 
 // non auth routes before passport and session code
 require("./routes/apiRoutes")(app);
@@ -38,6 +39,16 @@ let sqlStore = new mySQLStore({
 	host: process.env.MYSQLHOST,
 	port: process.env.MYSQLPORT  
 });
+let sessionOptions = {
+	secret: process.env.SESSION_SECRET,
+	store: sqlStore,
+	resave: false,
+	saveUninitialized: true,
+	cookie: {
+		secure: false,
+		maxAge: 24*60*60*1000
+	}
+};
 if (process.env.NODE_ENV === "production") {
 	sqlStore = new mySQLStore({
 		user: process.env.JAWSDB_USER,
@@ -46,21 +57,13 @@ if (process.env.NODE_ENV === "production") {
 		host: process.env.JAWSDB_HOST,
 		port: process.env.JAWSDB_PORT
 	});
-}
-let sessionOptions = {
-	secret: process.env.SESSION_SECRET,
-	store: sqlStore,
-	resave: false,
-	saveUninitialized: true,
-	cookie: { secure: false }
-};
-if (process.env.NODE_ENV === "production") {
 	app.set("trust proxy", 1);
 	sessionOptions.cookie.secure = true; // serve secure cookies only in production
 }
 app.use(session(sessionOptions));
 app.use(Passport.initialize());
 app.use(Passport.session());
+app.use(flash());
 
 // auth routes
 require("./routes/authRoutes")(app);

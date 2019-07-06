@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
-module.exports = function(sequelize, DataTypes) {
-	let Observation = sequelize.define("Observations", {
+module.exports = (sequelize, DataTypes) => {
+	const Observation = sequelize.define("Observations", {
 		id: {
 			primaryKey: true,
 			type: DataTypes.INTEGER,

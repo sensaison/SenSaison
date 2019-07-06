@@ -1,7 +1,8 @@
-$(document).ready(() => {
+$(document).ready(req => {
 
 	// if user is logged in
-	if (window.person) {
+	if (req.user) {
+		console.log("req.user:", req.user);
 		// if there is a signed in user hide the sign in button
 		if ($("#signin-index").hasClass("hide")) {
 			// nothing
@@ -41,8 +42,8 @@ $(document).ready(() => {
 			// nothing
 		}
 
-	} else if(!window.person) {
-		// if there is a signed in user hide the sign in button
+	} else {
+		console.log("no signed in user");
 		if ($("#signin-index").hasClass("hide")) {
 			$("#signin-index").removeClass("hide");
 		} else {

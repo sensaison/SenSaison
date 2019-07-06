@@ -7,12 +7,44 @@
 */
 
 nav ul a,
-nav .brand-logo {
+nav .brand-logo,
+#signin-button-link {
   color: #fff;
 }
 
 #logo {
   width: 30%;
+}
+
+.signin-li:hover {
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.08);
+}
+
+.signin-form {
+  background-color: transparent;
+  display: inline-block;
+  padding: 0 15px;
+  height: 100%;
+  width: 100%;
+}
+.signin-form:hover {
+  cursor: pointer;
+}
+
+.signin-button-link {
+  display: block;
+  text-decoration: none;
+  font-weight: inherit;
+  background-color: transparent;
+  border: none;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+.signin-button-link:hover {
+  background-color: transparent;
+  cursor: pointer;
 }
 
 .material-icons {

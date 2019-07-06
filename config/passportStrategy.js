@@ -19,24 +19,24 @@ Issuer.discover("https://accounts.google.com/.well-known/openid-configuration")
 			response_type: "code token id_token",
 			scope: "openid profile email",
 			nonce: generators.nonce(),
-			redirect_uri: "https://sensaison.herokuapp.com/useraccount",  // REMEMBER TO CHANGE THIS BETWEEN PROD AND DEV
+			redirect_uri: "http://localhost:3000/useraccount",  // REMEMBER TO CHANGE THIS BETWEEN PROD AND DEV
 			state: generators.state(),
 			prompt: "select_account",
-			display: "popup",
 			login_hint: "sub",
 		};
 
-		const verify = async ( access_token, id_token, expires_in, token_type, done ) => {
-			console.log("access_token: ", access_token);
-			console.log("id_token: ", id_token);
-			console.log("expires_in: ", expires_in);
-			console.log("token_type: ", token_type);
+		const verify = async ( tokenset, userinfo, done ) => {
+			console.log("tokenset: ", tokenset);
+			console.log("access_token: ", tokenset.access_token);
+			console.log("id_token: ", tokenset.id_token);
+			console.log("user info: ", userinfo);
+			
 			await db.Users.findOrCreate({
 				where: {
-					openId: id_token.sub,
-					firstName: id_token.given_name,
-					lastName: id_token.family_name,
-					email: id_token.email
+					openId: tokenset.claims.sub,
+					firstName: tokenset.id_token.given_name,
+					lastName: tokenset.id_token.family_name,
+					email: tokenset.id_token.email
 				}
 			}, (err, user) => {
 				if (err) {
@@ -48,7 +48,7 @@ Issuer.discover("https://accounts.google.com/.well-known/openid-configuration")
 					return done(null, false);
 				}
 				console.log("FIND OR CREATE");
-				return done(null, {user, access_token, id_token});
+				return done(null, { user, tokenset });
 			});
 		};
 
@@ -81,7 +81,7 @@ Passport.serializeUser((user, done) => {
 Passport.deserializeUser((id, done) => {
 	db.Users.findOne({
 		where: 
-			{openid: id}
+			{ openid: id }
 	}, (err, user) => {
 		console.log("DESERIALIZED USER: ", user);
 		done(err, user);

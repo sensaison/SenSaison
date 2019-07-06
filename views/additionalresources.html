@@ -14,17 +14,6 @@
         <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
         <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 
-        <!-- Swatchbook
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-        <meta name="description" content="Animated Swatch Book with CSS3 and jQuery" />
-        <meta name="keywords" content="swatch book, css3, jquery, animated, rotation, transition, folding fan" />
-        <meta name="author" content="Codrops" />
-        <link rel="stylesheet" type="text/css" href="Swatchbook/css/style.css" />
-        <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:700,300,300italic' rel='stylesheet' type='text/css'>
-        <script type="text/javascript" src="Swatchbook/js/modernizr.custom.79639.js"></script>  -->
-
     </head>
     <body>
 
@@ -36,8 +25,11 @@
                     <li><a href="/" class="white-text"> Home</a></li>
                     <li><a href="/team" class="white-text">About us</a></li>
                     <li><a href="/additionalresources" class="white-text">Additional resources</a></li>
-                    <li><a href="/auth/openid-client/callback" class="white-text" id="signin-resources">Sign in</a></li>
-                    <li><a href="/useraccount" class="white-text hide" id="account-resources">Your account</a></li>
+                    <li class="signin-li">
+                        <form action="/auth/openid-client" method="POST" class="signin-form">
+                            <button type="submit" class="white-text signin-button-link">Sign in</button>
+                        </form>
+                    </li>                    <li><a href="/useraccount" class="white-text hide" id="account-resources">Your account</a></li>
                     <li><a href="/logout" class="white-text hide" id="logout-resources">Log out</a></li>
                 </ul>    
             </div>

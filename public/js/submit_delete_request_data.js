@@ -1,7 +1,7 @@
-$(document).ready(function() {	
+$(document).ready(() => {	
 
 	// make last 3 fields in submission form required if animal plant or fungus selected
-	$("#obs-category").on("change", function() {
+	$("#obs-category").on("change", () => {
 		if ($("#obs-category").val() === "animal" && $("#species-info").hasClass("hidden")) {
 			$("#species-info").removeClass("hidden");
 			$("#species-info").addClass("show");
@@ -51,7 +51,7 @@ $(document).ready(function() {
 	});
 
 	// POST request when submitting new observation
-	$("#submit-obs").on("click", function(event) {
+	$("#submit-obs").on("click", event => {
 		event.preventDefault;
 
 		// USERID CODE FIRST
@@ -60,8 +60,8 @@ $(document).ready(function() {
 
 		///////////////////////////////
 
-		const getBase64 = function(file) {
-			return new Promise(function(resolve, reject) {
+		const getBase64 = file => {
+			return new Promise((resolve, reject) => {
 				var reader = new FileReader();
 				reader.readAsDataURL(file);
 				reader.onload = function() {
@@ -80,7 +80,7 @@ $(document).ready(function() {
 			let pictureIdVal;
 			let newObs;
 
-			getBase64(img).then(function(result) {
+			getBase64(img).then(result => {
 				// console.log(result);
 				// AJAX METHOD BELOW IS BROKEN
 				$.ajax({
@@ -92,9 +92,9 @@ $(document).ready(function() {
 						folder: userIdVal,
 						tags: userIdVal + ", " + categoryVal + ", " +  dateObsVal,
 					}
-				}).then(function(response) {
+				}).then(response => {
 					pictureIdVal = response.public_id;
-				}).then(function() {
+				}).then(() => {
 					newObs = {
 						openId: userIdVal,
 						pictureId: pictureIdVal,
@@ -114,11 +114,11 @@ $(document).ready(function() {
 						method: "POST",
 						data: newObs,
 						async: false,
-					}).then(function() {
+					}).then(() => {
 						alert("Observation successfully submitted");
 						location.reload();
 					});
-				}).catch(function(error) {
+				}).catch(error => {
 					if (error) {
 						console.log(error);
 					};
@@ -134,7 +134,7 @@ $(document).ready(function() {
 	});
     
 	// DELETE request when deleting observation
-	$("#all-your-obs-body").on("click", ".delete", function(e) {
+	$("#all-your-obs-body").on("click", ".delete", e => {
 		e.preventDefault();
 
 		let id_delete = $(this).parents("tr").attr("id");
@@ -149,7 +149,7 @@ $(document).ready(function() {
 	});
 
 	// request to download data
-	$("#request-data").on("click", function(e) {
+	$("#request-data").on("click", e => {
 		e.preventDefault();
 
 		let minDate = $("#start-date-download").val();

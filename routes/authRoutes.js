@@ -1,12 +1,43 @@
-const Passport = require("../config/passportStrategy");
-// const ensureLoggedIn = require("connect-ensure-login").ensureLoggedIn;
+const Passport = require("../config/passportStrategy"),
+	ensureAuthenticated = require("./ensureAuthenticated");
+	// db = require("../models"),
+	// path = require("path");
 
-module.exports = (app) => {
+let person,
+	access_token;
 
-	// post user info to db
+module.exports = app => {
+
+	app.get("/", (req, res) => {
+		res.render("index", (err, html) => {
+			if (err) {
+				console.log(err);
+			}
+			res.send(html);
+		});
+	});
+
+	app.get("/team", (req, res) => {
+		res.render("team", (err, html) => {
+			if (err) {
+				console.log(err);
+			}
+			res.send(html);
+		});
+	});
+
+	app.get("/additionalresources", (req, res) => {
+		res.render("additionalresources", (err, html) => {
+			if (err) {
+				console.log(err);
+			}
+			res.send(html);
+		});
+	});
+
 	app.post("/auth/openid-client", Passport.authenticate("openid-client"));
+	// above not working
 
-	// authentication
 	app.get("/auth/openid-client/callback",
 		Passport.authenticate("openid-client", {
 			session: true,
@@ -14,37 +45,33 @@ module.exports = (app) => {
 			failureFlash: "Problem with authentication, try again",
 		}),	(req, res) => {
 			res.setHeader("Cookie", ["set-cookie"]);
-			console.log(req.isAuthenticated);
-			if (req.isAuthenticated) {
-				console.log("REQ.USER: ", req.user);
-				window.person = req.user; // app-level variable
-				window.access_token = req.access_token;
-				req.session.save(() => {
-					res.send({person, access_token});
-					res.redirect("/useraccount")
-					console.log("SUCCESSFUL AUTHENTICATION");
-					// return (person, access_token);
-				});
-			} else {
-				req.flash("error");
-				res.redirect("/");
-			}
+
+			console.log("REQ.USER: ", req.user);
+
+			window.person = req.user; // app-level variable?????????????????
+			window.access_token = req.access_token;
+
+			req.session.save(() => {
+				res.send({ person, access_token });
+				res.redirect("/useraccount");
+				console.log("SUCCESSFUL AUTHENTICATION");
+			});
 		}
 	);
 	
 	// protect user account page
-	app.get("/useraccount",
-		(req, res) => {
-			if (req.isAuthenticated) {
-				res.send(req.user);
-				res.send(req.access_token);
-				console.log(req.access_token);
-				console.log(req.user);
-			} else {
-				res.redirect("/");
+	app.get("/useraccount", ensureAuthenticated, (req, res) => {
+		console.log("user account page");
+		console.log("req.user: ", req.user);
+		console.log("person: ", person);
+
+		res.render("useraccount", { user: req.user }, (err, html) => {
+			if (err) {
+				console.log(err);
 			}
-		}
-	);
+			res.send(html);
+		});
+	});
 
 	app.get("/logout", (req, res) => {
 		console.log("LOGGING OUT");
