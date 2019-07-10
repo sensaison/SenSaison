@@ -235,7 +235,7 @@ span.sb-icon img {
 }
 
 span.sb-icon:before {
-	speak: none;
+	/* speak: none; */
 	display: block;
 	text-decoration: inherit;
 	text-align: center;
