@@ -1,9 +1,5 @@
 $(document).ready(() => {
 
-	// var person;
-	// console.log("PERSON", person); // this returns undefined
-
-
 	// following four event listeners show/hide what the user can do from their account page
 	$("#add-obs-btn").on("click", () => {
 		if ($("#add-obs").hasClass("hidden")) {
@@ -63,12 +59,12 @@ $(document).ready(() => {
 		}
 	});
 
-
+	console.log(window.user);
 	// displaying user's observations in table mentioned above
 	$.ajax("/api/userobservations", {
 		type: "GET",
 		data: {
-			openId: "678910" // will have to change this to openId for DEVELOPMENT and in future in jawsdb
+			openId: window.user // will have to change this to openId for DEVELOPMENT and in future in jawsdb
 		}
 	}).then(data => {
 		window.userObs = data;

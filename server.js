@@ -12,11 +12,11 @@ const app = express();
 
 let PORT = process.env.PORT || 3000;
 
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-
 app.engine("html", require("./plugins/htmlEngine"));
 app.set("view engine", "html");
+
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 app.use(express.static(path.join(__dirname, "/public"), { extensions: ["html"] }));
 
@@ -27,6 +27,8 @@ app.use((req, res, next) => {
 	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 	next();
 });
+
+app.use(flash());
 
 // non auth routes before passport and session code
 require("./routes/apiRoutes")(app);
@@ -63,7 +65,40 @@ if (process.env.NODE_ENV === "production") {
 app.use(session(sessionOptions));
 app.use(Passport.initialize());
 app.use(Passport.session());
-app.use(flash());
+
+// create middleware to send user info to front end
+app.use((req, res, next) => {
+	res.locals.success_messages = req.flash("success! server.js");
+	res.locals.error_messages = req.flash("error! server.js");
+
+	console.log("==================");
+	console.log("req.session:", req.session);
+	console.log("==================");
+	console.log("req.session.user:", req.session.user);
+	console.log("==================");
+		
+	if (req.session && req.session.user) {
+
+		db.Users.findOrCreate({ openId: req.session.user.id }, (err, user) => {
+			if (err) {
+				console.log(err);
+			}
+			req.user = user;
+			req.session.user = user;  //refresh the session value
+			res.locals.user = user;
+
+			console.log("user:", user);
+			console.log("req.user:", req.user);
+			console.log("==================");
+
+			// finishing processing the middleware and run the route
+			next();
+		});
+	} else {
+		console.log("no session or session user");
+		next();
+	}
+});
 
 // auth routes
 require("./routes/authRoutes")(app);

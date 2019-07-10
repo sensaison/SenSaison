@@ -3,7 +3,7 @@ const db = require("../models"),
 	Sequelize = require("sequelize"),
 	Op = Sequelize.Op,
 	json2csv = require("json2csv").parse,
-	zipURLs = require("./zipURLs");
+	zipURLs = require("../plugins/zipURLs");
 
 module.exports = app => {
 
@@ -197,29 +197,6 @@ module.exports = app => {
 			.then(newusr => {
 				res.json(newusr);
 			});
-	});
-
-	// app-level person vars
-	app.use((req, res, next) => {
-		if (req.session && req.session.user) {
-			console.log("session: ", req.session);
-			db.Users.findOne({ openId: req.session.user.id }, (err, user) => {
-				if (user) {
-					person = req.user;
-					person = req.session.user;
-					person = res.locals.user;
-					console.log("PERSON: ", person);
-				} else {
-					console.log("NO USER");
-					console.log(err);
-				}
-				// finishing processing the middleware and run the route
-				next();
-			});
-		} else {
-			console.log("no user");
-			next();
-		}
 	});
 
 };

@@ -50,142 +50,214 @@
 
     <div class="container center-align">
         <div class="section">
-        <h3>Your account</h3>
-        <br>
-        <div class="row">
-            <button class="btn waves-effect waves-light btn-flat" id="add-obs-btn">Add new observation</button><br>
-            <button class="btn waves-effect waves-light btn-flat" id="view-usr-obs-btn">View all your observations</button><br>
-            <button class="btn waves-effect waves-light btn-flat" id="view-near-obs-btn">View nearby observations</button><br>
-            <button class="btn waves-effect waves-light btn-flat" id="download-data-btn">Download data</button>
-        </div>
-        <br>
-
-        <div class="row hidden" id="add-obs">
-            <div class="col s12 center">
-            <h5>Add new observation</h5>
+            <h3>Your account</h3>
             <br>
-            <p><i>Fields marked with an asterisk (*) are required.</i></p>
-            <br>
-            <form id="obs-submission-form" >
-                <div class="row">
-                    <div class="input-field col s12 m4">
-                        <input type="text" class="datepicker" id="date-obs" required="" aria-required="true">
-                        <label for="date-obs">Date of observation*</label>
-                    </div>
-
-                    <div class="input-field col s12 m4">
-                        <!-- step="1" is to change time format to hh:mm:ss -->
-                        <input type="text" class="timepicker" step="1" id="time-obs" required="" aria-required="true">
-                        <label for="time-obs">Time of observation*</label>
-                    </div>
-
-                    <div class="input-field col s12 m4">
-                        <select id="obs-category" required="" aria-required="true">
-                            <option disabled hidden selected class="form-option">Choose an option</option>
-                            <option value="animal" class="form-option">Animal&dagger;</option>
-                            <option value="plant" class="form-option">Plant&dagger;</option>
-                            <option value="fungus" class="form-option">Fungus&dagger;</option>
-                            <option value="weather" class="form-option">Weather</option>
-                            <option value="land_water" class="form-option">Land or water</option>
-                            <option value="other" class="form-option">Other (please explain in Description fields)</option>
-                        </select>
-                        <label for="obs-category">Category*</label>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col s12 m6">
-                        <label for="googlemap">Location*</label>
-                        <div id="map-wrapper">
-                            <form>
-                            <button class="btn waves-effect waves-light g1 disabled" type="button" id="clear-pins" disabled="true">Clear Pin</button>
-                            </form>
-                            <div class="mapDisplayed" id="map-0"></div>
-                        </div>
-                    </div>
-
-                    <div class="col s12 m6">
-
-                        <div class="row">
-                            <div class="input-field col s12">
-                                <textarea id="brief-desc" class="materialize-textarea validate" data-length="50" required=""  aria-required="true" placeholder="Ex. First Canada geese to return from winter"></textarea>
-                                <label for="brief-desc">Brief description of observation*</label>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="input-field col s12">
-                                <textarea id="extended-desc" class="materialize-textarea validate" data-length="500" placeholder="Ex. Cold day, some patches of ice on Mirror Lake. Four Canada geese showed up early this morning."></textarea>
-                                <label for="extended-desc">Extended description</label>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="input-field col s12">
-                                <select id="first-confidence" required="" aria-required="true">
-                                <option value="1" selected class="form-option">1 - low confidence (default)</option>
-                                <option value="2" class="form-option">2</option>
-                                <option value="3" class="form-option">3</option>
-                                <option value="4" class="form-option">4</option>
-                                <option value="5" class="form-option">5 - high confidence</option>
-                                </select>
-                                <label for="first-confidence">Confidence your observation is the first of its type in your area*</label>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="file-field input-field col s12">
-                                <button class="btn waves-effect waves-teal btn-flat btn-small" id="pic-button">
-                                Upload
-                                <input type="file" id="pic-file" accept="image/*" required="" aria-required="true">
-                                </button>
-                                <div class="file-path-wrapper">
-                                <input class="file-path validate" id="pic-path" type="text" placeholder="Upload ONE picture*" required="" aria-required="true">
-                                </div>
-                                
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-                <br>
-                <div class="row hidden" id="species-info">
-                    <p>&dagger;<i>The following section is required if you selected animal, plant, or fungus.</i></p>
-                    <br>
-                    <div class="input-field col s12 m6 l4">
-                        <label for="species">Common name&dagger;</label>
-                        <input type="text" class="validate" id="species" data-length="50">
-                    </div>
-
-                    <div class="input-field col s12 m6 l4">
-                        <label for="species-sci-name">Scientific name (if known)</label>
-                        <input type="text" class="validate" id="species-sci-name" data-length="50">
-                    </div>
-
-                    <div class="input-field col s12 m6 l4">
-                        <select id="species-confidence">
-                            <option value=null hidden selected class="form-option">Choose an option</option>
-                            <option value="1" class="form-option">1 - low confidence</option>
-                            <option value="2" class="form-option">2</option>
-                            <option value="3" class="form-option">3</option>
-                            <option value="4" class="form-option">4</option>
-                            <option value="5" class="form-option">5 - high confidence</option>
-                        </select>
-                        <label for="species-confidence">Species ID confidence&dagger;</label>
-                    </div>
-                </div>
-                <br>
-                <div class="row">
-                    <button class="btn waves-effect waves-light g1" type="submit" id="submit-obs">Submit</button> 
-                </div>
-            </form>
-            </div>
-        </div>
-
-        <div class="row hidden" id="view-near-obs">
-            <h5>Nearby observations</h5><br>
             <div class="row">
+                <button class="btn waves-effect waves-light btn-flat" id="add-obs-btn">Add new observation</button><br>
+                <button class="btn waves-effect waves-light btn-flat" id="view-usr-obs-btn">View all your observations</button><br>
+                <button class="btn waves-effect waves-light btn-flat" id="view-near-obs-btn">View nearby observations</button><br>
+                <button class="btn waves-effect waves-light btn-flat" id="download-data-btn">Download data</button>
+            </div>
+            <br>
+
+            <div class="row hidden" id="add-obs">
+                <div class="col s12 center">
+                    <h5>Add new observation</h5>
+                    <br>
+                    <p><i>Fields marked with an asterisk (*) are required.</i></p>
+                    <br>
+                    <form id="obs-submission-form" >
+                        <div class="row">
+                            <div class="input-field col s12 m4">
+                                <input type="text" class="datepicker" id="date-obs" required="" aria-required="true">
+                                <label for="date-obs">Date of observation*</label>
+                            </div>
+
+                            <div class="input-field col s12 m4">
+                                <!-- step="1" is to change time format to hh:mm:ss -->
+                                <input type="text" class="timepicker" step="1" id="time-obs" required="" aria-required="true">
+                                <label for="time-obs">Time of observation*</label>
+                            </div>
+
+                            <div class="input-field col s12 m4">
+                                <select id="obs-category" required="" aria-required="true">
+                                    <option disabled hidden selected class="form-option">Choose an option</option>
+                                    <option value="animal" class="form-option">Animal&dagger;</option>
+                                    <option value="plant" class="form-option">Plant&dagger;</option>
+                                    <option value="fungus" class="form-option">Fungus&dagger;</option>
+                                    <option value="weather" class="form-option">Weather</option>
+                                    <option value="land_water" class="form-option">Land or water</option>
+                                    <option value="other" class="form-option">Other (please explain in Description fields)</option>
+                                </select>
+                                <label for="obs-category">Category*</label>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col s12 m6">
+                                <label for="googlemap">Location*</label>
+                                <div id="map-wrapper">
+                                    <form>
+                                    <button class="btn waves-effect waves-light g1 disabled" type="button" id="clear-pins" disabled="true">Clear Pin</button>
+                                    </form>
+                                    <div class="mapDisplayed" id="map-0"></div>
+                                </div>
+                            </div>
+
+                            <div class="col s12 m6">
+
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <textarea id="brief-desc" class="materialize-textarea validate" data-length="50" required=""  aria-required="true" placeholder="Ex. First Canada geese to return from winter"></textarea>
+                                        <label for="brief-desc">Brief description of observation*</label>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <textarea id="extended-desc" class="materialize-textarea validate" data-length="500" placeholder="Ex. Cold day, some patches of ice on Mirror Lake. Four Canada geese showed up early this morning."></textarea>
+                                        <label for="extended-desc">Extended description</label>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <select id="first-confidence" required="" aria-required="true">
+                                        <option value="1" selected class="form-option">1 - low confidence (default)</option>
+                                        <option value="2" class="form-option">2</option>
+                                        <option value="3" class="form-option">3</option>
+                                        <option value="4" class="form-option">4</option>
+                                        <option value="5" class="form-option">5 - high confidence</option>
+                                        </select>
+                                        <label for="first-confidence">Confidence your observation is the first of its type in your area*</label>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="file-field input-field col s12">
+                                        <button class="btn waves-effect waves-teal btn-flat btn-small" id="pic-button">
+                                        Upload
+                                        <input type="file" id="pic-file" accept="image/*" required="" aria-required="true">
+                                        </button>
+                                        <div class="file-path-wrapper">
+                                        <input class="file-path validate" id="pic-path" type="text" placeholder="Upload ONE picture*" required="" aria-required="true">
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <br>
+                        <div class="row hidden" id="species-info">
+                            <p>&dagger;<i>The following section is required if you selected animal, plant, or fungus.</i></p>
+                            <br>
+                            <div class="input-field col s12 m6 l4">
+                                <label for="species">Common name&dagger;</label>
+                                <input type="text" class="validate" id="species" data-length="50">
+                            </div>
+
+                            <div class="input-field col s12 m6 l4">
+                                <label for="species-sci-name">Scientific name (if known)</label>
+                                <input type="text" class="validate" id="species-sci-name" data-length="50">
+                            </div>
+
+                            <div class="input-field col s12 m6 l4">
+                                <select id="species-confidence">
+                                    <option value=null hidden selected class="form-option">Choose an option</option>
+                                    <option value="1" class="form-option">1 - low confidence</option>
+                                    <option value="2" class="form-option">2</option>
+                                    <option value="3" class="form-option">3</option>
+                                    <option value="4" class="form-option">4</option>
+                                    <option value="5" class="form-option">5 - high confidence</option>
+                                </select>
+                                <label for="species-confidence">Species ID confidence&dagger;</label>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <button class="btn waves-effect waves-light g1" type="submit" id="submit-obs">Submit</button> 
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="row hidden" id="view-near-obs">
+                <h5>Nearby observations</h5>
+                <br>
+                <div class="row">
+                    <div class="input-field col s12 m4">
+                        <h6>Where?</h6>
+                        <form>
+                        <label id="near-me">
+                            <input class="with-gap" type="radio" name="group-1" id="me" value="near-me" /><span>Near me!</span><br>
+                        </label>
+                        <label>
+                            <input class="with-gap" type="radio" name="group-1" id="city" value="near-city" checked /><span>Near a specified city!</span><br>
+                        </label>
+                        </form><br>
+                        <div id="city-select">
+                            <form autocomplete="off">
+                                <div class="autoComplete">
+                                <label for="event-location" class="form-label">Location*</label>
+                                <input id="locationInput" type="text" name="location" list="suggestion-list" placeholder="City, State">
+                                <datalist id="suggestion-list">
+
+                                </datalist>
+                                </div><br>
+                            </form>
+                        </div>
+                        <form>
+                            <label for="radius" class="form-label">Search Radius</label><br>      
+                                <select id="location-radius" class="form-control">
+                                    <option id="1-mi" value="1">1 Kilometer</option>
+                                    <option id="10-mi" value="10" selected="selected">10 Kilometers</option>
+                                    <option id="50-mi" value="50">50 Kilometers</option>
+                                    <option id="100-mi" value="100">100 Kilometers</option>
+                                    <option id="5-mi" value="500">500 Kilometers</option>
+                                    <option id="20-mi" value="1000">1000 Kilometers</option>
+                                </select><br>
+                            <button class="btn waves-effect waves-light g1" type="button" id="get-nearby" disabled>Search</button>
+                        </form>
+                    </div>
+                    <div class="col s12 m8 l8">
+                        <div id="map-wrapper">
+                            <div class="mapDisplayed" id="map-2"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row hidden" id="view-usr-obs">
+                <h5>All your observations</h5>
+                <br>
+                <div class="col s12 m6 l6">
+                    <table class="highlight responsive-table" id="all-your-obs">
+                        <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Category</th>
+                            <th>Brief description</th>
+                            <th>Delete</th>
+                        </tr>
+                        </thead>
+                        <tbody id="all-your-obs-body">
+                            <!-- this table gets populated dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col s12 m6 l6">
+                    <div id="map-wrapper">
+                        <div class="mapDisplayed" id="map-1"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- THIS IS A MONUMENT TO MY MISTAKES -Stefan
+
+            <div class="row hidden" id="view-near-obs">
+                <h5>Nearby observations</h5><br>
+                <div class="row">
                 <div class="input-field col s12 m4">
                     <h6>Where?</h6>
                     <form>
@@ -200,186 +272,113 @@
                     <form autocomplete="off">
                         <div class="autoComplete">
                         <label for="event-location" class="form-label">Location*</label>
-                        <input id="locationInput" type="text" name="location" list="suggestion-list" placeholder="City, State">
-                        <datalist id="suggestion-list">
-
-                        </datalist>
+                        <input id="locationInput" type="text" name="location" placeholder="City, State">
                         </div><br>
                     </form>
+                    </div>
+                    <form>
+                    <label for="radius" class="form-label">Search Radius</label><br>      
+                        <select id="location-radius" class="form-control">
+                            <option id="1-mi" value="1">1 Kilometer</option>
+                            <option id="10-mi" value="10" selected="selected">10 Kilometers</option>
+                            <option id="50-mi" value="50">50 Kilometers</option>
+                            <option id="100-mi" value="100">100 Kilometers</option>
+                            <option id="5-mi" value="500">500 Kilometers</option>
+                            <option id="20-mi" value="1000">1000 Kilometers</option>
+                        </select><br>
+                    <button class="btn waves-effect waves-light g1" type="button" id="get-nearby" disabled>Search</button>
+                    </form>
                 </div>
-                <form>
-                <label for="radius" class="form-label">Search Radius</label><br>      
-                    <select id="location-radius" class="form-control">
-                        <option id="1-mi" value="1">1 Kilometer</option>
-                        <option id="10-mi" value="10" selected="selected">10 Kilometers</option>
-                        <option id="50-mi" value="50">50 Kilometers</option>
-                        <option id="100-mi" value="100">100 Kilometers</option>
-                        <option id="5-mi" value="500">500 Kilometers</option>
-                        <option id="20-mi" value="1000">1000 Kilometers</option>
-                    </select><br>
-                <button class="btn waves-effect waves-light g1" type="button" id="get-nearby" disabled>Search</button>
-                </form>
-            </div>
-            <div class="col s12 m8 l8">
-                <div id="map-wrapper">
-                    <div class="mapDisplayed" id="map-2"></div>
-                </div>
-            </div>
-        </div>
-        </div>
-
-        <div class="row hidden" id="view-usr-obs">
-            <h5>All your observations</h5>
-            <br>
-            <div class="col s12 m6 l6">
-            <table class="highlight responsive-table" id="all-your-obs">
-                <thead>
-                <tr>
-                    <th>Date</th>
-                    <th>Category</th>
-                    <th>Brief description</th>
-                    <th>Delete</th>
-                </tr>
-                </thead>
-                <tbody id="all-your-obs-body">
-                    <!-- this table gets populated dynamically -->
-                </tbody>
-            </table>
-
-            </div>
-            <div class="col s12 m6 l6">
-            <div id="map-wrapper">
-                <div class="mapDisplayed" id="map-1"></div>
-            </div>
-            </div>
-        </div>
-
-        <!-- THIS IS A MONUMENT TO MY MISTAKES -Stefan
-
-        <div class="row hidden" id="view-near-obs">
-            <h5>Nearby observations</h5><br>
-            <div class="row">
-            <div class="input-field col s12 m4">
-                <h6>Where?</h6>
-                <form>
-                <label id="near-me">
-                    <input class="with-gap" type="radio" name="group-1" id="me" value="near-me" /><span>Near me!</span><br>
-                </label>
-                <label>
-                    <input class="with-gap" type="radio" name="group-1" id="city" value="near-city" checked /><span>Near a specified city!</span><br>
-                </label>
-                </form><br>
-                <div id="city-select">
-                <form autocomplete="off">
-                    <div class="autoComplete">
-                    <label for="event-location" class="form-label">Location*</label>
-                    <input id="locationInput" type="text" name="location" placeholder="City, State">
-                    </div><br>
-                </form>
-                </div>
-                <form>
-                <label for="radius" class="form-label">Search Radius</label><br>      
-                    <select id="location-radius" class="form-control">
-                        <option id="1-mi" value="1">1 Kilometer</option>
-                        <option id="10-mi" value="10" selected="selected">10 Kilometers</option>
-                        <option id="50-mi" value="50">50 Kilometers</option>
-                        <option id="100-mi" value="100">100 Kilometers</option>
-                        <option id="5-mi" value="500">500 Kilometers</option>
-                        <option id="20-mi" value="1000">1000 Kilometers</option>
-                    </select><br>
-                <button class="btn waves-effect waves-light g1" type="button" id="get-nearby" disabled>Search</button>
-                </form>
-            </div>
-            <div class="col s12 m8 l8">
-                <div id="map-wrapper">
-                    <div class="mapDisplayed" id="map-2"></div>
-                </div>
+                <div class="col s12 m8 l8">
+                    <div id="map-wrapper">
+                        <div class="mapDisplayed" id="map-2"></div>
+                    </div>
+                    </div>
                 </div>
             </div>
-        </div>
-        -->
+            -->
 
-        <div class="row hidden" id="download-data">
-            <h5>Download data</h5>
-            <br>
-            <form id="data-request-form" onsubmit="return false">
-            <div class="row">
+            <div class="row hidden" id="download-data">
+                <h5>Download data</h5>
+                <br>
+                <form id="data-request-form" onsubmit="return false">
+                    <div class="row">
 
-                <div class="input-field col s12 m6 l3">
-                <select id="category-download" name="category-download">
-                    <option value="all" selected class="form-option">All (default)</option>
-                    <option value="animal" class="form-option">Animal</option>
-                    <option value="plants" class="form-option">Plant</option>
-                    <option value="fungus" class="form-option">Fungus</option>
-                    <option value="weather" class="form-option">Weather</option>
-                    <option value="land_water" class="form-option">Land or water</option>
-                    <option value="other" class="form-option">Other</option>
-                </select>
-                <label for="category-download">Category*</label>
-                </div>
-
-                <div class="input-field col s12 m6 l3">
-                <input type="text" class="datepicker" id="start-date-download" name="start-date-download" required="" aria-required="true">
-                <label for="start-date-download">Start date*</label>
-                </div>
-
-                <div class="input-field col s12 m6 l3">
-                <input type="text" class="datepicker" id="end-date-download" name="end-date-download" required="" aria-required="true">
-                <label for="end-date-download">End date*</label>
-                </div>
-
-                <div class="input-field col s12 m6 l3">
-                <label for="include-pictures">
-                    <input id="include-pictures" type="checkbox" />
-                    <span>Check to include pictures</span>
-                </label>
-                </div>
-            </div>
-            <br>
-            <div class="row">
-                <button class="btn waves-effect waves-light" type="submit" id="request-data">Request
-                </button>     
-            </div>
-
-            </form>
-
-        </div>
-        </div>
-        </div>  
-
-
-        <footer class="page-footer teal">
-            <div class="container">
-                <div class="row">
-                    <div class="col s4">
-                        <h5 class="white-text">Team</h5>
-                        <ul>
-                        <li class="grey-text text-lighten-4">Stefan</li>
-                        <li class="grey-text text-lighten-4">Catherine</li>
-                        <li class="grey-text text-lighten-4">Julie</li>
-                        </ul>
-                        </div>   
-                
-                        <div class="col s8">
-                        <h5 class="white-text">Contact</h5>
-                            <ul>
-                            <li><a class="white-text" href="https://github.com/stefan-apr">Github</a> | <a class="white-text" href="https://stefan-apr.github.io/Responsive-Portfolio/portfolio.html">Portfolio</a> | <a class="white-text" href="https://www.linkedin.com/in/stefan-apreutesei-592514171/">LinkedIn</a></li>
-                            <li><a class="white-text" href="https://github.com/crypticwoodwhite">Github</a> | <a class="white-text" href="https://crypticwoodwhite.github.io/">Portfolio</a> | <a class="white-text" href="https://www.linkedin.com/in/catherinephamcww/">LinkedIn</a></li>
-                            <li><a class="white-text" href="https://github.com/JulieMathews?tab=repositories">Github</a> | <a class="white-text" href="https://juliemathews.github.io/New_Port/">Portfolio</a> | <a class="white-text" href="https://www.linkedin.com/in/julie-mathews/">LinkedIn</a></li>
-                            </ul>
+                        <div class="input-field col s12 m6 l3">
+                            <select id="category-download" name="category-download">
+                                <option value="all" selected class="form-option">All (default)</option>
+                                <option value="animal" class="form-option">Animal</option>
+                                <option value="plants" class="form-option">Plant</option>
+                                <option value="fungus" class="form-option">Fungus</option>
+                                <option value="weather" class="form-option">Weather</option>
+                                <option value="land_water" class="form-option">Land or water</option>
+                                <option value="other" class="form-option">Other</option>
+                            </select>
+                            <label for="category-download">Category*</label>
                         </div>
-                </div>
+
+                        <div class="input-field col s12 m6 l3">
+                            <input type="text" class="datepicker" id="start-date-download" name="start-date-download" required="" aria-required="true">
+                            <label for="start-date-download">Start date*</label>
+                        </div>
+
+                        <div class="input-field col s12 m6 l3">
+                            <input type="text" class="datepicker" id="end-date-download" name="end-date-download" required="" aria-required="true">
+                            <label for="end-date-download">End date*</label>
+                        </div>
+
+                        <div class="input-field col s12 m6 l3">
+                            <label for="include-pictures">
+                                <input id="include-pictures" type="checkbox" />
+                                <span>Check to include pictures</span>
+                            </label>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <button class="btn waves-effect waves-light" type="submit" id="request-data">Request
+                        </button>     
+                    </div>
+
+                </form>
+
             </div>
+        </div>
+    </div>  
+
+
+    <footer class="page-footer teal">
+        <div class="container">
+            <div class="row">
+                <div class="col s4">
+                    <h5 class="white-text">Team</h5>
+                    <ul>
+                    <li class="grey-text text-lighten-4">Stefan</li>
+                    <li class="grey-text text-lighten-4">Catherine</li>
+                    <li class="grey-text text-lighten-4">Julie</li>
+                    </ul>
+                    </div>   
             
-            <div class="footer-copyright center-align">
-                <div class="container">
-                    Copyright 2019 The SenSaison Team. All rights reserved.
-                    <br>
-                    Layout made by <a class="brown-text text-lighten-3" href="http://materializecss.com">Materialize</a>
-                    <br>
-                    Icons made by <a class="brown-text text-lighten-3" href="https://www.freepik.com/?__hstc=57440181.0eb3d779ec5765d0fe6d5707603795e0.1556587780268.1557020807941.1557370549277.8&__hssc=57440181.8.1557370549277&__hsfp=2810556" title="Freepik">Freepik</a> from <a class="brown-text text-lighten-3" href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> and is licensed by <a class="brown-text text-lighten-3" href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC BY 3.0</a></div>
+                    <div class="col s8">
+                    <h5 class="white-text">Contact</h5>
+                        <ul>
+                        <li><a class="white-text" href="https://github.com/stefan-apr">Github</a> | <a class="white-text" href="https://stefan-apr.github.io/Responsive-Portfolio/portfolio.html">Portfolio</a> | <a class="white-text" href="https://www.linkedin.com/in/stefan-apreutesei-592514171/">LinkedIn</a></li>
+                        <li><a class="white-text" href="https://github.com/crypticwoodwhite">Github</a> | <a class="white-text" href="https://crypticwoodwhite.github.io/">Portfolio</a> | <a class="white-text" href="https://www.linkedin.com/in/catherinephamcww/">LinkedIn</a></li>
+                        <li><a class="white-text" href="https://github.com/JulieMathews?tab=repositories">Github</a> | <a class="white-text" href="https://juliemathews.github.io/New_Port/">Portfolio</a> | <a class="white-text" href="https://www.linkedin.com/in/julie-mathews/">LinkedIn</a></li>
+                        </ul>
+                    </div>
             </div>
-        </footer>
+        </div>
+        
+        <div class="footer-copyright center-align">
+            <div class="container">
+                Copyright 2019 The SenSaison Team. All rights reserved.
+                <br>
+                Layout made by <a class="brown-text text-lighten-3" href="http://materializecss.com">Materialize</a>
+                <br>
+                Icons made by <a class="brown-text text-lighten-3" href="https://www.freepik.com/?__hstc=57440181.0eb3d779ec5765d0fe6d5707603795e0.1556587780268.1557020807941.1557370549277.8&__hssc=57440181.8.1557370549277&__hsfp=2810556" title="Freepik">Freepik</a> from <a class="brown-text text-lighten-3" href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> and is licensed by <a class="brown-text text-lighten-3" href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC BY 3.0</a></div>
+        </div>
+    </footer>
 
 
     <!--  Scripts -->

@@ -34,9 +34,9 @@ Issuer.discover("https://accounts.google.com/.well-known/openid-configuration")
 			await db.Users.findOrCreate({
 				where: {
 					openId: tokenset.claims.sub,
-					firstName: tokenset.id_token.given_name,
-					lastName: tokenset.id_token.family_name,
-					email: tokenset.id_token.email
+					firstName: userinfo.given_name,
+					lastName: userinfo.family_name,
+					email: userinfo.email
 				}
 			}, (err, user) => {
 				if (err) {

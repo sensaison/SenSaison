@@ -1,10 +1,7 @@
 const Passport = require("../config/passportStrategy"),
-	ensureAuthenticated = require("./ensureAuthenticated");
+	ensureAuthenticated = require("../plugins/ensureAuthenticated");
 	// db = require("../models"),
 	// path = require("path");
-
-let person,
-	access_token;
 
 module.exports = app => {
 
@@ -44,17 +41,17 @@ module.exports = app => {
 			failureRedirect: "/" ,
 			failureFlash: "Problem with authentication, try again",
 		}),	(req, res) => {
-			res.setHeader("Cookie", ["set-cookie"]);
 
-			console.log("REQ.USER: ", req.user);
-
-			window.person = req.user; // app-level variable?????????????????
-			window.access_token = req.access_token;
+			console.log("======================");
+			console.log("req.user:", req.user);
+			console.log("user:", user);
+			console.log("req.access_token:", req.access_token);
+			console.log("req.user.id:", req.user.id);
+			console.log("req.session:", req.session);
+			console.log("======================");
 
 			req.session.save(() => {
-				res.send({ person, access_token });
-				res.redirect("/useraccount");
-				console.log("SUCCESSFUL AUTHENTICATION");
+				res.redirect("/useraccount", { user: req.user });
 			});
 		}
 	);
@@ -63,12 +60,13 @@ module.exports = app => {
 	app.get("/useraccount", ensureAuthenticated, (req, res) => {
 		console.log("user account page");
 		console.log("req.user: ", req.user);
-		console.log("person: ", person);
+		console.log("user:", user);
 
 		res.render("useraccount", { user: req.user }, (err, html) => {
 			if (err) {
 				console.log(err);
 			}
+			console.log("req.user:", user);
 			res.send(html);
 		});
 	});
