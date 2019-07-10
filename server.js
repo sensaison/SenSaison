@@ -32,13 +32,24 @@ app.use((req, res, next) => {
 require("./routes/apiRoutes")(app);
 
 // session and cookies
-let sqlStore = new mySQLStore({
-	user: process.env.MYSQLUSER,
-	password: process.env.MYSQLPWD,
-	database: process.env.MYSQLDB,
-	host: process.env.MYSQLHOST,
-	port: process.env.MYSQLPORT  
-});
+let sqlStore;
+if (process.env.NODE_ENV === "production") {
+	sqlStore = new mySQLStore({
+		user: process.env.JAWSDB_USER,
+		password: process.env.JAWSDB_PWD,
+		database: process.env.JAWSDB_DB,
+		host: process.env.JAWSDB_HOST,
+		port: process.env.JAWSDB_PORT
+	});
+} else {
+	sqlStore = new mySQLStore({
+		user: process.env.MYSQLUSER,
+		password: process.env.MYSQLPWD,
+		database: process.env.MYSQLDB,
+		host: process.env.MYSQLHOST,
+		port: process.env.MYSQLPORT  
+	});
+}
 let sessionOptions = {
 	secret: process.env.SESSION_SECRET,
 	store: sqlStore,
@@ -50,13 +61,6 @@ let sessionOptions = {
 	}
 };
 if (process.env.NODE_ENV === "production") {
-	sqlStore = new mySQLStore({
-		user: process.env.JAWSDB_USER,
-		password: process.env.JAWSDB_PWD,
-		database: process.env.JAWSDB_DB,
-		host: process.env.JAWSDB_HOST,
-		port: process.env.JAWSDB_PORT
-	});
 	app.set("trust proxy", 1);
 	sessionOptions.cookie.secure = true; // serve secure cookies only in production
 }
