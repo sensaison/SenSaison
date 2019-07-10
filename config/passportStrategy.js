@@ -13,7 +13,7 @@ Issuer.discover("https://accounts.google.com/.well-known/openid-configuration")
 			redirect_uris: ["https://sensaison.herokuapp.com/useraccount", "http://localhost:3000/useraccount"],
 			response_types: ["code", "token", "id_token"]
 		});
-
+		
 		const params = {
 			client_id: process.env.GOOGLE_CLIENTID, 
 			response_type: "code token id_token",
@@ -24,7 +24,7 @@ Issuer.discover("https://accounts.google.com/.well-known/openid-configuration")
 			prompt: "select_account",
 			login_hint: "sub",
 		};
-
+		
 		const verify = async ( tokenset, userinfo, done ) => {
 			console.log("tokenset: ", tokenset);
 			console.log("access_token: ", tokenset.access_token);
@@ -34,19 +34,20 @@ Issuer.discover("https://accounts.google.com/.well-known/openid-configuration")
 			await db.Users.findOrCreate({
 				where: {
 					openId: tokenset.claims.sub,
-					firstName: userinfo.given_name,
-					lastName: userinfo.family_name,
-					email: userinfo.email
+					firstName: tokenset.id_token.given_name,
+					lastName: tokenset.id_token.family_name,
+					email: tokenset.id_token.email
 				}
 			}, (err, user) => {
 				if (err) {
 					console.log("ERROR LOGGING IN");
 					return done(err, user);
 				}
-				if (!user) {
-					console.log("NO USER");
-					return done(null, false);
-				}
+				// don't need below because findOrCreate
+				// if (!user) {
+				// 	console.log("NO USER");
+				// 	return done(null, false);
+				// }
 				console.log("FIND OR CREATE");
 				return done(null, { user, tokenset });
 			});
@@ -74,18 +75,26 @@ Issuer.discover("https://accounts.google.com/.well-known/openid-configuration")
 
 // session stuff
 Passport.serializeUser((user, done) => {
-	console.log("SERIALIZED USER: ", user);
-	done(null, user);
+	console.log("SERIALIZE USER: ", user);
+	console.log("SERIALIZE USER.ID: ", user.id);
+	console.log("SERIALIZE USER._ID: ", user._id);
+	done(null, user.id);
 });
 
 Passport.deserializeUser((id, done) => {
 	db.Users.findOne({
-		where: 
-			{ openid: id }
+		where: { openId: id }
 	}, (err, user) => {
 		console.log("DESERIALIZED USER: ", user);
 		done(err, user);
 	});
+	// db.Users.findOne({
+	// 	where: 
+	// 		{ openid: id }
+	// }, (err, user) => {
+	// 	console.log("DESERIALIZED USER: ", user);
+	// 	done(err, user);
+	// });
 });
 
 module.exports = Passport;

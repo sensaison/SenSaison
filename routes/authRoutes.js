@@ -32,7 +32,13 @@ module.exports = app => {
 		});
 	});
 
-	app.post("/auth/openid-client", Passport.authenticate("openid-client"));
+	app.post("/auth/openid-client",
+		Passport.authenticate("openid-client"),
+		(req, res) => {
+			console.log("login post");
+			console.log("post req.user:", req.user);
+		}
+	);
 	// above not working
 
 	app.get("/auth/openid-client/callback",

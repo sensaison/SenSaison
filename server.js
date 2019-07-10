@@ -28,8 +28,6 @@ app.use((req, res, next) => {
 	next();
 });
 
-app.use(flash());
-
 // non auth routes before passport and session code
 require("./routes/apiRoutes")(app);
 
@@ -65,6 +63,7 @@ if (process.env.NODE_ENV === "production") {
 app.use(session(sessionOptions));
 app.use(Passport.initialize());
 app.use(Passport.session());
+app.use(flash());
 
 // create middleware to send user info to front end
 app.use((req, res, next) => {
@@ -72,14 +71,19 @@ app.use((req, res, next) => {
 	res.locals.error_messages = req.flash("error! server.js");
 
 	console.log("==================");
-	console.log("req.session:", req.session);
-	console.log("==================");
 	console.log("req.session.user:", req.session.user);
+	console.log("req.user:", req.user);
+	console.log("req.session:", req.session);
 	console.log("==================");
 		
 	if (req.session && req.session.user) {
 
-		db.Users.findOrCreate({ openId: req.session.user.id }, (err, user) => {
+		console.log("req.user.id:", req.user.id);
+		console.log("req.session.user.id:", req.session.user.id);	
+
+		db.Users.findOrCreate({
+			where: { openId: req.session.user.id }
+		}, (err, user) => {
 			if (err) {
 				console.log(err);
 			}

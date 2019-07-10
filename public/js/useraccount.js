@@ -59,12 +59,12 @@ $(document).ready(() => {
 		}
 	});
 
-	console.log(window.user);
+	console.log("window.user:", window.user);
 	// displaying user's observations in table mentioned above
 	$.ajax("/api/userobservations", {
 		type: "GET",
 		data: {
-			openId: window.user // will have to change this to openId for DEVELOPMENT and in future in jawsdb
+			openId: "12345" // will have to change this to openId for DEVELOPMENT and in future in jawsdb
 		}
 	}).then(data => {
 		window.userObs = data;
