@@ -82,10 +82,12 @@ app.use((req, res, next) => {
 		
 	if (req.session && req.session.user) {
 
+		console.log("==================");
 		console.log("req.user.id:", req.user.id);
-		console.log("req.session.user.id:", req.session.user.id);	
+		console.log("req.session.user.id:", req.session.user.id);
+		console.log("==================");
 
-		db.Users.findOrCreate({
+		db.Users.findOne({
 			where: { openId: req.session.user.id }
 		}, (err, user) => {
 			if (err) {

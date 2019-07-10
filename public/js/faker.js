@@ -47,7 +47,7 @@ $.ajax("/api/observations", {
 		var extendedDescriptionVal = randomWords(7, 3);
 
 		var newObs = {
-			userId: userIdVal,
+			openId: userIdVal,
 			pictureId: pictureIdVal,
 			dateObs: dateObsVal,
 			timeObs: timeObsVal,
