@@ -69,17 +69,22 @@ app.use(Passport.initialize());
 app.use(Passport.session());
 app.use(flash());
 
+// auth routes
+require("./routes/authRoutes")(app);
+// should this above go before or after the middleware below?
+
 // create middleware to send user info to front end
 app.use((req, res, next) => {
 	res.locals.success_messages = req.flash("success! server.js");
 	res.locals.error_messages = req.flash("error! server.js");
 
-	console.log("==================");
-	console.log("req.session.user:", req.session.user);
+	console.log("APP.USE MIDDLEWARE >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
 	console.log("req.user:", req.user);
+	console.log("req.session.user:", req.session.user);
 	console.log("req.session:", req.session);
 	console.log("==================");
-		
+	
+	// this part doesn't work because req.session is never created
 	if (req.session && req.session.user) {
 
 		console.log("==================");
@@ -99,19 +104,17 @@ app.use((req, res, next) => {
 
 			console.log("user:", user);
 			console.log("req.user:", req.user);
-			console.log("==================");
 
 			// finishing processing the middleware and run the route
 			next();
 		});
 	} else {
+		// this part works
 		console.log("no session or session user");
+		console.log("END APP.USE MIDDLEWARE >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
 		next();
 	}
 });
-
-// auth routes
-require("./routes/authRoutes")(app);
 
 let syncOptions = { force: false };
 if (process.env.NODE_ENV === "test") {
