@@ -21,7 +21,7 @@
         <meta name="description" content="Animated Swatch Book with CSS3 and jQuery" />
         <meta name="keywords" content="swatch book, css3, jquery, animated, rotation, transition, folding fan" />
         <meta name="author" content="Codrops" />
-        <link rel="stylesheet" type="text/css" href="SwatchBook/css/style3.css" />
+        <link rel="stylesheet" type="text/css" href="SwatchBook/css/swatchbookstyle.css" />
         <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:700,300,300italic' rel='stylesheet' type='text/css'>
         <!-- <script type="text/javascript" src="SwatchBook/js/modernizr.custom.79639.js"></script>
         <script type="text/javascript" src="SwatchBook/js/jquery.swatchbook.js"></script> -->
@@ -83,40 +83,43 @@
                 <h5 class="center-align">Latest observations uploaded by citizen scientists</h5>
                 <div id="sb-container" class="sb-container">
                     <div>
-                        <span class="sb-icon">
-                            <img  src="images/thunderstorm.jpg" />
-                        </span>
                         <h4><span>Weather</span></h4>
+                        <span class="sb-icon">
+                            <img class="sb-img" id="sb-weather" src="images/thunderstorm.jpg" />
+                            <p class="sb-img-date" id="sb-weather-date"></p>
+                        </span>
                     </div>
                     <div>
-                        <span class="sb-icon">
-                            <img  src="images/tulips.jpeg" />
-                        </span>
                         <h4><span>Plants</span></h4>
+                        <span class="sb-icon">
+                            <img class="sb-img" id="sb-plants" src="images/tulips.jpeg" />
+                            <p class="sb-img-date" id="sb-plants-date"></p>
+                        </span>
                     </div>	
                     <div>
-                        <span class="sb-icon">
-                            <img  src="images/permafrost.jpg" />
-                        </span>
                         <h4><span>Land & Water</span></h4>
+                        <span class="sb-icon">
+                            <img class="sb-img" id="sb-land-water" src="images/permafrost.jpg" />
+                            <p class="sb-img-date" id="sb-land-water-date"></p>
+                        </span>
                     </div>	
                     <div>
-                        <span class="sb-icon">
-                            <img  src="images/fungus.jpg" />
-                        </span>
                         <h4><span>Fungus</span></h4>
-                    </div>	
-                    <div>
                         <span class="sb-icon">
-                            <img  src="images/goose.jpg" />
+                            <img class="sb-img" id="sb-fungus" src="images/fungus.jpg" />
+                            <p class="sb-img-date" id="sb-fungus-date"></p>
                         </span>
-                        <h4><span>Animals</span></h4>
                     </div>	
                     <div>
-                    <h4><span style="text-shadow: 0px 0px 3px black">Latest Observations</span></h4>
-                    <span class="sb-toggle" style="text-shadow: 0px 0px 3px white">Click to open/close</span>
-            
-                    <!-- CURRENT_TIMESTAMP -->
+                        <h4><span>Animals</span></h4>
+                        <span class="sb-icon">
+                            <img class="sb-img" id="sb-animals" src="images/goose.jpg" />
+                            <p class="sb-img-date" id="sb-animals-date"></p>
+                        </span>
+                    </div>	
+                    <div>
+                        <h4><span id="sb-latest-obs">Latest Observations</span></h4>
+                        <span class="sb-toggle" id="sb-toggle-click">Click to open/close</span>
                     </div>
                 </div>
             </section>

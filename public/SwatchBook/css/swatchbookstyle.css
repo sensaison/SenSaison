@@ -1,3 +1,20 @@
+/* start customizations */
+
+#sb-latest-obs {
+	text-shadow: 0px 0px 3px black;
+}
+
+#sb-toggle-click {
+	text-shadow: 0px 0px 3px white;
+}
+
+.sb-img-date {
+	color: white;
+	border: 0;
+}
+
+/* end customizations */
+
 .sb-container {
 	position: relative;
 	width: 150px;
