@@ -3,7 +3,7 @@ const db = require("../models"),
 	Sequelize = require("sequelize"),
 	Op = Sequelize.Op,
 	json2csv = require("json2csv").parse,
-	zipURLs = require("./zipURLs");
+	zipURLs = require("../plugins/zipURLs");
 
 module.exports = app => {
 
@@ -11,7 +11,7 @@ module.exports = app => {
 	app.get("/api/observations", (req, res) => {
 		db.Observations.findAll({
 			include: [{
-				model: db.User,
+				model: db.Users,
 				attributes: ["openId", "firstName", "lastName", "username"]
 			}]
 		}).then(dbObs => {
@@ -26,7 +26,7 @@ module.exports = app => {
 				category: req.params.category
 			},
 			include: [{
-				model: db.User,
+				model: db.Users,
 				attributes: ["openId", "firstName", "lastName", "username"]
 			}]
 		}).then(dbObs => {
@@ -43,32 +43,29 @@ module.exports = app => {
 
 			},
 			order: [["createdAt", "DESC"]],
-			include: [{
-				model: db.User,
-				attributes: ["username"]
-			}]
+			attributes: ["pictureId", "dateObs", "briefDescription"]
 		}).then(recentObs => {
 			res.json(recentObs);
 		});
 	});
 
 	// GET most recent FIVE observations of each category by TIMESTAMP
-	app.get("/api/:category/mostrecentfive", (req, res) => {
-		db.Observations.findAll({
-			limit: 5,
-			where: {
-				category: req.params.category,
+	// app.get("/api/:category/mostrecentfive", (req, res) => {
+	// 	db.Observations.findAll({
+	// 		limit: 5,
+	// 		where: {
+	// 			category: req.params.category,
 
-			},
-			order: [["createdAt", "DESC"]],
-			include: [{
-				model: db.User,
-				attributes: ["username"]
-			}]
-		}).then(recentObs => {
-			res.json(recentObs);
-		});
-	});
+	// 		},
+	// 		order: [["createdAt", "DESC"]],
+	// 		include: [{
+	// 			model: db.Users,
+	// 			attributes: ["username"]
+	// 		}]
+	// 	}).then(recentObs => {
+	// 		res.json(recentObs);
+	// 	});
+	// });
 
 	// CREATE new observation
 	app.post("/api/observations", (req, res) => {
@@ -98,7 +95,7 @@ module.exports = app => {
 					[Op.between]: [req.query.minDate, req.query.maxDate]
 				}
 			} 
-		}).then(async function(results) {
+		}).then(async results => {
 			const csv = json2csv(results, {
 				fields: [
 					"id",
@@ -185,41 +182,19 @@ module.exports = app => {
 	app.get("/api/users", (req, res) => {
 		db.Users.findAll({
 			attributes: ["openId", "firstName", "lastName", "username"],
-			include: [db.Observation]
+			include: [db.Observations]
 		}).then(allusr => {
 			res.json(allusr);
 		});
 	});
 
+	// don't need this because done on login
 	// CREATE new user
-	app.post("/api/users", (req, res) => {
-		db.Users.create(req.body)
-			.then(newusr => {
-				res.json(newusr);
-			});
-	});
-
-	// app-level person vars
-	app.use((req, res, next) => {
-		if (req.session && req.session.user) {
-			console.log("session: ", req.session);
-			db.Users.findOne({ openId: req.session.user.id }, (err, user) => {
-				if (user) {
-					person = req.user;
-					person = req.session.user;
-					person = res.locals.user;
-					console.log("PERSON: ", person);
-				} else {
-					console.log("NO USER");
-					console.log(err);
-				}
-				// finishing processing the middleware and run the route
-				next();
-			});
-		} else {
-			console.log("no user");
-			next();
-		}
-	});
+	// app.post("/api/users", (req, res) => {
+	// 	db.Users.create(req.body)
+	// 		.then(newusr => {
+	// 			res.json(newusr);
+	// 		});
+	// });
 
 };

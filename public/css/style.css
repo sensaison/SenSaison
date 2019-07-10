@@ -6,6 +6,10 @@
 * Made By MaterializeCSS.com
 */
 
+#index-icons {
+  display: inline;
+}
+
 nav ul a,
 nav .brand-logo,
 #signin-button-link {

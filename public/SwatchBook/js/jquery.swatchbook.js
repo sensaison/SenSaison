@@ -9,7 +9,7 @@
  * http://www.codrops.com
  */
 	
-"use strict";
+// "use strict";
 
 // global
 var Modernizr = window.Modernizr;

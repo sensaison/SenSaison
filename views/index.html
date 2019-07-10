@@ -21,10 +21,13 @@
         <meta name="description" content="Animated Swatch Book with CSS3 and jQuery" />
         <meta name="keywords" content="swatch book, css3, jquery, animated, rotation, transition, folding fan" />
         <meta name="author" content="Codrops" />
-        <link rel="stylesheet" type="text/css" href="SwatchBook/css/style3.css" />
+        <link rel="stylesheet" type="text/css" href="SwatchBook/css/swatchbookstyle.css" />
         <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:700,300,300italic' rel='stylesheet' type='text/css'>
-        <script type="text/javascript" src="SwatchBook/js/modernizr.custom.79639.js"></script>
-        <script type="text/javascript" src="SwatchBook/js/jquery.swatchbook.js"></script>
+        <!-- <script type="text/javascript" src="SwatchBook/js/modernizr.custom.79639.js"></script>
+        <script type="text/javascript" src="SwatchBook/js/jquery.swatchbook.js"></script> -->
+
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
         
     </head>
 
@@ -67,7 +70,7 @@
                     <br><br>
                 </div>
             </div>
-            <div class="parallax"><img src="images/image1.jpg" alt="img 1"></div>
+            <div class="parallax"><img src="images/image1.jpg"></div>
         </div>
 
         <div class="container">
@@ -83,40 +86,43 @@
                 <h5 class="center-align">Latest observations uploaded by citizen scientists</h5>
                 <div id="sb-container" class="sb-container">
                     <div>
-                        <span class="sb-icon">
-                            <img  src="images/thunderstorm.jpg" />
-                        </span>
                         <h4><span>Weather</span></h4>
+                        <span class="sb-icon">
+                            <img class="sb-img" id="sb-weather" src="images/thunderstorm.jpg" />
+                            <p class="sb-img-date" id="sb-weather-date"></p>
+                        </span>
                     </div>
                     <div>
-                        <span class="sb-icon">
-                            <img  src="images/tulips.jpeg" />
-                        </span>
                         <h4><span>Plants</span></h4>
+                        <span class="sb-icon">
+                            <img class="sb-img" id="sb-plants" src="images/tulips.jpeg" />
+                            <p class="sb-img-date" id="sb-plants-date"></p>
+                        </span>
                     </div>	
                     <div>
-                        <span class="sb-icon">
-                            <img  src="images/permafrost.jpg" />
-                        </span>
                         <h4><span>Land & Water</span></h4>
+                        <span class="sb-icon">
+                            <img class="sb-img" id="sb-land-water" src="images/permafrost.jpg" />
+                            <p class="sb-img-date" id="sb-land-water-date"></p>
+                        </span>
                     </div>	
                     <div>
-                        <span class="sb-icon">
-                            <img  src="images/fungus.jpg" />
-                        </span>
                         <h4><span>Fungus</span></h4>
-                    </div>	
-                    <div>
                         <span class="sb-icon">
-                            <img  src="images/goose.jpg" />
+                            <img class="sb-img" id="sb-fungus" src="images/fungus.jpg" />
+                            <p class="sb-img-date" id="sb-fungus-date"></p>
                         </span>
-                        <h4><span>Animals</span></h4>
                     </div>	
                     <div>
-                    <h4><span style="text-shadow: 0px 0px 3px black">Latest Observations</span></h4>
-                    <span class="sb-toggle" style="text-shadow: 0px 0px 3px white">Click to open/close</span>
-            
-                    <!-- CURRENT_TIMESTAMP -->
+                        <h4><span>Animals</span></h4>
+                        <span class="sb-icon">
+                            <img class="sb-img" id="sb-animals" src="images/goose.jpg" />
+                            <p class="sb-img-date" id="sb-animals-date"></p>
+                        </span>
+                    </div>	
+                    <div>
+                        <h4><span id="sb-latest-obs">Latest Observations</span></h4>
+                        <span class="sb-toggle" id="sb-toggle-click">Click to open/close</span>
                     </div>
                 </div>
             </section>
@@ -124,7 +130,7 @@
 
         <div class="parallax-container valign-wrapper">
             <div class="section no-pad-bot"></div>
-            <div class="parallax"><img src="images/image2.jpg" alt="img 2"></div>
+            <div class="parallax"><img src="images/image2.jpg"></div>
         </div>
 
         <div class="container">
@@ -135,9 +141,9 @@
                         <div class="row">
                             <div class="col s12 center-align">
                                 <div class="icon-block">
-                                    <img style="display: inline;" src="images/land.png">  
-                                    <img style="display: inline;" src ="images/plant.png">  
-                                    <img style="display: inline;" src ="images/fungi.png">
+                                    <img class="index-icons" src="images/land.png">  
+                                    <img class="index-icons" src ="images/plant.png">  
+                                    <img class="index-icons" src ="images/fungi.png">
                                     <h5>Animals, plants, and fungi</h5>
                                     Living organisms such as animals, plants, and fungi, respond to changes in temperature, the timing of seasonal transitions, and the duration of seasons in different ways. For example, some insects might start reproducing earlier in the year. Birds that respond less to temperature and more to daylight or to historical migration patterns continue to lay their eggs about the same time they always have. That means that the peak season for insects no longer coincides with the period when chicks need the most food. That can cause long term declines in bird populations. Effects like these are common across all living organisms.      
                                 </div>
@@ -147,8 +153,8 @@
                         <div class="row">
                             <div class="col s12 center-align">
                                 <div class="icon-block">
-                                    <img style="display: inline;" src="images/weather.png">
-                                    <img style="display: inline;" src ="images/water.png">
+                                    <img class="index-icons" src="images/weather.png">
+                                    <img class="index-icons" src ="images/water.png">
                                     <h5>Weather, water, and land</h5>
                                     Changes in the timing and duration of seasons and seasonal transitions can also affect the non-living parts of the environment. For example, the length and timing of hurricane season might change, as well as how long lakes and seas are frozen for during the winter. These changes affect living organisms, including us.            
                                 </div>
@@ -161,7 +167,7 @@
 
         <div class="parallax-container valign-wrapper">
             <div class="section no-pad-bot"></div>
-            <div class="parallax"><img src="images/image1a.jpg" alt="img 3"></div>
+            <div class="parallax"><img src="images/image1a.jpg"></div>
         </div>
 
         <footer class="page-footer teal">
@@ -170,18 +176,17 @@
                     <div class="col s4">
                         <h5 class="white-text">Team</h5>
                         <ul>
-                        <li class="grey-text text-lighten-4">Stefan</li>
-                        <li class="grey-text text-lighten-4">Catherine</li>
-                        <li class="grey-text text-lighten-4">Julie</li>
+                            <li><a class="white-text" href="mailto:sapreut&#64;uw.edu" title="Email Stefan">Stefan <i class="white-text far fa-envelope fa-1x contact"></i></a></li>
+                            <li><a class="white-text" href="mailto:cpham.cww&#64;gmail.com" title="Email Catherine">Catherine <i class="white-text far fa-envelope fa-1x contact"></i></a></li>
+                            <li><a class="white-text" href="mailto:juliemathews84&#64;gmail.com" title="Email Julie">Julie <i class="white-text far fa-envelope fa-1x contact"></i></a></li>
                         </ul>
                         </div>   
                 
                         <div class="col s8">
                         <h5 class="white-text">Contact</h5>
                             <ul>
-                            <li><a class="white-text" href="https://github.com/stefan-apr">Github</a> | <a class="white-text" href="https://stefan-apr.github.io/Responsive-Portfolio/portfolio.html">Portfolio</a> | <a class="white-text" href="https://www.linkedin.com/in/stefan-apreutesei-592514171/">LinkedIn</a></li>
-                            <li><a class="white-text" href="https://github.com/crypticwoodwhite">Github</a> | <a class="white-text" href="https://crypticwoodwhite.github.io/">Portfolio</a> | <a class="white-text" href="https://www.linkedin.com/in/catherinephamcww/">LinkedIn</a></li>
-                            <li><a class="white-text" href="https://github.com/JulieMathews?tab=repositories">Github</a> | <a class="white-text" href="https://juliemathews.github.io/New_Port/">Portfolio</a> | <a class="white-text" href="https://www.linkedin.com/in/julie-mathews/">LinkedIn</a></li>
+                                <li><a class="white-text" href="mailto:teamsensaison&#64;gmail.com" title="Email the team">teamsensaison@gmail.com <i class="white-text far fa-envelope fa-1x contact"></i></a></li>
+                                <li>Seattle, WA, USA</li>
                             </ul>
                         </div>
                 </div>
@@ -189,7 +194,7 @@
             
             <div class="footer-copyright center-align">
                 <div class="container">
-                    Copyright 2019 The SenSaison Team. All rights reserved.
+                    Copyright 2019 Team SenSaison. All rights reserved.
                     <br>
                     Layout made by <a class="brown-text text-lighten-3" href="http://materializecss.com">Materialize</a>
                     <br>
@@ -204,48 +209,11 @@
         <script type="text/javascript" src="js/userAuthBtns_index.js"></script>
 
 
-        <!-- SWATCHBOOK SCRIPT -->
+        <!-- SWATCHBOOK SCRIPTS -->
+        <script type="text/javascript" src="SwatchBook/js/modernizr.custom.79639.js"></script>
         <script type="text/javascript" src="SwatchBook/js/jquery.swatchbook.js"></script>
-        <script type="text/javascript">
-            $(function() {
-                $( '#sb-container' ).swatchbook( {
-                    // number of degrees that is between each item
-                    angleInc : 30,
-                    neighbor : 15,
-                    // if it should be closed by default
-            initclosed : true,
-            // index of the element that when clicked, triggers the open/close function
-                    // by default there is no such element
-                    closeIdx : 5
-            });
-            
-            var randomNumber = Math.floor(Math.random() * 11) + 1;
-                $('#sb-container div:last-child').addClass('img'+randomNumber);
-                });
-        </script>
-        
-        <!-- SWATCHBOOK category images -->
-        <!-- <script>
-            $.get('/api/swatchPics', function(data) {
-            $('#animals').css('background-image', 'url(' + data.animalImage + ')');
-            })
-            
-            $.get('/api/swatchPics', function(data) {
-            $('#fungus').css('background-image', 'url(' + data.fungusImage + ')');
-            })
-            
-            $.get('/api/swatchPics', function(data) {
-            $('#landwater').css('background-image', 'url(' + data.landwaterImage + ')');
-            })
-            
-            $.get('/api/swatchPics', function(data) {
-            $('#plants').css('background-image', 'url(' + data.plantsImage + ')');
-            })
-            
-            $.get('/api/swatchPics', function(data) {
-            $('#weather').css('background-image', 'url(' + data.weatherImage + ')');
-            })
-        </script> -->
+        <script type="text/javascript" src="SwatchBook/js/swatchbook.js"></script>
+        <script type="text/javascript" src="SwatchBook/js/swatchbookimages.js"></script>
 
     </body>
 
