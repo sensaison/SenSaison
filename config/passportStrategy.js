@@ -1,100 +1,73 @@
 require("dotenv").config();
 const Passport = require("passport"),
-	Strategy = require("openid-client").Strategy,
-	Issuer = require("openid-client").Issuer,
-	generators = require("openid-client").generators,
-	db = require("../models");
+	db = require("../models"),
+	GoogleStrategy = require("passport-google-oauth20").Strategy;
 
-Issuer.discover("https://accounts.google.com/.well-known/openid-configuration")
-	.then(googleIssuer => {
-		const client = new googleIssuer.Client({
-			client_id: process.env.GOOGLE_CLIENTID,
-			client_secret: process.env.GOOGLE_SECRET,
-			redirect_uris: ["https://sensaison.herokuapp.com/useraccount", "http://localhost:3000/useraccount"],
-			response_types: ["code", "token", "id_token"]
-		});
-		
-		const params = {
-			client_id: process.env.GOOGLE_CLIENTID, 
-			response_type: "code token id_token",
-			scope: "openid profile email",
-			nonce: generators.nonce(),
-			redirect_uri: "http://localhost:3000/useraccount",  // REMEMBER TO CHANGE THIS BETWEEN PROD AND DEV
-			state: generators.state(),
-			prompt: "select_account",
-			login_hint: "sub",
-		};
-		
-		const verify = async ( tokenset, userinfo, done ) => {
-			console.log("tokenset: ", tokenset);
-			console.log("access_token: ", tokenset.access_token);
-			console.log("id_token: ", tokenset.id_token);
-			console.log("user info: ", userinfo);
-			
-			await db.Users.findOrCreate({
-				where: {
-					openId: tokenset.claims.sub,
-					firstName: tokenset.id_token.given_name,
-					lastName: tokenset.id_token.family_name,
-					email: tokenset.id_token.email
-				}
-			}, (err, user) => {
-				if (err) {
-					console.log("ERROR LOGGING IN");
-					return done(err, user);
-				}
-				// don't need below because findOrCreate
-				// if (!user) {
-				// 	console.log("NO USER");
-				// 	return done(null, false);
-				// }
-				console.log("FIND OR CREATE");
-				return done(null, { user, tokenset });
-			});
-		};
+// Configure the Facebook strategy for use by Passport.
+//
+// OAuth 2.0-based strategies require a `verify` function which receives the
+// credential (`accessToken`) for accessing the Facebook API on the user's
+// behalf, along with the user's profile.  The function must invoke `cb`
+// with a user object, which will be set at `req.user` in route handlers after
+// authentication.
+Passport.use(new GoogleStrategy({
+	clientID: process.env.GOOGLE_CLIENTID,
+	clientSecret: process.env.GOOGLE_SECRET,
+	callbackURL: "/auth/openid-client/callback"
+},
+function (accessToken, refreshToken, profile, cb) {
+	// In this example, the user's Facebook profile is supplied as the user
+	// record.  In a production-quality application, the Facebook profile should
+	// be associated with a user record in the application's database, which
+	// allows for account linking and authentication with other identity
+	// providers.
 
-		const passReqToCallback = true,
-			sessionKey = generators.random(),
-			usePKCE = false;
+	// db.Users.findOrCreate({
+	// 	where: {
+	// 		openId: accessToken.claims.sub,
+	// 		firstName: accessToken.id_token.given_name,
+	// 		lastName: tokenset.id_token.family_name,
+	// 		email: tokenset.id_token.email
+	// 	}
+	// }, (err, user) => {
+	// 	if (err) {
+	// 		console.log("ERROR LOGGING IN");
+	// 		return done(err, user);
+	// 	}
+	// 	// don't need below because findOrCreate
+	// 	// if (!user) {
+	// 	// 	console.log("NO USER");
+	// 	// 	return done(null, false);
+	// 	// }
+	// 	console.log("FIND OR CREATE");
+	// 	return done(null, { user, tokenset });
+	// });
 
-		const options = {
-			client,
-			params,
-			passReqToCallback,
-			sessionKey,
-			usePKCE,
-		};
+	console.log(accessToken);
+	console.log(refreshToken);
+	console.log(profile);
+	console.log("==================================================== I AM ALIVE!!!! >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+	return cb(null, profile);
+}));
 
-		Passport.use("openid-client", new Strategy( options, verify ));
 
-	}).catch(err => {
-		if (err) {
-			console.log(err);
-		}
-	});
-
-// session stuff
-Passport.serializeUser((user, done) => {
-	console.log("SERIALIZE USER: ", user);
-	console.log("SERIALIZE USER.ID: ", user.id);
-	console.log("SERIALIZE USER._ID: ", user._id);
-	done(null, user.id);
+// Configure Passport authenticated session persistence.
+//
+// In order to restore authentication state across HTTP requests, Passport needs
+// to serialize users into and deserialize users out of the session.  In a
+// production-quality application, this would typically be as simple as
+// supplying the user ID when serializing, and querying the user record by ID
+// from the database when deserializing.  However, due to the fact that this
+// example does not have a database, the complete Facebook profile is serialized
+// and deserialized.
+Passport.serializeUser(function (user, cb) {
+	console.log("\nSERIALIZE USER >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+	cb(null, user);
 });
 
-Passport.deserializeUser((id, done) => {
-	db.Users.findOne({
-		where: { openId: id }
-	}, (err, user) => {
-		console.log("DESERIALIZED USER: ", user);
-		done(err, user);
-	});
-	// db.Users.findOne({
-	// 	where: 
-	// 		{ openid: id }
-	// }, (err, user) => {
-	// 	console.log("DESERIALIZED USER: ", user);
-	// 	done(err, user);
-	// });
+Passport.deserializeUser(function (obj, cb) {
+	console.log("\nDESERIALIZE USER >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+	cb(null, obj);
 });
 
 module.exports = Passport;

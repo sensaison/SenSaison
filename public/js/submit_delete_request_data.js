@@ -56,7 +56,7 @@ $(document).ready(() => {
 
 		// USERID CODE FIRST
 
-		let userIdVal="678910";
+		let userIdVal="678910"; // TODO: fix this once user gets all fixed
 
 		///////////////////////////////
 
@@ -82,7 +82,6 @@ $(document).ready(() => {
 
 			getBase64(img).then(result => {
 				// console.log(result);
-				// AJAX METHOD BELOW IS BROKEN
 				$.ajax({
 					method: "POST",
 					url: "https://api.cloudinary.com/v1_1/sensaison/image/upload",
@@ -121,7 +120,7 @@ $(document).ready(() => {
 				}).catch(error => {
 					if (error) {
 						console.log(error);
-					};
+					}
 				});
 			});
 		} else {

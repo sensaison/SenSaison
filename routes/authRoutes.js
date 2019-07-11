@@ -32,37 +32,41 @@ module.exports = app => {
 		});
 	});
 
-	// this doesn't work?
+	// this partially works?
 	app.post("/auth/openid-client",
-		Passport.authenticate("openid-client"),
+		Passport.authenticate("google", { scope: ["profile"] }),
 		(req, res) => {
 			console.log("POST /AUTH/OPENID-CLIENT >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
 			console.log("login post");
 			console.log("post req.user:", req.user);
-			console.log("END POST /AUTH/OPENID-CLIENT >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+			console.log("END POST /AUTH/OPENID-CLIENT >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n");
 		}
 	);
 
-	// this doesn't work
+	// this partially works
 	app.get("/auth/openid-client/callback",
-		Passport.authenticate("openid-client", {
-			session: true,
-			failureRedirect: "/" ,
-			failureFlash: "Problem with authentication, try again",
-		}),	(req, res) => {
+		// Passport.authenticate("openid-client", {
+		// 	session: true,
+		// 	failureRedirect: "/" ,
+		// 	failureFlash: "Problem with authentication, try again",
+		// }),
+		Passport.authenticate("google", { failureRedirect: "/" }),
+		(req, res) => {
 
-			console.log("GET /auth/openid-client/callback >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-			console.log("req.user:", req.user);
-			console.log("user:", user);
-			console.log("req.access_token:", req.access_token);
-			console.log("req.user.id:", req.user.id);
-			console.log("req.session:", req.session);
-			console.log("callback url isAuthenticated?:", req.isAuthenticated());
-			console.log("END GET /auth/openid-client/callback >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+			console.log("\nGET /auth/openid-client/callback >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+			console.log("req.query:", req.query);
+			// console.log("req.user:", req.user);
+			// console.log("user:", user);
+			// console.log("req.access_token:", req.access_token);
+			// console.log("req.user.id:", req.user.id);
+			// console.log("req.session:", req.session);
+			// console.log("callback url isAuthenticated?:", req.isAuthenticated());
+			console.log("END GET /auth/openid-client/callback >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n");
 
-			req.session.save(() => {
-				res.redirect("/useraccount", { user: req.user });
-			});
+			// req.session.save(() => {
+			// 	res.redirect("/useraccount", { user: req.user });
+			// });
+			res.send("OK");
 		}
 	);
 	
@@ -70,25 +74,27 @@ module.exports = app => {
 	// ensureAuthenticated returns false
 	app.get("/useraccount", ensureAuthenticated, (req, res) => {
 		
-		console.log("GET /USERACCOUNT >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+		console.log("\nGET /USERACCOUNT >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
 		console.log("user account page");
+		console.log("req:", req);
 		console.log("req.user: ", req.user);
 		console.log("user:", user);
-		console.log("END GET /USERACCOUNT >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+		console.log("END GET /USERACCOUNT >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n");
 
 		res.render("useraccount", { user: req.user }, (err, html) => {
 			if (err) {
 				console.log(err);
 			}
 			console.log("req.user:", user);
-			console.log("RENDER GET /USERACCOUNT >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+			console.log("RENDER GET /USERACCOUNT >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n");
 			res.send(html);
 		});
 	});
 
 	// logout works
 	app.get("/logout", (req, res) => {
-		console.log("LOGGING OUT");
+		console.log("\nLOGGING OUT\n");
+		res.clearCookie();
 		req.logout;
 		req.session.destroy(() => res.redirect("/"));
 	});
