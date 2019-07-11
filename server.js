@@ -28,11 +28,6 @@ app.use((req, res, next) => {
 	// res.header("Access-Control-Allow-Origin", "*");
 	// can't use wild card above with allow-credentials being set to true
 	res.header("Access-Control-Allow-Origin", req.headers.origin);
-	console.log(`req path ${req.path}`);
-	// console.log("\nAPP.USE CORS MIDDLEWARE >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-	// console.log("req.headers.origin:", req.headers.origin);
-	// why is above returning undefined
-	// console.log("END APP.USE CORS MIDDLEWARE >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n");
 	res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE, OPTIONS");
 	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 	next();
@@ -79,34 +74,23 @@ app.use(Passport.initialize());
 app.use(Passport.session());
 app.use(flash());
 
-// auth routes
-require("./routes/authRoutes")(app);
-// should this above go before or after the middleware below?
-// doesn't seem to matter but maybe it does
-
 // create middleware to send user info to front end
 app.use((req, res, next) => {
 	res.locals.success_messages = req.flash("success! server.js");
 	res.locals.error_messages = req.flash("error! server.js");
 
-	// console.log("\nAPP.USE MIDDLEWARE >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+	console.log("\nAPP.USE MIDDLEWARE >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
 	// console.log("res:", res);
 	// console.log("req:", req);
-	// console.log("req.user:", req.user);
-	// console.log("req.session.user:", req.session.user);
+	console.log("req.user:", req.user);
+	console.log("req.session:", req.session);
 	// console.log("req.session:", req.session);
 	// console.log("==================");
 	
-	// this part doesn't work because req.session is never created
-	if (req.session && req.session.user) {
-
-		// console.log("==================");
-		// console.log("req.user.id:", req.user.id);
-		// console.log("req.session.user.id:", req.session.user.id);
-		// console.log("==================");
+	if (req.session && req.user) {
 
 		db.Users.findOne({
-			where: { openId: req.session.user.id }
+			where: { openId: req.user.profile.id }
 		}, (err, user) => {
 			if (err) {
 				console.log(err);
@@ -122,14 +106,20 @@ app.use((req, res, next) => {
 			next();
 		});
 	} else {
-		// this part works
-		// console.log("no session or session user");
-		// console.log("END APP.USE MIDDLEWARE >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n");
+		console.log("END APP.USE MIDDLEWARE >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n");
 		next();
 	}
 });
 
-let syncOptions = { force: false, logging: false};
+// auth routes
+require("./routes/authRoutes")(app);
+// should this above go before or after the user middleware?
+// doesn't seem to matter but maybe it does
+
+let syncOptions = {
+	force: false,
+	logging: false
+};
 if (process.env.NODE_ENV === "test") {
 	syncOptions.force = true;
 }

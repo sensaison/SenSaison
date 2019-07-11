@@ -30,13 +30,12 @@ CREATE TABLE IF NOT EXISTS Users (
     firstName VARCHAR(20) NOT NULL,
     lastName VARCHAR(20) NOT NULL,
     email VARCHAR(50) NOT NULL,
-    username VARCHAR(20) NOT NULL,
+    username VARCHAR(20),
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
     updatedAt TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (id),
     UNIQUE KEY (openId), 
-    UNIQUE KEY (email),
-    UNIQUE KEY (username)
+    UNIQUE KEY (email)
 );
 
 /*  unhex(replace(uuid(),'-','')) */
