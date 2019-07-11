@@ -78,20 +78,12 @@ app.use(flash());
 app.use((req, res, next) => {
 	res.locals.success_messages = req.flash("success! server.js");
 	res.locals.error_messages = req.flash("error! server.js");
-
-	console.log("\nAPP.USE MIDDLEWARE >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-	// console.log("res:", res);
-	// console.log("req:", req);
-	console.log("req.user:", req.user);
-	console.log("req.session:", req.session);
-	// console.log("req.session:", req.session);
-	// console.log("==================");
 	
 	if (req.session && req.user) {
 
 		db.Users.findOne({
 			where: { openId: req.user.profile.id }
-		}, (err, user) => {
+		}).then((user, err) => {
 			if (err) {
 				console.log(err);
 			}
@@ -99,14 +91,11 @@ app.use((req, res, next) => {
 			req.session.user = user;  //refresh the session value
 			res.locals.user = user;
 
-			console.log("user:", user);
-			console.log("req.user:", req.user);
+			// console.log(user);
 
-			// finishing processing the middleware and run the route
 			next();
 		});
 	} else {
-		console.log("END APP.USE MIDDLEWARE >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n");
 		next();
 	}
 });

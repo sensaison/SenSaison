@@ -10,13 +10,6 @@ Passport.use(new GoogleStrategy({
 },
 (accessToken, refreshToken, profile, done) => {
 
-	// console.log(accessToken);
-	// console.log(refreshToken);
-	// console.log(profile.id);
-	// console.log(profile.name.givenName);
-	// console.log(profile.name.familyName);
-	// console.log(profile.emails[0].value);
-
 	db.Users.findOrCreate({
 		where: {
 			openId: profile.id,
@@ -24,15 +17,14 @@ Passport.use(new GoogleStrategy({
 			lastName: profile.name.familyName,
 			email: profile.emails[0].value
 		}
-	}).then((user, created, err, done) => {
+	}).then((user, created, err) => {
 		if (err) {
-			console.log("ERROR LOGGING IN");
-			return done(err, user);
+			console.log("ERROR with FINDORCREATE:", err);
 		}
-		console.log("FINDORCREATE");
-		console.log("user:", user);
-		console.log("created:", created);
-		return done(null, user);
+		// console.log("FINDORCREATE");
+		// console.log("user.openId:", user[0].openId);
+		// console.log("created:", created);
+		return (user);
 	}).catch(err => {
 		if (err) {
 			console.log(err);
