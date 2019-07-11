@@ -1,4 +1,4 @@
-const apiKey = "AIzaSyDexLO6StKoAhSrxypz3E6neGfT9PpJSlM";
+const apiKey = "AIzaSyDdLQBi8yxA0W_khskCmkcGuazoHwL77z0";
 
 var startingPos;
 var userPin;
