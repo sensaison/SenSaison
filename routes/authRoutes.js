@@ -30,6 +30,61 @@ module.exports = app => {
 		});
 	});
 
+	app.get("/about", (req, res) => {
+		res.render("about", (err, html) => {
+			if (err) {
+				console.log("\nerror rendering about:", err, "\n");
+			}
+			res.send(html);
+		});
+	});
+
+	app.get("/help", (req, res) => {
+		res.render("help", (err, html) => {
+			if (err) {
+				console.log("\nerror rendering about:", err, "\n");
+			}
+			res.send(html);
+		});
+	});
+
+	app.get("/communityguidelines", (req, res) => {
+		res.render("communityguidelines", (err, html) => {
+			if (err) {
+				console.log("\nerror rendering community guidelines:", err, "\n");
+			}
+			res.send(html);
+		});
+	});
+
+	app.get("/login", (req, res) => {
+		res.render("login", (err, html) => {
+			if (err) {
+				console.log("\nerror rendering login:", err, "\n");
+			}
+			res.send(html);
+		});
+	});
+
+	app.get("/privacypolicy", (req, res) => {
+		res.render("privacypolicy", (err, html) => {
+			if (err) {
+				console.log("\nerror rendering privacy policy:", err, "\n");
+			}
+			res.send(html);
+		});
+	});
+
+	app.get("/termsofservice", (req, res) => {
+		res.render("termsofservice", (err, html) => {
+			if (err) {
+				console.log("\nerror rendering terms of service:", err, "\n");
+			}
+			res.send(html);
+		});
+	});
+
+
 	app.post("/auth/google",
 		Passport.authenticate("google",
 			{ scope: ["openid profile email"] }
