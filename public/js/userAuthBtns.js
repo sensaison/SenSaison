@@ -10,82 +10,82 @@ $(document).ready((req, user) => {
 	// if user is logged in
 	if (user) {
 		// if there is a signed in user hide the sign in button
-		if ($("#signin-index").hasClass("hide")) {
+		if ($("#signin").hasClass("hide")) {
 			// nothing
 		} else {
-			$("#signin-index").addClass("hide");
+			$("#signin").addClass("hide");
 		}
 		// show the your account button
-		if ($("#account-index").hasClass("hide")) {
-			$("#account-index").removeClass("hide");
+		if ($("#account").hasClass("hide")) {
+			$("#account").removeClass("hide");
 		} else {
 			// nothing
 		}
 		// show the logout button
-		if ($("#logout-index").hasClass("hide")) {
-			$("#logout-index").removeClass("hide");
+		if ($("#logout").hasClass("hide")) {
+			$("#logout").removeClass("hide");
 		} else {
 			// nothing
 		}
 		
 		// side menu
 
-		if ($("#signin-index-side").hasClass("hide")) {
+		if ($("#signin-side").hasClass("hide")) {
 			// nothing
 		} else {
-			$("#signin-index-side").addClass("hide");
+			$("#signin-side").addClass("hide");
 		}
 		// show the your account button
-		if ($("#account-index-side").hasClass("hide")) {
-			$("#account-index-side").removeClass("hide");
+		if ($("#account-side").hasClass("hide")) {
+			$("#account-side").removeClass("hide");
 		} else {
 			// nothing
 		}
 		// show the logout button
-		if ($("#logout-index-side").hasClass("hide")) {
-			$("#logout-index-side").removeClass("hide");
+		if ($("#logout-side").hasClass("hide")) {
+			$("#logout-side").removeClass("hide");
 		} else {
 			// nothing
 		}
 
 	} else {
 		console.log("no signed in user");
-		if ($("#signin-index").hasClass("hide")) {
-			$("#signin-index").removeClass("hide");
+		if ($("#signin").hasClass("hide")) {
+			$("#signin").removeClass("hide");
 		} else {
 			// nothing
 		}
 		// show the your account button
-		if ($("#account-index").hasClass("hide")) {
+		if ($("#account").hasClass("hide")) {
 			// nothing
 		} else {
-			$("#account-index").addClass("hide");
+			$("#account").addClass("hide");
 		}
 		// show the logout button
-		if ($("#logout-index").hasClass("hide")) {
+		if ($("#logout").hasClass("hide")) {
 			// nothing
 		} else {
-			$("#logout-index").addClass("hide");
+			$("#logout").addClass("hide");
 		}
 		
 		// side menu
 
-		if ($("#signin-index-side").hasClass("hide")) {
-			$("#signin-index-side").removeClass("hide");
+		if ($("#signin-side").hasClass("hide")) {
+			$("#signin-side").removeClass("hide");
 		} else {
 			// nothing
 		}
 		// show the your account button
-		if ($("#account-index-side").hasClass("hide")) {
+		if ($("#account-side").hasClass("hide")) {
 			// nothing
 		} else {
-			$("#account-index-side").addClass("hide");
+			$("#account-side").addClass("hide");
 		}
 		// show the logout button
-		if ($("#logout-index-side").hasClass("hide")) {
+		if ($("#logout-side").hasClass("hide")) {
 			// nothing
 		} else {
-			$("#logout-index-side").addClass("hide");
+			$("#logout-side").addClass("hide");
 		}
 	}
 	
