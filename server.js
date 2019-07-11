@@ -4,7 +4,7 @@ const express = require("express"),
 	path = require("path"),
 	mySQLStore = require("express-mysql-session")(session),
 	Passport = require("./config/passportStrategy"),
-	cors = require("cors"),
+	// cors = require("cors"),
 	flash = require("connect-flash"),
 	db = require("./models");
 	
@@ -20,9 +20,14 @@ app.use(express.json());
 
 app.use(express.static(path.join(__dirname, "/public"), { extensions: ["html"] }));
 
-app.use(cors());
+// app.use(cors({
+// 	credentials: true
+// }));
 app.use((req, res, next) => {
-	res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Credentials", true);
+	// res.header("Access-Control-Allow-Origin", "*");
+	// can't use wild card above with allow-credentials being set to true
+	res.header("Access-Control-Allow-Origin", req.headers.origin);
 	res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE, OPTIONS");
 	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 	next();
@@ -73,21 +78,12 @@ app.use(flash());
 app.use((req, res, next) => {
 	res.locals.success_messages = req.flash("success! server.js");
 	res.locals.error_messages = req.flash("error! server.js");
+	
+	if (req.session && req.user) {
 
-	console.log("==================");
-	console.log("req.session.user:", req.session.user);
-	console.log("req.user:", req.user);
-	console.log("req.session:", req.session);
-	console.log("==================");
-		
-	if (req.session && req.session.user) {
-
-		console.log("req.user.id:", req.user.id);
-		console.log("req.session.user.id:", req.session.user.id);	
-
-		db.Users.findOrCreate({
-			where: { openId: req.session.user.id }
-		}, (err, user) => {
+		db.Users.findOne({
+			where: { openId: req.user.profile.id }
+		}).then((user, err) => {
 			if (err) {
 				console.log(err);
 			}
@@ -95,23 +91,24 @@ app.use((req, res, next) => {
 			req.session.user = user;  //refresh the session value
 			res.locals.user = user;
 
-			console.log("user:", user);
-			console.log("req.user:", req.user);
-			console.log("==================");
+			// console.log(user);
 
-			// finishing processing the middleware and run the route
 			next();
 		});
 	} else {
-		console.log("no session or session user");
 		next();
 	}
 });
 
 // auth routes
 require("./routes/authRoutes")(app);
+// should this above go before or after the user middleware?
+// doesn't seem to matter but maybe it does
 
-let syncOptions = { force: false };
+let syncOptions = {
+	force: false,
+	logging: false
+};
 if (process.env.NODE_ENV === "test") {
 	syncOptions.force = true;
 }

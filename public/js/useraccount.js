@@ -63,8 +63,11 @@ $(document).ready(() => {
 	// displaying user's observations in table mentioned above
 	$.ajax("/api/userobservations", {
 		type: "GET",
+		xhrFields: {
+			withCredentials: true
+		},
 		data: {
-			openId: "12345" // will have to change this to openId for DEVELOPMENT and in future in jawsdb
+			openId: "12345" // TODO: change openId in production to user.id or whatever when that all gets fixed
 		}
 	}).then(data => {
 		window.userObs = data;

@@ -6,7 +6,9 @@ $.get("/api/animals/mostrecentone", data => {
 		imgSrc = data.animalImage;
 	}
 	$("#sb-animals").attr("src", imgSrc);
-	$("#sb-animals-date").html("Date:", data.dateObs);
+	if (data.dateObs) {
+		$("#sb-animals-date").html("Date:", data.dateObs);
+	}
 });
     
 $.get("/api/fungus/mostrecentone", data => {
@@ -17,7 +19,9 @@ $.get("/api/fungus/mostrecentone", data => {
 		imgSrc = data.fungusImage;
 	}	
 	$("#sb-fungus").attr("src", imgSrc);
-	$("#sb-fungus-date").html("Date:", data.dateObs);
+	if (data.dateObs) {
+		$("#sb-fungus-date").html("Date:", data.dateObs);
+	}
 });
     
 $.get("/api/land_water/mostrecentone", data => {
@@ -28,7 +32,9 @@ $.get("/api/land_water/mostrecentone", data => {
 		imgSrc = data.landwaterImage;
 	}	
 	$("#sb-land-water").attr("src", imgSrc);
-	$("#sb-land-water-date").html("Date:", data.dateObs);
+	if (data.dateObs) {
+		$("#sb-land-water-date").html("Date:", data.dateObs);
+	}
 });
     
 $.get("/api/plants/mostrecentone", data => {
@@ -39,7 +45,9 @@ $.get("/api/plants/mostrecentone", data => {
 		imgSrc = data.plantsImage;
 	}
 	$("#sb-plants").attr("src", imgSrc);
-	$("#sb-plants-date").html("Date:", data.dateObs);
+	if (data.dateObs) {
+		$("#sb-plants-date").html("Date:", data.dateObs);
+	}
 });
     
 $.get("/api/weather/mostrecentone", data => {
@@ -50,5 +58,7 @@ $.get("/api/weather/mostrecentone", data => {
 		imgSrc = data.weatherImage;
 	}
 	$("#sb-weather").attr("src", imgSrc);
-	$("#sb-weather-date").html("Date:", data.dateObs);
+	if (data.dateObs) {
+		$("#sb-weather-date").html("Date:", data.dateObs);
+	}
 });

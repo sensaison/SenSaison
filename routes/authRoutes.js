@@ -8,7 +8,7 @@ module.exports = app => {
 	app.get("/", (req, res) => {
 		res.render("index", (err, html) => {
 			if (err) {
-				console.log(err);
+				console.log("\nerror rendering index:", err);
 			}
 			res.send(html);
 		});
@@ -17,7 +17,7 @@ module.exports = app => {
 	app.get("/team", (req, res) => {
 		res.render("team", (err, html) => {
 			if (err) {
-				console.log(err);
+				console.log("\nerror rendering team:", err);
 			}
 			res.send(html);
 		});
@@ -26,35 +26,30 @@ module.exports = app => {
 	app.get("/additionalresources", (req, res) => {
 		res.render("additionalresources", (err, html) => {
 			if (err) {
-				console.log(err);
+				console.log("\nerror rendering additional resources:", err);
 			}
 			res.send(html);
 		});
 	});
 
 	app.post("/auth/openid-client",
-		Passport.authenticate("openid-client"),
-		(req, res) => {
-			console.log("login post");
-			console.log("post req.user:", req.user);
-		}
+		Passport.authenticate("google",
+			{ scope: ["openid profile email"] }
+		)
+		// , (req, res) => {
+		// 	console.log("post req.user:", req.user);
+		// }
 	);
-	// above not working
 
 	app.get("/auth/openid-client/callback",
-		Passport.authenticate("openid-client", {
+		Passport.authenticate("google", {
 			session: true,
 			failureRedirect: "/" ,
 			failureFlash: "Problem with authentication, try again",
-		}),	(req, res) => {
+		}),
+		(req, res) => {
 
-			console.log("======================");
-			console.log("req.user:", req.user);
-			console.log("user:", user);
-			console.log("req.access_token:", req.access_token);
-			console.log("req.user.id:", req.user.id);
-			console.log("req.session:", req.session);
-			console.log("======================");
+			console.log("\nis authenticated?", req.isAuthenticated());
 
 			req.session.save(() => {
 				res.redirect("/useraccount", { user: req.user });
@@ -62,23 +57,19 @@ module.exports = app => {
 		}
 	);
 	
-	// protect user account page
 	app.get("/useraccount", ensureAuthenticated, (req, res) => {
-		console.log("user account page");
-		console.log("req.user: ", req.user);
-		console.log("user:", user);
-
+		console.log("get user account page");
 		res.render("useraccount", { user: req.user }, (err, html) => {
 			if (err) {
-				console.log(err);
+				console.log("\nerror rendering user account page:", err);
 			}
-			console.log("req.user:", user);
 			res.send(html);
 		});
 	});
 
 	app.get("/logout", (req, res) => {
-		console.log("LOGGING OUT");
+		console.log("\nLOGGING OUT\n");
+		res.clearCookie();
 		req.logout;
 		req.session.destroy(() => res.redirect("/"));
 	});

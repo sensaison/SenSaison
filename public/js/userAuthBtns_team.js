@@ -1,6 +1,12 @@
-$(document).ready(req => {
+$(document).ready((req, user) => {
 
+	// TODO: req.user or user when that all gets fixed
+
+	console.log("userAuthBtns_team.js >>>>>>>>>>>>>>>>>>>>>>>>>>>>");
 	console.log("req:", req);
+	console.log("req.user:", req.user);
+	console.log("user:", user);
+	console.log("END userAuthBtns_team.js >>>>>>>>>>>>>>>>>>>>>>>>>>>>");
 
 	// if user is logged in
 	if (req.user) {
