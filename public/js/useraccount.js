@@ -59,7 +59,6 @@ $(document).ready(() => {
 		}
 	});
 
-	console.log("window.user:", window.user);
 	// displaying user's observations in table mentioned above
 	$.ajax("/api/userobservations", {
 		type: "GET",

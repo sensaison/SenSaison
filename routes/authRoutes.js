@@ -1,14 +1,12 @@
 const Passport = require("../config/passportStrategy"),
 	ensureAuthenticated = require("../plugins/ensureAuthenticated");
-	// db = require("../models"),
-	// path = require("path");
 
 module.exports = app => {
 
 	app.get("/", (req, res) => {
 		res.render("index", (err, html) => {
 			if (err) {
-				console.log("\nerror rendering index:", err);
+				console.log("\nerror rendering index:", err, "\n");
 			}
 			res.send(html);
 		});
@@ -17,7 +15,7 @@ module.exports = app => {
 	app.get("/team", (req, res) => {
 		res.render("team", (err, html) => {
 			if (err) {
-				console.log("\nerror rendering team:", err);
+				console.log("\nerror rendering team:", err, "\n");
 			}
 			res.send(html);
 		});
@@ -26,22 +24,19 @@ module.exports = app => {
 	app.get("/additionalresources", (req, res) => {
 		res.render("additionalresources", (err, html) => {
 			if (err) {
-				console.log("\nerror rendering additional resources:", err);
+				console.log("\nerror rendering additional resources:", err, "\n");
 			}
 			res.send(html);
 		});
 	});
 
-	app.post("/auth/openid-client",
+	app.post("/auth/google",
 		Passport.authenticate("google",
 			{ scope: ["openid profile email"] }
 		)
-		// , (req, res) => {
-		// 	console.log("post req.user:", req.user);
-		// }
 	);
 
-	app.get("/auth/openid-client/callback",
+	app.get("/auth/google/callback",
 		Passport.authenticate("google", {
 			session: true,
 			failureRedirect: "/" ,
@@ -49,19 +44,17 @@ module.exports = app => {
 		}),
 		(req, res) => {
 
-			console.log("\nis authenticated?", req.isAuthenticated());
+			console.log("\nis authenticated?", req.isAuthenticated(), "\n");
 
-			req.session.save(() => {
-				res.redirect("/useraccount", { user: req.user });
-			});
+			req.session.save(() => res.redirect("/useraccount"));
 		}
 	);
 	
 	app.get("/useraccount", ensureAuthenticated, (req, res) => {
-		console.log("get user account page");
+		console.log("\nget user account page\n");
 		res.render("useraccount", { user: req.user }, (err, html) => {
 			if (err) {
-				console.log("\nerror rendering user account page:", err);
+				console.log("\nerror rendering user account page:", err, "\n");
 			}
 			res.send(html);
 		});

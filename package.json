@@ -30,12 +30,14 @@
         "json2csv": "^4.5.2",
         "mime": "^2.4.0",
         "mysql2": "^1.6.5",
-        "openid-client": "^3.1.1",
+        "openid-client": "^3.2.1",
         "passport": "^0.4.0",
+        "passport-facebook": "^3.0.0",
         "passport-google-oauth20": "^2.0.0",
+        "passport-twitter": "^1.0.4",
         "path": "^0.12.7",
         "request": "^2.88.0",
-        "sequelize": "^5.9.4"
+        "sequelize": "^5.10.0"
     },
     "devDependencies": {
         "chai": "^4.1.2",
