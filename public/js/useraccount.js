@@ -61,10 +61,6 @@ $(document).ready(() => {
 		}
 	});
 
-	/////////////////////////// SQUIRRELLY SHIT
-
-	///////////////////////////////////////////////
-
 	// displaying user's observations in table mentioned above
 	$.ajax("/api/userobservations", {
 		type: "GET",
@@ -76,7 +72,7 @@ $(document).ready(() => {
 		}
 	}).then(data => {
 		window.userObs = data;
-		if (!data || !data.length) {
+		if ( !data || !data.length || data.length===0 ) {
 			// if no data then add a row saying so
 			$("#all-your-obs-body").prepend("<tr class='no-data'><td></td><td></td><td>No observations to display</td><td></td></tr>"
 			);
@@ -96,9 +92,8 @@ $(document).ready(() => {
 				);
 			}
 		}
-	}).then(() => {
 
-		// FIXME: WHYYYYYYYYYYYYYYYYY is this suddenly broken
+		// FIXME: WHYYYYYYYYYYYYYYYYY is this pagination suddenly broken
 
 		$("#all-your-obs").after("<br><ul class='pagination'><li class='waves-effect' id='start-pagination'><a href='#'><i class='material-icons'>chevron_left</i></a></li><li class='waves-effect' id='end-pagination'><a href='#'><i class='material-icons'>chevron_right</i></a></li></div>");
     

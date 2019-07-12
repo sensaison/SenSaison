@@ -84,6 +84,9 @@ $(document).ready(() => {
 				// console.log(result);
 				$.ajax({
 					method: "POST",
+					xhrFields: {
+						withCredentials: true
+					},
 					url: "https://api.cloudinary.com/v1_1/sensaison/image/upload",
 					data: {
 						file: result,
@@ -111,6 +114,9 @@ $(document).ready(() => {
 					};
 					$.ajax("/api/observations", {
 						method: "POST",
+						xhrFields: {
+							withCredentials: true
+						},
 						data: newObs,
 						async: false,
 					}).then(() => {
@@ -133,23 +139,23 @@ $(document).ready(() => {
 	});
     
 	// DELETE request when deleting observation
-	$("#all-your-obs-body").on("click", ".delete", e => {
+	$("#all-your-obs-body").on("click", "button", e => {
 		e.preventDefault();
+		console.log("click!");
 
 		let id_delete = $(this).parents("tr").attr("id");
-
-		// FIXME: WHYYYYYYYYYYYY is this no longer working?!
-
-		console.log($(this).parents("tr").attr("id"));
+		// FIXME: WHYYYYYYYYYYYY is this DELETE no longer working?!
 		console.log("deleting:", id_delete);
 
 		$.ajax({
 			method: "DELETE",
+			xhrFields: {
+				withCredentials: true
+			},
 			url: "/api/observations?id=" + id_delete
-		});
-
-		$(this).parents("tr").remove();
-    
+		}).then(
+			$(this).parents("tr").remove()
+		);
 	});
 
 	// request to download data
