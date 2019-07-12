@@ -6,11 +6,14 @@ const express = require("express"),
 	mySQLStore = require("express-mysql-session")(session),
 	Passport = require("./config/passportStrategy"),
 	flash = require("connect-flash"),
-	db = require("./models");
+	db = require("./models"),
+	favicon = require("serve-favicon");
 	
 const app = express();
 
 let PORT = process.env.PORT || 3000;
+
+app.use(favicon(path.join(__dirname, "public", "images", "favicon.ico")));
 
 app.engine("html", require("./plugins/htmlEngine"));
 app.set("views", "./views_purehtml");
