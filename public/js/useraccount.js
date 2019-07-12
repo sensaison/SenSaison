@@ -1,5 +1,7 @@
 $(document).ready(() => {
 
+	// console.log("user:", user);
+
 	// following four event listeners show/hide what the user can do from their account page
 	$("#add-obs-btn").on("click", () => {
 		if ($("#add-obs").hasClass("hidden")) {
@@ -59,7 +61,10 @@ $(document).ready(() => {
 		}
 	});
 
-	console.log("window.user:", window.user);
+	/////////////////////////// SQUIRRELLY SHIT
+
+	///////////////////////////////////////////////
+
 	// displaying user's observations in table mentioned above
 	$.ajax("/api/userobservations", {
 		type: "GET",
@@ -67,7 +72,7 @@ $(document).ready(() => {
 			withCredentials: true
 		},
 		data: {
-			openId: "12345" // TODO: change openId in production to user.id or whatever when that all gets fixed
+			openId: "678910" // TODO: change openId in production to user.id or whatever when that all gets fixed
 		}
 	}).then(data => {
 		window.userObs = data;
@@ -92,6 +97,9 @@ $(document).ready(() => {
 			}
 		}
 	}).then(() => {
+
+		// FIXME: WHYYYYYYYYYYYYYYYYY is this suddenly broken
+
 		$("#all-your-obs").after("<br><ul class='pagination'><li class='waves-effect' id='start-pagination'><a href='#'><i class='material-icons'>chevron_left</i></a></li><li class='waves-effect' id='end-pagination'><a href='#'><i class='material-icons'>chevron_right</i></a></li></div>");
     
 		let rowsShown = 10;
@@ -113,7 +121,7 @@ $(document).ready(() => {
 			$(this).parent("li").addClass("active");
 			let currPage = $(this).attr("rel");
 			let startItem = currPage * rowsShown;
-			var endItem = startItem + rowsShown;
+			let endItem = startItem + rowsShown;
 			$("#all-your-obs tbody tr").css("opacity","0.0").hide().slice(startItem, endItem).css("display","table-row").animate({opacity:1}, 300);
 		});   
 	});

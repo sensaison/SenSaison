@@ -1,0 +1,232 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <meta http-equiv="Content-Security-Policy" content="font-src 'self' data: *">
+
+        <title>SenSaison</title>
+
+        <!-- CSS  -->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+        <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+
+        <!-- Swatchbook -->
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+        <meta name="description" content="Animated Swatch Book with CSS3 and jQuery" />
+        <meta name="keywords" content="swatch book, css3, jquery, animated, rotation, transition, folding fan" />
+        <meta name="author" content="Codrops" />
+        <link rel="stylesheet" type="text/css" href="SwatchBook/css/swatchbookstyle.css" />
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:700,300,300italic' rel='stylesheet' type='text/css'>
+
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+        
+    </head>
+
+    <body>
+
+        <nav class="grey">
+            <div class="nav-wrapper">
+                <a href="/" class="brand-logo white-text"><img src="images/senlogo.png" id="logo"></a>
+                <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li><a href="/team" class="white-text">Team</a></li>
+                    <!-- <li><a href="/about" class="white-text">About</a></li> -->
+                    <!-- TODO: make an About page -->
+                    <li><a href="/additionalresources" class="white-text">Additional resources</a></li>
+                    <li class="signin-li">
+                        <form action="/auth/google" method="POST" class="signin-form">
+                            <button type="submit" class="white-text signin-button-link">Sign in</button>
+                        </form>
+                    </li>
+                    <li><a href="/useraccount" class="white-text hide" id="account">Your account</a></li>
+                    <li><a href="/logout" class="white-text hide" id="logout">Log out</a></li>
+                </ul>    
+            </div>
+        </nav>
+        <ul id="mobile-demo" class="sidenav">
+            <li><a href="/">Home</a></li>
+            <li><a href="/team">Team</a></li>
+            <li><a href="/additionalresources">Additional resources</a></li>
+            <li><a href="/auth/google/callback" class="" id="signin-side">Sign in</a></li>
+            <li><a href="/useraccount" class="hide" id="account-side">Your account</a></li>
+            <li><a href="/logout" class="hide" id="logout-side">Log out</a></li>
+        </ul>
+
+        <!-- MAIN -->
+        <div id="index-banner" class="parallax-container">
+            <div class="section no-pad-bot">
+                <div class="container">
+                    <h1 class="header center teal-text text-lighten-2" style="text-shadow:4px 4px 4px black;">SenSaison</h1>
+                    <div class="row center">
+                        <h5 class="header col s12 light" style="text-shadow: 2px 2px 2px black;">For citizen scientists to record seasonal natural history observations</h5>
+                    </div>
+                    <br><br>
+                </div>
+            </div>
+            <div class="parallax"><img src="images/image1.jpg"></div>
+        </div>
+
+        <div class="container">
+            <section class="main">
+                <div class="row">
+                    <div class="col s12">
+                        <h5 class="center-align">What SenSaison is all about</h5>
+                        <p class="center-align">Climate change is causing our seasons to shift - winter is shorter, summer is longer, and the timing of seasonal transitions have changed. The purpose of SenSaison is to record the timing of seasonal events to as to increase our understanding of how these changes work and how they will affect us in the short- and long-term.</p>
+                    </div>
+                </div>
+            </section>
+            <section class="main">
+                <h5 class="center-align">Pictures of recent observations uploaded by citizen scientists</h5>
+                <div id="sb-container" class="sb-container">
+                    <div>
+                        <h4><span>Weather</span></h4>
+                        <span class="sb-icon">
+                            <img class="sb-img" id="sb-weather" src="images/thunderstorm.jpg" />
+                            <p class="sb-img-date" id="sb-weather-date"></p>
+                        </span>
+                    </div>
+                    <div>
+                        <h4><span>Plants</span></h4>
+                        <span class="sb-icon">
+                            <img class="sb-img" id="sb-plants" src="images/tulips.jpeg" />
+                            <p class="sb-img-date" id="sb-plants-date"></p>
+                        </span>
+                    </div>	
+                    <div>
+                        <h4><span>Land & Water</span></h4>
+                        <span class="sb-icon">
+                            <img class="sb-img" id="sb-land-water" src="images/permafrost.jpg" />
+                            <p class="sb-img-date" id="sb-land-water-date"></p>
+                        </span>
+                    </div>	
+                    <div>
+                        <h4><span>Fungus</span></h4>
+                        <span class="sb-icon">
+                            <img class="sb-img" id="sb-fungus" src="images/fungus.jpg" />
+                            <p class="sb-img-date" id="sb-fungus-date"></p>
+                        </span>
+                    </div>	
+                    <div>
+                        <h4><span>Animals</span></h4>
+                        <span class="sb-icon">
+                            <img class="sb-img" id="sb-animals" src="images/goose.jpg" />
+                            <p class="sb-img-date" id="sb-animals-date"></p>
+                        </span>
+                    </div>	
+                    <div>
+                        <h4><span id="sb-latest-obs">Latest Observations</span></h4>
+                        <span class="sb-toggle" id="sb-toggle-click">Click to open/close</span>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div class="parallax-container valign-wrapper">
+            <div class="section no-pad-bot"></div>
+            <div class="parallax"><img src="images/image2.jpg"></div>
+        </div>
+
+        <div class="container">
+            <div class="section">
+                <div class="row">
+                    <div class="col s12 center">
+                        <h3><i class="mdi-content-send brown-text"></i></h3>
+                        <div class="row">
+                            <div class="col s12 center-align">
+                                <div class="icon-block">
+                                    <img class="index-icons" src="images/land.png">   
+                                    <img class="index-icons" src ="images/plant.png"> 
+                                    <img class="index-icons" src ="images/fungi.png">
+                                    <h5>Animals, plants, and fungi</h5>
+                                    Living organisms such as animals, plants, and fungi, respond to changes in temperature, the timing of seasonal transitions, and the duration of seasons in different ways. For example, some insects might start reproducing earlier in the year. Birds that respond less to temperature and more to daylight or to historical migration patterns continue to lay their eggs about the same time they always have. That means that the peak season for insects no longer coincides with the period when chicks need the most food. That can cause long term declines in bird populations. Effects like these are common across all living organisms.      
+                                </div>
+                            </div>
+                        </div>
+            
+                        <div class="row">
+                            <div class="col s12 center-align">
+                                <div class="icon-block">
+                                    <img class="index-icons" src="images/weather.png"> 
+                                    <img class="index-icons" src ="images/water.png">
+                                    <h5>Weather, water, and land</h5>
+                                    Changes in the timing and duration of seasons and seasonal transitions can also affect the non-living parts of the environment. For example, the length and timing of hurricane season might change, as well as how long lakes and seas are frozen for during the winter. These changes affect living organisms, including us.            
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row center-align">
+                <a class="btn waves-effect waves-teal btn-flat" id="backtotop" href="#top">Back to top</a>
+            </div>        
+        </div>
+
+        <div class="parallax-container valign-wrapper">
+            <div class="section no-pad-bot"></div>
+            <div class="parallax"><img src="images/image1a.jpg"></div>
+        </div>
+
+        <footer class="page-footer teal">
+            <div class="container">
+                <div class="row">
+                    <!-- TODO: make About, Help, Community Guidelines, Privacy Policy, and ToS pages -->
+                    <div class="col s3">
+                        <ul>
+                            <li><a class="white-text" href="/about">About</a></li>
+                            <li><a class="white-text" href="/help">Help</a></li>
+                            <li><a class="white-text" href="/additionalresources">Additional Resources</a></li>
+                        </ul>
+                    </div>
+                    <div class="col s3">
+                        <ul>
+                            <li><a class="white-text" href="/communityguidelines">Community Guidelines</a></li>
+                            <li><a class="white-text" href="/privacypolicy">Privacy Policy</a></li>
+                            <li><a class="white-text" href="/termsofservice">Terms of Service</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col s6 right-align">
+                        <ul>
+                            <h5>Contact Us</h5>
+                            <li><a class="white-text" href="mailto:teamsensaison&#64;gmail.com" title="Email the team">teamsensaison@gmail.com <i class="white-text far fa-envelope fa-1x contact"></i></a></li>
+                            <li>Seattle, WA, USA</li>
+                        </ul>
+                    </div>
+    
+                </div>
+            </div>
+            
+            <div class="footer-copyright center-align">
+                <div class="container">
+                    Copyright 2019 Team SenSaison. All rights reserved.
+                    <br>
+                    Layout made by <a class="brown-text text-lighten-3" href="http://materializecss.com">Materialize</a>
+                    <br>
+                    Icons made by <a class="brown-text text-lighten-3" href="https://www.freepik.com/?__hstc=57440181.0eb3d779ec5765d0fe6d5707603795e0.1556587780268.1557020807941.1557370549277.8&__hssc=57440181.8.1557370549277&__hsfp=2810556" title="Freepik">Freepik</a> from <a class="brown-text text-lighten-3" href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> and is licensed by <a class="brown-text text-lighten-3" href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC BY 3.0</a></div>
+            </div>
+        </footer>
+
+        <!--  Scripts-->
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        <script type="text/javascript" src="js/init.js"></script>
+        <script type="text/javascript" src="js/userAuthBtns.js"></script>
+        <!-- <script type="text/javascript" src="js/faker.js"></script> -->
+
+
+        <!-- SWATCHBOOK SCRIPTS -->
+        <script type="text/javascript" src="SwatchBook/js/modernizr.custom.79639.js"></script>
+        <script type="text/javascript" src="SwatchBook/js/jquery.swatchbook.js"></script>
+        <script type="text/javascript" src="SwatchBook/js/swatchbook.js"></script>
+        <script type="text/javascript" src="SwatchBook/js/swatchbookimages.js"></script>
+
+    </body>
+
+</html>

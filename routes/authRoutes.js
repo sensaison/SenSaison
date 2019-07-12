@@ -1,14 +1,13 @@
 const Passport = require("../config/passportStrategy"),
-	ensureAuthenticated = require("../plugins/ensureAuthenticated");
-	// db = require("../models"),
-	// path = require("path");
+	ensureAuthenticated = require("../plugins/ensureAuthenticated"),
+	Sqrl = require("squirrelly");
 
 module.exports = app => {
 
 	app.get("/", (req, res) => {
 		res.render("index", (err, html) => {
 			if (err) {
-				console.log("\nerror rendering index:", err);
+				console.log("\nerror rendering index:", err, "\n");
 			}
 			res.send(html);
 		});
@@ -17,7 +16,7 @@ module.exports = app => {
 	app.get("/team", (req, res) => {
 		res.render("team", (err, html) => {
 			if (err) {
-				console.log("\nerror rendering team:", err);
+				console.log("\nerror rendering team:", err, "\n");
 			}
 			res.send(html);
 		});
@@ -26,22 +25,74 @@ module.exports = app => {
 	app.get("/additionalresources", (req, res) => {
 		res.render("additionalresources", (err, html) => {
 			if (err) {
-				console.log("\nerror rendering additional resources:", err);
+				console.log("\nerror rendering additional resources:", err, "\n");
 			}
 			res.send(html);
 		});
 	});
 
-	app.post("/auth/openid-client",
+	app.get("/about", (req, res) => {
+		res.render("about", (err, html) => {
+			if (err) {
+				console.log("\nerror rendering about:", err, "\n");
+			}
+			res.send(html);
+		});
+	});
+
+	app.get("/help", (req, res) => {
+		res.render("help", (err, html) => {
+			if (err) {
+				console.log("\nerror rendering about:", err, "\n");
+			}
+			res.send(html);
+		});
+	});
+
+	app.get("/communityguidelines", (req, res) => {
+		res.render("communityguidelines", (err, html) => {
+			if (err) {
+				console.log("\nerror rendering community guidelines:", err, "\n");
+			}
+			res.send(html);
+		});
+	});
+
+	app.get("/login", (req, res) => {
+		res.render("login", (err, html) => {
+			if (err) {
+				console.log("\nerror rendering login:", err, "\n");
+			}
+			res.send(html);
+		});
+	});
+
+	app.get("/privacypolicy", (req, res) => {
+		res.render("privacypolicy", (err, html) => {
+			if (err) {
+				console.log("\nerror rendering privacy policy:", err, "\n");
+			}
+			res.send(html);
+		});
+	});
+
+	app.get("/termsofservice", (req, res) => {
+		res.render("termsofservice", (err, html) => {
+			if (err) {
+				console.log("\nerror rendering terms of service:", err, "\n");
+			}
+			res.send(html);
+		});
+	});
+
+
+	app.post("/auth/google",
 		Passport.authenticate("google",
 			{ scope: ["openid profile email"] }
 		)
-		// , (req, res) => {
-		// 	console.log("post req.user:", req.user);
-		// }
 	);
 
-	app.get("/auth/openid-client/callback",
+	app.get("/auth/google/callback",
 		Passport.authenticate("google", {
 			session: true,
 			failureRedirect: "/" ,
@@ -49,22 +100,28 @@ module.exports = app => {
 		}),
 		(req, res) => {
 
-			console.log("\nis authenticated?", req.isAuthenticated());
+			console.log("\nis authenticated?", req.isAuthenticated(), "\n");
 
-			req.session.save(() => {
-				res.redirect("/useraccount", { user: req.user });
-			});
+			req.session.save(() => res.redirect("/useraccount"));
 		}
 	);
 	
 	app.get("/useraccount", ensureAuthenticated, (req, res) => {
-		console.log("get user account page");
-		res.render("useraccount", { user: req.user }, (err, html) => {
-			if (err) {
-				console.log("\nerror rendering user account page:", err);
-			}
-			res.send(html);
-		});
+		console.log("\nget user account page\n");
+		console.log("req.user:", req.user.dataValues.openId);
+		console.log("req.user:", req.user.dataValues);
+		res.render("useraccount",
+			{
+				userFirstName: req.user.dataValues.firstName,
+				userLastName: req.user.dataValues.lastName,
+				userOpenId: req.user.dataValues.openId
+			},
+			(err, html) => {
+				if (err) {
+					console.log("\nerror rendering user account page:", err, "\n");
+				}
+				res.send(html);
+			});
 	});
 
 	app.get("/logout", (req, res) => {

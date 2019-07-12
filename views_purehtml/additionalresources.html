@@ -27,25 +27,26 @@
                 <a href="/" class="brand-logo white-text"><img src="images/senlogo.png" id="logo"></a>
                 <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
-                    <li><a href="/" class="white-text"> Home</a></li>
-                    <li><a href="/team" class="white-text">About us</a></li>
+                    <li><a href="/" class="white-text">Home</a></li>
+                    <li><a href="/team" class="white-text">Team</a></li>
                     <li><a href="/additionalresources" class="white-text">Additional resources</a></li>
                     <li class="signin-li">
-                        <form action="/auth/openid-client" method="POST" class="signin-form">
+                        <form action="/auth/google" method="POST" class="signin-form">
                             <button type="submit" class="white-text signin-button-link">Sign in</button>
                         </form>
-                    </li>                    <li><a href="/useraccount" class="white-text hide" id="account-resources">Your account</a></li>
-                    <li><a href="/logout" class="white-text hide" id="logout-resources">Log out</a></li>
+                    </li>
+                    <li><a href="/useraccount" class="white-text hide" id="account">Your account</a></li>
+                    <li><a href="/logout" class="white-text hide" id="logout">Log out</a></li>
                 </ul>    
             </div>
         </nav>
         <ul id="mobile-demo" class="sidenav">
-            <li><a href="/"> Home</a></li>
-            <li><a href="/team"> About us</a></li>
+            <li><a href="/">Home</a></li>
+            <li><a href="/team">Team</a></li>
             <li><a href="/additionalresources">Additional resources</a></li>
-            <li><a href="/auth/openid-client/callback" id="signin-resources-side">Sign in</a></li>
-            <li><a href="/useraccount" class="hide" id="account-resources-side">Your account</a></li>
-            <li><a href="/logout" class="hide" id="logout-resources-side">Log out</a></li>
+            <li><a href="/auth/google/callback" class="" id="signin-side">Sign in</a></li>
+            <li><a href="/useraccount" class="hide" id="account-side">Your account</a></li>
+            <li><a href="/logout" class="hide" id="logout-side">Log out</a></li>
         </ul>
 
         <!-- MAIN -->
@@ -127,7 +128,7 @@
 
                 <br><br>
                 <div class="row center-align">
-                <a class="btn waves-effect waves-teal btn-flat" id="backtotop" href="#top">Back to top</a>
+                    <a class="btn waves-effect waves-teal btn-flat" id="backtotop" href="#top">Back to top</a>
                 </div>
 
             </div>
@@ -138,24 +139,33 @@
         <footer class="page-footer teal">
             <div class="container">
                 <div class="row">
-                    <div class="col s4">
-                        <h5 class="white-text">Team</h5>
+                    <!-- TODO: make About, Help, Community Guidelines, Privacy Policy, and ToS pages -->
+                    <div class="col s3">
                         <ul>
-                            <li><a class="white-text" href="mailto:sapreut&#64;uw.edu" title="Email Stefan">Stefan <i class="white-text far fa-envelope fa-1x contact"></i></a></li>
-                            <li><a class="white-text" href="mailto:cpham.cww&#64;gmail.com" title="Email Catherine">Catherine <i class="white-text far fa-envelope fa-1x contact"></i></a></li>
-                            <li><a class="white-text" href="mailto:juliemathews84&#64;gmail.com" title="Email Julie">Julie <i class="white-text far fa-envelope fa-1x contact"></i></a></li>
+                            <li><a class="white-text" href="/about">About</a></li>
+                            <li><a class="white-text" href="/help">Help</a></li>
+                            <li><a class="white-text" href="/additionalresources">Additional Resources</a></li>
                         </ul>
-                    </div>   
-                
-                    <div class="col s8">
-                        <h5 class="white-text">Contact</h5>
+                    </div>
+                    <div class="col s3">
                         <ul>
+                            <li><a class="white-text" href="/communityguidelines">Community Guidelines</a></li>
+                            <li><a class="white-text" href="/privacypolicy">Privacy Policy</a></li>
+                            <li><a class="white-text" href="/termsofservice">Terms of Service</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col s6 right-align">
+                        <ul>
+                            <h5>Contact Us</h5>
                             <li><a class="white-text" href="mailto:teamsensaison&#64;gmail.com" title="Email the team">teamsensaison@gmail.com <i class="white-text far fa-envelope fa-1x contact"></i></a></li>
                             <li>Seattle, WA, USA</li>
                         </ul>
                     </div>
+    
                 </div>
-            </div>            
+            </div>
+            
             <div class="footer-copyright center-align">
                 <div class="container">
                     Copyright 2019 Team SenSaison. All rights reserved.
@@ -165,14 +175,14 @@
                     Icons made by <a class="brown-text text-lighten-3" href="https://www.freepik.com/?__hstc=57440181.0eb3d779ec5765d0fe6d5707603795e0.1556587780268.1557020807941.1557370549277.8&__hssc=57440181.8.1557370549277&__hsfp=2810556" title="Freepik">Freepik</a> from <a class="brown-text text-lighten-3" href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> and is licensed by <a class="brown-text text-lighten-3" href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC BY 3.0</a></div>
             </div>
         </footer>
-
+    
 
 
         <!--  Scripts -->
         <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
         <script type="text/javascript" src="js/init.js"></script>
-        <script type="text/javascript" src="js/userAuthBtns_resources.js"></script>
+        <script type="text/javascript" src="js/userAuthBtns.js"></script>
 
 
 
