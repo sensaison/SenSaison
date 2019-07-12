@@ -1,5 +1,6 @@
 const Passport = require("../config/passportStrategy"),
-	ensureAuthenticated = require("../plugins/ensureAuthenticated");
+	ensureAuthenticated = require("../plugins/ensureAuthenticated"),
+	Sqrl = require("squirrelly");
 
 module.exports = app => {
 
@@ -107,12 +108,20 @@ module.exports = app => {
 	
 	app.get("/useraccount", ensureAuthenticated, (req, res) => {
 		console.log("\nget user account page\n");
-		res.render("useraccount", { user: req.user }, (err, html) => {
-			if (err) {
-				console.log("\nerror rendering user account page:", err, "\n");
-			}
-			res.send(html);
-		});
+		console.log("req.user:", req.user.dataValues.openId);
+		console.log("req.user:", req.user.dataValues);
+		res.render("useraccount",
+			{
+				userFirstName: req.user.dataValues.firstName,
+				userLastName: req.user.dataValues.lastName,
+				userOpenId: req.user.dataValues.openId
+			},
+			(err, html) => {
+				if (err) {
+					console.log("\nerror rendering user account page:", err, "\n");
+				}
+				res.send(html);
+			});
 	});
 
 	app.get("/logout", (req, res) => {

@@ -138,6 +138,11 @@ $(document).ready(() => {
 
 		let id_delete = $(this).parents("tr").attr("id");
 
+		// FIXME: WHYYYYYYYYYYYY is this no longer working?!
+
+		console.log($(this).parents("tr").attr("id"));
+		console.log("deleting:", id_delete);
+
 		$.ajax({
 			method: "DELETE",
 			url: "/api/observations?id=" + id_delete

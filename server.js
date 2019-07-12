@@ -1,5 +1,6 @@
 require("dotenv").config();
 const express = require("express"),
+	Sqrl = require("squirrelly"),
 	session = require("express-session"),
 	path = require("path"),
 	mySQLStore = require("express-mysql-session")(session),
@@ -12,7 +13,11 @@ const app = express();
 let PORT = process.env.PORT || 3000;
 
 app.engine("html", require("./plugins/htmlEngine"));
+app.set("views", "./views_purehtml");
 app.set("view engine", "html");
+
+// app.set("views", "./views_squirrelly");
+// app.set("view engine", "squirrelly");
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
