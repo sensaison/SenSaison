@@ -131,4 +131,17 @@ module.exports = app => {
 		req.session.destroy(() => res.redirect("/"));
 	});
 
+	// for sending user data to client
+	app.get("/api/user_data", (req, res) => {
+
+		if (req.user === undefined) {
+			// The user is not logged in
+			res.json({});
+		} else {
+			res.json({
+				user: req.user
+			});
+		}
+	});
+
 };

@@ -247,7 +247,6 @@
                             </thead>
                             <tbody id="all-your-obs-body">
                                 <!-- this table gets populated dynamically -->
-
                             </tbody>
                         </table>
                     </div>

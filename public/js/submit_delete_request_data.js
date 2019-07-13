@@ -137,29 +137,29 @@ $(document).ready(() => {
 
 
 	});
-    
+	
 	// DELETE request when deleting observation
-	$("#all-your-obs-body").on("click", "button", e => {
+	$("#all-your-obs-body").on("click", ".delete", function(e) {
 		e.preventDefault();
 		console.log("click!");
 
-		let id_delete = $(this).parents("tr").attr("id");
+		let idDelete = $(this).closest("tr").attr("id");
 		// FIXME: WHYYYYYYYYYYYY is this DELETE no longer working?!
-		console.log("deleting:", id_delete);
+		console.log("deleting:", idDelete);
 
 		$.ajax({
 			method: "DELETE",
 			xhrFields: {
 				withCredentials: true
 			},
-			url: "/api/observations?id=" + id_delete
-		}).then(
-			$(this).parents("tr").remove()
-		);
+			url: "/api/observations?id=" + idDelete
+		});
+		
+		$(this).closest("tr").remove();
 	});
 
 	// request to download data
-	$("#request-data").on("click", e => {
+	$("#request-data").on("click", function(e) {
 		e.preventDefault();
 
 		let minDate = $("#start-date-download").val();
