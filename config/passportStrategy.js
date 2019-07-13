@@ -24,7 +24,7 @@ Passport.use(new GoogleStrategy({
 			email: profile.emails[0].value
 		}
 	}).then((user, created, err) => {
-		console.log("findOrCreate Google:", user[0].openId);
+		// console.log("findOrCreate Google:", user[0].openId);
 		// console.log("user.openId:", user[0].openId);
 		// console.log("created:", created);
 		return user;
