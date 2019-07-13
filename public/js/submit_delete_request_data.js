@@ -59,7 +59,7 @@ $(document).ready(() => {
 			if (data.hasOwnProperty("user")) {
 				return data;
 			} else {
-				console.log("ERROR: no user data!");
+				console.log("No user data!");
 			}
 		}).then(dataUser => {
 

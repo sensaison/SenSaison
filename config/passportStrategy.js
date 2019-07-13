@@ -37,6 +37,8 @@ Passport.use(new GoogleStrategy({
 	return done(null, { accessToken, refreshToken, profile });
 }));
 
+// TODO: facebook and twitter logins
+
 // FACEBOOK
 // Passport.use(new FacebookStrategy({
 // 	clientID: process.env.FACEBOOK_CLIENTID,

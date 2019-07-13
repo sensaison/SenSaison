@@ -127,7 +127,7 @@ module.exports = app => {
 
 	// for sending user data to client
 	app.get("/api/user_data", (req, res) => {
-		if (req.user === undefined) {
+		if (req.user === undefined || req.user === null) {
 			// The user is not logged in
 			res.json({});
 		} else {
