@@ -3,6 +3,16 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-143816140-1"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag("js", new Date());
+
+            gtag("config", "UA-143816140-1");
+        </script>
+
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
@@ -169,7 +179,7 @@
 
                                 <div class="input-field col s12 m6 l4">
                                     <select id="species-confidence">
-                                        <option value="" selected class="form-option">Choose an option</option>
+                                        <option value="-1" selected hidden class="form-option">Choose an option</option>
                                         <option value="1" class="form-option">1 - low confidence</option>
                                         <option value="2" class="form-option">2</option>
                                         <option value="3" class="form-option">3</option>

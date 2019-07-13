@@ -59,7 +59,7 @@ $(document).ready(() => {
 			if (data.hasOwnProperty("user")) {
 				return data;
 			} else {
-				console.log("ERROR: no user data!");
+				console.log("No user data!");
 			}
 		}).then(dataUser => {
 
@@ -96,28 +96,38 @@ $(document).ready(() => {
 					}).then(response => {
 						pictureIdVal = response.public_id;
 					}).then(() => {
-						let speciesCon;
-						if ($("#species-confidence").val() === "") {
-							speciesCon = null;
+						let newObs;
+						if ($("#species-confidence").val() === "-1") {
+							newObs = {
+								openId: userIdVal,
+								pictureId: pictureIdVal,
+								dateObs: dateObsVal,
+								timeObs: $("#time-obs").val(),
+								latitude: window.userPin.position.lat(),
+								longitude: window.userPin.position.lng(),
+								category: categoryVal,
+								firstConfidence: $("#first-confidence").val(),
+								briefDescription: $("#brief-desc").val().trim(),
+								extendedDescription: $("#extended-desc").val().trim(),
+							};	
 						} else {
-							speciesCon = $("#species-confidence").val(); 
+							newObs = {
+								openId: userIdVal,
+								pictureId: pictureIdVal,
+								dateObs: dateObsVal,
+								timeObs: $("#time-obs").val(),
+								latitude: window.userPin.position.lat(),
+								longitude: window.userPin.position.lng(),
+								category: categoryVal,
+								firstConfidence: $("#first-confidence").val(),
+								briefDescription: $("#brief-desc").val().trim(),
+								extendedDescription: $("#extended-desc").val().trim(),
+								species: $("#species").val().trim(),
+								speciesSciName: $("#species-sci-name").val().trim(),
+								speciesConfidence: $("#species-confidence").val()
+							};
 						}
-						console.log(speciesCon);
-						newObs = {
-							openId: userIdVal,
-							pictureId: pictureIdVal,
-							dateObs: dateObsVal,
-							timeObs: $("#time-obs").val(),
-							latitude: window.userPin.position.lat(),
-							longitude: window.userPin.position.lng(),
-							category: categoryVal,
-							firstConfidence: $("#first-confidence").val(),
-							briefDescription: $("#brief-desc").val().trim(),
-							extendedDescription: $("#extended-desc").val().trim(),
-							species: $("#species").val().trim(),
-							speciesSciName: $("#species-sci-name").val().trim(),
-							speciesConfidence: speciesCon
-						};
+						console.log(newObs);
 						$.ajax("/api/observations", {
 							method: "POST",
 							xhrFields: {
@@ -129,11 +139,11 @@ $(document).ready(() => {
 							alert("Observation successfully submitted");
 							location.reload();
 						});
-					}).catch(error => {
-						if (error) {
-							console.log(error);
-						}
 					});
+				}).catch(error => {
+					if (error) {
+						console.log(error);
+					}
 				});
 			} else {
 				$("#pin-reminder").remove();

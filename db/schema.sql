@@ -15,14 +15,13 @@ CREATE TABLE IF NOT EXISTS Observations (
     firstConfidence ENUM("1", "2", "3", "4", "5") NOT NULL,
     species VARCHAR(50),
     speciesSciName VARCHAR(50),
-    speciesConfidence ENUM("1", "2", "3", "4", "5"),
+    speciesConfidence ENUM("1", "2", "3", "4", "5") DEFAULT NULL,
     briefDescription TEXT NOT NULL,
     extendedDescription TEXT DEFAULT NULL,
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
     updatedAt TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (id)
 );
-
 
 CREATE TABLE IF NOT EXISTS Users (
     id INT NOT NULL AUTO_INCREMENT,
@@ -37,5 +36,3 @@ CREATE TABLE IF NOT EXISTS Users (
     UNIQUE KEY (openId), 
     UNIQUE KEY (email)
 );
-
-/*  unhex(replace(uuid(),'-','')) */
