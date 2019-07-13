@@ -219,7 +219,7 @@ span.sb-icon{
 	display: block;
 	height: 70px;
 	width: 70px;
-  margin: 20px auto;
+  	margin: 20px 15px;
 	-webkit-touch-callout: none;
 	-webkit-user-select: none;
 	-khtml-user-select: none;
@@ -230,8 +230,9 @@ span.sb-icon{
 
 span.sb-icon img {
 	display: block;
-	height: 80px;
-	width: 80px;
+	height: 100px;
+	width: 100px;
+	align-self: center;
 }
 
 span.sb-icon:before {

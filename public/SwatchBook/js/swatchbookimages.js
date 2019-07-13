@@ -1,64 +1,65 @@
-$.get("/api/animals/mostrecentone", data => {
+$.get("/api/animal/mostrecentone", data => {
+	console.log(data[0].dateObs);
 	let imgSrc;
-	if (data.pictureId) {
-		imgSrc = "https://res.cloudinary.com/sensaison/image/upload/"+ data.pictureId + ".jpg";
+	if (data[0].pictureId) {
+		imgSrc = "https://res.cloudinary.com/sensaison/image/upload/"+ data[0].pictureId + ".jpg";
 	} else {
-		imgSrc = data.animalImage;
+		imgSrc = "../../images/goose.jpg";
 	}
 	$("#sb-animals").attr("src", imgSrc);
-	if (data.dateObs) {
-		$("#sb-animals-date").html("Date:", data.dateObs);
+	if (data[0].dateObs) {
+		$("#sb-animals-date").html(data[0].dateObs);
 	}
 });
     
 $.get("/api/fungus/mostrecentone", data => {
 	let imgSrc;
-	if (data.pictureId) {
-		imgSrc = "https://res.cloudinary.com/sensaison/image/upload/"+ data.pictureId + ".jpg";
+	if (data[0].pictureId) {
+		imgSrc = "https://res.cloudinary.com/sensaison/image/upload/"+ data[0].pictureId + ".jpg";
 	} else {
-		imgSrc = data.fungusImage;
+		imgSrc = "../../images/fungus.jpg";
 	}	
 	$("#sb-fungus").attr("src", imgSrc);
-	if (data.dateObs) {
-		$("#sb-fungus-date").html("Date:", data.dateObs);
+	if (data[0].dateObs) {
+		$("#sb-fungus-date").html(data[0].dateObs);
 	}
 });
     
 $.get("/api/land_water/mostrecentone", data => {
 	let imgSrc;
-	if (data.pictureId) {
-		imgSrc = "https://res.cloudinary.com/sensaison/image/upload/"+ data.pictureId + ".jpg";
+	if (data[0].pictureId) {
+		imgSrc = "https://res.cloudinary.com/sensaison/image/upload/"+ data[0].pictureId + ".jpg";
 	} else {
-		imgSrc = data.landwaterImage;
+		imgSrc = "../../images/permafrost.jpg";
 	}	
 	$("#sb-land-water").attr("src", imgSrc);
-	if (data.dateObs) {
-		$("#sb-land-water-date").html("Date:", data.dateObs);
+	if (data[0].dateObs) {
+		$("#sb-land-water-date").html(data[0].dateObs);
 	}
 });
     
-$.get("/api/plants/mostrecentone", data => {
+$.get("/api/plant/mostrecentone", data => {
 	let imgSrc;
-	if (data.pictureId) {
-		imgSrc = "https://res.cloudinary.com/sensaison/image/upload/"+ data.pictureId + ".jpg";
+	if (data[0].pictureId) {
+		imgSrc = "https://res.cloudinary.com/sensaison/image/upload/"+ data[0].pictureId + ".jpg";
 	} else {
-		imgSrc = data.plantsImage;
+		imgSrc = "../../images/tulips.jpeg";
 	}
 	$("#sb-plants").attr("src", imgSrc);
-	if (data.dateObs) {
-		$("#sb-plants-date").html("Date:", data.dateObs);
+	if (data[0].dateObs) {
+		$("#sb-plants-date").html(data[0].dateObs);
 	}
 });
     
 $.get("/api/weather/mostrecentone", data => {
 	let imgSrc;
-	if (data.pictureId) {
-		imgSrc = "https://res.cloudinary.com/sensaison/image/upload/"+ data.pictureId + ".jpg";
+	if (data[0].pictureId) {
+		imgSrc = "https://res.cloudinary.com/sensaison/image/upload/"+ data[0].pictureId + ".jpg";
 	} else {
-		imgSrc = data.weatherImage;
+		imgSrc = "../../images/thunderstorm.jpg";
 	}
 	$("#sb-weather").attr("src", imgSrc);
-	if (data.dateObs) {
-		$("#sb-weather-date").html("Date:", data.dateObs);
+	if (data[0].dateObs) {
+		$("#sb-weather-date").html(data[0].dateObs);
 	}
 });
