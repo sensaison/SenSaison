@@ -1,5 +1,4 @@
 $.get("/api/animal/mostrecentone", data => {
-	console.log(data[0].dateObs);
 	let imgSrc;
 	if (data[0].pictureId) {
 		imgSrc = "https://res.cloudinary.com/sensaison/image/upload/"+ data[0].pictureId + ".jpg";
