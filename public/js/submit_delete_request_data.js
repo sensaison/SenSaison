@@ -97,8 +97,7 @@ $(document).ready(() => {
 						pictureIdVal = response.public_id;
 					}).then(() => {
 						let newObs;
-						console.log($("#species-confidence").val());
-						if ($("#species-confidence").val() === -1) {
+						if ($("#species-confidence").val() === "-1") {
 							newObs = {
 								openId: userIdVal,
 								pictureId: pictureIdVal,
@@ -110,9 +109,6 @@ $(document).ready(() => {
 								firstConfidence: $("#first-confidence").val(),
 								briefDescription: $("#brief-desc").val().trim(),
 								extendedDescription: $("#extended-desc").val().trim(),
-								species: $("#species").val().trim(),
-								speciesSciName: $("#species-sci-name").val().trim(),
-								speciesConfidence: null
 							};	
 						} else {
 							newObs = {
@@ -129,8 +125,9 @@ $(document).ready(() => {
 								species: $("#species").val().trim(),
 								speciesSciName: $("#species-sci-name").val().trim(),
 								speciesConfidence: $("#species-confidence").val()
-							};	
+							};
 						}
+						console.log(newObs);
 						$.ajax("/api/observations", {
 							method: "POST",
 							xhrFields: {
@@ -142,11 +139,11 @@ $(document).ready(() => {
 							alert("Observation successfully submitted");
 							location.reload();
 						});
-					}).catch(error => {
-						if (error) {
-							console.log(error);
-						}
 					});
+				}).catch(error => {
+					if (error) {
+						console.log(error);
+					}
 				});
 			} else {
 				$("#pin-reminder").remove();
