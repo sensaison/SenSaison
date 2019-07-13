@@ -17,7 +17,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <meta http-equiv="Content-Security-Policy" content="font-src 'self' data: *">
 
-        <meta name="description" content="An app for citizen scientists to record seasonal natural history observatiobns" />
+        <meta name="description" content="An app for citizen scientists to record seasonal natural history observations" />
 
         <title>SenSaison</title>
 
