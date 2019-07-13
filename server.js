@@ -15,12 +15,12 @@ let PORT = process.env.PORT || 3000;
 
 app.use(favicon(path.join(__dirname, "public", "images", "favicon.ico")));
 
-app.engine("html", require("./plugins/htmlEngine"));
-app.set("views", "./views_purehtml");
-app.set("view engine", "html");
+// app.engine("html", require("./plugins/htmlEngine"));
+// app.set("views", "./views_purehtml");
+// app.set("view engine", "html");
 
-// app.set("views", "./views_squirrelly");
-// app.set("view engine", "squirrelly");
+app.set("views", "./views_squirrelly");
+app.set("view engine", "squirrelly");
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());

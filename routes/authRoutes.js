@@ -100,16 +100,11 @@ module.exports = app => {
 		}),
 		(req, res) => {
 
-			console.log("\nis authenticated?", req.isAuthenticated(), "\n");
-
 			req.session.save(() => res.redirect("/useraccount"));
 		}
 	);
 	
 	app.get("/useraccount", ensureAuthenticated, (req, res) => {
-		console.log("\nget user account page\n");
-		console.log("req.user:", req.user.dataValues.openId);
-		console.log("req.user:", req.user.dataValues);
 		res.render("useraccount",
 			{
 				userFirstName: req.user.dataValues.firstName,
@@ -125,10 +120,21 @@ module.exports = app => {
 	});
 
 	app.get("/logout", (req, res) => {
-		console.log("\nLOGGING OUT\n");
 		res.clearCookie();
 		req.logout;
 		req.session.destroy(() => res.redirect("/"));
+	});
+
+	// for sending user data to client
+	app.get("/api/user_data", (req, res) => {
+		if (req.user === undefined) {
+			// The user is not logged in
+			res.json({});
+		} else {
+			res.json({
+				user: req.user
+			});
+		}
 	});
 
 };

@@ -54,7 +54,8 @@
         <div class="container center-align">
             <div class="section">
                 <h3 id="welcome-user">Welcome {{userFirstName}} {{userLastName}}!</h3>
-                <h4>Your account</h4>
+                <br>
+                <h4>Account actions</h4>
                 <br>
                 <div class="row">
                     <button class="btn waves-effect waves-light btn-flat" id="add-obs-btn">Add new observation</button><br>
@@ -168,7 +169,7 @@
 
                                 <div class="input-field col s12 m6 l4">
                                     <select id="species-confidence">
-                                        <option value=null hidden selected class="form-option">Choose an option</option>
+                                        <option value="" selected class="form-option">Choose an option</option>
                                         <option value="1" class="form-option">1 - low confidence</option>
                                         <option value="2" class="form-option">2</option>
                                         <option value="3" class="form-option">3</option>
@@ -247,7 +248,6 @@
                             </thead>
                             <tbody id="all-your-obs-body">
                                 <!-- this table gets populated dynamically -->
-
                             </tbody>
                         </table>
                     </div>
