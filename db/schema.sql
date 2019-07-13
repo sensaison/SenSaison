@@ -3,10 +3,10 @@ USE SenSaison_db;
 
 CREATE TABLE IF NOT EXISTS Observations (
     id INT NOT NULL AUTO_INCREMENT,
-    openId VARCHAR(30) NOT NULL REFERENCES Users (openId)
+    openId VARCHAR(50) NOT NULL REFERENCES Users (openId)
         ON DELETE NO ACTION
         ON UPDATE CASCADE,
-    pictureId VARCHAR(30) NOT NULL,
+    pictureId VARCHAR(50) NOT NULL,
     dateObs DATE NOT NULL,
     timeObs TIME NOT NULL,
     latitude FLOAT NOT NULL,
@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS Observations (
     firstConfidence ENUM("1", "2", "3", "4", "5") NOT NULL,
     species VARCHAR(50),
     speciesSciName VARCHAR(50),
-    speciesConfidence ENUM("1", "2", "3", "4", "5") DEFAULT NULL,
+    speciesConfidence ENUM("1", "2", "3", "4", "5"),
     briefDescription TEXT NOT NULL,
     extendedDescription TEXT DEFAULT NULL,
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS Observations (
 
 CREATE TABLE IF NOT EXISTS Users (
     id INT NOT NULL AUTO_INCREMENT,
-    openId VARCHAR(30) NOT NULL,
+    openId VARCHAR(50) NOT NULL,
     firstName VARCHAR(20) NOT NULL,
     lastName VARCHAR(20) NOT NULL,
     email VARCHAR(50) NOT NULL,
