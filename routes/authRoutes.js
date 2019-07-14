@@ -99,7 +99,6 @@ module.exports = app => {
 			failureFlash: "Problem with authentication, try again",
 		}),
 		(req, res) => {
-
 			req.session.save(() => res.redirect("/useraccount"));
 		}
 	);
