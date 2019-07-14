@@ -54,7 +54,7 @@ $(document).ready(() => {
 	$("#submit-obs").on("click", event => {
 		event.preventDefault;
 
-		$.getJSON("api/user_data", data => {
+		$.getJSON("api/userprofile", data => {
 			// Make sure the data contains the username as expected before using it
 			if (data.hasOwnProperty("user")) {
 				return data;
