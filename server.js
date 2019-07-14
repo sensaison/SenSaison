@@ -69,6 +69,7 @@ let sessionOptions = {
 };
 if (process.env.NODE_ENV === "production") {
 	app.set("trust proxy", 1);
+	sessionOptions.proxy = true;
 	sessionOptions.cookie.secure = true; // serve secure cookies only in production
 }
 app.use(session(sessionOptions));
@@ -84,7 +85,7 @@ app.use((req, res, next) => {
 	if (req.session && req.user) {
 
 		db.Users.findOne({
-			where: { openId: req.user.profile.id }
+			where: { openId: req.user.id }
 		}).then((user, err) => {
 			if (err) {
 				console.log(err);

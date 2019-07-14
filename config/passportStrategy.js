@@ -10,10 +10,10 @@ const Passport = require("passport"),
 Passport.use(new GoogleStrategy({
 	clientID: process.env.GOOGLE_CLIENTID,
 	clientSecret: process.env.GOOGLE_SECRET,
-	callbackURL: "/auth/google/callback",
-	response_type: "code token id_token",
-	prompt: "select_account",
-	scope: "openid profile email"
+	callbackURL: "/auth/google/callback"
+	// response_type: "code token id_token",
+	// prompt: "select_account",
+	// scope: "openid profile email"
 },
 (accessToken, refreshToken, profile, done) => {
 
@@ -37,7 +37,7 @@ Passport.use(new GoogleStrategy({
 		}
 	});
 
-	return done(null, { accessToken, refreshToken, profile });
+	return done(null, profile);
 }));
 
 // TODO: facebook and twitter logins
