@@ -12,7 +12,7 @@ module.exports = app => {
 		db.Observations.findAll({
 			include: [{
 				model: db.Users,
-				attributes: ["openId", "firstName", "lastName", "username"]
+				attributes: ["openId", "firstName", "lastName"]
 			}]
 		}).then(dbObs => {
 			res.json(dbObs);
@@ -27,7 +27,7 @@ module.exports = app => {
 			},
 			include: [{
 				model: db.Users,
-				attributes: ["openId", "firstName", "lastName", "username"]
+				attributes: ["openId", "firstName", "lastName"]
 			}]
 		}).then(dbObs => {
 			res.json(dbObs);
@@ -187,14 +187,5 @@ module.exports = app => {
 			res.json(allusr);
 		});
 	});
-
-	// don't need this because done on login
-	// CREATE new user
-	// app.post("/api/users", (req, res) => {
-	// 	db.Users.create(req.body)
-	// 		.then(newusr => {
-	// 			res.json(newusr);
-	// 		});
-	// });
 
 };

@@ -97,7 +97,7 @@ module.exports = app => {
 		Passport.authenticate("google", {
 			session: true,
 			failureRedirect: "/" ,
-			failureFlash: "Problem with authentication, try again",
+			failureFlash: "Problem with authentication, try again"
 		}),
 		(req, res) => {
 			req.session.save(() => res.redirect("/useraccount"));
