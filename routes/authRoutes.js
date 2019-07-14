@@ -87,9 +87,7 @@ module.exports = app => {
 
 
 	app.post("/auth/google",
-		Passport.authenticate("google",
-			{ scope: ["openid", "profile", "email"] }
-		)
+		Passport.authenticate("google")
 	);
 
 	app.get("/auth/google/callback",
