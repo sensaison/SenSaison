@@ -37,7 +37,7 @@ Passport.use(new GoogleStrategy({
 		}
 	});
 
-	return done(null, { accessToken, refreshToken, profile });
+	return done(null, profile);
 }));
 
 // TODO: facebook and twitter logins
