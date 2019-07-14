@@ -25,7 +25,7 @@ app.set("view engine", "squirrelly");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.use(express.static(path.join(__dirname, "/public"), { extensions: ["html", "squirrelly"] }));
+app.use(express.static(path.join(__dirname, "/public"), { extensions: ["html"] }));
 
 app.use((req, res, next) => {
 	res.header("Access-Control-Allow-Credentials", true);
@@ -69,7 +69,7 @@ let sessionOptions = {
 };
 if (process.env.NODE_ENV === "production") {
 	app.set("trust proxy", 1);
-	sessionOptions.proxy = true;
+	// sessionOptions.proxy = true;
 	sessionOptions.cookie.secure = true; // serve secure cookies only in production
 }
 app.use(session(sessionOptions));

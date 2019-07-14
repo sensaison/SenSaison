@@ -86,9 +86,11 @@ module.exports = app => {
 	});
 
 
-	app.post("/auth/google",
+	app.get("/auth/google",
 		Passport.authenticate("google",
-			{ scope: ["openid", "profile", "email"] }
+			{ 
+				scope: ["openid", "profile", "email"]
+			}
 		)
 	);
 
