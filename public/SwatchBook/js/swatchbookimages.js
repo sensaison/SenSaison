@@ -7,7 +7,8 @@ $.get("/api/animal/mostrecentone", data => {
 	}
 	$("#sb-animals").attr("src", imgSrc);
 	if (data[0].dateObs) {
-		$("#sb-animals-date").html(data[0].dateObs);
+		let date = moment(data[0].dateObs).format("MMM Do[,] YYYY");
+		$("#sb-animals-date").html(date);
 	}
 });
     
@@ -20,7 +21,8 @@ $.get("/api/fungus/mostrecentone", data => {
 	}	
 	$("#sb-fungus").attr("src", imgSrc);
 	if (data[0].dateObs) {
-		$("#sb-fungus-date").html(data[0].dateObs);
+		let date = moment(data[0].dateObs).format("MMM Do[,] YYYY");
+		$("#sb-fungus-date").html(date);
 	}
 });
     
@@ -33,7 +35,8 @@ $.get("/api/land_water/mostrecentone", data => {
 	}	
 	$("#sb-land-water").attr("src", imgSrc);
 	if (data[0].dateObs) {
-		$("#sb-land-water-date").html(data[0].dateObs);
+		let date = moment(data[0].dateObs).format("MMM Do[,] YYYY");
+		$("#sb-land-water-date").html(date);
 	}
 });
     
@@ -46,7 +49,8 @@ $.get("/api/plant/mostrecentone", data => {
 	}
 	$("#sb-plants").attr("src", imgSrc);
 	if (data[0].dateObs) {
-		$("#sb-plants-date").html(data[0].dateObs);
+		let date = moment(data[0].dateObs).format("MMM Do[,] YYYY");
+		$("#sb-plants-date").html(date);
 	}
 });
     
@@ -59,6 +63,7 @@ $.get("/api/weather/mostrecentone", data => {
 	}
 	$("#sb-weather").attr("src", imgSrc);
 	if (data[0].dateObs) {
-		$("#sb-weather-date").html(data[0].dateObs);
+		let date = moment(data[0].dateObs).format("MMM Do[,] YYYY");
+		$("#sb-weather-date").html(date);
 	}
 });
