@@ -58,14 +58,14 @@ module.exports = app => {
 		});
 	});
 
-	app.get("/login", (req, res) => {
-		res.render("login", (err, html) => {
-			if (err) {
-				console.log("\nerror rendering login:", err, "\n");
-			}
-			res.send(html);
-		});
-	});
+	// app.get("/login", (req, res) => {
+	// 	res.render("login", (err, html) => {
+	// 		if (err) {
+	// 			console.log("\nerror rendering login:", err, "\n");
+	// 		}
+	// 		res.send(html);
+	// 	});
+	// });
 
 	app.get("/privacypolicy", (req, res) => {
 		res.render("privacypolicy", (err, html) => {

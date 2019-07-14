@@ -16,6 +16,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
+        <meta name="google-signin-client_id" content="708503444271-t6ob4t8bifbfaeo8nsdp6552grbrskht.apps.googleusercontent.com">
 
         <title>SenSaison</title>
 
@@ -30,6 +31,11 @@
     </head>
     
     <body>
+        <!-- fb login -->
+        <div id="fb-root"></div>
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.3&appId=2424152161004698&autoLogAppEvents=1"></script>
+        <!-- google login -->
+        <script src="https://apis.google.com/js/platform.js" async defer></script>
 
         <nav class="grey">
             <div class="nav-wrapper">
@@ -69,8 +75,10 @@
 
                 <div class="row center-align">
                     <!--TODO: logos/buttons for each strategy, href/post methods for each strategy -->
-                    <a class="btn waves-effect waves-light btn-flat" id="add-obs-btn" href="#">Google</a><br>
-                    <a class="btn waves-effect waves-light btn-flat" id="add-obs-btn" href="#">Facebook</a><br>
+                    <a href="/google/auth"><div class="g-signin2 center-align" data-width="240" data-height="50" data-longtitle="true" data-theme="dark"></div></a>
+                    <br>
+                    <a href="/facebook/auth"><div class="fb-login-button" data-width="" data-size="large" data-button-type="login_with" data-auto-logout-link="true" data-use-continue-as="false"></div></a>
+                    <br>
                     <a class="btn waves-effect waves-light btn-flat" id="view-near-obs-btn" href="#">Twitter</a><br>
                 </div>
                 <br>
