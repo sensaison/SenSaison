@@ -10,7 +10,7 @@ const Passport = require("passport"),
 Passport.use(new GoogleStrategy({
 	clientID: process.env.GOOGLE_CLIENTID,
 	clientSecret: process.env.GOOGLE_SECRET,
-	callbackURL: "/auth/google/callback"
+	callbackURL: "https://sensaison.herokuapp.com/auth/google/callback"
 },
 (accessToken, refreshToken, profile, done) => {
 
