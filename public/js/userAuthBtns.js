@@ -3,7 +3,7 @@ $(document).ready(() => {
 	$.getJSON("api/user_data", data => {
 		// Make sure the data contains the username as expected before using it
 		if (data.hasOwnProperty("user")) {
-			console.log("user signed in");
+			// console.log("user signed in");
 			// if there is a signed in user hide the sign in button
 			if ($(".signin-li").hasClass("hide")) {
 				// nothing
@@ -43,7 +43,7 @@ $(document).ready(() => {
 				// nothing
 			}
 		} else {
-			console.log("no signed in user");
+			// console.log("no signed in user");
 
 			if ($("#signin").hasClass("hide")) {
 				$("#signin").removeClass("hide");
