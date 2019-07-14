@@ -15,8 +15,6 @@ Passport.use(new GoogleStrategy({
 (accessToken, refreshToken, profile, done) => {
 
 	db.Users.findOrCreate({
-		// findOrCreate is inconsistent about how it handles duplicates - clearing out the db seems to fix the issue?
-		// prob related to having email being duplicated but other unique keys not being duplicated (specifically openId)
 		where: {
 			openId: profile.id,
 			firstName: profile.name.givenName,
@@ -34,7 +32,7 @@ Passport.use(new GoogleStrategy({
 		}
 	});
 
-	return done(null, profile);
+	return done(null, { accessToken, refreshToken, profile });
 }));
 
 // TODO: facebook and twitter logins
