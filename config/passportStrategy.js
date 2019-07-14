@@ -14,6 +14,8 @@ Passport.use(new GoogleStrategy({
 },
 (accessToken, refreshToken, profile, done) => {
 
+	// give Team SenSaison admin account
+
 	db.Users.findOrCreate({
 		where: {
 			openId: profile.id,
@@ -32,7 +34,7 @@ Passport.use(new GoogleStrategy({
 		}
 	});
 
-	return done(null, { accessToken, refreshToken, profile });
+	return done(null, profile);
 }));
 
 // TODO: facebook and twitter logins
