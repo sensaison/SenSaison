@@ -40,12 +40,7 @@
                     <li><a href="/" class="white-text">Home</a></li>
                     <li><a href="/team" class="white-text">Team</a></li>
                     <li><a href="/additionalresources" class="white-text">Additional resources</a></li>
-                    <li><a href="/auth/google" class="white-text">Sign in</a></li>
-                    <!-- <li class="signin-li">
-                        <form action="/auth/google" method="POST" class="signin-form">
-                            <button type="submit" class="white-text signin-button-link">Sign in</button>
-                        </form>
-                    </li> -->
+                    <li><a href="/auth/google" class="white-text" id="signin">Sign in</a></li>
                     <li><a href="/useraccount" class="white-text hide" id="account">Your account</a></li>
                     <li><a href="/logout" class="white-text hide" id="logout">Log out</a></li>
                 </ul>    
