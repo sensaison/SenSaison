@@ -93,7 +93,7 @@ $(document).ready(() => {
 				//prepend rows of data
 				for (let i=0; i<dataUserObs.length; i++) {
 					let obsId = dataUserObs[i].id;
-					let date = dataUserObs[i].dateObs;
+					let date = moment(dataUserObs[i].dateObs).format("MMM Do, YYYY");
 					let category = dataUserObs[i].category;
 					let briefDesc = dataUserObs[i].briefDescription;
 			
