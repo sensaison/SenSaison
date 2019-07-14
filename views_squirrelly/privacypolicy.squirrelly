@@ -68,74 +68,87 @@
                 <p class="left-align">
                     This is the privacy policy ("Privacy Policy") of the SenSaison website located at sensaison.herokuapp.com (the "Website"). This Privacy Policy describes how sensaison.herokuapp.com ("SenSaison," "We," "Us" or "Our") handles Personal Information (as defined below) that users ("You," "Your” or "User") provide to Us, or that We collect from You through the use of Our Website or Apps.
                     <br><br>
-                    <strong>Website and App Visitors</strong><br>
-                    SenSaison collects non-personally-identifying information of the sort that web browsers and servers typically make available, such as the browser type, language preference, referring site, and the date and time of each visitor request. SenSaison's purpose in collecting non-personally identifying information is to better understand how SenSaison's visitors use its Websit. From time to time, SenSaison may release non-personally-identifying information in the aggregate, e.g. by publishing a report on trends in the usage of its Website.
-                    <br><br>
-                    <strong>Personal Information</strong><br>
-                    "Personal Information" means information such as Your first/middle initial or name, last name, e-mail address, street address, mailing address if different, town or city, state, postal code, telephone number, date of birth, location data, Internet Protocol (IP) addresses, personal photo, and any other information that would allow someone to identify You or contact You.
-                    SenSaison does not disclose such information other than as specified below.
-                    <br><br>
-                    <strong>The Personal Information We Collect</strong><br>
-                    SenSaison may collect Personal Information when You choose to interact with SenSaison in ways that require SenSaison to gather such information, such as if You browse on SenSaison, register as an SenSaison User, update or add information to Your SenSaison page, provide content to SenSaison through Your computer or phone, or otherwise communicate with Us about the SenSaison service. When You post an Observation on SenSaison, We may collect Your User ID, latitude and longitude of the site of the Observation, the place name of the site of the Observation, the date and time of the Observation, the time zone of the site of the Observation, and a photograph of the Observation. The amount and type of information that SenSaison gathers depends on the nature of the interaction. In each case, SenSaison collects such information only insofar as is necessary or appropriate to fulfill the purpose of Your interaction with SenSaison. SenSaison does not disclose personally-identifying information other than as described below, and You can always refuse to supply personally-identifying information, with the caveat that doing so may prevent You from engaging in certain Website-related activities.
-                    <br><br>
-                    <strong>How We Use Personal Information</strong><br>
-                    We may use the Personal Information that You provide in order to provide the SenSaison services and to administer and maintain the SenSaison website. If You register as an SenSaison User, You must give Us current, complete, and accurate information and keep the information You provide to Us up to date. We cannot and shall not be responsible for any problems or liability that may arise if You do not give Us current, accurate, truthful or complete information or You fail to update the information You give Us.
-                    <br><br>
-                    <strong>How We Disclose and Share Personal Information</strong><br>
-                    Personal Information related to the Observations You post (date, time, location) is published on SenSaison as matter of normal usage and therefore is shared with other SenSaison Users. We explicitly share this public information in a machine-readable format for certain Observations with any User who chooses to obtain this information.
-                    <br><br>
-                    Personal Information associated with Users’ registration and account (name, email address, etc.) is shared with SenSaison staff. SenSaison Network partners can request and receive Personal Information from Users who affiliate with their particular partner site as their primary site, including requesting and receiving Personal Data related to Observations made by such Users.
-                    SenSaison discloses potentially personally-identifying and personally-identifying information only to those of its programmers, contractors, and affiliated organizations that (i) need to know that information in order to process it on SenSaison 's behalf or to provide services available at the Website, and (ii) that have agreed not to disclose it to others.
-                    We share IP addresses, User agents, and information relating to software stability (e.g. information about software crashes) and behavior (e.g. the sequence of screens visited) with Google Analytics. We do not share Your SenSaison User ID, name, or email address with any of this service. Some of those employees, contractors, and affiliated organizations may be located outside of Your home country; by using the Website, You consent to the transfer of such information to them. SenSaison will not rent or sell potentially personally-identifying and personally-identifying information to anyone.
-                    <br><br>
-                    Other than to its employees, contractors, and affiliated organizations, as described above, SenSaison discloses potentially personally-identifying and personally-identifying information only when required to do so by law, when SenSaison believes it is necessary to do so in the interest of User safety, or when SenSaison believes in good faith that disclosure is reasonably necessary to protect the property or rights of SenSaison, third parties, or the public at large. Unless authorized by You through Your opt-in, or as provided above, We will make Your Personal Information available to non-affiliated third parties only in the following circumstances:
-                    <br><br>
-                    <ul>
-                        <li>● If We are compelled to do so by a governmental agency, court, or other entity (e.g. to respond to subpoenas, court orders, or legal process);</li>
-                        <li>● If We believe Your actions violate a law, regulation, this Privacy Policy, or any applicable Website and App(s) Terms of Service, or if You threaten the rights, property or safety of Us, Our Website, Our Apps, any other Users, or third party;</li>
-                        <li>● If, in Our sole discretion, We believe disclosure is necessary to investigate or resolve possible problems or inquiries, to protect Our assets, to defend Our interests, or comply with Our legal and regulatory obligations; or</li>
-                        <li>● If there is a bankruptcy, merger, acquisition, transfer of control, joint venture or other business combination involving iNaturalist, the California Academy of Sciences, or National Geographic Society.</li>
+                    <ul class="left-align">
+                        <li><strong>Website and App Visitors</strong><br>
+                        SenSaison collects non-personally-identifying information of the sort that web browsers and servers typically make available, such as the browser type, language preference, referring site, and the date and time of each visitor request. SenSaison's purpose in collecting non-personally identifying information is to better understand how SenSaison's visitors use its Websit. From time to time, SenSaison may release non-personally-identifying information in the aggregate, e.g. by publishing a report on trends in the usage of its Website.</li>
+                        <br>
+                        <li><strong>Personal Information</strong><br>
+                        "Personal Information" means information such as Your first/middle initial or name, last name, e-mail address, street address, mailing address if different, town or city, state, postal code, telephone number, date of birth, location data, Internet Protocol (IP) addresses, personal photo, and any other information that would allow someone to identify You or contact You.
+                        <br><br>
+                        SenSaison does not disclose such information other than as specified below.</li>
+                        <br>
+                        <li><strong>The Personal Information We Collect</strong><br>
+                        SenSaison may collect Personal Information when You choose to interact with SenSaison in ways that require SenSaison to gather such information, such as if You browse on SenSaison, register as an SenSaison User, update or add information to Your SenSaison page, provide content to SenSaison through Your computer or phone, or otherwise communicate with Us about the SenSaison service. When You post an Observation on SenSaison, We may collect Your User ID, latitude and longitude of the site of the Observation, the place name of the site of the Observation, the date and time of the Observation, the time zone of the site of the Observation, and a photograph of the Observation. The amount and type of information that SenSaison gathers depends on the nature of the interaction. In each case, SenSaison collects such information only insofar as is necessary or appropriate to fulfill the purpose of Your interaction with SenSaison. SenSaison does not disclose personally-identifying information other than as described below, and You can always refuse to supply personally-identifying information, with the caveat that doing so may prevent You from engaging in certain Website-related activities.</li>
+                        <br>
+                        <li><strong>How We Use Personal Information</strong><br>
+                        We may use the Personal Information that You provide in order to provide the SenSaison services and to administer and maintain the SenSaison website. If You register as an SenSaison User, You must give Us current, complete, and accurate information and keep the information You provide to Us up to date. We cannot and shall not be responsible for any problems or liability that may arise if You do not give Us current, accurate, truthful or complete information or You fail to update the information You give Us.</li>
+                        <br>
+                        <li><strong>How We Disclose and Share Personal Information</strong><br>
+                        Personal Information related to the Observations You post (date, time, location) is published on SenSaison as matter of normal usage and therefore is shared with other SenSaison Users. We explicitly share this public information in a machine-readable format for certain Observations with any User who chooses to obtain this information.
+                        <br>
+                        Personal Information associated with Users’ registration and account (name, email address, etc.) is shared with SenSaison staff. SenSaison Network partners can request and receive Personal Information from Users who affiliate with their particular partner site as their primary site, including requesting and receiving Personal Data related to Observations made by such Users.
+                        <br><br>
+                        SenSaison discloses potentially personally-identifying and personally-identifying information only to those of its programmers, contractors, and affiliated organizations that (i) need to know that information in order to process it on SenSaison 's behalf or to provide services available at the Website, and (ii) that have agreed not to disclose it to others.
+                        <br><br>
+                        We share IP addresses, User agents, and information relating to software stability (e.g. information about software crashes) and behavior (e.g. the sequence of screens visited) with Google Analytics. We do not share Your SenSaison User ID, name, or email address with any of this service. Some of those employees, contractors, and affiliated organizations may be located outside of Your home country; by using the Website, You consent to the transfer of such information to them. SenSaison will not rent or sell potentially personally-identifying and personally-identifying information to anyone.
+                        <br><br>
+                        Other than to its employees, contractors, and affiliated organizations, as described above, SenSaison discloses potentially personally-identifying and personally-identifying information only when required to do so by law, when SenSaison believes it is necessary to do so in the interest of User safety, or when SenSaison believes in good faith that disclosure is reasonably necessary to protect the property or rights of SenSaison, third parties, or the public at large. Unless authorized by You through Your opt-in, or as provided above, We will make Your Personal Information available to non-affiliated third parties only in the following circumstances:
+                        <br><br>
+                            <ul class="left-align">
+                                <li>● If We are compelled to do so by a governmental agency, court, or other entity (e.g. to respond to subpoenas, court orders, or legal process);</li><br>
+                                <li>● If We believe Your actions violate a law, regulation, this Privacy Policy, or any applicable Website and App(s) Terms of Service, or if You threaten the rights, property or safety of Us, Our Website, Our Apps, any other Users, or third party;</li><br>
+                                <li>● If, in Our sole discretion, We believe disclosure is necessary to investigate or resolve possible problems or inquiries, to protect Our assets, to defend Our interests, or comply with Our legal and regulatory obligations; or</li><br>
+                                <li>● If there is a bankruptcy, merger, acquisition, transfer of control, joint venture or other business combination involving iNaturalist, the California Academy of Sciences, or National Geographic Society.</li>
+                            </ul>
+                        <br>
+                        If You are a registered User SenSaison and have supplied Your email address, SenSaison may occasionally send You an email to tell You about new features, solicit Your feedback, or keep You up to date with the Website. We expect to keep this type of email to a minimum. If You send Us a request, We reserve the right to publish it in order to help Us clarify or respond to Your request or to help Us support other Users. SenSaison takes all measures reasonably necessary to protect against the unauthorized access, use, alteration, or destruction of potentially personally-identifying and personally-identifying information.
+                        <br><br>
+                        We do not share Your Personal Information with any parties for commercial purposes.</li>
+                        <br>
+                        <li><strong>How We Retain Personal Information</strong><br>
+                        We retain Your personal information associated with Your registration for so long as You remain a registered User of SenSaison. In addition, We may retain personal information from closed accounts to comply with national laws, prevent fraud, resolve disputes, troubleshoot problems, assist with any investigation, enforce Our Terms of Service and take other actions permitted or required by applicable national laws.</li>
+                        <br>
+                        <li>Some Personal Information associated with Observations (time, date, location, etc.) may remain attached to Observations, even after You have closed Your account.</li>
+                        <br>
+                        <li><strong>Children</strong><br>
+                        We do not knowingly collect or solicit personal information from children or knowingly allow children to purchase goods or memberships through Our Website and Apps. Visitors 12 years of age and younger must obtain a parent or guardian's permission before submitting any personal information to this Website. In the event that We learn that We have received any personal information from a visitor 12 years of age or younger, and We do not receive parental permission within a reasonable period of time of Our request for it, We will delete that information as quickly as possible. If You believe that We might have information from or about a child 12 years of age or younger, please contact Us at <a href="mailto:teamsensaison&#64;gmail.com">sensaisonteam@gmail.com</a>.</li>
+                        <br>
+                        <li><strong>Cookies</strong><br>
+                        A cookie is a string of information that a website stores on a visitor's computer, and that the visitor's browser provides to the website each time the visitor returns. SenSaison uses cookies to help SenSaison identify and track visitors, their usage of the Website, and their Website access preferences. SenSaison visitors who do not wish to have cookies placed on their computers should set their browsers to refuse cookies before using the Website, with the drawback that certain features of the Website may not function properly without the aid of cookies.</li>
+                        <br>
+                        <li><strong>How We Protect Your Personal Information</strong><br>
+                        We are committed to protecting the Personal Information You share with Us through use of SenSaison and We maintain reasonable physical, electronic, and procedural safeguards to protect Your Personal Information. We limit access to SenSaison by Our own employees to individuals who are authorized for the proper handling of such information and any employee found violating Our standards of security and confidentiality is subject to Our disciplinary processes. We request Our service providers to follow the same policy. Unfortunately, We cannot guarantee that data transmitted over the Internet will always be secure. As a result, although We strive to protect Your Personal Information, We cannot ensure or warrant the security of any information You transmit or We may learn as a result of Your use of SenSaison and You do so at Your own risk. If, for any reason, You do not agree with this Privacy Policy, please do not use or attempt to take advantage of any of the information, services, features, or functions of SenSaison that might require You to provide Your Personal Information.</li>
+                        <br>
+                        <li><strong>Your Rights with Your Personal Information</strong><br>
+                        You have the right to know what Personal Information We have about You, request a copy of it, update and correct Your Personal Information, request that We stop collecting Your Personal Information, request a transfer of Your Personal Information, or ask questions about any automated decision-making processes regarding Your Personal Information. For any such information or requests, contact Us at <a href="mailto:teamsensaison&#64;gmail.com">sensaisonteam@gmail.com</a>.</li>
+                        <br>
+                        <li><strong>Posting Observations</strong><br>
+                        If You do not wish to have the time, date, place, or other identifying information of an Observation included on SenSaison, You should not post an Observation. Once You post an Observation, You may not be able to change it, although you may remove it. Upon Your request, We will close Your account and remove Your Observations.</li>
+                        <br>
+                        <li><strong>Withdraw Consent</strong><br>
+                        If You withdraw Your consent for the use or disclosure of Your Personal Information for purposes set out in this Privacy Policy You may not have access to all Our Services and We might not be able to provide You all of the Services and customer support offered to Our Users and authorized under this Privacy Policy and Our Terms of Service Agreement.</li>
+                        <br>
+                        <li><strong>Privacy Policy Changes</strong><br>
+                        Although most changes are likely to be minor, iNaturalist.org may change its Privacy Policy from time to time, and in SenSaison 's sole discretion. We will post an updated and revised version of this Privacy Policy on the Website when any material changes have been made, and iNaturalist.org encourages visitors to check this Privacy Policy often so You are aware of the most current terms and conditions that apply to You. The revisions are effective immediately upon posting. Your continued use of this site after any change in this Privacy Policy will constitute Your acceptance of such change.</li>
+                        <br>
+                        <li><strong>Information from Users Outside the US</strong><br>
+                        The services of SenSaison are operated in the United States (U.S.). By using the Services and posting Observations, You consent to the transfer, processing and storage of Your personal information in the U.S., a jurisdiction in which the privacy laws may not be as comprehensive as those in the country in which You reside. We take all steps reasonably necessary to ensure that Your data is treated securely and in accordance with this Privacy Policy.</li>
+                        <br>
+                        <li><strong>Do Not Track Notice</strong><br>
+                        Because there are not yet common, industry-accepted “do not track” standards and systems, the Website does not respond to Do Not Track signals.</li>
+                        <br>
+                        <li><strong>All Users</strong><br>
+                        If any User of Our Website has any questions about this Privacy Policy, please contact Us at <a href="mailto:teamsensaison&#64;gmail.com">sensaisonteam@gmail.com</a>.</li>
                     </ul>
                     <br><br>
-                    If You are a registered User SenSaison and have supplied Your email address, SenSaison may occasionally send You an email to tell You about new features, solicit Your feedback, or keep You up to date with the Website. We expect to keep this type of email to a minimum. If You send Us a request, We reserve the right to publish it in order to help Us clarify or respond to Your request or to help Us support other Users. SenSaison takes all measures reasonably necessary to protect against the unauthorized access, use, alteration, or destruction of potentially personally-identifying and personally-identifying information.
-                    <br><br>
-                    We do not share Your Personal Information with any parties for commercial purposes.
-                    <br><br>
-                    <strong>How We Retain Personal Information</strong><br>
-                    We retain Your personal information associated with Your registration for so long as You remain a registered User of SenSaison. In addition, We may retain personal information from closed accounts to comply with national laws, prevent fraud, resolve disputes, troubleshoot problems, assist with any investigation, enforce Our Terms of Service and take other actions permitted or required by applicable national laws.
-                    <br><br>
-                    Some Personal Information associated with Observations (time, date, location, etc.) may remain attached to Observations, even after You have closed Your account.
-                    <br><br>
-                    <strong>Children</strong><br>
-                    We do not knowingly collect or solicit personal information from children or knowingly allow children to purchase goods or memberships through Our Website and Apps. Visitors 12 years of age and younger must obtain a parent or guardian's permission before submitting any personal information to this Website. In the event that We learn that We have received any personal information from a visitor 12 years of age or younger, and We do not receive parental permission within a reasonable period of time of Our request for it, We will delete that information as quickly as possible. If You believe that We might have information from or about a child 12 years of age or younger, please contact Us at <a href="mailto:teamsensaison&#64;gmail.com">sensaisonteam@gmail.com</a>.
-                    <br><br>
-                    <strong>Cookies</strong><br>
-                    A cookie is a string of information that a website stores on a visitor's computer, and that the visitor's browser provides to the website each time the visitor returns. SenSaison uses cookies to help SenSaison identify and track visitors, their usage of the Website, and their Website access preferences. SenSaison visitors who do not wish to have cookies placed on their computers should set their browsers to refuse cookies before using the Website, with the drawback that certain features of the Website may not function properly without the aid of cookies.
-                    <br><br>
-                    <strong>How We Protect Your Personal Information</strong><br>
-                    We are committed to protecting the Personal Information You share with Us through use of SenSaison and We maintain reasonable physical, electronic, and procedural safeguards to protect Your Personal Information. We limit access to SenSaison by Our own employees to individuals who are authorized for the proper handling of such information and any employee found violating Our standards of security and confidentiality is subject to Our disciplinary processes. We request Our service providers to follow the same policy. Unfortunately, We cannot guarantee that data transmitted over the Internet will always be secure. As a result, although We strive to protect Your Personal Information, We cannot ensure or warrant the security of any information You transmit or We may learn as a result of Your use of SenSaison and You do so at Your own risk. If, for any reason, You do not agree with this Privacy Policy, please do not use or attempt to take advantage of any of the information, services, features, or functions of SenSaison that might require You to provide Your Personal Information.
-                    <br><br>
-                    <strong>Your Rights with Your Personal Information</strong><br>
-                    You have the right to know what Personal Information We have about You, request a copy of it, update and correct Your Personal Information, request that We stop collecting Your Personal Information, request a transfer of Your Personal Information, or ask questions about any automated decision-making processes regarding Your Personal Information. For any such information or requests, contact Us at <a href="mailto:teamsensaison&#64;gmail.com">sensaisonteam@gmail.com</a>.
-                    <br><br>
-                    <strong>Posting Observations</strong><br>
-                    If You do not wish to have the time, date, place, or other identifying information of an Observation included on SenSaison, You should not post an Observation. Once You post an Observation, You may not be able to change it, although you may remove it. Upon Your request, We will close Your account and remove Your Observations.
-                    <br><br>
-                    <strong>Withdraw Consent</strong><br>
-                    If You withdraw Your consent for the use or disclosure of Your Personal Information for purposes set out in this Privacy Policy You may not have access to all Our Services and We might not be able to provide You all of the Services and customer support offered to Our Users and authorized under this Privacy Policy and Our Terms of Service Agreement.
-                    <br><br>
-                    <strong>Privacy Policy Changes</strong><br>
-                    Although most changes are likely to be minor, iNaturalist.org may change its Privacy Policy from time to time, and in SenSaison 's sole discretion. We will post an updated and revised version of this Privacy Policy on the Website when any material changes have been made, and iNaturalist.org encourages visitors to check this Privacy Policy often so You are aware of the most current terms and conditions that apply to You. The revisions are effective immediately upon posting. Your continued use of this site after any change in this Privacy Policy will constitute Your acceptance of such change.
-                    <br><br>
-                    <strong>Information from Users Outside the US</strong><br>
-                    The services of SenSaison are operated in the United States (U.S.). By using the Services and posting Observations, You consent to the transfer, processing and storage of Your personal information in the U.S., a jurisdiction in which the privacy laws may not be as comprehensive as those in the country in which You reside. We take all steps reasonably necessary to ensure that Your data is treated securely and in accordance with this Privacy Policy.
-                    <br><br>
-                    <strong>Do Not Track Notice</strong><br>
-                    Because there are not yet common, industry-accepted “do not track” standards and systems, the Website does not respond to Do Not Track signals.
-                    <br><br>
-                    <strong>All Users</strong><br>
-                    If any User of Our Website has any questions about this Privacy Policy, please contact Us at <a href="mailto:teamsensaison&#64;gmail.com">sensaisonteam@gmail.com</a>.
+                    <strong><em>Last updated July 14, 2019.</em></strong>
                 </p>
+                <br>
+                <br>
+
+                <div class="row center-align">
+                    <a class="btn waves-effect waves-teal btn-flat" id="backtotop" href="#top">Back to top</a>
+                </div>
 
             </div>
         </div>
