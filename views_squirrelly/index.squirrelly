@@ -53,11 +53,12 @@
                     <!-- <li><a href="/about" class="white-text">About</a></li> -->
                     <!-- TODO: make an About page -->
                     <li><a href="/additionalresources" class="white-text">Additional resources</a></li>
-                    <li class="signin-li">
+                    <li><a href="/auth/google" class="white-text">Sign in</a></li>
+                    <!-- <li class="signin-li">
                         <form action="/auth/google" method="GET" class="signin-form">
                             <button type="submit" class="white-text signin-button-link">Sign in</button>
                         </form>
-                    </li>
+                    </li> -->
                     <li><a href="/useraccount" class="white-text hide" id="account">Your account</a></li>
                     <li><a href="/logout" class="white-text hide" id="logout">Log out</a></li>
                 </ul>    
