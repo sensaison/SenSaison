@@ -85,7 +85,6 @@ module.exports = app => {
 		});
 	});
 
-
 	app.get("/auth/google",
 		Passport.authenticate("google",
 			{ 
