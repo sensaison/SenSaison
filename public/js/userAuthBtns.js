@@ -5,10 +5,10 @@ $(document).ready(() => {
 		if (data.hasOwnProperty("user")) {
 			// console.log("user signed in");
 			// if there is a signed in user hide the sign in button
-			if ($(".signin").hasClass("hide")) {
+			if ($("#signin").hasClass("hide")) {
 				// nothing
 			} else {
-				$(".signin").addClass("hide");
+				$("#signin").addClass("hide");
 			}
 			// show the your account button
 			if ($("#account").hasClass("hide")) {
