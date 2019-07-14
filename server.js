@@ -36,19 +36,20 @@ app.use((req, res, next) => {
 });
 
 // middleware to require https except for auth page
-app.use(function(req, res, next) {
-	if (process.env.NODE_ENV === "production") {
-		const reqType = req.headers["x-forwarded-proto"];
-		// if not https redirect to https unless logging in using OAuth
-		if (reqType !== "https") {
-			req.url.indexOf("/auth/google") !== -1
-				? next()
-				: res.redirect("https://" + req.headers.host + req.url);
-		} 
-	} else {
-		next();
-	}
-}); 
+// this breaks heroku
+// app.use((req, res, next) => {
+// 	if (process.env.NODE_ENV === "production") {
+// 		const reqType = req.headers["x-forwarded-proto"];
+// 		// if not https redirect to https unless logging in using OAuth
+// 		if (reqType !== "https") {
+// 			req.url.indexOf("/auth/google") !== -1
+// 				? next()
+// 				: res.redirect("https://" + req.headers.host + req.url);
+// 		} 
+// 	} else {
+// 		next();
+// 	}
+// }); 
 
 // non auth routes before passport and session code
 require("./routes/apiRoutes")(app);
@@ -120,12 +121,12 @@ app.use((req, res, next) => {
 require("./routes/authRoutes")(app);
 
 let syncOptions = {
-	force: false,
+	force: true,
 	logging: false // prevents console logs of sequelize things
 };
-if (process.env.NODE_ENV === "test") {
-	syncOptions.force = true;
-}
+// if (process.env.NODE_ENV === "test") {
+// 	syncOptions.force = true;
+// }
 
 // Starting the server, syncing our models
 db.sequelize.sync(syncOptions).then(() => {
