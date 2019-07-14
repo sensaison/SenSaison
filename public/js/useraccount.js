@@ -62,7 +62,7 @@ $(document).ready(() => {
 	});
 
 	// displaying user's observations in table mentioned above
-	$.getJSON("api/user_data", data => {
+	$.getJSON("api/userprofile", data => {
 		// Make sure the data contains the username as expected before using it
 		if (data.hasOwnProperty("user")) {
 			return data;

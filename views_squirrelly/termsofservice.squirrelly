@@ -52,7 +52,7 @@
             <li><a href="/">Home</a></li>
             <li><a href="/team">Team</a></li>
             <li><a href="/additionalresources">Additional resources</a></li>
-            <li><a href="/auth/google/callback" class ="" id="signin-side">Sign in</a></li>
+            <li><a href="/auth/google" class ="" id="signin-side">Sign in</a></li>
             <li><a href="/useraccount" class="hide" id="account-side">Your account</a></li>
             <li><a href="/logout" class="hide" id="logout-side">Log out</a></li>
         </ul>

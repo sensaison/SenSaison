@@ -85,11 +85,10 @@ module.exports = app => {
 		});
 	});
 
-
 	app.get("/auth/google",
 		Passport.authenticate("google",
 			{ 
-				scope: "openid profile email"
+				scope: ["openid", "profile", "email"]
 			}
 		)
 	);
@@ -126,8 +125,8 @@ module.exports = app => {
 		req.session.destroy(() => res.redirect("/"));
 	});
 
-	// for sending user data to client
-	app.get("/api/user_data", (req, res) => {
+	// for sending user profile to client
+	app.get("/api/userprofile", (req, res) => {
 		if (req.user === undefined || req.user === null) {
 			// The user is not logged in
 			res.json({});
