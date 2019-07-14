@@ -12,7 +12,7 @@ Passport.use(new GoogleStrategy({
 	clientSecret: process.env.GOOGLE_SECRET,
 	callbackURL: "/auth/google/callback",
 	// prompt: "select_account",
-	scope: "openid profile email"
+	scope: ["openid", "profile", "email"]
 },
 (accessToken, refreshToken, profile, done) => {
 
