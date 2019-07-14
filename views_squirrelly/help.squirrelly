@@ -65,7 +65,20 @@
             <div class="section">
                 <h3 class="center-align">Help</h3>
                 <br>
-                <p>Page under construction, please forgive the dust and lack of content!</p>
+                <p class="center-align">
+                    <strong></em>Page under construction, please forgive the dust and lack of content!</em></strong>
+                    <br><br>
+                    <h5 class="center-align">Frequently Asked Questions</h5>
+                    <br><br>
+                    <h5 class="center-align">Video tutorials</h5>
+                    <br><br>                    
+                </p>
+                
+                <br><br>
+
+                <div class="row center-align">
+                    <a class="btn waves-effect waves-teal btn-flat" id="backtotop" href="#top">Back to top</a>
+                </div>
 
             </div>
         </div>
