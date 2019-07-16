@@ -260,6 +260,7 @@ $(document).ready(() => {
 				},
 				type: "DELETE",
 			}).then(()=> {
+				window.location="/";
 				console.log("user deleted");
 			});
 		});

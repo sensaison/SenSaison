@@ -367,15 +367,15 @@
                         <form id="modify-account-form" onsubmit="return false">
                             <div class="row">
                             <!-- TODO: show name update fields ONLY IF using email/password login -->
-                                <div class="input-field col s12 m3">
+                                <div class="input-field col s12 m3" id="modify-first-name-div">
                                     <label for="modify-first-name">Update first name</label>
                                     <input type="text" id="modify-first-name" class="validate" data-length="20">
                                 </div>
-                                <div class="input-field col s12 m3">
+                                <div class="input-field col s12 m3" id="modify-last-name-div">
                                     <label for="modify-last-name">Update last name</label>
                                     <input type="text" id="modify-last-name" class="validate" data-length="20">
                                 </div>
-                                <div class="input-field col s12 m3">
+                                <div class="input-field col s12 m3" id="modify-email-div">
                                     <label for="modify-email">Update email</label>
                                     <input type="text" id="modify-email" class="validate" data-length="50">
                                 </div>
