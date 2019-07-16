@@ -1,4 +1,4 @@
-const Passport = require("../config/passportStrategy"),
+const Passport = require("../config/passportStrategy2"),
 	ensureAuthenticated = require("../plugins/ensureAuthenticated"),
 	Sqrl = require("squirrelly");
 
@@ -58,14 +58,14 @@ module.exports = app => {
 		});
 	});
 
-	// app.get("/login", (req, res) => {
-	// 	res.render("login", (err, html) => {
-	// 		if (err) {
-	// 			console.log("\nerror rendering login:", err, "\n");
-	// 		}
-	// 		res.send(html);
-	// 	});
-	// });
+	app.get("/login", (req, res) => {
+		res.render("login", (err, html) => {
+			if (err) {
+				console.log("\nerror rendering login:", err, "\n");
+			}
+			res.send(html);
+		});
+	});
 
 	app.get("/privacypolicy", (req, res) => {
 		res.render("privacypolicy", (err, html) => {
@@ -97,7 +97,45 @@ module.exports = app => {
 		Passport.authenticate("google", {
 			session: true,
 			failureRedirect: "/" ,
-			failureFlash: "Problem with authentication, try again"
+			failureFlash: "Problem with Google authentication, try again"
+		}),
+		(req, res) => {
+			req.session.save(() => res.redirect("/useraccount"));
+		}
+	);
+
+	app.get("/auth/facebook",
+		Passport.authenticate("facebook",
+			{ 
+				scope: ["openid", "profile", "email"]
+			}
+		)
+	);
+
+	app.get("/auth/facebook/callback",
+		Passport.authenticate("facebook", {
+			session: true,
+			failureRedirect: "/" ,
+			failureFlash: "Problem with Facebook authentication, try again"
+		}),
+		(req, res) => {
+			req.session.save(() => res.redirect("/useraccount"));
+		}
+	);
+
+	app.get("/auth/twitter",
+		Passport.authenticate("twitter",
+			{ 
+				scope: ["openid", "profile", "email"]
+			}
+		)
+	);
+
+	app.get("/auth/twitter/callback",
+		Passport.authenticate("twitter", {
+			session: true,
+			failureRedirect: "/" ,
+			failureFlash: "Problem with Twitter authentication, try again"
 		}),
 		(req, res) => {
 			req.session.save(() => res.redirect("/useraccount"));
@@ -109,11 +147,28 @@ module.exports = app => {
 			{
 				userFirstName: req.user.dataValues.firstName,
 				userLastName: req.user.dataValues.lastName,
+				displayName: req.user.dataValues.displayName,
 				userOpenId: req.user.dataValues.openId
 			},
 			(err, html) => {
 				if (err) {
 					console.log("\nerror rendering user account page:", err, "\n");
+				}
+				res.send(html);
+			});
+	});
+
+	app.get("/modifyaccount", ensureAuthenticated, (req, res) => {
+		res.render("modifyaccount",
+			{
+				userFirstName: req.user.dataValues.firstName,
+				userLastName: req.user.dataValues.lastName,
+				displayName: req.user.dataValues.displayName,
+				userOpenId: req.user.dataValues.openId
+			},
+			(err, html) => {
+				if (err) {
+					console.log("\nerror rendering user modify account page:", err, "\n");
 				}
 				res.send(html);
 			});

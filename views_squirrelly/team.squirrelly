@@ -37,7 +37,7 @@
                     <li><a href="/" class="white-text">Home</a></li>
                     <li><a href="/team" class="white-text">Team</a></li>
                     <li><a href="/additionalresources" class="white-text">Additional resources</a></li>
-                    <li><a href="/auth/google" class="white-text" id="signin">Sign in</a></li>
+                    <li><a href="/login" class="white-text" id="signin">Login</a></li>
                     <li><a href="/useraccount" class="white-text hide" id="account">Your account</a></li>
                     <li><a href="/logout" class="white-text hide" id="logout">Log out</a></li>
                 </ul>    
@@ -47,7 +47,7 @@
             <li><a href="/">Home</a></li>
             <li><a href="/team">Team</a></li>
             <li><a href="/additionalresources">Additional resources</a></li>
-            <li><a href="/auth/google" class="" id="signin-side">Sign in</a></li>
+            <li><a href="/login" class="" id="signin-side">Login</a></li>
             <li><a href="/useraccount" class="hide" id="account-side">Your account</a></li>
             <li><a href="/logout" class="hide" id="logout-side">Log out</a></li>
         </ul>

@@ -37,7 +37,7 @@
                     <li><a href="/" class="white-text">Home</a></li>
                     <li><a href="/team" class="white-text">Team</a></li>
                     <li><a href="/additionalresources" class="white-text">Additional resources</a></li>
-                    <li><a href="/auth/google" class="white-text" id="signin">Sign in</a></li>
+                    <li><a href="/login" class="white-text" id="signin">Login</a></li>
                     <li><a href="/useraccount" class="white-text hide" id="account">Your account</a></li>
                     <li><a href="/logout" class="white-text hide" id="logout">Log out</a></li>
                 </ul>    
@@ -47,7 +47,7 @@
             <li><a href="/">Home</a></li>
             <li><a href="/team">Team</a></li>
             <li><a href="/additionalresources">Additional resources</a></li>
-            <li><a href="/auth/google" class ="" id="signin-side">Sign in</a></li>
+            <li><a href="/login" class ="" id="signin-side">Login</a></li>
             <li><a href="/useraccount" class="hide" id="account-side">Your account</a></li>
             <li><a href="/logout" class="hide" id="logout-side">Log out</a></li>
         </ul>
@@ -65,7 +65,20 @@
             <div class="section">
                 <h3 class="center-align">Help</h3>
                 <br>
-                <p>Page under construction, please forgive the dust and lack of content!</p>
+                <p class="center-align">
+                    <strong><em>Page under construction, please forgive the dust and lack of content!</em></strong>
+                    <br><br>
+                    <h5 class="center-align">Frequently Asked Questions</h5>
+                    <br><br>
+                    <h5 class="center-align">Video tutorials</h5>
+                    <br><br>                    
+                </p>
+                
+                <br><br>
+
+                <div class="row center-align">
+                    <a class="btn waves-effect waves-teal btn-flat" id="backtotop" href="#top">Back to top</a>
+                </div>
 
             </div>
         </div>

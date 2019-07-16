@@ -4,7 +4,7 @@ const express = require("express"),
 	session = require("express-session"),
 	path = require("path"),
 	mySQLStore = require("express-mysql-session")(session),
-	Passport = require("./config/passportStrategy"),
+	Passport = require("./config/passportStrategy2"),
 	flash = require("connect-flash"),
 	db = require("./models"),
 	favicon = require("serve-favicon");
@@ -122,7 +122,7 @@ require("./routes/authRoutes")(app);
 
 let syncOptions = {
 	force: true,
-	logging: false // prevents console logs of sequelize things
+	// logging: false // prevents console logs of sequelize things
 };
 // if (process.env.NODE_ENV === "test") {
 // 	syncOptions.force = true;

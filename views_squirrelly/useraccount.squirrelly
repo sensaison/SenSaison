@@ -63,7 +63,7 @@
 
         <div class="container center-align">
             <div class="section">
-                <h3 id="welcome-user">Welcome {{userFirstName}} {{userLastName}}!</h3>
+                <h3 id="welcome-user">Welcome {{displayName}}!</h3>
                 <br>
                 <h4>Account actions</h4>
                 <br>
@@ -71,7 +71,8 @@
                     <button class="btn waves-effect waves-light btn-flat" id="add-obs-btn">Add new observation</button><br>
                     <button class="btn waves-effect waves-light btn-flat" id="view-usr-obs-btn">View all your observations</button><br>
                     <button class="btn waves-effect waves-light btn-flat" id="view-near-obs-btn">View nearby observations</button><br>
-                    <button class="btn waves-effect waves-light btn-flat" id="download-data-btn">Download data</button>
+                    <button class="btn waves-effect waves-light btn-flat" id="download-data-btn">Download data</button><br>
+                    <button class="btn waves-effect waves-light btn-flat" id="modify-account-btn">Modify account</button>
                 </div>
                 <br>
 
@@ -351,20 +352,60 @@
                         </div>
                         <br>
                         <div class="row">
-                            <button class="btn waves-effect waves-light" type="submit" id="request-data">Request
+                            <button class="btn waves-effect waves-light" type="submit" id="request-data">Download
                             </button>     
                         </div>
 
                     </form>
 
                 </div>
+
+                <div class="row hidden" id="modify-account">
+                    <div class="col s12 center">
+                        <h5>Modify your account</h5>
+                        <br>
+                        <form id="modify-account-form" onsubmit="return false">
+                            <div class="row">
+                            <!-- TODO: show name update fields ONLY IF using email/password login -->
+                                <div class="input-field col s12 m3">
+                                    <label for="modify-first-name">Update first name</label>
+                                    <input type="text" id="modify-first-name" class="validate" data-length="20">
+                                </div>
+                                <div class="input-field col s12 m3">
+                                    <label for="modify-last-name">Update last name</label>
+                                    <input type="text" id="modify-last-name" class="validate" data-length="20">
+                                </div>
+                                <div class="input-field col s12 m3">
+                                    <label for="modify-email">Update email</label>
+                                    <input type="text" id="modify-email" class="validate" data-length="50">
+                                </div>
+                                <div class="input-field col s12 m3">
+                                    <button class="btn waves-effect waves-light" type="submit" id="modify-account-submit">Submit update</button>  
+                                </div>   
+                            </div>
+                        </form>
+                        <br><br>
+                        <br><br>
+                        <div class="row show" id="delete-account-1">
+                            <button class="btn waves-effect waves-light red" id="delete-account-btn-1">Delete account</button>     
+                        </div>
+                        <div class="row hidden" id="delete-account-2">
+                            <button class="btn waves-effect waves-light red" id="delete-account-btn-2">Click me if you are sure</button>     
+                        </div>
+                        <div class="row hidden" id="delete-account-3">
+                            <button class="btn waves-effect waves-light red btn-large" id="delete-account-btn-3">There is no going back after you click me!</button>     
+                        </div>
+                    </div>
+                </div>
+                <br><br>
+
             </div>
         </div>  
 
         <footer class="page-footer teal">
             <div class="container">
                 <div class="row">
-                    <!-- TODO: make About, Help, Community Guidelines, Privacy Policy, and ToS pages -->
+                    <!-- TODO: make About, Help, Community Guidelines pages -->
                     <div class="col s3">
                         <ul>
                             <li><a class="white-text" href="/about">About</a></li>

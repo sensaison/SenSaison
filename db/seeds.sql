@@ -16,8 +16,7 @@ INSERT IGNORE INTO Observations
 
 INSERT IGNORE INTO Users
     (openId, firstName, lastName, email, username)
-    VALUES ("12345", "Catherine", "Pham", "crypticwoodwhite@gmail.com", "catherinep"),
-    ("678910", "Stefan", "Apreutesei", "sapreut@uw.edu", "stefana"),
+    VALUES ("678910", "Stefan", "Apreutesei", "sapreut@uw.edu", "stefana"),
     ("246810", "Julie", "Mathews", "julie@mathews.com", "juliem"),
     ("13759", "John", "Smith", "john@smith.com", "johnsmith"),
     ("540884", "Jane", "Doe", "jane@doe.com", "janedoe"),

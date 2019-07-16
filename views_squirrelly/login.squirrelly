@@ -45,7 +45,7 @@
                     <li><a href="/" class="white-text"> Home</a></li>
                     <li><a href="/team" class="white-text">Team</a></li>
                     <li><a href="/additionalresources" class="white-text">Additional resources</a></li>
-                    <li><a href="/auth/google" class="white-text hide" id="signin">Sign in</a></li>
+                    <li><a href="/login" class="white-text hide" id="signin">Login</a></li>
                     <li><a href="/useraccount" class="white-text hide" id="account">Your account</a></li>
                     <li><a href="/logout" class="white-text hide" id="logout">Log out</a></li>
                 </ul>    
@@ -55,7 +55,7 @@
             <li><a href="/">Home</a></li>
             <li><a href="/team">Team</a></li>
             <li><a href="/additionalresources">Additional resources</a></li>
-            <li><a href="/auth/google" class="" id="signin-side">Sign in</a></li>
+            <li><a href="/login" class="" id="signin-side">Login</a></li>
             <li><a href="/useraccount" class="hide" id="account-side">Your account</a></li>
             <li><a href="/logout" class="hide" id="logout-side">Log out</a></li>
         </ul>
@@ -74,14 +74,31 @@
                 <br>
 
                 <div class="row center-align">
-                    <!--TODO: logos/buttons for each strategy, href/post methods for each strategy -->
-                    <a href="/google/auth"><div class="g-signin2 center-align" data-width="240" data-height="50" data-longtitle="true" data-theme="dark"></div></a>
-                    <br>
-                    <a href="/facebook/auth"><div class="fb-login-button" data-width="" data-size="large" data-button-type="login_with" data-auto-logout-link="true" data-use-continue-as="false"></div></a>
-                    <br>
-                    <a class="btn waves-effect waves-light btn-flat" id="view-near-obs-btn" href="#">Twitter</a><br>
+                    <div class="col s12 m3 center-align">
+                    </div>
+                    <div class="col s12 m6 center-align">
+                        <div class="card">
+                            <div class="card-content">
+                                <span class="card-title">Social media login</span>
+                                <br>
+                                <p>
+                                    <a class="google-button" href="/auth/google"><img src="/images/btn_google_signin_dark_normal_web@2x.png" style="height: auto; width:240px;"></a>
+                                    <br><br>
+                                    <a class="fb-login-button" data-width="" data-size="large" data-button-type="login_with" data-auto-logout-link="true" data-use-continue-as="false" href="/auth/facebook"></a>
+                                    <br><br>
+                                    <a href="/auth/twitter" class="twitter-button"><img src="/images/sign-in-with-twitter-gray.png" style="height:auto; width:240px;"></a>
+                                </p>
+                                <br>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col s12 m3 center-align">
+                    </div>
                 </div>
                 <br>
+                <div class="row">
+                    <p><strong><em>Email and password sign in coming in the future!</em></strong></p>
+                </div>
 
                 <br><br>
             </div>
@@ -134,8 +151,9 @@
         <!--  Scripts -->
         <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-        <script type="text/javascript" src="js/init.js"></script>
         <script type="text/javascript" src="js/userAuthBtns.js"></script>
+        <script type="text/javascript" src="js/init.js"></script>
+        <script type="text/javascript" src="js/googlelogin.js"></script>
 
 
 
