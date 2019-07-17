@@ -61,7 +61,7 @@
 
         <div class="container center-align">
             <div class="section">
-                <h3 id="welcome-user">Welcome {{displayName}}!</h3>
+                <h3 id="welcome-user">Welcome {{userFirstName}} {{userLastName}}!</h3>
                 <br>
                 <h4>Actions</h4>
                 <br>
