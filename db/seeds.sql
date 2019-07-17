@@ -15,15 +15,15 @@ INSERT IGNORE INTO Observations
     ("241882", "13579005", "2019-04-21", "07:58:00", 37.8239, -96.2892, "animal", "Raccoon", NULL, 5, 3, "First raccoon kits", "Family of raccoons seen in the local park this morning, babies look very young");
 
 INSERT IGNORE INTO Users
-    (openId, firstName, lastName, email, username)
-    VALUES ("678910", "Stefan", "Apreutesei", "sapreut@uw.edu", "stefana"),
-    ("246810", "Julie", "Mathews", "julie@mathews.com", "juliem"),
-    ("13759", "John", "Smith", "john@smith.com", "johnsmith"),
-    ("540884", "Jane", "Doe", "jane@doe.com", "janedoe"),
-    ("763781", "Bonnie", "Outlaw", "bonnie@outlaw.com", "bonnieoutlaw"),
-    ("037289", "Clyde", "Outlaw", "clyde@outlaw.com", "clydeoutlaw"),
-    ("364789", "Gwen", "Stefani", "gwen@stefani.com", "gwenstefani"),
-    ("241882", "Spider", "Man", "spider@man.com", "spiderman");
+    (openId, firstName, lastName, email, issuer, username)
+    VALUES ("678910", "Stefan", "Apreutesei", "sapreut@uw.edu", "google", "stefana"),
+    ("246810", "Julie", "Mathews", "julie@mathews.com", "twitter", "juliem"),
+    ("13759", "John", "Smith", "john@smith.com", "twitter", "johnsmith"),
+    ("540884", "Jane", "Doe", "jane@doe.com", "facebook", "janedoe"),
+    ("763781", "Bonnie", "Outlaw", "bonnie@outlaw.com", "google", "bonnieoutlaw"),
+    ("037289", "Clyde", "Outlaw", "clyde@outlaw.com", "google", "clydeoutlaw"),
+    ("364789", "Gwen", "Stefani", "gwen@stefani.com", "facebook", "gwenstefani"),
+    ("241882", "Spider", "Man", "spider@man.com", "google", "spiderman");
     
 
 

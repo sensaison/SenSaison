@@ -23,7 +23,8 @@ Passport.use("google", new GoogleStrategy({
 			displayName: profile.displayName,
 			firstName: profile.name.givenName,
 			lastName: profile.name.familyName,
-			email: profile.emails[0].value
+			email: profile.emails[0].value,
+			issuer: "google"
 		}
 	}).then((user, created, err) => {
 		// console.log("findOrCreate Google:", user[0].openId);
@@ -55,7 +56,8 @@ Passport.use("facebook", new FacebookStrategy({
 			firstName: profile.first_name,
 			lastName: profile.last_name,
 			displayName: profile.name,
-			email: profile.email
+			email: profile.email,
+			issuer: "facebook"
 		}
 	}).then((user, created) => {
 		console.log("\nfindOrCreate FACEBOOK:", user[0].openId, "\n");
@@ -83,7 +85,8 @@ Passport.use("twitter", new TwitterStrategy({
 		where: {
 			openId: profile.id,
 			displayName: profile.displayName,
-			email: profile.emails[0].value
+			email: profile.emails[0].value,
+			issuer: "twitter"
 			// twitter does NOT provide first/last names!!!
 		}
 	}).then((user, created) => {

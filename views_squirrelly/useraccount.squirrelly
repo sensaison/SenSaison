@@ -40,16 +40,14 @@
                 <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
                     <li><a href="/" class="white-text">Home</a></li>
-                    <li><a href="/team" class="white-text">Team</a></li>
-                    <li><a href="/additionalresources" class="white-text">Additional resources</a></li>
+                    <li><a href="/about" class="white-text">About</a></li>
                     <li><a href="/logout" class="" id="logout">Log out</a></li>
                 </ul>    
             </div>
         </nav>
         <ul id="mobile-demo" class="sidenav">
             <li><a href="/">Home</a></li>
-            <li><a href="/team">Team</a></li>
-            <li><a href="/additionalresources">Additional resources</a></li>
+            <li><a href="/about">About</a></li>
             <li><a href="/logout" class="" id="logout-side">Log out</a></li>
         </ul>
 
@@ -65,14 +63,14 @@
             <div class="section">
                 <h3 id="welcome-user">Welcome {{displayName}}!</h3>
                 <br>
-                <h4>Account actions</h4>
+                <h4>Actions</h4>
                 <br>
                 <div class="row">
                     <button class="btn waves-effect waves-light btn-flat" id="add-obs-btn">Add new observation</button><br>
                     <button class="btn waves-effect waves-light btn-flat" id="view-usr-obs-btn">View all your observations</button><br>
                     <button class="btn waves-effect waves-light btn-flat" id="view-near-obs-btn">View nearby observations</button><br>
                     <button class="btn waves-effect waves-light btn-flat" id="download-data-btn">Download data</button><br>
-                    <button class="btn waves-effect waves-light btn-flat" id="modify-account-btn">Modify account</button>
+                    <!-- <button class="btn waves-effect waves-light btn-flat" id="modify-account-btn">Your account</button>  -->
                 </div>
                 <br>
 
@@ -360,13 +358,12 @@
 
                 </div>
 
-                <div class="row hidden" id="modify-account">
+                <!-- <div class="row hidden" id="modify-account">
                     <div class="col s12 center">
                         <h5>Modify your account</h5>
                         <br>
                         <form id="modify-account-form" onsubmit="return false">
                             <div class="row">
-                            <!-- TODO: show name update fields ONLY IF using email/password login -->
                                 <div class="input-field col s12 m3" id="modify-first-name-div">
                                     <label for="modify-first-name">Update first name</label>
                                     <input type="text" id="modify-first-name" class="validate" data-length="20">
@@ -393,9 +390,10 @@
                             <button class="btn waves-effect waves-light red" id="delete-account-btn-2">Click me if you are sure</button>     
                         </div>
                         <div class="row hidden" id="delete-account-3">
-                            <button class="btn waves-effect waves-light red btn-large" id="delete-account-btn-3">There is no going back after you click me!</button>     
+                            <button class="btn waves-effect waves-light red btn-large" id="delete-account-btn-3">Point of no return</button>     
                         </div>
-                    </div>
+                    </div> -->
+
                 </div>
                 <br><br>
 
@@ -405,10 +403,10 @@
         <footer class="page-footer teal">
             <div class="container">
                 <div class="row">
-                    <!-- TODO: make About, Help, Community Guidelines pages -->
                     <div class="col s3">
                         <ul>
                             <li><a class="white-text" href="/about">About</a></li>
+                            <li><a class="white-text" href="/team">Team SenSaison</a></li>
                             <li><a class="white-text" href="/help">Help</a></li>
                             <li><a class="white-text" href="/additionalresources">Additional Resources</a></li>
                         </ul>

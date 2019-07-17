@@ -4,7 +4,7 @@ const express = require("express"),
 	session = require("express-session"),
 	path = require("path"),
 	mySQLStore = require("express-mysql-session")(session),
-	Passport = require("./config/passportStrategy2"),
+	Passport = require("./config/passportStrategy"),
 	flash = require("connect-flash"),
 	db = require("./models"),
 	favicon = require("serve-favicon");
@@ -34,22 +34,6 @@ app.use((req, res, next) => {
 	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 	next();
 });
-
-// middleware to require https except for auth page
-// this breaks heroku
-// app.use((req, res, next) => {
-// 	if (process.env.NODE_ENV === "production") {
-// 		const reqType = req.headers["x-forwarded-proto"];
-// 		// if not https redirect to https unless logging in using OAuth
-// 		if (reqType !== "https") {
-// 			req.url.indexOf("/auth/google") !== -1
-// 				? next()
-// 				: res.redirect("https://" + req.headers.host + req.url);
-// 		} 
-// 	} else {
-// 		next();
-// 	}
-// }); 
 
 // non auth routes before passport and session code
 require("./routes/apiRoutes")(app);
@@ -122,7 +106,7 @@ require("./routes/authRoutes")(app);
 
 let syncOptions = {
 	force: true,
-	// logging: false // prevents console logs of sequelize things
+	logging: false // prevents console logs of sequelize things
 };
 // if (process.env.NODE_ENV === "test") {
 // 	syncOptions.force = true;

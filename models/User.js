@@ -33,6 +33,10 @@ module.exports = (sequelize, DataTypes) => {
 				args: true
 			}
 		},
+		issuer: {
+			type: DataTypes.STRING,
+			allowNull: false
+		},
 		username: {
 			type: DataTypes.STRING,
 			allowNull: true,

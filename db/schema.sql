@@ -30,6 +30,7 @@ CREATE TABLE IF NOT EXISTS Users (
     lastName VARCHAR(20),
     displayName VARCHAR(50),
     email VARCHAR(50) NOT NULL,
+    issuer ENUM("email_pw", "google", "facebook", "twitter") NOT NULL,
     username VARCHAR(20),
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
     updatedAt TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
