@@ -1,8 +1,6 @@
 $(document).ready(() => {
 
-	// console.log("user:", user);
-
-	// following four event listeners show/hide what the user can do from their account page
+	// following five event listeners show/hide what the user can do from their account page
 	$("#add-obs-btn").on("click", () => {
 		if ($("#add-obs").hasClass("hidden")) {
 			$("#add-obs").addClass("show");
@@ -15,6 +13,8 @@ $(document).ready(() => {
 			$("#view-near-obs").removeClass("show");
 			$("#download-data").addClass("hidden");
 			$("#download-data").removeClass("show");
+			$("#modify-account").addClass("hidden");
+			$("#modify-account").removeClass("show");
 		}
 		// NO ELSE because if it's already showing do nothing
 	});
@@ -30,6 +30,8 @@ $(document).ready(() => {
 			$("#view-near-obs").removeClass("show");
 			$("#download-data").addClass("hidden");
 			$("#download-data").removeClass("show");
+			$("#modify-account").addClass("hidden");
+			$("#modify-account").removeClass("show");
 		}
 	});
 
@@ -44,6 +46,8 @@ $(document).ready(() => {
 			$("#add-obs").removeClass("show");
 			$("#download-data").addClass("hidden");
 			$("#download-data").removeClass("show");
+			$("#modify-account").addClass("hidden");
+			$("#modify-account").removeClass("show");
 		}
 	});
 
@@ -58,6 +62,26 @@ $(document).ready(() => {
 			$("#view-near-obs").removeClass("show");
 			$("#add-obs").addClass("hidden");
 			$("#add-obs").removeClass("show");
+			$("#modify-account").addClass("hidden");
+			$("#modify-account").removeClass("show");
+
+		}
+	});
+
+	$("#modify-account-btn").on("click", () => {
+		if ($("#modify-account").hasClass("hidden")) {
+			$("#modify-account").addClass("show");
+			$("#modify-account").removeClass("hidden");
+
+			$("#download-data").addClass("hidden");
+			$("#download-data").removeClass("show");
+			$("#view-usr-obs").addClass("hidden");
+			$("#view-usr-obs").removeClass("show");
+			$("#view-near-obs").addClass("hidden");
+			$("#view-near-obs").removeClass("show");
+			$("#add-obs").addClass("hidden");
+			$("#add-obs").removeClass("show");
+
 		}
 	});
 
@@ -133,8 +157,21 @@ $(document).ready(() => {
 	
 	});
 
+	// delete user account show buttons
+	$("#delete-account-btn-1").on("click", e => {
+		e.preventDefault();
+		$("#delete-account-1").removeClass("show");
+		$("#delete-account-1").addClass("hidden");
+		$("#delete-account-2").removeClass("hidden");
+		$("#delete-account-2").addClass("show");
+	});
 
-
-
+	$("#delete-account-btn-2").on("click", e => {
+		e.preventDefault();
+		$("#delete-account-2").removeClass("show");
+		$("#delete-account-2").addClass("hidden");
+		$("#delete-account-3").removeClass("hidden");
+		$("#delete-account-3").addClass("show");
+	});
 
 });

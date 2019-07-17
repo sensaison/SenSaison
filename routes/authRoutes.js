@@ -97,18 +97,57 @@ module.exports = app => {
 		Passport.authenticate("google", {
 			session: true,
 			failureRedirect: "/" ,
-			failureFlash: "Problem with authentication, try again"
+			failureFlash: "Problem with Google authentication, try again"
 		}),
 		(req, res) => {
 			req.session.save(() => res.redirect("/useraccount"));
 		}
 	);
+
+	// app.get("/auth/facebook",
+	// 	Passport.authenticate("facebook",
+	// 		{ 
+	// 			scope: ["openid", "profile", "email"]
+	// 		}
+	// 	)
+	// );
+
+	// app.get("/auth/facebook/callback",
+	// 	Passport.authenticate("facebook", {
+	// 		session: true,
+	// 		failureRedirect: "/" ,
+	// 		failureFlash: "Problem with Facebook authentication, try again"
+	// 	}),
+	// 	(req, res) => {
+	// 		req.session.save(() => res.redirect("/useraccount"));
+	// 	}
+	// );
+
+	// app.get("/auth/twitter",
+	// 	Passport.authenticate("twitter",
+	// 		{ 
+	// 			scope: ["openid", "profile", "email"]
+	// 		}
+	// 	)
+	// );
+
+	// app.get("/auth/twitter/callback",
+	// 	Passport.authenticate("twitter", {
+	// 		session: true,
+	// 		failureRedirect: "/" ,
+	// 		failureFlash: "Problem with Twitter authentication, try again"
+	// 	}),
+	// 	(req, res) => {
+	// 		req.session.save(() => res.redirect("/useraccount"));
+	// 	}
+	// );
 	
 	app.get("/useraccount", ensureAuthenticated, (req, res) => {
 		res.render("useraccount",
 			{
 				userFirstName: req.user.dataValues.firstName,
 				userLastName: req.user.dataValues.lastName,
+				displayName: req.user.dataValues.displayName,
 				userOpenId: req.user.dataValues.openId
 			},
 			(err, html) => {

@@ -181,11 +181,38 @@ module.exports = app => {
 	// FIND ALL users
 	app.get("/api/users", (req, res) => {
 		db.Users.findAll({
-			attributes: ["openId", "firstName", "lastName", "username"],
+			attributes: ["id", "openId", "displayName", "email"],
 			include: [db.Observations]
 		}).then(allusr => {
 			res.json(allusr);
 		});
 	});
+
+	// DESTROY ONE user
+	app.delete("/api/users", (req, res) => {
+		db.Users.destroy({
+			where: {
+				openId: req.query.openId
+			}
+		}).then(allusr => {
+			res.json(allusr);
+		});
+	});
+
+	// UPDATE ONE user
+	app.put("/api/users", (req, res) => {
+		db.Users.update({
+			firstName: req.query.firstName,
+			lastName: req.query.lastName,
+			displayName: req.query.displayName
+		},{
+			where: {
+				openId: req.query.openId
+			}
+		}).then(allusr => {
+			res.json(allusr);
+		});
+	});
+
 
 };

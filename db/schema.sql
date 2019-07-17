@@ -26,9 +26,11 @@ CREATE TABLE IF NOT EXISTS Observations (
 CREATE TABLE IF NOT EXISTS Users (
     id INT NOT NULL AUTO_INCREMENT,
     openId VARCHAR(50) NOT NULL,
-    firstName VARCHAR(20) NOT NULL,
-    lastName VARCHAR(20) NOT NULL,
+    firstName VARCHAR(20),
+    lastName VARCHAR(20),
+    displayName VARCHAR(50),
     email VARCHAR(50) NOT NULL,
+    issuer ENUM("email_pw", "google", "facebook", "twitter") NOT NULL,
     username VARCHAR(20),
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
     updatedAt TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
