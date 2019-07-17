@@ -35,9 +35,8 @@
                 <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
                     <li><a href="/" class="white-text">Home</a></li>
-                    <li><a href="/team" class="white-text">Team</a></li>
-                    <li><a href="/additionalresources" class="white-text">Additional resources</a></li>
-                    <li><a href="/auth/google" class="white-text" id="signin">Sign in</a></li>
+                    <li><a href="/about" class="white-text">About</a></li>
+                    <li><a href="/auth/google" class="white-text" id="signin">Login</a></li>
                     <li><a href="/useraccount" class="white-text hide" id="account">Your account</a></li>
                     <li><a href="/logout" class="white-text hide" id="logout">Log out</a></li>
                 </ul>    
@@ -45,9 +44,8 @@
         </nav>
         <ul id="mobile-demo" class="sidenav">
             <li><a href="/">Home</a></li>
-            <li><a href="/team">Team</a></li>
-            <li><a href="/additionalresources">Additional resources</a></li>
-            <li><a href="/auth/google" class ="" id="signin-side">Sign in</a></li>
+            <li><a href="/About">Team</a></li>
+            <li><a href="/auth/google" class ="" id="signin-side">Login</a></li>
             <li><a href="/useraccount" class="hide" id="account-side">Your account</a></li>
             <li><a href="/logout" class="hide" id="logout-side">Log out</a></li>
         </ul>
@@ -65,8 +63,14 @@
             <div class="section">
                 <h3 class="center-align">About</h3>
                 <br>
-                <p>Page under construction, please forgive the dust and lack of content!</p>
-
+                <p>
+                    Climate change is rapidly changing the world in which we live and on which we depend. Weather patterns are changing, seas are rising, glaciers are melting, and species are showing up in places they have never occurred before. We at SenSaison are especially interested in the effects of climate change on seasons, seasonal transitions, and seasonal events. In short, summer is becoming longer and hotter, and winter is becoming shorter and milder. There are many questions about the short- and long-term effects of these changes on ecosystems, communities, species, and populations. The answers the scientific community has so far found range from simple to incredibly complex due to the interconnectedness of life on Earth.
+                    <br><br>
+                    We understand that scientists are limited in resources, including funding, and do not have as much raw data as they really need in order to answer their many unanswered questions. That data--empirical evidence--can be produced by non-scientists, by lay people like you. This is called citizen science. The lay people engaged in citizen science are then empowered with new knowledge about the scientific process as well as about the particular research they are participating in.
+                    <br><br>
+                    The goal of SenSaison then is to bring together scientists and lay people to produce new data about seasonal natural history events in order to power more climate change research, and to empower lay people.
+                </p>
+            <br><br>
             </div>
         </div>
 
@@ -77,6 +81,7 @@
                     <div class="col s3">
                         <ul>
                             <li><a class="white-text" href="/about">About</a></li>
+                            <li><a class="white-text" href="/team">Team SenSaison</a></li>
                             <li><a class="white-text" href="/help">Help</a></li>
                             <li><a class="white-text" href="/additionalresources">Additional Resources</a></li>
                         </ul>

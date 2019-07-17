@@ -6,6 +6,14 @@
 * Made By MaterializeCSS.com
 */
 
+.btn-large {
+  font-size: 120%;
+}
+
+.card-title {
+  border-bottom: solid 1px #f2f2f2;
+}
+
 #index-icons {
   display: inline;
 }

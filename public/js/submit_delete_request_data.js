@@ -51,7 +51,7 @@ $(document).ready(() => {
 	});
 
 	// POST request when submitting new observation
-	$("#submit-obs").on("click", event => {
+	$("#obs-submission-form").on("submit", event => {
 		event.preventDefault;
 
 		$.getJSON("api/userprofile", data => {
@@ -154,13 +154,10 @@ $(document).ready(() => {
 	});
 	
 	// DELETE request when deleting observation
-	$("#all-your-obs-body").on("click", ".delete", function(e) {
+	$("#all-your-obs-body").on("click", ".delete", e => {
 		e.preventDefault();
-		console.log("click!");
 
 		let idDelete = $(this).closest("tr").attr("id");
-		// FIXME: WHYYYYYYYYYYYY is this DELETE no longer working?!
-		console.log("deleting:", idDelete);
 
 		$.ajax({
 			method: "DELETE",
@@ -174,7 +171,7 @@ $(document).ready(() => {
 	});
 
 	// request to download data
-	$("#request-data").on("click", function(e) {
+	$("#data-request-form").on("submit", e => {
 		e.preventDefault();
 
 		let minDate = $("#start-date-download").val();
@@ -202,4 +199,71 @@ $(document).ready(() => {
 		}
 		$("#data-request-form")[0].reset();
 	});
+
+	// TODO: modify user account
+	$("#modify-account-form").on("submit", event => {
+		event.preventDefault();
+
+		let firstName = ("#modify-first-name").val().trim();
+		let lastName = ("#modify-last-name").val().trim();
+		let email = ("#modify-email").val().trim();
+
+		$.getJSON("api/userprofile", data => {
+			// Make sure the data contains the username as expected before using it
+			if (data.hasOwnProperty("user")) {
+				return data;
+			} else {
+				console.log("No user data!");
+				return alert("Error trying to delete your account, please try again");
+			}
+		}).then(dataUser => {
+			let openId = dataUser.user.openId;
+
+			$.ajax({
+				url: "/api/users?openId=" + openId,
+				xhrFields: {
+					withCredentials: true
+				},
+				type: "PUT",
+				data: {
+					firstName: firstName,
+					lastName: lastName,
+					email: email
+				}
+			}).then(()=> {
+				console.log("user updated");
+			});
+		});
+
+	});
+
+	// TODO: delete user account
+	$("#delete-account-btn-3").on("click", e => {
+		e.preventDefault();
+
+		// api call to get user openid
+		$.getJSON("api/userprofile", data => {
+			// Make sure the data contains the username as expected before using it
+			if (data.hasOwnProperty("user")) {
+				return data;
+			} else {
+				console.log("No user data!");
+				return alert("Error trying to delete your account, please try again");
+			}
+		}).then(dataUser => {
+			let openId = dataUser.user.openId;
+
+			$.ajax({
+				url: "/api/users?openId=" + openId,
+				xhrFields: {
+					withCredentials: true
+				},
+				type: "DELETE",
+			}).then(()=> {
+				window.location="/";
+				console.log("user deleted");
+			});
+		});
+	});
+
 });

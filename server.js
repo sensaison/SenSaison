@@ -35,22 +35,6 @@ app.use((req, res, next) => {
 	next();
 });
 
-// middleware to require https except for auth page
-// this breaks heroku
-// app.use((req, res, next) => {
-// 	if (process.env.NODE_ENV === "production") {
-// 		const reqType = req.headers["x-forwarded-proto"];
-// 		// if not https redirect to https unless logging in using OAuth
-// 		if (reqType !== "https") {
-// 			req.url.indexOf("/auth/google") !== -1
-// 				? next()
-// 				: res.redirect("https://" + req.headers.host + req.url);
-// 		} 
-// 	} else {
-// 		next();
-// 	}
-// }); 
-
 // non auth routes before passport and session code
 require("./routes/apiRoutes")(app);
 

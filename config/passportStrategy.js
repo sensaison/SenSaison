@@ -21,7 +21,8 @@ Passport.use(new GoogleStrategy({
 			openId: profile.id,
 			firstName: profile.name.givenName,
 			lastName: profile.name.familyName,
-			email: profile.emails[0].value
+			email: profile.emails[0].value,
+			issuer: "google"
 		}
 	}).then((user, created, err) => {
 		// console.log("findOrCreate Google:", user[0].openId);
@@ -54,7 +55,8 @@ Passport.use(new GoogleStrategy({
 // 			openId: profile.id,
 // 			firstName: profile.name.givenName,
 // 			lastName: profile.name.familyName,
-// 			email: profile.emails[0].value
+// 			email: profile.emails[0].value,
+//			issuer: "facebook"
 // 		}
 // 	}).then((user, created) => {
 // 		console.log("\nfindOrCreate FACEBOOK:", user[0].openId, "\n");
@@ -83,6 +85,7 @@ Passport.use(new GoogleStrategy({
 // 			firstName: profile.name.givenName,
 // 			lastName: profile.name.familyName,
 // 			email: profile.emails[0].value
+//			issuer: "twitter"
 // 		}
 // 	}).then((user, created) => {
 // 		console.log("\nfindOrCreate TWITTER:", user[0].openId, "\n");

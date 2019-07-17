@@ -13,11 +13,15 @@ module.exports = (sequelize, DataTypes) => {
 		},
 		firstName: {
 			type: DataTypes.STRING,
-			allowNull: false
+			allowNull: true
 		},
 		lastName: {
 			type: DataTypes.STRING,
-			allowNull: false
+			allowNull: true
+		},
+		displayName: {
+			type: DataTypes.STRING,
+			allowNull: true
 		},
 		email: {
 			type: DataTypes.STRING,
@@ -28,6 +32,10 @@ module.exports = (sequelize, DataTypes) => {
 			unique: {
 				args: true
 			}
+		},
+		issuer: {
+			type: DataTypes.STRING,
+			allowNull: false
 		},
 		username: {
 			type: DataTypes.STRING,
