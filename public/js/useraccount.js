@@ -13,8 +13,8 @@ $(document).ready(() => {
 			$("#view-near-obs").removeClass("show");
 			$("#download-data").addClass("hidden");
 			$("#download-data").removeClass("show");
-			$("#modify-account").addClass("hidden");
-			$("#modify-account").removeClass("show");
+			$("#your-account").addClass("hidden");
+			$("#your-account").removeClass("show");
 		}
 		// NO ELSE because if it's already showing do nothing
 	});
@@ -30,8 +30,8 @@ $(document).ready(() => {
 			$("#view-near-obs").removeClass("show");
 			$("#download-data").addClass("hidden");
 			$("#download-data").removeClass("show");
-			$("#modify-account").addClass("hidden");
-			$("#modify-account").removeClass("show");
+			$("#your-account").addClass("hidden");
+			$("#your-account").removeClass("show");
 		}
 	});
 
@@ -46,8 +46,8 @@ $(document).ready(() => {
 			$("#add-obs").removeClass("show");
 			$("#download-data").addClass("hidden");
 			$("#download-data").removeClass("show");
-			$("#modify-account").addClass("hidden");
-			$("#modify-account").removeClass("show");
+			$("#your-account").addClass("hidden");
+			$("#your-account").removeClass("show");
 		}
 	});
 
@@ -62,16 +62,16 @@ $(document).ready(() => {
 			$("#view-near-obs").removeClass("show");
 			$("#add-obs").addClass("hidden");
 			$("#add-obs").removeClass("show");
-			$("#modify-account").addClass("hidden");
-			$("#modify-account").removeClass("show");
+			$("#your-account").addClass("hidden");
+			$("#your-account").removeClass("show");
 
 		}
 	});
 
-	$("#modify-account-btn").on("click", () => {
-		if ($("#modify-account").hasClass("hidden")) {
-			$("#modify-account").addClass("show");
-			$("#modify-account").removeClass("hidden");
+	$("#your-account-btn").on("click", () => {
+		if ($("#your-account").hasClass("hidden")) {
+			$("#your-account").addClass("show");
+			$("#your-account").removeClass("hidden");
 
 			$("#download-data").addClass("hidden");
 			$("#download-data").removeClass("show");
@@ -155,6 +155,40 @@ $(document).ready(() => {
 	
 		});
 	
+	});
+
+	// Show name and email update fields if issuer is email/pw
+	$.getJSON("api/userprofile", data => {
+		if (data.hasOwnProperty("user")) {
+			return data;
+		} else {
+			return console.log("ERROR: no user data!");
+		}
+	}).then(dataUser => {
+		$.ajax("/api/users", {
+			type: "GET",
+			xhrFields: {
+				withCredentials: true
+			},
+			data: {
+				openId: dataUser.user.openId
+			}
+		}).then(dataUserId => {
+			// console.log("data:", dataUserId[0]);
+			// console.log("issuer:", dataUserId[0].issuer);
+			switch(dataUserId[0].issuer) {
+			case "email_pw":
+				$("#modify-account-form").removeClass("hidden");
+				$("#modify-account-form").addClass("show");
+				$("#modify-username-div").removeClass("show");
+				$("#modify-username-div").addClass("hidden");
+				break;
+			default:
+				console.log("NOT email/pw user so cannot update name or email");
+				break;
+			}
+
+		});
 	});
 
 	// delete user account show buttons

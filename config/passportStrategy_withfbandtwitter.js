@@ -6,6 +6,10 @@ const Passport = require("passport"),
 	db = require("../models");
 
 
+// TODO: Check if user already exists with another issuer, and if so, merge those accounts. For example, if user previously signed in with their google account, and is now using the fb account. Use email to check.
+// TODO: Check if user changed their name with their issuer, if so, update name
+
+
 // GOOGLE
 Passport.use("google", new GoogleStrategy({
 	clientID: process.env.GOOGLE_CLIENTID,
@@ -20,9 +24,9 @@ Passport.use("google", new GoogleStrategy({
 	db.Users.findOrCreate({
 		where: {
 			openId: profile.id,
-			displayName: profile.displayName,
 			firstName: profile.name.givenName,
 			lastName: profile.name.familyName,
+			displayName: profile.displayName,
 			email: profile.emails[0].value,
 			issuer: "google"
 		}
@@ -39,8 +43,6 @@ Passport.use("google", new GoogleStrategy({
 
 	return done(null, profile);
 }));
-
-// TODO: facebook and twitter logins
 
 // FACEBOOK
 Passport.use("facebook", new FacebookStrategy({

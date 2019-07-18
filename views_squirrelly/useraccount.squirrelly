@@ -61,7 +61,7 @@
 
         <div class="container center-align">
             <div class="section">
-                <h3 id="welcome-user">Welcome {{userFirstName}} {{userLastName}}!</h3>
+                <h3 id="welcome-user">Welcome {{displayName}}!</h3>
                 <br>
                 <h4>Actions</h4>
                 <br>
@@ -70,7 +70,7 @@
                     <button class="btn waves-effect waves-light btn-flat" id="view-usr-obs-btn">View all your observations</button><br>
                     <button class="btn waves-effect waves-light btn-flat" id="view-near-obs-btn">View nearby observations</button><br>
                     <button class="btn waves-effect waves-light btn-flat" id="download-data-btn">Download data</button><br>
-                    <!-- <button class="btn waves-effect waves-light btn-flat" id="modify-account-btn">Your account</button>  -->
+                    <button class="btn waves-effect waves-light btn-flat" id="your-account-btn">Your account</button>
                 </div>
                 <br>
 
@@ -358,25 +358,46 @@
 
                 </div>
 
-                <!-- <div class="row hidden" id="modify-account">
+                <div class="row hidden" id="your-account">
                     <div class="col s12 center">
-                        <h5>Modify your account</h5>
+                        <h5>Your account</h5>
                         <br>
-                        <form id="modify-account-form" onsubmit="return false">
+                        <form id="modify-username-form" class="show" onsubmit="return false">
                             <div class="row">
-                                <div class="input-field col s12 m3" id="modify-first-name-div">
+                                <div class="col s12 m2">
+                                </div>
+                                <div class="input-field col s12 m4" id="modify-username-only-div">
+                                    <label for="modify-username-only">Update username</label>
+                                    <input type="text" id="modify-username-only" class="validate" data-length="20">
+                                </div>
+                                <div class="input-field col s12 m4">
+                                    <button class="btn waves-effect waves-light" type="submit" id="modify-username-submit">Update</button>  
+                                </div> 
+                                <div class="col s12 m2">
+                                </div>
+                            </div>
+                        </form>
+                        <form id="modify-account-form" class="hidden" onsubmit="return false">
+                            <div class="row">
+                                <div class="input-field col s12 m3" id="modify-username-div">
+                                    <label for="modify-username">Update username</label>
+                                    <input type="text" id="modify-username" class="validate" data-length="20">
+                                </div>
+                                <div class="input-field col s12 m3 hidden" id="modify-first-name-div">
                                     <label for="modify-first-name">Update first name</label>
                                     <input type="text" id="modify-first-name" class="validate" data-length="20">
                                 </div>
-                                <div class="input-field col s12 m3" id="modify-last-name-div">
+                                <div class="input-field col s12 m3 hidden" id="modify-last-name-div">
                                     <label for="modify-last-name">Update last name</label>
                                     <input type="text" id="modify-last-name" class="validate" data-length="20">
                                 </div>
-                                <div class="input-field col s12 m3" id="modify-email-div">
+                                <div class="input-field col s12 m3 hidden" id="modify-email-div">
                                     <label for="modify-email">Update email</label>
                                     <input type="text" id="modify-email" class="validate" data-length="50">
                                 </div>
-                                <div class="input-field col s12 m3">
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s12">
                                     <button class="btn waves-effect waves-light" type="submit" id="modify-account-submit">Submit update</button>  
                                 </div>   
                             </div>
@@ -392,7 +413,7 @@
                         <div class="row hidden" id="delete-account-3">
                             <button class="btn waves-effect waves-light red btn-large" id="delete-account-btn-3">Point of no return</button>     
                         </div>
-                    </div> -->
+                    </div>
 
                 </div>
                 <br><br>

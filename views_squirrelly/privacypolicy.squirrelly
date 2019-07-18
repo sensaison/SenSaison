@@ -155,7 +155,6 @@
         <footer class="page-footer teal">
             <div class="container">
                 <div class="row">
-                    <!-- TODO: make About, Help, Community Guidelines, Privacy Policy, and ToS pages -->
                     <div class="col s3">
                         <ul>
                             <li><a class="white-text" href="/about">About</a></li>
