@@ -181,7 +181,7 @@ module.exports = app => {
 	// FIND ALL users
 	app.get("/api/users", (req, res) => {
 		db.Users.findAll({
-			attributes: ["id", "openId", "displayName", "email"],
+			attributes: ["id", "openId", "username", "firstName", "lastName", "displayName", "email", "issuer"],
 			include: [db.Observations]
 		}).then(allusr => {
 			res.json(allusr);
@@ -202,9 +202,11 @@ module.exports = app => {
 	// UPDATE ONE user
 	app.put("/api/users", (req, res) => {
 		db.Users.update({
-			firstName: req.query.firstName,
-			lastName: req.query.lastName,
-			displayName: req.query.displayName
+			username: req.body.username,
+			firstName: req.body.firstName,
+			lastName: req.body.lastName,
+			displayName: req.body.displayName,
+			email: req.body.email
 		},{
 			where: {
 				openId: req.query.openId

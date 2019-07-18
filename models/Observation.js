@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
 			allowNull: false
 		},
 		pictureId: {
-			type: DataTypes.INTEGER,
+			type: DataTypes.STRING,
 			allowNull: false
 		},
 		dateObs: {
