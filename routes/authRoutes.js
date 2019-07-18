@@ -58,14 +58,14 @@ module.exports = app => {
 		});
 	});
 
-	// app.get("/login", (req, res) => {
-	// 	res.render("login", (err, html) => {
-	// 		if (err) {
-	// 			console.log("\nerror rendering login:", err, "\n");
-	// 		}
-	// 		res.send(html);
-	// 	});
-	// });
+	app.get("/login", (req, res) => {
+		res.render("login", (err, html) => {
+			if (err) {
+				console.log("\nerror rendering login:", err, "\n");
+			}
+			res.send(html);
+		});
+	});
 
 	app.get("/privacypolicy", (req, res) => {
 		res.render("privacypolicy", (err, html) => {
@@ -104,49 +104,49 @@ module.exports = app => {
 		}
 	);
 
-	// app.get("/auth/facebook",
-	// 	Passport.authenticate("facebook",
-	// 		{ 
-	// 			scope: ["openid", "profile", "email"]
-	// 		}
-	// 	)
-	// );
+	app.get("/auth/facebook",
+		Passport.authenticate("facebook",
+			{ 
+				scope: ["openid", "profile", "email"]
+			}
+		)
+	);
 
-	// app.get("/auth/facebook/callback",
-	// 	Passport.authenticate("facebook", {
-	// 		session: true,
-	// 		failureRedirect: "/" ,
-	// 		failureFlash: "Problem with Facebook authentication, try again"
-	// 	}),
-	// 	(req, res) => {
-	// 		req.session.save(() => res.redirect("/useraccount"));
-	// 	}
-	// );
+	app.get("/auth/facebook/callback",
+		Passport.authenticate("facebook", {
+			session: true,
+			failureRedirect: "/" ,
+			failureFlash: "Problem with Facebook authentication, try again"
+		}),
+		(req, res) => {
+			req.session.save(() => res.redirect("/useraccount"));
+		}
+	);
 
-	// app.get("/auth/twitter",
-	// 	Passport.authenticate("twitter",
-	// 		{ 
-	// 			scope: ["openid", "profile", "email"]
-	// 		}
-	// 	)
-	// );
+	app.get("/auth/twitter",
+		Passport.authenticate("twitter",
+			{ 
+				scope: ["openid", "profile", "email"]
+			}
+		)
+	);
 
-	// app.get("/auth/twitter/callback",
-	// 	Passport.authenticate("twitter", {
-	// 		session: true,
-	// 		failureRedirect: "/" ,
-	// 		failureFlash: "Problem with Twitter authentication, try again"
-	// 	}),
-	// 	(req, res) => {
-	// 		req.session.save(() => res.redirect("/useraccount"));
-	// 	}
-	// );
+	app.get("/auth/twitter/callback",
+		Passport.authenticate("twitter", {
+			session: true,
+			failureRedirect: "/" ,
+			failureFlash: "Problem with Twitter authentication, try again"
+		}),
+		(req, res) => {
+			req.session.save(() => res.redirect("/useraccount"));
+		}
+	);
 	
 	app.get("/useraccount", ensureAuthenticated, (req, res) => {
 		res.render("useraccount",
 			{
-				userFirstName: req.user.dataValues.firstName,
-				userLastName: req.user.dataValues.lastName,
+				firstName: req.user.dataValues.firstName,
+				lastName: req.user.dataValues.lastName,
 				displayName: req.user.dataValues.displayName,
 				userOpenId: req.user.dataValues.openId
 			},
@@ -166,7 +166,7 @@ module.exports = app => {
 
 	// for sending user profile to client
 	app.get("/api/userprofile", (req, res) => {
-		if (req.user === undefined || req.user === null) {
+		if (req.user === undefined || req.user === null || !req.user) {
 			// The user is not logged in
 			res.json({});
 		} else {

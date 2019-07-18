@@ -51,8 +51,9 @@ $(document).ready(() => {
 	});
 
 	// POST request when submitting new observation
-	$("#obs-submission-form").on("submit", event => {
+	$("#submit-obs").on("click", event => {
 		event.preventDefault;
+		console.log("submit")
 
 		$.getJSON("api/userprofile", data => {
 			// Make sure the data contains the username as expected before using it
@@ -135,6 +136,12 @@ $(document).ready(() => {
 							},
 							data: newObs,
 							async: false,
+							error: (jqXHR, err) => {
+								console.log("error uploading");
+								console.log(jqXHR);
+								console.log(err);
+								alert("error, please try again");
+							}
 						}).then(() => {
 							alert("Observation successfully submitted");
 							location.reload();
@@ -171,7 +178,7 @@ $(document).ready(() => {
 	});
 
 	// request to download data
-	$("#data-request-form").on("submit", e => {
+	$("#request-data").on("click", e => {
 		e.preventDefault();
 
 		let minDate = $("#start-date-download").val();
@@ -200,13 +207,15 @@ $(document).ready(() => {
 		$("#data-request-form")[0].reset();
 	});
 
-	// TODO: modify user account
-	$("#modify-account-form").on("submit", event => {
+	// PUT user account
+	$("#modify-account-submit").on("click", event => {
 		event.preventDefault();
 
-		let firstName = ("#modify-first-name").val().trim();
-		let lastName = ("#modify-last-name").val().trim();
-		let email = ("#modify-email").val().trim();
+		let userName = $("#modify-username").val().trim();
+		let firstName = $("#modify-first-name").val().trim();
+		let lastName = $("#modify-last-name").val().trim();
+		let email = $("#modify-email").val().trim();
+		let displayName = firstName + " " + lastName;
 
 		$.getJSON("api/userprofile", data => {
 			// Make sure the data contains the username as expected before using it
@@ -226,22 +235,57 @@ $(document).ready(() => {
 				},
 				type: "PUT",
 				data: {
+					username: userName,
 					firstName: firstName,
 					lastName: lastName,
+					displayName: displayName,
 					email: email
 				}
 			}).then(()=> {
-				console.log("user updated");
+				alert("Account successfully updated");
+				location.reload();
 			});
 		});
 
+	});
+
+	// PUT username
+	$("#modify-username-submit").on("click", event => {
+		event.preventDefault();
+
+		let userName = $("#modify-username-only").val().trim();
+
+		$.getJSON("api/userprofile", data => {
+			// Make sure the data contains the username as expected before using it
+			if (data.hasOwnProperty("user")) {
+				return data;
+			} else {
+				console.log("No user data!");
+				return alert("Error trying to update your username, please try again");
+			}
+		}).then(dataUser => {
+			let openId = dataUser.user.openId;
+
+			$.ajax({
+				url: "/api/users?openId=" + openId,
+				xhrFields: {
+					withCredentials: true
+				},
+				type: "PUT",
+				data: {
+					username: userName,
+				}
+			}).then(()=> {
+				alert("Username successfully updated");
+				location.reload();
+			});
+		});
 	});
 
 	// TODO: delete user account
 	$("#delete-account-btn-3").on("click", e => {
 		e.preventDefault();
 
-		// api call to get user openid
 		$.getJSON("api/userprofile", data => {
 			// Make sure the data contains the username as expected before using it
 			if (data.hasOwnProperty("user")) {
@@ -252,7 +296,6 @@ $(document).ready(() => {
 			}
 		}).then(dataUser => {
 			let openId = dataUser.user.openId;
-
 			$.ajax({
 				url: "/api/users?openId=" + openId,
 				xhrFields: {

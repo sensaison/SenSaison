@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS Observations (
     openId VARCHAR(50) NOT NULL REFERENCES Users (openId)
         ON DELETE NO ACTION
         ON UPDATE CASCADE,
-    pictureId VARCHAR(50) NOT NULL,
+    pictureId VARCHAR(100) NOT NULL,
     dateObs DATE NOT NULL,
     timeObs TIME NOT NULL,
     latitude FLOAT NOT NULL,
