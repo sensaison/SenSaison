@@ -53,14 +53,16 @@ $(document).ready(() => {
 	// POST request when submitting new observation
 	$("#submit-obs").on("click", event => {
 		event.preventDefault;
-		console.log("submit")
+		// console.log("submit");
 
 		$.getJSON("api/userprofile", data => {
-			// Make sure the data contains the username as expected before using it
+			// Make sure the data contains the user as expected before using it
 			if (data.hasOwnProperty("user")) {
 				return data;
 			} else {
 				console.log("No user data!");
+				alert("Error submitting your observation, please try again");
+				location.reload;
 			}
 		}).then(dataUser => {
 
@@ -185,7 +187,7 @@ $(document).ready(() => {
 		let maxDate = $("#end-date-download").val();
         
 		if ($("#include-pictures").is(":checked")) { // PICTURES IN DOWNLOAD
-			console.log("pics included in download");
+			// console.log("pics included in download");
 
 			if ($("#category-download").val() === "all") { // ALL categories selected
 				location.href="/download-with-pictures?minDate=" + minDate + "&maxDate=" + maxDate + "&category=animal&category=plant&category=fungus&category=weather&category=land_water";
@@ -196,7 +198,7 @@ $(document).ready(() => {
 			}
 
 		} else { // NO PICTURES
-			console.log("NO pics included in download");
+			// console.log("NO pics included in download");
 			if ($("#category-download").val() === "all") { // ALL categories selected
 				location.href="/download?minDate=" + minDate + "&maxDate=" + maxDate + "&category=animal&category=plant&category=fungus&category=weather&category=land_water";
 			} else { // single category selected
@@ -223,7 +225,8 @@ $(document).ready(() => {
 				return data;
 			} else {
 				console.log("No user data!");
-				return alert("Error trying to delete your account, please try again");
+				alert("Error trying to delete your account, please try again");
+				location.reload;
 			}
 		}).then(dataUser => {
 			let openId = dataUser.user.openId;
@@ -261,7 +264,8 @@ $(document).ready(() => {
 				return data;
 			} else {
 				console.log("No user data!");
-				return alert("Error trying to update your username, please try again");
+				alert("Error trying to update your username, please try again");
+				location.reload;
 			}
 		}).then(dataUser => {
 			let openId = dataUser.user.openId;
@@ -292,7 +296,8 @@ $(document).ready(() => {
 				return data;
 			} else {
 				console.log("No user data!");
-				return alert("Error trying to delete your account, please try again");
+				alert("Error trying to delete your account, please try again");
+				location.reload;
 			}
 		}).then(dataUser => {
 			let openId = dataUser.user.openId;
@@ -304,7 +309,7 @@ $(document).ready(() => {
 				type: "DELETE",
 			}).then(()=> {
 				window.location="/";
-				console.log("user deleted");
+				// console.log("user deleted");
 			});
 		});
 	});

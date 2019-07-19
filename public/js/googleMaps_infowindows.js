@@ -1,13 +1,13 @@
 const apiKey = "AIzaSyDdLQBi8yxA0W_khskCmkcGuazoHwL77z0";
 
-var startingPos;
-var userPin;
-var mapType = 0;
-var selectedLocationID;
-var coordinates = {};
-var nearbyMap;
-var userMap;
-var userObs;
+let startingPos;
+let userPin;
+let mapType = 0;
+let selectedLocationID;
+let coordinates = {};
+let nearbyMap;
+let userMap;
+let userObs;
 allowTime();
 
 function getLocation() {
@@ -74,6 +74,35 @@ function generateMaps() {
 	generateMap();
 	generateMap();
 }
+
+
+function generateInfoWindowContent() {
+	// // CREATE INFOWINDOW HERE ////////////////////////////////////////////////////////////////
+	let infoWindowContent;
+	$.getJSON("api/userprofile", data => {
+		if (data.hasOwnProperty("user")) {
+			return data;
+		} else {
+			return console.log("ERROR: no user data!");
+		}
+	}).then(dataUser => {
+		$.ajax("/api/userobservations", {
+			type: "GET",
+			xhrFields: {
+				withCredentials: true
+			},
+			data: {
+				openId: dataUser.user.openId
+			}
+		}).then(dataUserObs => {
+			console.log("dataUserObs", dataUserObs);
+			console.log("date", dataUserObs.date);
+			console.log("date", dataUserObs.openId);
+			console.log("date", dataUserObs.briefDesc);
+		});
+	});
+}
+generateInfoWindowContent();
 
 function generateMap() {
 	var latitude = 47.1585;
