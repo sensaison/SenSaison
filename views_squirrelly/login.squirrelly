@@ -85,7 +85,7 @@
                                     <br><br>
                                     <a class="fb-login-button" data-width="" data-size="large" data-button-type="login_with" data-auto-logout-link="true" data-use-continue-as="false" href="/auth/facebook"></a>
                                     <br><br>
-                                    <a href="/auth/twitter" class="twitter-button"><img src="/images/sign-in-with-twitter-gray.png" style="height:auto; width:240px;"></a>
+                                    <a href="/auth/twitter"><button id="twitter-button"><img src="/images/Twitter_Logo_Blue.png" style="height:auto; width: 50px;vertical-align:middle;">Sign in with Twitter</button></a>
                                 </p>
                                 <br>
                             </div>

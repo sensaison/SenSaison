@@ -12,7 +12,7 @@ module.exports = app => {
 		db.Observations.findAll({
 			include: [{
 				model: db.Users,
-				attributes: ["openId", "firstName", "lastName"]
+				attributes: ["id", "openId", "firstName", "lastName", "username"]
 			}]
 		}).then(dbObs => {
 			res.json(dbObs);
@@ -27,7 +27,7 @@ module.exports = app => {
 			},
 			include: [{
 				model: db.Users,
-				attributes: ["openId", "firstName", "lastName"]
+				attributes: ["id", "openId", "firstName", "lastName", "username"]
 			}]
 		}).then(dbObs => {
 			res.json(dbObs);
@@ -172,7 +172,11 @@ module.exports = app => {
 		db.Observations.findAll({
 			where: {
 				openId: req.query.openId
-			}
+			},
+			include: [{
+				model: db.Users,
+				attributes: ["id", "firstName", "lastName", "displayName", "username"]
+			}]
 		}).then(dbObs => {
 			res.json(dbObs);
 		});

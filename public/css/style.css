@@ -6,8 +6,21 @@
 * Made By MaterializeCSS.com
 */
 
-sb-img-date {
-  font-size: 80%;
+#twitter-button {
+  color: #101010;
+  font-family: "Arial Black", "Arial Bold", sans-serif;
+  font-size: 105%;
+  border-radius: 8px;
+  border: gray 1px #101010;
+  padding: 0;
+  width: 240px;
+  height: 50px;
+  background-image: linear-gradient(white, lightgray);
+  text-align: left;
+}
+
+#twitter-button:hover {
+  cursor: pointer;
 }
 
 .btn-large {

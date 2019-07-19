@@ -367,7 +367,7 @@
                                 <div class="col s12 m2">
                                 </div>
                                 <div class="input-field col s12 m4" id="modify-username-only-div">
-                                    <label for="modify-username-only">Update username</label>
+                                    <label for="modify-username-only">Update username*</label>
                                     <input type="text" id="modify-username-only" class="validate" data-length="20">
                                 </div>
                                 <div class="input-field col s12 m4">
@@ -380,7 +380,7 @@
                         <form id="modify-account-form" class="hidden" onsubmit="return false">
                             <div class="row">
                                 <div class="input-field col s12 m3" id="modify-username-div">
-                                    <label for="modify-username">Update username</label>
+                                    <label for="modify-username">Update username*</label>
                                     <input type="text" id="modify-username" class="validate" data-length="20">
                                 </div>
                                 <div class="input-field col s12 m3 hidden" id="modify-first-name-div">
@@ -402,6 +402,7 @@
                                 </div>   
                             </div>
                         </form>
+                        <p><i>* We will use your username rather than your name when showing your observations on the map.</i></p>
                         <br><br>
                         <br><br>
                         <div class="row show" id="delete-account-1">
