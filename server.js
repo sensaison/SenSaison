@@ -105,12 +105,12 @@ app.use((req, res, next) => {
 require("./routes/authRoutes")(app);
 
 let syncOptions = {
-	force: true,
+	force: false,
 	logging: false // prevents console logs of sequelize things
 };
-// if (process.env.NODE_ENV === "test") {
-// 	syncOptions.force = true;
-// }
+if (process.env.NODE_ENV === "test" ) {
+	syncOptions.force = true;
+}
 
 // Starting the server, syncing our models
 db.sequelize.sync(syncOptions).then(() => {

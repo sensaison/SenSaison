@@ -1,11 +1,13 @@
 /* start customizations */
 
 #sb-latest-obs {
+	color: white;
 	text-shadow: 0px 0px 3px black;
 }
 
 #sb-toggle-click {
 	text-shadow: 0px 0px 3px white;
+	background-color: rgb(255,255,255,0.5);
 }
 
 .sb-img-date {

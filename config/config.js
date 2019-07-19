@@ -6,7 +6,8 @@ module.exports = {
 		password: process.env.MYSQLPWD,
 		database: process.env.MYSQLDB,
 		host: process.env.MYSQLHOST,
-		dialect: "mysql"
+		dialect: "mysql",
+		"logging": false // prevents logging to console
 	},
 	"test": {
 		username: "root",

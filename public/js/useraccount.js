@@ -184,7 +184,6 @@ $(document).ready(() => {
 				$("#modify-username-div").addClass("hidden");
 				break;
 			default:
-				console.log("NOT email/pw user so cannot update name or email");
 				break;
 			}
 

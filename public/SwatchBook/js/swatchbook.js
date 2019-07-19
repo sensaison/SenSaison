@@ -1,7 +1,8 @@
 $(() => {
 	$( "#sb-container" ).swatchbook( {
+		center : 3,
 		// number of degrees that is between each item
-		angleInc : 30,
+		angleInc : 35,
 		neighbor : 15,
 		// if it should be closed by default
 		initclosed : true,
