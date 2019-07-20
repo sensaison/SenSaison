@@ -168,7 +168,6 @@ function placeNearbyMarker(latLng, map, obsValues) {
 
 // for seeing user's obs
 function placeYourMarker(latLng, map) {
-	let name;
 	let date;
 	let briefDesc;
 	let infoWindowContent;
@@ -176,18 +175,11 @@ function placeYourMarker(latLng, map) {
 	let imgSrc;
 
 	userObs.forEach((item, i) => {
-		if (userObs[i].User.username) {
-			name = userObs[i].User.username;
-		} else if (userObs[i].User.displayName) {
-			name = userObs[i].User.displayName;
-		} else if (userObs[i].User.firstName) {
-			name = userObs[i].User.firstName + " " + userObs[i].User.lastName;
-		}
 		date = moment(userObs[i].dateObs).format("MMM Do, YYYY");
 		briefDesc = userObs[i].briefDescription;
 		imgSrc = "https://res.cloudinary.com/sensaison/image/upload/c_thumb,h_64,w_64/"+ userObs[i].pictureId + ".jpg";
 
-		infoWindowContent = "<div class='infoWindowContent'><img class='infoWindowImg' src='" + imgSrc + "'> " + briefDesc + "<br><br><em>Observed " + date + " by " + name + "</em></div>";
+		infoWindowContent = "<div class='infoWindowContent'><img class='infoWindowImg' src='" + imgSrc + "'> " + briefDesc + "<br><br><em>Observed " + date + "</em></div>";
 		info = new google.maps.InfoWindow({
 			content: infoWindowContent
 		});
