@@ -76,9 +76,16 @@ function generateMaps() {
 }
 
 
-function generateInfoWindowContent() {
+// function generateInfoWindowContentAll() {
+// }
+
+function generateInfoWindowContentUser() {
 	// // CREATE INFOWINDOW HERE ////////////////////////////////////////////////////////////////
 	let infoWindowContent;
+	let name;
+	let date;
+	let briefDesc;
+	let infowindow;
 	$.getJSON("api/userprofile", data => {
 		if (data.hasOwnProperty("user")) {
 			return data;
@@ -96,13 +103,27 @@ function generateInfoWindowContent() {
 			}
 		}).then(dataUserObs => {
 			console.log("dataUserObs", dataUserObs);
-			console.log("date", dataUserObs.date);
-			console.log("date", dataUserObs.openId);
-			console.log("date", dataUserObs.briefDesc);
+			dataUserObs.forEach((item, i) => {
+				if (dataUserObs[i].User.username) {
+					name = dataUserObs[i].User.username;
+				} else if (dataUserObs[i].User.displayName) {
+					name = dataUserObs[i].User.displayName;
+				} else if (dataUserObs[i].User.firstName) {
+					name = dataUserObs[i].User.firstName + " " + dataUserObs[0].User.lastName;
+				}
+				date = dataUserObs[i].dateObs;
+				briefDesc = dataUserObs[i].briefDescription;
+	
+				infoWindowContent = "<div class='infoWindowContent'>" + briefDesc + "<br>Date: " + date + "<br>Observed by: " + name + "<div>";
+				console.log("infoWindowContent:", i, infoWindowContent);
+				infowindow = new google.maps.InfoWindow({
+					content: infoWindowContent
+				});
+			});
 		});
 	});
+	
 }
-generateInfoWindowContent();
 
 function generateMap() {
 	var latitude = 47.1585;
@@ -166,10 +187,15 @@ function placeNearbyMarker(latLng, map, obsValues) {
 	});
 }
 
+// this is for user's obs
 function placeYourMarker(latLng, map) {
 	var marker = new google.maps.Marker({
 		position: latLng,
 		map: map
+	});
+	generateInfoWindowContentUser();
+	marker.addListener("click", function() {
+		infowindow.open(map, marker);
 	});
 }
 
@@ -331,7 +357,7 @@ function sleep(ms) {
 	
 async function allowTime() {
 	// console.log('Give Google time to respond...');
-	await sleep(500);
+	await sleep(1000);
 	// console.log('Half a second later. Maps can load now.');
 	getLocation();
 }

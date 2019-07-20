@@ -105,7 +105,7 @@ app.use((req, res, next) => {
 require("./routes/authRoutes")(app);
 
 let syncOptions = {
-	force: false,
+	force: false, // change this to true if making changes to the db/schema/models
 	logging: false // prevents console logs of sequelize things
 };
 if (process.env.NODE_ENV === "test" ) {
