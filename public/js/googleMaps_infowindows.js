@@ -1,13 +1,13 @@
 const apiKey = "AIzaSyDdLQBi8yxA0W_khskCmkcGuazoHwL77z0";
 
-let startingPos;
-let userPin;
-let mapType = 0;
-let selectedLocationID;
-let coordinates = {};
-let nearbyMap;
-let userMap;
-let userObs;
+var startingPos;
+var userPin;
+var mapType = 0;
+var selectedLocationID;
+var coordinates = {};
+var nearbyMap;
+var userMap;
+var userObs;
 allowTime();
 
 function getLocation() {
@@ -75,56 +75,6 @@ function generateMaps() {
 	generateMap();
 }
 
-
-// function generateInfoWindowContentAll() {
-// }
-
-function generateInfoWindowContentUser() {
-	// // CREATE INFOWINDOW HERE ////////////////////////////////////////////////////////////////
-	let infoWindowContent;
-	let name;
-	let date;
-	let briefDesc;
-	let info;
-	$.getJSON("api/userprofile", data => {
-		if (data.hasOwnProperty("user")) {
-			return data;
-		} else {
-			return console.log("ERROR: no user data!");
-		}
-	}).then(dataUser => {
-		$.ajax("/api/userobservations", {
-			type: "GET",
-			xhrFields: {
-				withCredentials: true
-			},
-			data: {
-				openId: dataUser.user.openId
-			}
-		}).then(dataUserObs => {
-			console.log("dataUserObs", dataUserObs);
-			dataUserObs.forEach((item, i) => {
-				if (dataUserObs[i].User.username) {
-					name = dataUserObs[i].User.username;
-				} else if (dataUserObs[i].User.displayName) {
-					name = dataUserObs[i].User.displayName;
-				} else if (dataUserObs[i].User.firstName) {
-					name = dataUserObs[i].User.firstName + " " + dataUserObs[0].User.lastName;
-				}
-				date = dataUserObs[i].dateObs;
-				briefDesc = dataUserObs[i].briefDescription;
-	
-				infoWindowContent = "<div class='infoWindowContent'>" + briefDesc + "<br>Date: " + date + "<br>Observed by: " + name + "<div>";
-				console.log("infoWindowContent:", i, infoWindowContent);
-				info = new google.maps.InfoWindow({
-					content: infoWindowContent
-				});
-			});
-		});
-	});
-	
-}
-
 function generateMap() {
 	var latitude = 47.1585;
 	var longitude = 27.6014;
@@ -155,7 +105,7 @@ function generateMap() {
 	} else if(mapType === 1) {
 		// Do some stuff to pin all user observations
 		userMap = map;
-		// console.log(userObs);
+		console.log("googlemaps.js userObs:", userObs);
 		for(var i = 0; i < userObs.length; i++) {
 			placeYourMarker(new google.maps.LatLng(userObs[i].latitude, userObs[i].longitude), userMap);
 			if(i === 0) {
@@ -169,6 +119,7 @@ function generateMap() {
 	mapType++;
 }
 
+// for submitting obs
 function placeMarkerAndPanTo(latLng, map) {
 	var marker = new google.maps.Marker({
 		position: latLng,
@@ -178,24 +129,76 @@ function placeMarkerAndPanTo(latLng, map) {
 	userPin = marker;
 }
 
+// for seeing nearby obs
 function placeNearbyMarker(latLng, map, obsValues) {
 	// console.log("Nearby Observation Deets:");
 	// console.log(obsValues);
+	let name;
+	let date;
+	let briefDesc;
+	let infoWindowContent;
+	let info;
+	let imgSrc;
+
+	if (obsValues.User.username) {
+		name = obsValues.User.username;
+	} else if (obsValues.User.displayName) {
+		name = obsValues.User.displayName;
+	} else if (obsValues.User.firstName) {
+		name = obsValues.User.firstName + " " + obsValues.User.lastName;
+	}
+	date = moment(obsValues.dateObs).format("MMM Do, YYYY");
+	briefDesc = obsValues.briefDescription;
+	imgSrc = "https://res.cloudinary.com/sensaison/image/upload/c_thumb,h_64,w_64/"+ obsValues.pictureId + ".jpg";
+
+	infoWindowContent = "<div class='infoWindowContent'><img class='infoWindowImg' src='" + imgSrc + "'> " + briefDesc + "<br><br><em>Observed " + date + " by " + name + "</em></div>";
+	info = new google.maps.InfoWindow({
+		content: infoWindowContent
+	});
+	
+
 	var marker = new google.maps.Marker({
 		position: latLng,
 		map: map
+	});
+	marker.addListener("click", function() {
+		info.open(map, marker);
 	});
 }
 
-// this is for user's obs
+// for seeing user's obs
 function placeYourMarker(latLng, map) {
+	let name;
+	let date;
+	let briefDesc;
+	let infoWindowContent;
+	let info;
+	let imgSrc;
+
+	userObs.forEach((item, i) => {
+		if (userObs[i].User.username) {
+			name = userObs[i].User.username;
+		} else if (userObs[i].User.displayName) {
+			name = userObs[i].User.displayName;
+		} else if (userObs[i].User.firstName) {
+			name = userObs[i].User.firstName + " " + userObs[i].User.lastName;
+		}
+		date = moment(userObs[i].dateObs).format("MMM Do, YYYY");
+		briefDesc = userObs[i].briefDescription;
+		imgSrc = "https://res.cloudinary.com/sensaison/image/upload/c_thumb,h_64,w_64/"+ userObs[i].pictureId + ".jpg";
+
+		infoWindowContent = "<div class='infoWindowContent'><img class='infoWindowImg' src='" + imgSrc + "'> " + briefDesc + "<br><br><em>Observed " + date + " by " + name + "</em></div>";
+		info = new google.maps.InfoWindow({
+			content: infoWindowContent
+		});
+	});
+
 	var marker = new google.maps.Marker({
 		position: latLng,
 		map: map
 	});
-	generateInfoWindowContentUser();
 	marker.addListener("click", function() {
-		infowindow.open(map, marker);
+		info.open(map, marker);
 	});
 }
 
@@ -259,7 +262,7 @@ function doCalcs(obs, lat, long, radius) {
 		var lat2 = obs[i].latitude;
 		var long2 = obs[i].longitude;
 		var distance = getDistance(lat, long, lat2, long2);
-		console.log("Distance: " + distance);
+		// console.log("Distance: " + distance);
 		if(distance <= radius) {
 			validSet.push(obs[i]);
 		}

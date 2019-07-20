@@ -6,6 +6,15 @@
 * Made By MaterializeCSS.com
 */
 
+.infoWindowContent {
+  font-size: 110%;
+}
+.infoWindowImg {
+  float: left;
+  margin-right: 5px;
+  margin-bottom: 5px;
+}
+
 #twitter-button {
   color: #101010;
   font-family: "Arial Black", "Arial Bold", sans-serif;
