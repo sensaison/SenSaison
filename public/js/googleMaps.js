@@ -119,6 +119,7 @@ function generateMap() {
 	mapType++;
 }
 
+// for submitting obs
 function placeMarkerAndPanTo(latLng, map) {
 	var marker = new google.maps.Marker({
 		position: latLng,
@@ -128,19 +129,76 @@ function placeMarkerAndPanTo(latLng, map) {
 	userPin = marker;
 }
 
+// for seeing nearby obs
 function placeNearbyMarker(latLng, map, obsValues) {
 	// console.log("Nearby Observation Deets:");
 	// console.log(obsValues);
+	let name;
+	let date;
+	let briefDesc;
+	let infoWindowContent;
+	let info;
+	let imgSrc;
+
+	if (obsValues.User.username) {
+		name = obsValues.User.username;
+	} else if (obsValues.User.displayName) {
+		name = obsValues.User.displayName;
+	} else if (obsValues.User.firstName) {
+		name = obsValues.User.firstName + " " + obsValues.User.lastName;
+	}
+	date = moment(obsValues.dateObs).format("MMM Do, YYYY");
+	briefDesc = obsValues.briefDescription;
+	imgSrc = "https://res.cloudinary.com/sensaison/image/upload/c_thumb,h_64,w_64/"+ obsValues.pictureId + ".jpg";
+
+	infoWindowContent = "<div class='infoWindowContent'><img class='infoWindowImg' src='" + imgSrc + "'> " + briefDesc + "<br><br><em>Observed " + date + " by " + name + "</em></div>";
+	info = new google.maps.InfoWindow({
+		content: infoWindowContent
+	});
+	
+
 	var marker = new google.maps.Marker({
 		position: latLng,
 		map: map
 	});
+	marker.addListener("click", function() {
+		info.open(map, marker);
+	});
 }
 
+// for seeing user's obs
 function placeYourMarker(latLng, map) {
+	let name;
+	let date;
+	let briefDesc;
+	let infoWindowContent;
+	let info;
+	let imgSrc;
+
+	userObs.forEach((item, i) => {
+		if (userObs[i].User.username) {
+			name = userObs[i].User.username;
+		} else if (userObs[i].User.displayName) {
+			name = userObs[i].User.displayName;
+		} else if (userObs[i].User.firstName) {
+			name = userObs[i].User.firstName + " " + userObs[i].User.lastName;
+		}
+		date = moment(userObs[i].dateObs).format("MMM Do, YYYY");
+		briefDesc = userObs[i].briefDescription;
+		imgSrc = "https://res.cloudinary.com/sensaison/image/upload/c_thumb,h_64,w_64/"+ userObs[i].pictureId + ".jpg";
+
+		infoWindowContent = "<div class='infoWindowContent'><img class='infoWindowImg' src='" + imgSrc + "'> " + briefDesc + "<br><br><em>Observed " + date + " by " + name + "</em></div>";
+		info = new google.maps.InfoWindow({
+			content: infoWindowContent
+		});
+	});
+
 	var marker = new google.maps.Marker({
 		position: latLng,
 		map: map
+	});
+	marker.addListener("click", function() {
+		info.open(map, marker);
 	});
 }
 
@@ -204,7 +262,7 @@ function doCalcs(obs, lat, long, radius) {
 		var lat2 = obs[i].latitude;
 		var long2 = obs[i].longitude;
 		var distance = getDistance(lat, long, lat2, long2);
-		console.log("Distance: " + distance);
+		// console.log("Distance: " + distance);
 		if(distance <= radius) {
 			validSet.push(obs[i]);
 		}
