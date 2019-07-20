@@ -104,7 +104,6 @@ $(document).ready(() => {
 			}
 		}).then(dataUserObs => {	
 			window.userObs = dataUserObs;
-			console.log("useraccount.js userObs:", userObs);
 			
 			if ( !dataUserObs || !dataUserObs.length || dataUserObs.length === 0 ) {
 				// if no data then add a row saying so
