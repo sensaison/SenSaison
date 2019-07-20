@@ -1,7 +1,7 @@
 $.get("/api/animal/mostrecentone", data => {
 	let imgSrc;
 	if (data[0].pictureId) {
-		imgSrc = "https://res.cloudinary.com/sensaison/image/upload/"+ data[0].pictureId + ".jpg";
+		imgSrc = "https://res.cloudinary.com/sensaison/image/upload/c_thumb,h_100,w_100/"+ data[0].pictureId + ".jpg";
 	} else {
 		imgSrc = "../../images/goose.jpg";
 	}
@@ -15,7 +15,7 @@ $.get("/api/animal/mostrecentone", data => {
 $.get("/api/fungus/mostrecentone", data => {
 	let imgSrc;
 	if (data[0].pictureId) {
-		imgSrc = "https://res.cloudinary.com/sensaison/image/upload/"+ data[0].pictureId + ".jpg";
+		imgSrc = "https://res.cloudinary.com/sensaison/image/upload/c_thumb,h_100,w_100/"+ data[0].pictureId + ".jpg";
 	} else {
 		imgSrc = "../../images/fungus.jpg";
 	}	
@@ -29,7 +29,7 @@ $.get("/api/fungus/mostrecentone", data => {
 $.get("/api/land_water/mostrecentone", data => {
 	let imgSrc;
 	if (data[0].pictureId) {
-		imgSrc = "https://res.cloudinary.com/sensaison/image/upload/"+ data[0].pictureId + ".jpg";
+		imgSrc = "https://res.cloudinary.com/sensaison/image/upload/c_thumb,h_100,w_100/"+ data[0].pictureId + ".jpg";
 	} else {
 		imgSrc = "../../images/permafrost.jpg";
 	}	
@@ -43,7 +43,7 @@ $.get("/api/land_water/mostrecentone", data => {
 $.get("/api/plant/mostrecentone", data => {
 	let imgSrc;
 	if (data[0].pictureId) {
-		imgSrc = "https://res.cloudinary.com/sensaison/image/upload/"+ data[0].pictureId + ".jpg";
+		imgSrc = "https://res.cloudinary.com/sensaison/image/upload/c_thumb,h_100,w_100/"+ data[0].pictureId + ".jpg";
 	} else {
 		imgSrc = "../../images/tulips.jpeg";
 	}
@@ -57,7 +57,7 @@ $.get("/api/plant/mostrecentone", data => {
 $.get("/api/weather/mostrecentone", data => {
 	let imgSrc;
 	if (data[0].pictureId) {
-		imgSrc = "https://res.cloudinary.com/sensaison/image/upload/"+ data[0].pictureId + ".jpg";
+		imgSrc = "https://res.cloudinary.com/sensaison/image/upload/c_thumb,h_100,w_100/"+ data[0].pictureId + ".jpg";
 	} else {
 		imgSrc = "../../images/thunderstorm.jpg";
 	}
