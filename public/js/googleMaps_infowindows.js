@@ -85,7 +85,7 @@ function generateInfoWindowContentUser() {
 	let name;
 	let date;
 	let briefDesc;
-	let infowindow;
+	let info;
 	$.getJSON("api/userprofile", data => {
 		if (data.hasOwnProperty("user")) {
 			return data;
@@ -116,7 +116,7 @@ function generateInfoWindowContentUser() {
 	
 				infoWindowContent = "<div class='infoWindowContent'>" + briefDesc + "<br>Date: " + date + "<br>Observed by: " + name + "<div>";
 				console.log("infoWindowContent:", i, infoWindowContent);
-				infowindow = new google.maps.InfoWindow({
+				info = new google.maps.InfoWindow({
 					content: infoWindowContent
 				});
 			});
