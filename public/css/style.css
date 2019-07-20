@@ -9,6 +9,11 @@
 .infoWindowContent {
   font-size: 110%;
 }
+.infoWindowImg {
+  float: left;
+  margin-right: 5px;
+  margin-bottom: 5px;
+}
 
 #twitter-button {
   color: #101010;

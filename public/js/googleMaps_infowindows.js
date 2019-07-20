@@ -133,9 +133,36 @@ function placeMarkerAndPanTo(latLng, map) {
 function placeNearbyMarker(latLng, map, obsValues) {
 	// console.log("Nearby Observation Deets:");
 	// console.log(obsValues);
+	let name;
+	let date;
+	let briefDesc;
+	let infoWindowContent;
+	let info;
+	let imgSrc;
+
+	if (obsValues.User.username) {
+		name = obsValues.User.username;
+	} else if (obsValues.User.displayName) {
+		name = obsValues.User.displayName;
+	} else if (obsValues.User.firstName) {
+		name = obsValues.User.firstName + " " + obsValues.User.lastName;
+	}
+	date = moment(obsValues.dateObs).format("MMM Do, YYYY");
+	briefDesc = obsValues.briefDescription;
+	imgSrc = "https://res.cloudinary.com/sensaison/image/upload/c_thumb,h_64,w_64/"+ obsValues.pictureId + ".jpg";
+
+	infoWindowContent = "<div class='infoWindowContent'><img class='infoWindowImg' src='" + imgSrc + "'> " + briefDesc + "<br><br><em>Observed " + date + " by " + name + "</em></div>";
+	info = new google.maps.InfoWindow({
+		content: infoWindowContent
+	});
+	
+
 	var marker = new google.maps.Marker({
 		position: latLng,
 		map: map
+	});
+	marker.addListener("click", function() {
+		info.open(map, marker);
 	});
 }
 
@@ -146,7 +173,7 @@ function placeYourMarker(latLng, map) {
 	let briefDesc;
 	let infoWindowContent;
 	let info;
-	let picSrc;
+	let imgSrc;
 
 	userObs.forEach((item, i) => {
 		if (userObs[i].User.username) {
@@ -158,14 +185,12 @@ function placeYourMarker(latLng, map) {
 		}
 		date = moment(userObs[i].dateObs).format("MMM Do, YYYY");
 		briefDesc = userObs[i].briefDescription;
-		picSrc = userObs[i].pictureId
+		imgSrc = "https://res.cloudinary.com/sensaison/image/upload/c_thumb,h_64,w_64/"+ userObs[i].pictureId + ".jpg";
 
-		infoWindowContent = "<div class='infoWindowContent'>" + briefDesc + "<br><br>Date: " + date + "<br>Observed by: " + name + "</div>";
-		console.log("infoWindowContent:", i, infoWindowContent);
+		infoWindowContent = "<div class='infoWindowContent'><img class='infoWindowImg' src='" + imgSrc + "'> " + briefDesc + "<br><br><em>Observed " + date + " by " + name + "</em></div>";
 		info = new google.maps.InfoWindow({
 			content: infoWindowContent
 		});
-	
 	});
 
 	var marker = new google.maps.Marker({
