@@ -15,7 +15,7 @@
     "license": "ISC",
     "dependencies": {
         "archiver": "^3.0.0",
-        "async": "^2.6.2",
+        "async": "^2.6.4",
         "cloudinary": "^1.14.0",
         "connect-ensure-login": "^0.1.1",
         "connect-flash": "^0.1.1",
